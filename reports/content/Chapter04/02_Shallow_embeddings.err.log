@@ -1,0 +1,109 @@
+Traceback (most recent call last):
+  File "C:\Users\sashk\AppData\Local\Programs\Python\Python313\Lib\site-packages\jupyter_cache\executors\utils.py", line 58, in single_nb_execution
+    executenb(
+    ~~~~~~~~~^
+        nb,
+        ^^^
+    ...<4 lines>...
+        **kwargs,
+        ^^^^^^^^^
+    )
+    ^
+  File "C:\Users\sashk\AppData\Local\Programs\Python\Python313\Lib\site-packages\nbclient\client.py", line 1319, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\sashk\AppData\Local\Programs\Python\Python313\Lib\site-packages\jupyter_core\utils\__init__.py", line 165, in wrapped
+    return loop.run_until_complete(inner)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\sashk\AppData\Local\Programs\Python\Python313\Lib\asyncio\base_events.py", line 725, in run_until_complete
+    return future.result()
+           ~~~~~~~~~~~~~^^
+  File "C:\Users\sashk\AppData\Local\Programs\Python\Python313\Lib\site-packages\nbclient\client.py", line 709, in async_execute
+    await self.async_execute_cell(
+        cell, index, execution_count=self.code_cells_executed + 1
+    )
+  File "C:\Users\sashk\AppData\Local\Programs\Python\Python313\Lib\site-packages\nbclient\client.py", line 1062, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "C:\Users\sashk\AppData\Local\Programs\Python\Python313\Lib\site-packages\nbclient\client.py", line 918, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+import networkx as nx
+
+G = nx.barbell_graph(m1=3, m2=2)
+nodes_label = [0 for x in range(len(G.nodes()))]
+nodes_label[0] = 1
+nodes_label[6] = 2
+draw_graph(G, nodes_label=nodes_label, node_size=1200)
+------------------
+
+
+[31m---------------------------------------------------------------------------[39m
+[31mAttributeError[39m                            Traceback (most recent call last)
+[36mCell[39m[36m [39m[32mIn[2][39m[32m, line 1[39m
+[32m----> [39m[32m1[39m [38;5;28;01mimport[39;00m[38;5;250m [39m[34;01mnetworkx[39;00m[38;5;250m [39m[38;5;28;01mas[39;00m[38;5;250m [39m[34;01mnx[39;00m
+[32m      3[39m G = nx.barbell_graph(m1=[32m3[39m, m2=[32m2[39m)
+[32m      4[39m nodes_label = [[32m0[39m [38;5;28;01mfor[39;00m x [38;5;129;01min[39;00m [38;5;28mrange[39m([38;5;28mlen[39m(G.nodes()))]
+
+[36mFile [39m[32m~\AppData\Local\Programs\Python\Python313\Lib\site-packages\networkx\__init__.py:64[39m
+[32m     61[39m [38;5;28;01mimport[39;00m[38;5;250m [39m[34;01mnetworkx[39;00m[34;01m.[39;00m[34;01mgenerators[39;00m
+[32m     62[39m [38;5;28;01mfrom[39;00m[38;5;250m [39m[34;01mnetworkx[39;00m[34;01m.[39;00m[34;01mgenerators[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m *
+[32m---> [39m[32m64[39m [38;5;28;01mimport[39;00m[38;5;250m [39m[34;01mnetworkx[39;00m[34;01m.[39;00m[34;01mreadwrite[39;00m
+[32m     65[39m [38;5;28;01mfrom[39;00m[38;5;250m [39m[34;01mnetworkx[39;00m[34;01m.[39;00m[34;01mreadwrite[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m *
+[32m     67[39m [38;5;66;03m# Need to test with SciPy, when available[39;00m
+
+[36mFile [39m[32m~\AppData\Local\Programs\Python\Python313\Lib\site-packages\networkx\readwrite\__init__.py:15[39m
+[32m     13[39m [38;5;28;01mfrom[39;00m[38;5;250m [39m[34;01mnetworkx[39;00m[34;01m.[39;00m[34;01mreadwrite[39;00m[34;01m.[39;00m[34;01mnx_yaml[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m *
+[32m     14[39m [38;5;28;01mfrom[39;00m[38;5;250m [39m[34;01mnetworkx[39;00m[34;01m.[39;00m[34;01mreadwrite[39;00m[34;01m.[39;00m[34;01mgml[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m *
+[32m---> [39m[32m15[39m [38;5;28;01mfrom[39;00m[38;5;250m [39m[34;01mnetworkx[39;00m[34;01m.[39;00m[34;01mreadwrite[39;00m[34;01m.[39;00m[34;01mgraphml[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m *
+[32m     16[39m [38;5;28;01mfrom[39;00m[38;5;250m [39m[34;01mnetworkx[39;00m[34;01m.[39;00m[34;01mreadwrite[39;00m[34;01m.[39;00m[34;01mgexf[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m *
+[32m     17[39m [38;5;28;01mfrom[39;00m[38;5;250m [39m[34;01mnetworkx[39;00m[34;01m.[39;00m[34;01mreadwrite[39;00m[34;01m.[39;00m[34;01mnx_shp[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m *
+
+[36mFile [39m[32m~\AppData\Local\Programs\Python\Python313\Lib\site-packages\networkx\readwrite\graphml.py:344[39m
+[32m    340[39m             [38;5;28;01mraise[39;00m nx.NetworkXError([33m"[39m[33mfile not successfully read as graphml[39m[33m"[39m)
+[32m    341[39m     [38;5;28;01mreturn[39;00m glist[[32m0[39m]
+[32m--> [39m[32m344[39m [38;5;28;43;01mclass[39;49;00m[38;5;250;43m [39;49m[34;43;01mGraphML[39;49;00m[43m:[49m
+[32m    345[39m [43m    [49m[43mNS_GRAPHML[49m[43m [49m[43m=[49m[43m [49m[33;43m"[39;49m[33;43mhttp://graphml.graphdrawing.org/xmlns[39;49m[33;43m"[39;49m
+[32m    346[39m [43m    [49m[43mNS_XSI[49m[43m [49m[43m=[49m[43m [49m[33;43m"[39;49m[33;43mhttp://www.w3.org/2001/XMLSchema-instance[39;49m[33;43m"[39;49m
+
+[36mFile [39m[32m~\AppData\Local\Programs\Python\Python313\Lib\site-packages\networkx\readwrite\graphml.py:377[39m, in [36mGraphML[39m[34m()[39m
+[32m    370[39m     [38;5;28;01mpass[39;00m
+[32m    371[39m [38;5;28;01melse[39;00m:
+[32m    372[39m     [38;5;66;03m# prepend so that python types are created upon read (last entry wins)[39;00m
+[32m    373[39m     types = [
+[32m    374[39m         (np.float64, [33m"[39m[33mfloat[39m[33m"[39m),
+[32m    375[39m         (np.float32, [33m"[39m[33mfloat[39m[33m"[39m),
+[32m    376[39m         (np.float16, [33m"[39m[33mfloat[39m[33m"[39m),
+[32m--> [39m[32m377[39m         ([43mnp[49m[43m.[49m[43mfloat_[49m, [33m"[39m[33mfloat[39m[33m"[39m),
+[32m    378[39m         (np.int_, [33m"[39m[33mint[39m[33m"[39m),
+[32m    379[39m         (np.int8, [33m"[39m[33mint[39m[33m"[39m),
+[32m    380[39m         (np.int16, [33m"[39m[33mint[39m[33m"[39m),
+[32m    381[39m         (np.int32, [33m"[39m[33mint[39m[33m"[39m),
+[32m    382[39m         (np.int64, [33m"[39m[33mint[39m[33m"[39m),
+[32m    383[39m         (np.uint8, [33m"[39m[33mint[39m[33m"[39m),
+[32m    384[39m         (np.uint16, [33m"[39m[33mint[39m[33m"[39m),
+[32m    385[39m         (np.uint32, [33m"[39m[33mint[39m[33m"[39m),
+[32m    386[39m         (np.uint64, [33m"[39m[33mint[39m[33m"[39m),
+[32m    387[39m         (np.int_, [33m"[39m[33mint[39m[33m"[39m),
+[32m    388[39m         (np.intc, [33m"[39m[33mint[39m[33m"[39m),
+[32m    389[39m         (np.intp, [33m"[39m[33mint[39m[33m"[39m),
+[32m    390[39m     ] + types
+[32m    392[39m xml_type = [38;5;28mdict[39m(types)
+[32m    393[39m python_type = [38;5;28mdict[39m([38;5;28mreversed[39m(a) [38;5;28;01mfor[39;00m a [38;5;129;01min[39;00m types)
+
+[36mFile [39m[32m~\AppData\Local\Programs\Python\Python313\Lib\site-packages\numpy\__init__.py:413[39m, in [36m__getattr__[39m[34m(attr)[39m
+[32m    410[39m     [38;5;28;01mraise[39;00m [38;5;167;01mAttributeError[39;00m(__former_attrs__[attr], name=[38;5;28;01mNone[39;00m)
+[32m    412[39m [38;5;28;01mif[39;00m attr [38;5;129;01min[39;00m __expired_attributes__:
+[32m--> [39m[32m413[39m     [38;5;28;01mraise[39;00m [38;5;167;01mAttributeError[39;00m(
+[32m    414[39m         [33mf[39m[33m"[39m[33m`np.[39m[38;5;132;01m{[39;00mattr[38;5;132;01m}[39;00m[33m` was removed in the NumPy 2.0 release. [39m[33m"[39m
+[32m    415[39m         [33mf[39m[33m"[39m[38;5;132;01m{[39;00m__expired_attributes__[attr][38;5;132;01m}[39;00m[33m"[39m,
+[32m    416[39m         name=[38;5;28;01mNone[39;00m
+[32m    417[39m     )
+[32m    419[39m [38;5;28;01mif[39;00m attr == [33m"[39m[33mchararray[39m[33m"[39m:
+[32m    420[39m     warnings.warn(
+[32m    421[39m         [33m"[39m[33m`np.chararray` is deprecated and will be removed from [39m[33m"[39m
+[32m    422[39m         [33m"[39m[33mthe main namespace in the future. Use an array with a string [39m[33m"[39m
+[32m    423[39m         [33m"[39m[33mor bytes dtype instead.[39m[33m"[39m, [38;5;167;01mDeprecationWarning[39;00m, stacklevel=[32m2[39m)
+
+[31mAttributeError[39m: `np.float_` was removed in the NumPy 2.0 release. Use `np.float64` instead.
+

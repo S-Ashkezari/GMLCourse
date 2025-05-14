@@ -1,0 +1,841 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Introduction to Graph Machine Learning &#8212; Graph Machine Learning</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/Chapter00/chap01_intro_and_basics';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Step-by-Step Setup Guide: Anaconda, Virtual Environments, and Jupyter Kernel Configuration" href="help.html" />
+    <link rel="prev" title="Welcome to Graph Machine Learning Workshop" href="../../intro.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Graph Machine Learning - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Graph Machine Learning - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Welcome to Graph Machine Learning Workshop
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Introduction to Graph Machine Learning</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="help.html">Step-by-Step Setup Guide: Anaconda, Virtual Environments, and Jupyter Kernel Configuration</a></li>
+
+
+
+
+
+
+
+
+
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Chapter01/01_Introduction_Networkx.html">Chapter 1 : Introduction to Networkx</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter01/02_Graph_metrics.html">Chapter 1.2: Graph properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter01/03_Graphs_Benchmarks.html">Benchmark and Repositories</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../Chapter02/01_embedding_examples.html">Chapter 2 : Embedding Examples</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/executablebooks/jupyter-book/blob/master/docs/content/Chapter00/chap01_intro_and_basics.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fcontent/Chapter00/chap01_intro_and_basics.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/content/Chapter00/chap01_intro_and_basics.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Introduction to Graph Machine Learning</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#difference-between-tabular-and-graph-data">1. Difference Between Tabular and Graph Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#different-ways-to-define-edges-in-a-graph">Different ways to define edges in a graph:</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-to-structured-data-in-graphs">2. Introduction to Structured Data in Graphs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#definition-of-graphs-and-basic-concepts">3. Definition of Graphs and Basic Concepts</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview-of-machine-learning">4. Overview of Machine Learning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#connection-between-machine-learning-and-graphs">5. Connection Between Machine Learning and Graphs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-introduction-to-networkx-and-graph-creation-in-python">7. Practical: Introduction to NetworkX and Graph Creation in Python</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="introduction-to-graph-machine-learning">
+<h1>Introduction to Graph Machine Learning<a class="headerlink" href="#introduction-to-graph-machine-learning" title="Link to this heading">#</a></h1>
+<p>Graphs are a powerful and flexible data structure that naturally represent complex relationships and interactions among entities. From social networks and recommendation systems to biological networks and transportation systems, graphs are everywhere. Traditional machine learning techniques often struggle to capture these rich relational patterns. This is where <strong>Graph Machine Learning (Graph ML)</strong> comes into play.</p>
+<p>🔍 <strong>Why Traditional Machine Learning Falls Short on Graph Data</strong></p>
+<ol class="arabic simple">
+<li><p>Assumes Independent and Identically Distributed (i.i.d.) Data</p></li>
+</ol>
+<p>Traditional ML models treat each data point as independent, ignoring dependencies that are essential in graph-structured data (e.g., social ties, molecular bonds).</p>
+<ol class="arabic simple" start="2">
+<li><p>Ignores Graph Topology</p></li>
+</ol>
+<p>Conventional algorithms do not utilize the rich topological structure of graphs, such as neighborhood, clustering, or centrality, which often carry significant semantic information.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Feature</p></th>
+<th class="head"><p>Traditional Algorithms (KNN, Clustering)</p></th>
+<th class="head"><p>Graph Machine Learning</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Basis of relationship</strong></p></td>
+<td><p>Distance in vector space (e.g., Euclidean, Cosine)</p></td>
+<td><p>Explicit edges in a graph</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Network topology</strong></p></td>
+<td><p>Ignored</p></td>
+<td><p>Fully modeled</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Neighborhood definition</strong></p></td>
+<td><p>Based on distance only</p></td>
+<td><p>Based on graph connectivity</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Graph-specific features (e.g., degree, centrality)</strong></p></td>
+<td><p>Not supported</p></td>
+<td><p>Actively utilized</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Information propagation</strong></p></td>
+<td><p>Not available</p></td>
+<td><p>Core concept (e.g., message passing)</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Modeling complex relations</strong></p></td>
+<td><p>Limited</p></td>
+<td><p>Very expressive (e.g., in social or molecular networks)</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Typical applications</strong></p></td>
+<td><p>Text classification, market segmentation</p></td>
+<td><p>Social network analysis, drug discovery</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<ol class="arabic simple" start="3">
+<li><p>Requires Tabular Input</p></li>
+</ol>
+<p>Standard ML expects fixed-size vector inputs, while real-world data (e.g., social networks, biological systems) is often non-Euclidean and best represented as graphs.</p>
+<ol class="arabic simple" start="4">
+<li><p>Cannot Model Influence and Information Propagation</p></li>
+</ol>
+<p>Many real-world phenomena involve the spread of information across nodes. Graph ML captures this through techniques like message passing, which are absent in traditional models.</p>
+<hr class="docutils" />
+<p>Graph ML is a rapidly growing area at the intersection of machine learning and network science. It leverages both the features of individual entities (nodes) and their connections (edges) to make predictions, uncover patterns, and generate meaningful representations. Recent advances in <strong>Graph Neural Networks (GNNs)</strong> have made it possible to apply deep learning directly to graph-structured data, enabling breakthroughs in various domains.</p>
+<p>This workshop is designed to provide a hands-on introduction to the core concepts, techniques, and tools used in Graph Machine Learning. We will cover:</p>
+<ul class="simple">
+<li><p>The fundamentals of graph theory and graph data structures</p></li>
+<li><p>Techniques for feature extraction and graph representation</p></li>
+<li><p>Introduction to Graph Neural Networks and their applications</p></li>
+<li><p>Practical exercises using Python libraries such as <code class="docutils literal notranslate"><span class="pre">NetworkX</span></code> and <code class="docutils literal notranslate"><span class="pre">PyTorch</span> <span class="pre">Geometric</span></code></p></li>
+</ul>
+<p><strong>By the end of this workshop</strong>, participants will have a solid understanding of how to represent, analyze, and learn from graph data, equipping them with skills applicable to modern machine learning challenges.</p>
+<blockquote>
+<div><p>Let’s explore how learning from connections can lead to deeper insights!</p>
+</div></blockquote>
+<section id="difference-between-tabular-and-graph-data">
+<h2>1. Difference Between Tabular and Graph Data<a class="headerlink" href="#difference-between-tabular-and-graph-data" title="Link to this heading">#</a></h2>
+<p>Tabular data consists of structured features for each instance, typically stored in a DataFrame.
+In contrast, graph data models complex relationships between instances, useful in various domains like social networks, recommender systems, and bioinformatics.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#pip install pandas</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#pip install matplotlib</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="c1"># Example of tabular data</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s1">&#39;ID&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
+    <span class="s1">&#39;Feature1&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">],</span>
+    <span class="s1">&#39;Feature2&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">]</span>
+<span class="p">})</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Tabular Data:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Tabular Data:
+    ID  Feature1  Feature2
+0   1       0.5       0.1
+1   2       0.7       0.8
+2   3       0.2       0.3
+</pre></div>
+</div>
+</div>
+</div>
+<section id="different-ways-to-define-edges-in-a-graph">
+<h3>Different ways to define edges in a graph:<a class="headerlink" href="#different-ways-to-define-edges-in-a-graph" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>Method</strong></p></th>
+<th class="head"><p><strong>Description</strong></p></th>
+<th class="head"><p><strong>Example Use Cases</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Explicit Structure</strong></p></td>
+<td><p>Edges are defined by known relationships in the data.</p></td>
+<td><p>Social networks, molecules, transportation maps</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Feature Similarity</strong></p></td>
+<td><p>Connect nodes with high similarity based on feature vectors.</p></td>
+<td><p>Image datasets, user profiles</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>k-Nearest Neighbors (k-NN)</strong></p></td>
+<td><p>Each node is connected to its <em>k</em> most similar nodes.</p></td>
+<td><p>Vector-based datasets, recommender systems</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Graph Structure Learning</strong></p></td>
+<td><p>The model learns the optimal structure during training.</p></td>
+<td><p>Noisy or unknown structure, deep learning models</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Semantic or Logical Relations</strong></p></td>
+<td><p>Edges represent logical or semantic dependencies between entities.</p></td>
+<td><p>Knowledge graphs, NLP dependency trees</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Co-occurrence</strong></p></td>
+<td><p>Edges are formed between nodes that frequently appear together.</p></td>
+<td><p>Text analysis, medical co-diagnoses</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#pip install networkx</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">networkx</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nx</span>
+<span class="c1"># Creating a simple graph with NetworkX</span>
+<span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">Graph</span><span class="p">()</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">([(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">)])</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">with_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">node_color</span><span class="o">=</span><span class="s1">&#39;lightblue&#39;</span><span class="p">,</span> <span class="n">edge_color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Graph Representation&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/a44a0e3ba6e9f31058725aded8d0b9d6d92d1262679b1856a3fa6810936865e9.png" src="../../_images/a44a0e3ba6e9f31058725aded8d0b9d6d92d1262679b1856a3fa6810936865e9.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="introduction-to-structured-data-in-graphs">
+<h2>2. Introduction to Structured Data in Graphs<a class="headerlink" href="#introduction-to-structured-data-in-graphs" title="Link to this heading">#</a></h2>
+<p>Graphs are a flexible way to represent structured data, and they can vary widely depending on the nature of the data and its dynamics. Key types of graph structures include:</p>
+<p>• <strong>Static Graphs</strong>
+These graphs do not change over time. The nodes and edges remain fixed after the graph is created.</p>
+<p>Example: Road maps, power grids, or anatomical brain networks.</p>
+<p><img alt="Static Graphs" src="../../_images/chap0_1.png" /></p>
+<p>• <strong>Dynamic Graphs</strong>
+These graphs evolve over time, with nodes and/or edges appearing, disappearing, or changing attributes.</p>
+<p>Example: Social networks where users form new connections or communication patterns evolve.</p>
+<p>📌 Dynamic graphs often require temporal modeling techniques to capture the sequence or frequency of changes.
+<img alt="Static Graphs" src="../../_images/chap0_2.ppm" /></p>
+<p>• <strong>Homogeneous vs. Heterogeneous Graphs</strong>
+Homogeneous Graphs contain only one type of node and edge.</p>
+<p>Heterogeneous Graphs consist of multiple types of nodes and/or edges, each possibly representing different entities or relationships.</p>
+<p>Example (Heterogeneous):
+In a biological knowledge graph:</p>
+<p>Nodes: proteins, diseases, drugs</p>
+<p>Edges: interactions, treatments, causes</p>
+<p>📌 Heterogeneous graphs require models that can handle multiple semantics simultaneously.
+<img alt="Static Graphs" src="../../_images/chap0_3.png" /></p>
+</section>
+<section id="definition-of-graphs-and-basic-concepts">
+<h2>3. Definition of Graphs and Basic Concepts<a class="headerlink" href="#definition-of-graphs-and-basic-concepts" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Node (Vertex): Represents an entity (user, product, protein, etc.).</p></li>
+<li><p>Edge: Represents a relationship between two nodes (friendship, interaction, protein-protein connection).</p></li>
+<li><p>Types of Graphs:</p>
+<ul>
+<li><p>Directed: Connections have direction.</p></li>
+<li><p>Weighted: Edges have specific weights.</p></li>
+<li><p>Heterogeneous: Includes different types of nodes and edges.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="overview-of-machine-learning">
+<h2>4. Overview of Machine Learning<a class="headerlink" href="#overview-of-machine-learning" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Supervised Learning: Data is labeled (classification, regression).</p></li>
+<li><p>Unsupervised Learning: No labels (clustering, dimensionality reduction).</p></li>
+<li><p>Semi-Supervised Learning: A mix of labeled and unlabeled data.</p></li>
+</ul>
+</section>
+<section id="connection-between-machine-learning-and-graphs">
+<h2>5. Connection Between Machine Learning and Graphs<a class="headerlink" href="#connection-between-machine-learning-and-graphs" title="Link to this heading">#</a></h2>
+<p>Graphs help model structural information, improving ML model accuracy.
+Examples:</p>
+<ul class="simple">
+<li><p>Knowledge Graphs for information extraction.</p></li>
+<li><p>Node representation learning using Node2Vec and Graph Neural Networks (GNNs).</p></li>
+</ul>
+</section>
+<section id="practical-introduction-to-networkx-and-graph-creation-in-python">
+<h2>7. Practical: Introduction to NetworkX and Graph Creation in Python<a class="headerlink" href="#practical-introduction-to-networkx-and-graph-creation-in-python" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Creating a more complex graph with additional attributes</span>
+<span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">DiGraph</span><span class="p">()</span>  <span class="c1"># Directed graph</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_nodes_from</span><span class="p">([</span>
+    <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;label&quot;</span><span class="p">:</span> <span class="s2">&quot;User A&quot;</span><span class="p">}),</span>
+    <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;label&quot;</span><span class="p">:</span> <span class="s2">&quot;User B&quot;</span><span class="p">}),</span>
+    <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;label&quot;</span><span class="p">:</span> <span class="s2">&quot;User C&quot;</span><span class="p">})</span>
+<span class="p">])</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">([(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)])</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">with_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">node_color</span><span class="o">=</span><span class="s1">&#39;lightgreen&#39;</span><span class="p">,</span> <span class="n">edge_color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Directed Graph Representation&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/d64203691c73018db6fb2b9c5f202db6a68132f99a42e847acdece2106ac859f.png" src="../../_images/d64203691c73018db6fb2b9c5f202db6a68132f99a42e847acdece2106ac859f.png" />
+</div>
+</div>
+<p>✅ In this chapter, we discussed the difference between tabular and graph data.</p>
+<p>✅ We introduced fundamental graph concepts.</p>
+<p>✅ We explored the importance of graphs in machine learning.</p>
+<p>✅ We performed our first practical experiment with NetworkX.</p>
+</section>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "mlgbook"
+        },
+        kernelOptions: {
+            name: "mlgbook",
+            path: "./content\Chapter00"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'mlgbook'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../../intro.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Welcome to Graph Machine Learning Workshop</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="help.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Step-by-Step Setup Guide: Anaconda, Virtual Environments, and Jupyter Kernel Configuration</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#difference-between-tabular-and-graph-data">1. Difference Between Tabular and Graph Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#different-ways-to-define-edges-in-a-graph">Different ways to define edges in a graph:</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-to-structured-data-in-graphs">2. Introduction to Structured Data in Graphs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#definition-of-graphs-and-basic-concepts">3. Definition of Graphs and Basic Concepts</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview-of-machine-learning">4. Overview of Machine Learning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#connection-between-machine-learning-and-graphs">5. Connection Between Machine Learning and Graphs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-introduction-to-networkx-and-graph-creation-in-python">7. Practical: Introduction to NetworkX and Graph Creation in Python</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Soheila Ashkezari-T.
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

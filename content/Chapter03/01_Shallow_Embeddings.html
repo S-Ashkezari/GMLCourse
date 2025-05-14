@@ -1,0 +1,1398 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Shallow Embedding Methods &#8212; Graph Machine Learning</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/Chapter03/01_Shallow_Embeddings';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Graph Machine Learning - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Graph Machine Learning - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Welcome to Graph Machine Learning Workshop
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Chapter00/chap01_intro_and_basics.html">Introduction to Graph Machine Learning</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter00/help.html">Step-by-Step Setup Guide: Anaconda, Virtual Environments, and Jupyter Kernel Configuration</a></li>
+
+
+
+
+
+
+
+
+
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Chapter01/01_Introduction_Networkx.html">Chapter 1 : Introduction to Networkx</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter01/02_Graph_metrics.html">Chapter 1.2: Graph properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter01/03_Graphs_Benchmarks.html">Benchmark and Repositories</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../Chapter02/01_embedding_examples.html">Chapter 2 : Embedding Examples</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/executablebooks/jupyter-book/blob/master/docs/content/Chapter03/01_Shallow_Embeddings.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fcontent/Chapter03/01_Shallow_Embeddings.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/content/Chapter03/01_Shallow_Embeddings.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Shallow Embedding Methods</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Shallow Embedding Methods</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#matrix-factorization">Matrix Factorization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#graph-factorization">Graph Factorization</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#graph-representation-with-global-structure-information-graphrep">Graph Representation with Global Structure Information (GraphRep)</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#motivation">Motivation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#notation-and-setup">Notation and Setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-the-k-th-order-proximity">What is the <span class="math notranslate nohighlight">\( k \)</span>th-Order Proximity?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objective-function">Objective Function</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#final-embedding-construction">Final Embedding Construction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parameters">Parameters</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#higher-order-proximity-preserved-embedding-hope">Higher-order proximity preserved embedding ( HOPE)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hope-high-order-proximity-preserved-embedding">HOPE: High-Order Proximity Preserved Embedding</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Final Embedding Construction</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#similarity-matrix-computation">Similarity Matrix Computation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#skip-gram">Skip Gram</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deepwalk">DeepWalk</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#negative-sampling-and-subsampling">Negative sampling and subsampling</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#node2vec">Node2Vec</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#balancing-exploration-and-exploitation">Balancing Exploration and Exploitation:</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#edge2vec">Edge2Vec</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#graph2vec">Graph2Vec</a></li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="shallow-embedding-methods">
+<h1>Shallow Embedding Methods<a class="headerlink" href="#shallow-embedding-methods" title="Link to this heading">#</a></h1>
+<p>Shallow embedding methods refer to a category of algorithms that generate fixed, static vector representations for the input data, typically without involving deep learning architectures or dynamic updates during downstream tasks.</p>
+<section id="matrix-factorization">
+<h2>Matrix Factorization<a class="headerlink" href="#matrix-factorization" title="Link to this heading">#</a></h2>
+<p>Matrix factorization is a broadly applicable decomposition technique used across various fields. In the context of graph embedding, it serves as a foundational method for deriving low-dimensional node representations from a graph’s structure.</p>
+<p>Several graph embedding techniques leverage matrix factorization to capture structural properties. In this section, we introduce two prominent algorithms:</p>
+<ul class="simple">
+<li><p><strong>Graph Factorization (GF)</strong></p></li>
+<li><p><strong>Higher-Order Proximity preserved Embedding (HOPE)</strong></p></li>
+</ul>
+<p>Both approaches use matrix factorization to compute node embeddings that preserve different aspects of the graph’s topology.</p>
+<p>Let <span class="math notranslate nohighlight">\(W \in \mathbb{R}^{m \times n}\)</span> represent the input data matrix. Matrix factorization aims to approximate this matrix as the product of two lower-dimensional matrices:<br />
+<span class="math notranslate nohighlight">\(W \approx V \times H\)</span><br />
+where <span class="math notranslate nohighlight">\(V \in \mathbb{R}^{m \times d}\)</span> and <span class="math notranslate nohighlight">\(H \in \mathbb{R}^{d \times n}\)</span> are referred to as the <strong>source</strong> and <strong>abundance</strong> matrices, respectively. The parameter <span class="math notranslate nohighlight">\(d\)</span> indicates the dimensionality of the embedding space.</p>
+<p>The matrix factorization process involves learning <span class="math notranslate nohighlight">\(V\)</span> and <span class="math notranslate nohighlight">\(H\)</span> by minimizing a loss function, typically defined as the reconstruction error. A commonly used form is the Frobenius norm:<br />
+<span class="math notranslate nohighlight">\(\left\| W - V \times H \right\|_F^2\)</span></p>
+<p>This fundamental approach underlies many unsupervised graph embedding methods. These techniques represent the input graph as a matrix (such as an adjacency or proximity matrix) and decompose it to capture structural relationships. While the core principle is consistent across different models, they differ in how the loss function is defined. Different loss formulations allow the learned embedding space to highlight specific properties of the graph structure.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">draw_graph</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">node_names</span><span class="o">=</span><span class="p">{},</span> <span class="n">node_size</span><span class="o">=</span><span class="mi">500</span><span class="p">):</span>
+    <span class="n">pos_nodes</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">spring_layout</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+    <span class="n">nx</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos_nodes</span><span class="p">,</span> <span class="n">with_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">node_size</span><span class="o">=</span><span class="n">node_size</span><span class="p">,</span> <span class="n">edge_color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">arrowsize</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+    
+    <span class="n">pos_attrs</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">node</span><span class="p">,</span> <span class="n">coords</span> <span class="ow">in</span> <span class="n">pos_nodes</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">pos_attrs</span><span class="p">[</span><span class="n">node</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">coords</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">coords</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mf">0.08</span><span class="p">)</span>
+        
+    <span class="c1">#nx.draw_networkx_labels(G, pos_attrs, font_family=&#39;serif&#39;, font_size=20)</span>
+    
+    <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+    <span class="n">axis</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+    <span class="n">axis</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">([</span><span class="mf">1.2</span><span class="o">*</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">axis</span><span class="o">.</span><span class="n">get_xlim</span><span class="p">()])</span>
+    <span class="n">axis</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">([</span><span class="mf">1.2</span><span class="o">*</span><span class="n">y</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">axis</span><span class="o">.</span><span class="n">get_ylim</span><span class="p">()])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="graph-factorization">
+<h2>Graph Factorization<a class="headerlink" href="#graph-factorization" title="Link to this heading">#</a></h2>
+<p>Graph Factorization (GF) was among the earliest models designed to efficiently compute node embeddings for a given graph. It follows the general matrix factorization principle described earlier, and specifically factorizes the adjacency matrix of the graph.</p>
+<p>Formally, let <span class="math notranslate nohighlight">\(G = (V, E)\)</span> be the input graph, and let <span class="math notranslate nohighlight">\(A \in \mathbb{R}^{|V| \times |V|}\)</span> denote its adjacency matrix. The GF algorithm aims to learn a low-dimensional embedding matrix <span class="math notranslate nohighlight">\(Y \in \mathbb{R}^{|V| \times d}\)</span>, where each row <span class="math notranslate nohighlight">\(Y_{i,:}\)</span> corresponds to the <span class="math notranslate nohighlight">\(d\)</span>-dimensional embedding of node <span class="math notranslate nohighlight">\(i\)</span>.</p>
+<p>The loss function used in GF is defined as:</p>
+<div class="math notranslate nohighlight">
+\[
+L = \frac{1}{2} \sum_{(i,j)\in E} \left(A_{i,j} - Y_{i,:} Y_{j,:}^\top \right)^2 
++ \frac{\lambda}{2} \sum_i \left\| Y_{i,:} \right\|^2
+\]</div>
+<p>Here, <span class="math notranslate nohighlight">\((i, j) \in E\)</span> indicates an edge in the graph, and <span class="math notranslate nohighlight">\(\lambda\)</span> is a regularization coefficient that helps prevent overfitting and ensures the stability of the optimization, especially in sparse graphs.</p>
+<p>The first term in the loss measures the reconstruction error between the actual adjacency values and the inner product of the corresponding node embeddings. The second term penalizes large embedding values to control model complexity.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">networkx</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nx</span>
+
+<span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">barbell_graph</span><span class="p">(</span><span class="n">m1</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">m2</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">draw_graph</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/4eb52b2c46beb5c0b905ae47d8815d0f6e4e79dc00ba873068599fbdc4de6432.png" src="../../_images/4eb52b2c46beb5c0b905ae47d8815d0f6e4e79dc00ba873068599fbdc4de6432.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="ch">#!pip install git+https://github.com/palash1992/GEM.git</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="n">Path</span><span class="p">(</span><span class="s2">&quot;gem/intermediate&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Instead of this old library, we use newer one</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">gem.embedding.gf</span><span class="w"> </span><span class="kn">import</span> <span class="n">GraphFactorization</span>
+
+<span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">barbell_graph</span><span class="p">(</span><span class="n">m1</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">m2</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">draw_graph</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+
+<span class="n">gf</span> <span class="o">=</span> <span class="n">GraphFactorization</span><span class="p">(</span><span class="n">d</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>  <span class="n">data_set</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">max_iter</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span> <span class="n">eta</span><span class="o">=</span><span class="mi">1</span><span class="o">*</span><span class="mi">10</span><span class="o">**-</span><span class="mi">4</span><span class="p">,</span> <span class="n">regu</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+<span class="n">gf</span><span class="o">.</span><span class="n">learn_embedding</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/e508b47525f37c0603a0c8e46e4a9b096eef39880f04a66b560f8402dc9c3546.png" src="../../_images/e508b47525f37c0603a0c8e46e4a9b096eef39880f04a66b560f8402dc9c3546.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>./gf not found. Reverting to Python implementation. Please compile gf, place node2vec in the path and grant executable permission
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 0.00554237, -0.00861324],
+       [ 0.0055462 , -0.00861385],
+       [ 0.00553989, -0.00860772],
+       [ 0.00554404, -0.00862161],
+       [ 0.0054759 , -0.00864185],
+       [ 0.00549401, -0.00864196],
+       [ 0.00595482, -0.00843479],
+       [ 0.0051752 , -0.00822833],
+       [ 0.00689223, -0.01079613],
+       [ 0.00373813, -0.00559314],
+       [-0.00565012, -0.00073303],
+       [-0.00977193, -0.00460925],
+       [-0.00460825,  0.0034018 ],
+       [ 0.00369419, -0.00493356],
+       [ 0.00949266, -0.00887645],
+       [ 0.00949055, -0.00887594],
+       [ 0.00949262, -0.00888189],
+       [ 0.0095015 , -0.00887259],
+       [ 0.00947297, -0.0089253 ],
+       [ 0.00958962, -0.00887244],
+       [ 0.00961562, -0.00899678],
+       [ 0.00881016, -0.00826726],
+       [ 0.00853986, -0.01108863],
+       [ 0.01839397, -0.01117985]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">():</span>
+    
+    <span class="n">v</span> <span class="o">=</span> <span class="n">gf</span><span class="o">.</span><span class="n">get_embedding</span><span class="p">()[</span><span class="n">x</span><span class="p">]</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">s</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/cf68a3b3dd3f11f85f357cf157092d4eecf6894ada32bffec2fc15082a952f07.png" src="../../_images/cf68a3b3dd3f11f85f357cf157092d4eecf6894ada32bffec2fc15082a952f07.png" />
+</div>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="graph-representation-with-global-structure-information-graphrep">
+<h1>Graph Representation with Global Structure Information (GraphRep)<a class="headerlink" href="#graph-representation-with-global-structure-information-graphrep" title="Link to this heading">#</a></h1>
+<p>GraphRep is a family of graph embedding methods that preserve <strong>global structural information</strong>. A well-known example is <strong>HOPE (High-Order Proximity preserved Embedding)</strong>, which captures <strong>higher-order node proximity</strong> without requiring embeddings to be symmetric.</p>
+<section id="motivation">
+<h2>Motivation<a class="headerlink" href="#motivation" title="Link to this heading">#</a></h2>
+<p>Most basic embedding methods capture only first-order (direct links) or second-order (shared neighbors) proximities. However, <strong>global proximity</strong> (longer-range relationships between nodes) often reveals richer structure. GraphRep methods address this by considering multiple steps (orders) of proximity in the graph.</p>
+</section>
+<hr class="docutils" />
+<section id="notation-and-setup">
+<h2>Notation and Setup<a class="headerlink" href="#notation-and-setup" title="Link to this heading">#</a></h2>
+<p>Let:</p>
+<ul>
+<li><p><span class="math notranslate nohighlight">\( G = (V, E) \)</span>: input graph with <span class="math notranslate nohighlight">\( |V| \)</span> nodes</p></li>
+<li><p><span class="math notranslate nohighlight">\( A \in \mathbb{R}^{|V| \times |V|} \)</span>: adjacency matrix</p></li>
+<li><p><span class="math notranslate nohighlight">\( D \)</span>: diagonal <strong>degree matrix</strong>, defined as:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+  D_{ij} =
+  \begin{cases}
+  \sum_p A_{ip}, &amp; \text{if } i = j \\
+  0, &amp; \text{otherwise}
+  \end{cases}
+  \end{split}\]</div>
+</li>
+<li><p><span class="math notranslate nohighlight">\( X^k \in \mathbb{R}^{|V| \times |V| }\)</span>: the <strong>k-th order proximity matrix</strong></p></li>
+<li><p><span class="math notranslate nohighlight">\( Y_s^k, Y_t^k \in \mathbb{R}^{|V| \times d} \)</span>: embedding matrices for source and target nodes</p></li>
+<li><p><span class="math notranslate nohighlight">\( d \)</span>: dimension of embeddings per proximity order</p></li>
+<li><p><span class="math notranslate nohighlight">\( K \)</span>: maximum order of proximity</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="what-is-the-k-th-order-proximity">
+<h2>What is the <span class="math notranslate nohighlight">\( k \)</span>th-Order Proximity?<a class="headerlink" href="#what-is-the-k-th-order-proximity" title="Link to this heading">#</a></h2>
+<p>The <strong><span class="math notranslate nohighlight">\( k \)</span>th-order proximity</strong> measures how strongly two nodes are connected by walks of length <span class="math notranslate nohighlight">\( k \)</span>. It is calculated using the <strong>transition probability matrix</strong>:</p>
+<ul class="simple">
+<li><p>First-order transition matrix:
+<span class="math notranslate nohighlight">\(
+X^1 = D^{-1} A
+\)</span>
+where <span class="math notranslate nohighlight">\( X^1_{ij} \)</span> gives the probability of moving from node <span class="math notranslate nohighlight">\( v_i \)</span> to <span class="math notranslate nohighlight">\( v_j \)</span> in one step.</p></li>
+<li><p>Higher-order transition matrix:
+<span class="math notranslate nohighlight">\(
+X^k = (D^{-1} A)^k
+\)</span>
+where <span class="math notranslate nohighlight">\( X^k_{ij} \)</span> is the probability of moving from <span class="math notranslate nohighlight">\( v_i \)</span> to <span class="math notranslate nohighlight">\( v_j \)</span> in exactly <span class="math notranslate nohighlight">\( k \)</span> steps.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="objective-function">
+<h2>Objective Function<a class="headerlink" href="#objective-function" title="Link to this heading">#</a></h2>
+<p>For each proximity order <span class="math notranslate nohighlight">\( k \)</span>, the loss function is defined as:</p>
+<p><span class="math notranslate nohighlight">\(
+L_k = \left\| X^k - Y_s^k \cdot \left(Y_t^k\right)^{T} \right\|_F^2 \quad \text{for } 1 \leq k \leq K
+\)</span></p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\( \|\cdot\|_F \)</span> is the <strong>Frobenius norm</strong></p></li>
+<li><p>This loss measures how well the embedding matrices approximate the proximity matrix <span class="math notranslate nohighlight">\( X^k \)</span></p></li>
+</ul>
+<p>Each <span class="math notranslate nohighlight">\( L_k \)</span> is minimized <strong>independently</strong> to learn the embedding matrices <span class="math notranslate nohighlight">\( Y_s^k \)</span> and <span class="math notranslate nohighlight">\( Y_t^k \)</span>.</p>
+</section>
+<hr class="docutils" />
+<section id="final-embedding-construction">
+<h2>Final Embedding Construction<a class="headerlink" href="#final-embedding-construction" title="Link to this heading">#</a></h2>
+<p>After optimization, the final embedding for each node is constructed by <strong>concatenating</strong> the source embeddings from all orders:</p>
+<p><span class="math notranslate nohighlight">\(
+Y_s = \left[ Y_s^1 \ \| \ Y_s^2 \ \| \ \cdots \ \| \ Y_s^K \right] \in \mathbb{R}^{|V| \times (d \cdot K)}
+\)</span></p>
+<ul class="simple">
+<li><p><strong>Number of rows</strong>: <span class="math notranslate nohighlight">\( |V| \)</span> (one per node)</p></li>
+<li><p><strong>Number of columns</strong>: <span class="math notranslate nohighlight">\( d \cdot K\)</span></p></li>
+</ul>
+<p>This way, each node has a composite embedding that captures multi-step structural information.</p>
+</section>
+<hr class="docutils" />
+<section id="parameters">
+<h2>Parameters<a class="headerlink" href="#parameters" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">dimension</span></code>: the embedding dimension per proximity order (<span class="math notranslate nohighlight">\( d \)</span>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">order</span></code>: the maximum number of proximity steps considered (<span class="math notranslate nohighlight">\(K \)</span>)</p></li>
+<li><p>Final embedding dimension per node: <span class="math notranslate nohighlight">\( d \times K \)</span></p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h2>
+<p>GraphRep methods (like HOPE):</p>
+<ul class="simple">
+<li><p>Capture <strong>high-order proximity</strong> and <strong>global graph structure</strong></p></li>
+<li><p>Use <strong>random walk transition matrices</strong> up to <span class="math notranslate nohighlight">\( K \)</span> steps</p></li>
+<li><p>Allow for <strong>asymmetric embeddings</strong> in directed graphs</p></li>
+<li><p>Construct embeddings via <strong>matrix factorization</strong></p></li>
+<li><p>Combine embeddings from each proximity order to form the final representation</p></li>
+</ul>
+<p>In this implementation,
+the dimension parameter represents the dimension of the embedding space, while the
+order parameter defines the maximum number of orders of proximity between nodes.
+The number of columns of the final embedding matrix (stored, in the example, in the
+embeddings variable) is dimension*order, since, as we said, for each proximity
+order an embedding is computed and concatenated in the final embedding matrix.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">networkx</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nx</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">karateclub.node_embedding.neighbourhood.grarep</span><span class="w"> </span><span class="kn">import</span> <span class="n">GraRep</span>
+
+<span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">barbell_graph</span><span class="p">(</span><span class="n">m1</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">m2</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">draw_graph</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+
+<span class="n">gr</span> <span class="o">=</span> <span class="n">GraRep</span><span class="p">(</span><span class="n">dimensions</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">order</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">gr</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/a56be38e3bf3c1c4834a4a9ea14e639237f1193d2f53e711b1c3ffedd451d781.png" src="../../_images/a56be38e3bf3c1c4834a4a9ea14e639237f1193d2f53e711b1c3ffedd451d781.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<span class="c1"># Since dimensions=2 and order=3, we have 6 dimensions embedded space.</span>
+<span class="n">ida</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">idb</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">():</span>
+    
+    <span class="n">v</span> <span class="o">=</span> <span class="n">gr</span><span class="o">.</span><span class="n">get_embedding</span><span class="p">()[</span><span class="n">x</span><span class="p">]</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="n">ida</span><span class="p">],</span><span class="n">v</span><span class="p">[</span><span class="n">idb</span><span class="p">],</span> <span class="n">s</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="n">ida</span><span class="p">],</span><span class="n">v</span><span class="p">[</span><span class="n">idb</span><span class="p">]),</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/805a7ad0e1bca9d37e841a342a3b37238153538787b43c3efb0ae53445a9a263.png" src="../../_images/805a7ad0e1bca9d37e841a342a3b37238153538787b43c3efb0ae53445a9a263.png" />
+</div>
+</div>
+</section>
+<section id="higher-order-proximity-preserved-embedding-hope">
+<h2>Higher-order proximity preserved embedding ( HOPE)<a class="headerlink" href="#higher-order-proximity-preserved-embedding-hope" title="Link to this heading">#</a></h2>
+<p>HOPE is another graph embedding technique based on the matrix factorization principle.
+This method allows preserving higher-order proximity and does not force its embeddings
+to have any symmetric properties.</p>
+</section>
+<section id="hope-high-order-proximity-preserved-embedding">
+<h2>HOPE: High-Order Proximity Preserved Embedding<a class="headerlink" href="#hope-high-order-proximity-preserved-embedding" title="Link to this heading">#</a></h2>
+<p>Given the notion of high-order proximity in graphs, the <strong>HOPE</strong> algorithm is designed to generate node embeddings that preserve these structural relationships, particularly in <strong>directed</strong> graphs where proximity is often asymmetric.</p>
+<p>Let the input graph be defined as:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(G = (V, E)\)</span>: a graph with node set <span class="math notranslate nohighlight">\(V\)</span> and edge set <span class="math notranslate nohighlight">\(E\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(A \in \mathbb{R}^{|V| \times |V|}\)</span>: the adjacency matrix of <span class="math notranslate nohighlight">\(G\)</span></p></li>
+</ul>
+<p>The goal is to approximate a <strong>similarity matrix</strong> <span class="math notranslate nohighlight">\(S\)</span> using two separate embedding matrices, one for source nodes and another for target nodes. The optimization objective (loss function) is defined as:</p>
+<div class="math notranslate nohighlight">
+\[
+L = \left\| S - Y_s \cdot Y_t^{T} \right\|_F^2
+\]</div>
+<p>Where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(S \in \mathbb{R}^{|V| \times |V|}\)</span> is a similarity matrix derived from graph <span class="math notranslate nohighlight">\(G\)</span> that encodes high-order proximity between nodes</p></li>
+<li><p><span class="math notranslate nohighlight">\(Y_s \in \mathbb{R}^{|V| \times d}\)</span>: source embedding matrix</p></li>
+<li><p><span class="math notranslate nohighlight">\(Y_t \in \mathbb{R}^{|V| \times d}\)</span>: target embedding matrix</p></li>
+<li><p><span class="math notranslate nohighlight">\(d\)</span> is the embedding dimensionality</p></li>
+<li><p><span class="math notranslate nohighlight">\(\|\cdot\|_F\)</span> denotes the Frobenius norm</p></li>
+</ul>
+<p>The use of <strong>separate embeddings for source and target nodes</strong> allows HOPE to effectively capture <strong>asymmetric</strong> relationships in the graph—common in many real-world networks such as citation, hyperlink, or follower graphs.</p>
+<section id="id1">
+<h3>Final Embedding Construction<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<p>The final embedding of each node is obtained by <strong>concatenating</strong> its source and target embeddings:</p>
+<div class="math notranslate nohighlight">
+\[
+Y = [Y_s \,|\, Y_t] \in \mathbb{R}^{|V| \times 2d}
+\]</div>
+<p>This means each node is ultimately represented in a <span class="math notranslate nohighlight">\(2d\)</span>-dimensional space.</p>
+</section>
+<hr class="docutils" />
+<section id="similarity-matrix-computation">
+<h3>Similarity Matrix Computation<a class="headerlink" href="#similarity-matrix-computation" title="Link to this heading">#</a></h3>
+<p>The similarity matrix <span class="math notranslate nohighlight">\(S\)</span> is designed to reflect higher-order proximities between nodes and is computed as:</p>
+<div class="math notranslate nohighlight">
+\[
+S = M_g \cdot M_l
+\]</div>
+<p>where both <span class="math notranslate nohighlight">\(M_g\)</span> and <span class="math notranslate nohighlight">\(M_l\)</span> are matrix polynomials chosen based on the desired similarity measure. For example, when using the <strong>Adamic-Adar (AA)</strong> similarity measure, we have:</p>
+<ul>
+<li><p><span class="math notranslate nohighlight">\(M_g = I\)</span> (identity matrix)</p></li>
+<li><p><span class="math notranslate nohighlight">\(M_l = A D A\)</span>, where:</p>
+<ul>
+<li><p><span class="math notranslate nohighlight">\(A\)</span> is the adjacency matrix</p></li>
+<li><p><span class="math notranslate nohighlight">\(D\)</span> is a diagonal matrix defined as:</p>
+<div class="math notranslate nohighlight">
+\[
+    D_{ii} = \frac{1}{\sum_j (A_{ij} + A_{ji})}
+    \]</div>
+</li>
+</ul>
+</li>
+</ul>
+<p>This formulation highlights the importance of shared neighbors weighted by node degrees, which is characteristic of the Adamic-Adar method.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">networkx</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nx</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">gem.embedding.hope</span><span class="w"> </span><span class="kn">import</span> <span class="n">HOPE</span>
+
+<span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">barbell_graph</span><span class="p">(</span><span class="n">m1</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">m2</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">draw_graph</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+
+<span class="n">hp</span> <span class="o">=</span> <span class="n">HOPE</span><span class="p">(</span><span class="n">d</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">beta</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
+<span class="n">hp</span><span class="o">.</span><span class="n">learn_embedding</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/58b6d0827406a984ebcc2b65a60419714c40a0730f057c39387922b748650559.png" src="../../_images/58b6d0827406a984ebcc2b65a60419714c40a0730f057c39387922b748650559.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>SVD error (low rank): 0.052092
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[-0.07024409, -0.07024348, -0.07024409, -0.07024348],
+       [-0.07024409, -0.07024348, -0.07024409, -0.07024348],
+       [-0.07024409, -0.07024348, -0.07024409, -0.07024348],
+       [-0.07024409, -0.07024348, -0.07024409, -0.07024348],
+       [-0.07024409, -0.07024348, -0.07024409, -0.07024348],
+       [-0.07024409, -0.07024348, -0.07024409, -0.07024348],
+       [-0.07024409, -0.07024348, -0.07024409, -0.07024348],
+       [-0.07024409, -0.07024348, -0.07024409, -0.07024348],
+       [-0.07024409, -0.07024348, -0.07024409, -0.07024348],
+       [-0.07104037, -0.07104201, -0.07104037, -0.07104201],
+       [-0.00797181, -0.00799433, -0.00797181, -0.00799433],
+       [-0.00079628, -0.00099787, -0.00079628, -0.00099787],
+       [ 0.00079628, -0.00099787,  0.00079628, -0.00099787],
+       [ 0.00797181, -0.00799433,  0.00797181, -0.00799433],
+       [ 0.07104037, -0.07104201,  0.07104037, -0.07104201],
+       [ 0.07024409, -0.07024348,  0.07024409, -0.07024348],
+       [ 0.07024409, -0.07024348,  0.07024409, -0.07024348],
+       [ 0.07024409, -0.07024348,  0.07024409, -0.07024348],
+       [ 0.07024409, -0.07024348,  0.07024409, -0.07024348],
+       [ 0.07024409, -0.07024348,  0.07024409, -0.07024348],
+       [ 0.07024409, -0.07024348,  0.07024409, -0.07024348],
+       [ 0.07024409, -0.07024348,  0.07024409, -0.07024348],
+       [ 0.07024409, -0.07024348,  0.07024409, -0.07024348],
+       [ 0.07024409, -0.07024348,  0.07024409, -0.07024348]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">():</span>
+    
+    <span class="n">v</span> <span class="o">=</span> <span class="n">hp</span><span class="o">.</span><span class="n">get_embedding</span><span class="p">()[</span><span class="n">x</span><span class="p">,</span><span class="mi">2</span><span class="p">:]</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">s</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/4f12c9acff8537f08dc602cc622a827d1badf43abbfc1ec1699c5591d57a39b7.png" src="../../_images/4f12c9acff8537f08dc602cc622a827d1badf43abbfc1ec1699c5591d57a39b7.png" />
+</div>
+</div>
+<p>In this case, the graph is undirected and thus there is no difference between the source
+and target nodes. Figure shows the first two dimensions of the embeddings matrix
+representing . It is possible to see how the embedding space generated by HOPE
+provides, in this case, a better separation of the different nodes.</p>
+</section>
+</section>
+<section id="skip-gram">
+<h2>Skip Gram<a class="headerlink" href="#skip-gram" title="Link to this heading">#</a></h2>
+<p>The skip-gram model is a simple neural network with one hidden layer trained in order to
+predict the probability of a given word being present when an input word is present. The
+neural network is trained by building the training data using a text corpus as a reference.
+This process is described in the following chart:</p>
+<p>A target word is selected and a rolling window of fixed size w is built around
+that word. The words inside the rolling windows are known as context words. Multiple
+pairs of (target word, context word) are then built according to the words inside the rolling
+window.</p>
+<p>Once the training data is generated from the whole corpus, the skip-gram model is trained
+to predict the probability of a word being a context word for the given target. During its
+training, the neural network learns a compact representation of the input words. This is
+why the skip-gram model is also known as Word to Vector (Word2Vec).</p>
+<p><img alt="image.png" src="content/Chapter03/attachment:6a15b260-825d-4217-989c-e412c262d468.png" /></p>
+<p>The structure of the neural network representing the skip-gram model is described in the
+following chart:</p>
+<p><img alt="{7BE2F5C6-4AED-40EC-A413-A4709712B7AB}.png" src="content/Chapter03/attachment:80ac2be5-aece-4257-a23b-6fb438433fb4.png" /></p>
+<p>The input of the neural network is a binary vector of size <span class="math notranslate nohighlight">\(m\)</span>. Each element of the vector represents a word in the dictionary of the language we want to embed the words in. When, during the training process, a (target word, context word) pair is given, the input array will have 0 in all its entries with the exception of the entry representing the “target” word, which will be equal to 1. The hidden layer has d neurons. The hidden layer will learn the embedding representation of each word, creating a d-dimensional embedding space. Finally, the output layer of the neural network is a dense layer of <span class="math notranslate nohighlight">\(m\)</span> neurons (the same size as the input vector) with a softmax activation function. Each neuron represents a word of the dictionary. The value assigned by the neuron corresponds to the probability of that word being “related” to the input word. Since softmax can be hard to compute when the
+size of <span class="math notranslate nohighlight">\(m\)</span> increases, a hierarchical softmax approach is always used.</p>
+<p>The final goal of the skip-gram model is not to actually learn the task we previously described but to build a compact d-dimensional representation of the input words. Thanks to this representation, it is possible to easily extract an embedding space for the words using the weight of the hidden layer. Another common approach to creating a skip-gram model, which will be not described here, is context-based: Continuous Bag-of-Words (CBOW).</p>
+<p><img alt="image.png" src="content/Chapter03/attachment:a5f34c23-3ca4-4441-a1e2-4fbcbbf52384.png" />
+ref:<a class="reference external" href="https://medium.com/data-science/complete-guide-to-understanding-node2vec-algorithm-4e9a35e5d147">https://medium.com/data-science/complete-guide-to-understanding-node2vec-algorithm-4e9a35e5d147</a></p>
+<p>When training this neural network, the input is a one-hot encoded vector representing the input word, and the output is also a one-hot encoded vector representing the context word. Remember from the previous image how we constructed input and context pairs of words. Word2vec uses a trick where we aren’t interested in the output vector of the neural network, but rather the goal is to learn the weights of the hidden layer. The weights of the hidden layer are actually the word embedding we are trying to learn. The number of neurons in the hidden layer will determine the embedding dimension or the size of the vector representing each word in the vocabulary.</p>
+<p>Note that the neural network does not consider the offset of the context word, so it does not differentiate between directly adjacent context words to the input and those more distant in the context window or even if the context word precedes or follows the input term. Consequently, the window size parameter has a significant influence on the results of the word embedding. For example, a study Dependency-Based Word Embeddings by Levy &amp; Goldberg finds that larger context window size tends to capture more topic/domain information. In contrast, smaller windows tend to capture more information about the word itself, e.g., what other words are functionally similar.</p>
+</section>
+<section id="deepwalk">
+<h2>DeepWalk<a class="headerlink" href="#deepwalk" title="Link to this heading">#</a></h2>
+<p>The DeepWalk algorithm generates the node embedding of a given graph using the skip-gram model.
+In order to provide a better explanation of this model, we need to introduce the concept of <strong>random walks</strong>:
+Formally, let <span class="math notranslate nohighlight">\(G\)</span> be a graph and let <span class="math notranslate nohighlight">\(v_i\)</span> be a vertex selected as the starting point. We select
+a neighbor of <span class="math notranslate nohighlight">\(v_i\)</span> at random and we move toward it. From this point, we randomly select
+another point to move. This process is repeated <span class="math notranslate nohighlight">\(t\)</span> times. The random sequence of
+vertices selected in this way is a random walk of length <span class="math notranslate nohighlight">\(t\)</span>. It is worth mentioning that the
+algorithm used to generate the random walks does not impose any constraint on how they
+are built. As a consequence, there is no guarantee that the local neighborhood of the node
+is well preserved.</p>
+<p>Using the notion of random walk, the DeepWalk algorithm generates a random walk of a size of at most <span class="math notranslate nohighlight">\(t\)</span> <strong>for each node</strong>. Those random walks will be given as input to the skip-gram model. The embedding generated using skip-gram will be used as the final node embedding. In the following figure (Figure 3.7), we can see a step-by-step graphical representation of the algorithm:
+<img alt="{C30A40F4-DCCE-408C-AD23-2C4C3BFF59DD}.png" src="content/Chapter03/attachment:a313ad89-33e3-45c6-878e-46a27af780df.png" />
+Here is a step-by-step explanation of the algorithm graphically described in the preceding
+chart:</p>
+<ol class="arabic simple">
+<li><p><strong>Random Walk Generation</strong>: For each node of input graph <span class="math notranslate nohighlight">\(G\)</span>, a set of random walks with a fixed maximum length <span class="math notranslate nohighlight">\((t)\)</span> is computed. It should be noted that the length <span class="math notranslate nohighlight">\(t\)</span> is an upper bound. There are no constraints forcing all the paths to have the same length.</p></li>
+<li><p><strong>Skip-Gram Training</strong>: Using all the random walks generated in the previous step, a skip-gram model is trained. As we described earlier, the skip-gram model works on words and sentences. When a graph is given as input to the skip-gram model, as visible in Figure 3.7, a graph can be seen as an input text corpus, while a single node of the graph can be seen as a word of the corpus.
+A random walk can be seen as a sequence of words (a sentence). The skip-gram is then trained using the “fake” sentences generated by the nodes in the random walk. The parameters for the skip-gram model previously described (window size, w, and embed size, d) are used in this step.</p></li>
+<li><p><strong>Embedding Generation</strong>: The information contained in the hidden layers of the
+trained skip-gram model is used in order to extract the embedding of each node</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.decomposition</span><span class="w"> </span><span class="kn">import</span> <span class="n">PCA</span>
+
+<span class="c1"># فرض کنیم 4 نود داریم: A, B, C, D</span>
+<span class="n">nodes</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">]</span>
+<span class="n">node_to_index</span> <span class="o">=</span> <span class="p">{</span><span class="n">node</span><span class="p">:</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">node</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">nodes</span><span class="p">)}</span>
+
+<span class="c1"># وان‌هات ورودی‌ها</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">one_hot</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">4</span><span class="p">):</span>
+    <span class="n">vec</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>
+    <span class="n">vec</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">vec</span>
+
+<span class="c1"># داده‌ی آموزش (مرکز → کانتکست)</span>
+<span class="n">training_data</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">)</span>
+<span class="p">]</span>
+
+<span class="c1"># پارامترها</span>
+<span class="n">vocab_size</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">embedding_size</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="c1"># وزن‌های اولیه</span>
+<span class="n">W</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">vocab_size</span><span class="p">,</span> <span class="n">embedding_size</span><span class="p">)</span>
+<span class="n">W_prime</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">embedding_size</span><span class="p">,</span> <span class="n">vocab_size</span><span class="p">)</span>
+
+<span class="c1"># تابع softmax</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">softmax</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="n">e_x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">e_x</span> <span class="o">/</span> <span class="n">e_x</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+
+<span class="c1"># آموزش خیلی ساده با gradient descent</span>
+<span class="n">learning_rate</span> <span class="o">=</span> <span class="mf">0.1</span>
+<span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">center</span><span class="p">,</span> <span class="n">context</span> <span class="ow">in</span> <span class="n">training_data</span><span class="p">:</span>
+        <span class="n">center_vec</span> <span class="o">=</span> <span class="n">one_hot</span><span class="p">(</span><span class="n">node_to_index</span><span class="p">[</span><span class="n">center</span><span class="p">])</span>
+        <span class="n">context_index</span> <span class="o">=</span> <span class="n">node_to_index</span><span class="p">[</span><span class="n">context</span><span class="p">]</span>
+
+        <span class="c1"># forward</span>
+        <span class="n">h</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">center_vec</span><span class="p">,</span> <span class="n">W</span><span class="p">)</span>                  <span class="c1"># embedding</span>
+        <span class="n">u</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">W_prime</span><span class="p">)</span>                     <span class="c1"># نمره برای همه نودها</span>
+        <span class="n">y_pred</span> <span class="o">=</span> <span class="n">softmax</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>                        <span class="c1"># احتمال‌ها</span>
+
+        <span class="c1"># ground truth</span>
+        <span class="n">y_true</span> <span class="o">=</span> <span class="n">one_hot</span><span class="p">(</span><span class="n">context_index</span><span class="p">)</span>
+
+        <span class="c1"># gradient</span>
+        <span class="n">error</span> <span class="o">=</span> <span class="n">y_pred</span> <span class="o">-</span> <span class="n">y_true</span>
+        <span class="n">dW_prime</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">outer</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">error</span><span class="p">)</span>
+        <span class="n">dW</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">outer</span><span class="p">(</span><span class="n">center_vec</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">W_prime</span><span class="p">,</span> <span class="n">error</span><span class="p">))</span>
+
+        <span class="c1"># update</span>
+        <span class="n">W_prime</span> <span class="o">-=</span> <span class="n">learning_rate</span> <span class="o">*</span> <span class="n">dW_prime</span>
+        <span class="n">W</span> <span class="o">-=</span> <span class="n">learning_rate</span> <span class="o">*</span> <span class="n">dW</span>
+
+<span class="c1"># نمایش embedding نهایی</span>
+<span class="n">embeddings</span> <span class="o">=</span> <span class="n">W</span>
+<span class="n">emb_2d</span> <span class="o">=</span> <span class="n">PCA</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">embeddings</span><span class="p">)</span>
+
+<span class="c1"># رسم</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">label</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">nodes</span><span class="p">):</span>
+    <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">emb_2d</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="mf">0.01</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="mf">0.01</span><span class="p">,</span> <span class="n">label</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Node Embeddings learned via Skip-Gram&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;equal&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/c12ab2d826c173f53257f74513abc311c48f1e6e54a4d31c0e008b731e65744b.png" src="../../_images/c12ab2d826c173f53257f74513abc311c48f1e6e54a4d31c0e008b731e65744b.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">networkx</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nx</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">karateclub.node_embedding.neighbourhood.deepwalk</span><span class="w"> </span><span class="kn">import</span> <span class="n">DeepWalk</span>
+
+<span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">barbell_graph</span><span class="p">(</span><span class="n">m1</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">m2</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">draw_graph</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+
+<span class="n">dw</span> <span class="o">=</span> <span class="n">DeepWalk</span><span class="p">(</span><span class="n">dimensions</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">dw</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/aab10e2bc59e7467aa81d9c24b91abb94aa459e13373539eaad24e674b6c9f4c.png" src="../../_images/aab10e2bc59e7467aa81d9c24b91abb94aa459e13373539eaad24e674b6c9f4c.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">():</span>
+    
+    <span class="n">v</span> <span class="o">=</span> <span class="n">dw</span><span class="o">.</span><span class="n">get_embedding</span><span class="p">()[</span><span class="n">x</span><span class="p">]</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">s</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/d52462b4efe4013237550cf88dae60d35af7d907e412314790b3b13f035162a3.png" src="../../_images/d52462b4efe4013237550cf88dae60d35af7d907e412314790b3b13f035162a3.png" />
+</div>
+</div>
+<section id="negative-sampling-and-subsampling">
+<h3>Negative sampling and subsampling<a class="headerlink" href="#negative-sampling-and-subsampling" title="Link to this heading">#</a></h3>
+<p>ref:<a class="reference external" href="https://medium.com/data-science/complete-guide-to-understanding-node2vec-algorithm-4e9a35e5d147">https://medium.com/data-science/complete-guide-to-understanding-node2vec-algorithm-4e9a35e5d147</a></p>
+<p>The authors of the word2vec skip-gram model have later published a Distributed representations of words and phrases and their compositionality that introduces two optimizations to the original model. The first optimization is the subsampling of frequent words. In any text corpus, the most frequent terms will most likely be the so-called stop words like “the”, “at”, “in”. While the skip-gram model benefits from co-occurrences of words like “Germany” and “Berlin”, the benefit of frequent co-occurrences of “Germany” and “the” is far smaller as nearly every word is accompanied with “the” term. The authors implemented a subsampling technique to address this issue. For each word in the training corpus, there is a chance that we will ignore specific instances of the word in the text. The probability of cutting the word from a sentence is related to the word’s frequency. The research paper shows that subsampling of frequent words during training results in a significant speedup and improves the representations of less frequent words.</p>
+<p>The second optimization is the introduction of negative sampling. Training a neural network involves taking a training sample and adjusting all of the neuron weights to predict that training sample more precisely. In layman’s terms, each training sample will tweak all of the weights in the neural network. A Test Your Vocab study shows that most adult native speakers’ vocabulary ranges from 20,000–35,000 words and you can have millions or even billions of input-context training pairs. Updating several thousand weights for every input-context training pair is very expensive. Negative sampling solves this performance issue by having each training sample modify only a small subset of the weights rather than all of them. With negative sampling, a “negative” word is one for which we want the neural network to output a 0, meaning that it is not in the context of our input term. We will still update the weights for our “positive” context word. Experiments indicate that the number of negative samples in the range 5–20 is useful for small training datasets. For larger datasets, the number of negative examples can be as small as 2–5. So, for example, instead of updating all of the neuron weights for each training sample, we only update five negative and one positive weight. This will have a significant impact on the model training time. The paper shows that selecting negative samples using the unigram distribution raised to the 3/4rd power significantly outperformed other options. In a unigram distribution, more frequent words are more probable to be selected as negative samples.</p>
+</section>
+</section>
+<section id="node2vec">
+<h2>Node2Vec<a class="headerlink" href="#node2vec" title="Link to this heading">#</a></h2>
+<p>The Node2Vec algorithm can be seen as an extension of DeepWalk. This algorithm uses skip-gram with negative sampling (SGNS). Indeed, as with DeepWalk, Node2Vec also generates a set of random walks used as input to a skip-gram model. Once trained, the hidden layers of the skip-gram model are used to generate the embedding of the node in the graph. <strong>The main difference between the two algorithms lies in the way the random walks are generated</strong>.</p>
+<p>Indeed, if DeepWalk generates random walks without using any bias, in Node2Vec a new technique to generate biased random walks on the graph is introduced. The algorithm to generate the random walks combines graph exploration by merging Breadth-First Search (BFS) and Depth-First Search (DFS). The way those two algorithms are combined in the random walk’s generation is regularized by two parameters, <span class="math notranslate nohighlight">\(p\)</span> and <span class="math notranslate nohighlight">\(q\)</span>. <span class="math notranslate nohighlight">\(p\)</span> defines the probability of a random walk getting back to the previous node, while <span class="math notranslate nohighlight">\(q\)</span> defines the probability that a random walk can pass through a previously unseen part of the graph.</p>
+<section id="balancing-exploration-and-exploitation">
+<h3>Balancing Exploration and Exploitation:<a class="headerlink" href="#balancing-exploration-and-exploitation" title="Link to this heading">#</a></h3>
+<p>The parameters <span class="math notranslate nohighlight">\(p\)</span> and <span class="math notranslate nohighlight">\(q\)</span> are crucial in determining the balance between exploration and exploitation during random walks.</p>
+<p>A higher value of <span class="math notranslate nohighlight">\(p\)</span> encourages revisiting recent nodes, fostering the exploitation of local neighbourhoods.</p>
+<p>A lower value of <span class="math notranslate nohighlight">\(q\)</span> promotes exploration by allowing the walk to move away from the current node.</p>
+<p>Due to this combination, Node2Vec can preserve high-order proximities by preserving local structures in the graph as well as global community structures. This new method of random walk generation allows solving the limitation of DeepWalk preserving the local neighborhood properties of the node.</p>
+<p>Node2Vec framework is based on the principle of learning continuous feature representation for nodes in the graph and preserving the knowledge gained from the neighboring 100 nodes.  Lets us understand how the algorithm works.  Say we have a graph having a few interconnected nodes creating a network. So, Node2Vec algorithm learns a dense representation (say 100 dimensions/features) of every node in the network.</p>
+<p>The algorithm suggests that if we plot these 100 dimensions of each node in a 2 dimensional graph by applying PCA, the distance of the two nodes in that low-dimensional graph would be same as their actual distance in the given network.</p>
+<p>In this way, the framework maximizes the likelihood of preserving neighboring nodes even if you represent them in a low-dimensional space.</p>
+<p><img alt="image.png" src="content/Chapter03/attachment:ed88df22-91f8-4fba-bb31-71bfea80c054.png" /></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">networkx</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nx</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">node2vec</span><span class="w"> </span><span class="kn">import</span> <span class="n">Node2Vec</span>
+
+<span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">barbell_graph</span><span class="p">(</span><span class="n">m1</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">m2</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">draw_graph</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+
+<span class="n">node2vec</span> <span class="o">=</span> <span class="n">Node2Vec</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">dimensions</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">node2vec</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">window</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">embeddings</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">wv</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/58b6d0827406a984ebcc2b65a60419714c40a0730f057c39387922b748650559.png" src="../../_images/58b6d0827406a984ebcc2b65a60419714c40a0730f057c39387922b748650559.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing transition probabilities:   0%|                                                       | 0/24 [00:00&lt;?, ?it/s]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing transition probabilities: 100%|████████████████████████████████████████████| 24/24 [00:00&lt;00:00, 1590.66it/s]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Generating walks (CPU: 1):   0%|                                                                | 0/10 [00:00&lt;?, ?it/s]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Generating walks (CPU: 1):  20%|███████████▏                                            | 2/10 [00:00&lt;00:00,  9.22it/s]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Generating walks (CPU: 1):  30%|████████████████▊                                       | 3/10 [00:00&lt;00:01,  6.65it/s]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Generating walks (CPU: 1):  40%|██████████████████████▍                                 | 4/10 [00:00&lt;00:00,  7.35it/s]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Generating walks (CPU: 1):  50%|████████████████████████████                            | 5/10 [00:00&lt;00:00,  6.68it/s]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Generating walks (CPU: 1):  60%|█████████████████████████████████▌                      | 6/10 [00:00&lt;00:00,  5.91it/s]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Generating walks (CPU: 1):  70%|███████████████████████████████████████▏                | 7/10 [00:01&lt;00:00,  5.48it/s]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Generating walks (CPU: 1):  80%|████████████████████████████████████████████▊           | 8/10 [00:01&lt;00:00,  5.29it/s]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Generating walks (CPU: 1):  90%|██████████████████████████████████████████████████▍     | 9/10 [00:01&lt;00:00,  5.37it/s]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Generating walks (CPU: 1): 100%|███████████████████████████████████████████████████████| 10/10 [00:01&lt;00:00,  5.61it/s]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Generating walks (CPU: 1): 100%|███████████████████████████████████████████████████████| 10/10 [00:01&lt;00:00,  5.35it/s]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span><span class="mi">7</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">():</span>
+    
+    <span class="n">v</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">wv</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)]</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">s</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/42cbd6e10130f391551f5ea21199ee0f54ec563a1c358a83ab2aa277f05855be.png" src="../../_images/42cbd6e10130f391551f5ea21199ee0f54ec563a1c358a83ab2aa277f05855be.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">wv</span><span class="p">[</span><span class="s2">&quot;1&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[-2.4506648  2.4546766]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="edge2vec">
+<h2>Edge2Vec<a class="headerlink" href="#edge2vec" title="Link to this heading">#</a></h2>
+<p>Contrary to the other embedding function, the Edge to Vector (Edge2Vec) algorithm
+generates the embedding space on edges, instead of nodes. This algorithm is a simple side
+effect of the embedding generated by using Node2Vec. The main idea is to use the node
+embedding of two adjacent nodes to perform some basic mathematical operations in
+order to extract the embedding of the edge connecting them
+Formally, let and be two adjacent nodes and let <span class="math notranslate nohighlight">\(f(v_i)\)</span> and <span class="math notranslate nohighlight">\(f(v_j)\)</span> be their
+embeddings computed with Node2Vec. The operators described in Table 3.1 can be used in order to compute the embedding of their edge:</p>
+<p><img alt="{52EB2093-0461-4E6B-8C86-90002285EFF6}.png" src="content/Chapter03/attachment:261a8765-c2a4-49d8-b8c6-f5ee21a04fd5.png" /></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">node2vec.edges</span><span class="w"> </span><span class="kn">import</span> <span class="n">HadamardEmbedder</span>
+<span class="n">edges_embs</span> <span class="o">=</span> <span class="n">HadamardEmbedder</span><span class="p">(</span><span class="n">keyed_vectors</span><span class="o">=</span><span class="n">model</span><span class="o">.</span><span class="n">wv</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">G</span><span class="o">.</span><span class="n">edges</span><span class="p">():</span>
+    
+    <span class="n">v</span> <span class="o">=</span> <span class="n">edges_embs</span><span class="p">[(</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]))]</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">s</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/6eca35d35bd9b29ee5ffaa794fa60cdd32ec51429738a4e26a8c5486a545820c.png" src="../../_images/6eca35d35bd9b29ee5ffaa794fa60cdd32ec51429738a4e26a8c5486a545820c.png" />
+</div>
+</div>
+</section>
+<section id="graph2vec">
+<h2>Graph2Vec<a class="headerlink" href="#graph2vec" title="Link to this heading">#</a></h2>
+<p>The methods we previously described generated the embedding space for each node or edge on a given graph. Graph to Vector (Graph2Vec) generalizes this concept and generates embeddings for the whole graph.</p>
+<p>To specify, given a set of graphs, the Graph2Vec algorithms generate an embedding space where each point represents a graph. This algorithm generates its embedding using an evolution of the Word2Vec skip-gram model known as Document to Vector (Doc2Vec).</p>
+<p>The main idea behind this method is to view an entire graph as a document and each of its subgraphs, generated as an ego graph (see Chapter 1, Getting Started with Graphs) of each node, as words that comprise the document.</p>
+<p>In other words, a graph is composed of subgraphs as a document is composed of sentences. According to this description, the algorithm can be summarized into the
+following steps:</p>
+<ol class="arabic simple">
+<li><p>Subgraph generation: A set of rooted subgraphs is generated around every node.</p></li>
+<li><p>Doc2Vec training: The Doc2Vec skip-gram is trained using the subgraphs
+generated by the previous step.</p></li>
+<li><p>Embedding generation: The information contained in the hidden layers of the
+trained Doc2Vec model is used in order to extract the embedding of each node.</p></li>
+</ol>
+<p><img alt="image.png" src="content/Chapter03/attachment:86ab289b-3b74-491f-be68-bc54aa8ea094.png" /></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">karateclub</span><span class="w"> </span><span class="kn">import</span> <span class="n">Graph2Vec</span>
+
+<span class="n">n_graphs</span> <span class="o">=</span> <span class="mi">20</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">generate_radom</span><span class="p">():</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+    <span class="n">k</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">nx</span><span class="o">.</span><span class="n">watts_strogatz_graph</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="n">p</span><span class="p">),</span> <span class="p">[</span><span class="n">n</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="n">p</span><span class="p">]</span>
+
+<span class="n">Gs</span> <span class="o">=</span> <span class="p">[</span><span class="n">generate_radom</span><span class="p">()</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_graphs</span><span class="p">)]</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">Graph2Vec</span><span class="p">(</span><span class="n">dimensions</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">wl_iterations</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">([</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">Gs</span><span class="p">])</span>
+<span class="n">embeddings</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">get_embedding</span><span class="p">()</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">vec</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">embeddings</span><span class="p">):</span>
+    
+    <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">vec</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">vec</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">s</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">),</span> <span class="p">(</span><span class="n">vec</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">vec</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">40</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/90d0274006019d783d5989549a9287f80e674f76638136df18e7288335ede3e4.png" src="../../_images/90d0274006019d783d5989549a9287f80e674f76638136df18e7288335ede3e4.png" />
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "mlgbook"
+        },
+        kernelOptions: {
+            name: "mlgbook",
+            path: "./content\Chapter03"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'mlgbook'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Shallow Embedding Methods</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#matrix-factorization">Matrix Factorization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#graph-factorization">Graph Factorization</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#graph-representation-with-global-structure-information-graphrep">Graph Representation with Global Structure Information (GraphRep)</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#motivation">Motivation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#notation-and-setup">Notation and Setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-the-k-th-order-proximity">What is the <span class="math notranslate nohighlight">\( k \)</span>th-Order Proximity?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objective-function">Objective Function</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#final-embedding-construction">Final Embedding Construction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parameters">Parameters</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#higher-order-proximity-preserved-embedding-hope">Higher-order proximity preserved embedding ( HOPE)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hope-high-order-proximity-preserved-embedding">HOPE: High-Order Proximity Preserved Embedding</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Final Embedding Construction</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#similarity-matrix-computation">Similarity Matrix Computation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#skip-gram">Skip Gram</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deepwalk">DeepWalk</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#negative-sampling-and-subsampling">Negative sampling and subsampling</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#node2vec">Node2Vec</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#balancing-exploration-and-exploitation">Balancing Exploration and Exploitation:</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#edge2vec">Edge2Vec</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#graph2vec">Graph2Vec</a></li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Soheila Ashkezari-T.
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
