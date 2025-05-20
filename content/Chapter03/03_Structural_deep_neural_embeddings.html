@@ -60,8 +60,6 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'content/Chapter03/03_Structural_deep_neural_embeddings';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Unsupervised graph representation learning using Graph ConvNet" href="04_Graph_Neural_Network.html" />
-    <link rel="prev" title="AutoEncoder" href="02_Autoencoders.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -124,6 +122,8 @@
       
       
       
+        
+      
       <div class="bd-sidebar-primary bd-sidebar">
         
 
@@ -175,31 +175,30 @@
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="../../intro.html">
-                    Welcome to Graph Machhine Learning Workshop
+                    Welcome to Graph Machine Learning Workshop
                 </a>
             </li>
         </ul>
-        <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../Chapter00/chap01_intro_and_basics.html">Introduction to Graphs and Machine Learning</a></li>
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Chapter00/chap01_intro_and_basics.html">Introduction to Graph Machine Learning</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter00/help.html">Step-by-Step Setup Guide: Anaconda, Virtual Environments, and Jupyter Kernel Configuration</a></li>
 
+
+
+
+
+
+
+
+
+</ul>
+</details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../Chapter01/01_Introduction_Networkx.html">Chapter 1 : Introduction to Networkx</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter01/02_Graph_metrics.html">Chapter 1.2: Graph properties</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter01/03_Graphs_Benchmarks.html">Benchmark and Repositories</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../Chapter02/01_embedding_examples.html">Chapter 2 : Embedding Examples</a></li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="00_Unsupervised_Learning.html">Chapter 3 : Unsupervised machine learning</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="01_Shallow_Embeddings.html">Shallow embedding methods</a></li>
-<li class="toctree-l2"><a class="reference internal" href="02_Autoencoders.html">AutoEncoder</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Structural Deep Network Embedding</a></li>
-<li class="toctree-l2"><a class="reference internal" href="04_Graph_Neural_Network.html">Unsupervised graph representation learning using Graph ConvNet</a></li>
-</ul>
-</details></li>
-<li class="toctree-l1"><a class="reference internal" href="../Chapter04/01_Feature_based_methods.html">Chapter 4 : Supervised Graph Learning</a></li>
-
-<li class="toctree-l1"><a class="reference internal" href="../Chapter05/01_link_prediction.html">Chapter 5: Problems with Machine Learning on Graphs</a></li>
-
-<li class="toctree-l1"><a class="reference internal" href="../Chapter06/01_Social_network_analysis.html">Chapter 6 : Machine learning on Social Netowrk Graphs</a></li>
 </ul>
 
     </div>
@@ -485,494 +484,494 @@ document.write(`
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 1/50
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1/1 [==============================] - ETA: 0s - loss: 49.1299 - subtract_loss: 24.5886 - subtract_1_loss: 24.5405 - subtract_2_loss: 0.2515
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1/1 [==============================] - ETA: 0s - loss: 47.6475 - subtract_loss: 23.8304 - subtract_1_loss: 23.8162 - subtract_2_loss: 0.3351
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-1/1 [==============================] - 2s 2s/step - loss: 49.1299 - subtract_loss: 24.5886 - subtract_1_loss: 24.5405 - subtract_2_loss: 0.2515
+1/1 [==============================] - 2s 2s/step - loss: 47.6475 - subtract_loss: 23.8304 - subtract_1_loss: 23.8162 - subtract_2_loss: 0.3351
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 2/50
 
-1/1 [==============================] - ETA: 0s - loss: 41.7761 - subtract_loss: 20.6723 - subtract_1_loss: 21.1030 - subtract_2_loss: 0.4102
+1/1 [==============================] - ETA: 0s - loss: 41.2519 - subtract_loss: 20.6155 - subtract_1_loss: 20.6355 - subtract_2_loss: 0.7770
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-1/1 [==============================] - 0s 0s/step - loss: 41.7761 - subtract_loss: 20.6723 - subtract_1_loss: 21.1030 - subtract_2_loss: 0.4102
+1/1 [==============================] - 0s 0s/step - loss: 41.2519 - subtract_loss: 20.6155 - subtract_1_loss: 20.6355 - subtract_2_loss: 0.7770
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 3/50
 
-1/1 [==============================] - ETA: 0s - loss: 32.6974 - subtract_loss: 16.2707 - subtract_1_loss: 16.4258 - subtract_2_loss: 0.5486
+1/1 [==============================] - ETA: 0s - loss: 35.7255 - subtract_loss: 18.0083 - subtract_1_loss: 17.7164 - subtract_2_loss: 2.3424
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-1/1 [==============================] - 0s 0s/step - loss: 32.6974 - subtract_loss: 16.2707 - subtract_1_loss: 16.4258 - subtract_2_loss: 0.5486
+1/1 [==============================] - 0s 17ms/step - loss: 35.7255 - subtract_loss: 18.0083 - subtract_1_loss: 17.7164 - subtract_2_loss: 2.3424
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 4/50
 
-1/1 [==============================] - ETA: 0s - loss: 36.4274 - subtract_loss: 18.1613 - subtract_1_loss: 18.2652 - subtract_2_loss: 1.2404
+1/1 [==============================] - ETA: 0s - loss: 34.4888 - subtract_loss: 17.0290 - subtract_1_loss: 17.4590 - subtract_2_loss: 1.9427
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-1/1 [==============================] - 0s 0s/step - loss: 36.4274 - subtract_loss: 18.1613 - subtract_1_loss: 18.2652 - subtract_2_loss: 1.2404
+1/1 [==============================] - 0s 0s/step - loss: 34.4888 - subtract_loss: 17.0290 - subtract_1_loss: 17.4590 - subtract_2_loss: 1.9427
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 5/50
 
-1/1 [==============================] - ETA: 0s - loss: 32.7761 - subtract_loss: 16.3866 - subtract_1_loss: 16.3886 - subtract_2_loss: 0.2812
+1/1 [==============================] - ETA: 0s - loss: 33.6986 - subtract_loss: 17.2628 - subtract_1_loss: 16.4350 - subtract_2_loss: 1.3473
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-1/1 [==============================] - 0s 0s/step - loss: 32.7761 - subtract_loss: 16.3866 - subtract_1_loss: 16.3886 - subtract_2_loss: 0.2812
+1/1 [==============================] - 0s 0s/step - loss: 33.6986 - subtract_loss: 17.2628 - subtract_1_loss: 16.4350 - subtract_2_loss: 1.3473
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 6/50
 
-1/1 [==============================] - ETA: 0s - loss: 30.5846 - subtract_loss: 15.3092 - subtract_1_loss: 15.2745 - subtract_2_loss: 0.2372
+1/1 [==============================] - ETA: 0s - loss: 33.3655 - subtract_loss: 17.0812 - subtract_1_loss: 16.2835 - subtract_2_loss: 1.4268
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-1/1 [==============================] - 0s 0s/step - loss: 30.5846 - subtract_loss: 15.3092 - subtract_1_loss: 15.2745 - subtract_2_loss: 0.2372
+1/1 [==============================] - 0s 0s/step - loss: 33.3655 - subtract_loss: 17.0812 - subtract_1_loss: 16.2835 - subtract_2_loss: 1.4268
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 7/50
 
-1/1 [==============================] - ETA: 0s - loss: 29.6401 - subtract_loss: 14.9631 - subtract_1_loss: 14.6762 - subtract_2_loss: 0.1996
+1/1 [==============================] - ETA: 0s - loss: 32.9246 - subtract_loss: 16.5730 - subtract_1_loss: 16.3508 - subtract_2_loss: 1.2534
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-1/1 [==============================] - 0s 16ms/step - loss: 29.6401 - subtract_loss: 14.9631 - subtract_1_loss: 14.6762 - subtract_2_loss: 0.1996
+1/1 [==============================] - 0s 0s/step - loss: 32.9246 - subtract_loss: 16.5730 - subtract_1_loss: 16.3508 - subtract_2_loss: 1.2534
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 8/50
 
-1/1 [==============================] - ETA: 0s - loss: 30.0351 - subtract_loss: 15.3104 - subtract_1_loss: 14.7238 - subtract_2_loss: 0.1441
+1/1 [==============================] - ETA: 0s - loss: 32.3119 - subtract_loss: 16.0120 - subtract_1_loss: 16.2991 - subtract_2_loss: 1.1593
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-1/1 [==============================] - 0s 0s/step - loss: 30.0351 - subtract_loss: 15.3104 - subtract_1_loss: 14.7238 - subtract_2_loss: 0.1441
+1/1 [==============================] - 0s 16ms/step - loss: 32.3119 - subtract_loss: 16.0120 - subtract_1_loss: 16.2991 - subtract_2_loss: 1.1593
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 9/50
 
-1/1 [==============================] - ETA: 0s - loss: 30.3914 - subtract_loss: 15.6396 - subtract_1_loss: 14.7509 - subtract_2_loss: 0.1051
+1/1 [==============================] - ETA: 0s - loss: 32.8987 - subtract_loss: 16.5970 - subtract_1_loss: 16.3008 - subtract_2_loss: 1.1155
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-1/1 [==============================] - 0s 16ms/step - loss: 30.3914 - subtract_loss: 15.6396 - subtract_1_loss: 14.7509 - subtract_2_loss: 0.1051
+1/1 [==============================] - 0s 0s/step - loss: 32.8987 - subtract_loss: 16.5970 - subtract_1_loss: 16.3008 - subtract_2_loss: 1.1155
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 10/50
 
-1/1 [==============================] - ETA: 0s - loss: 30.0820 - subtract_loss: 15.0658 - subtract_1_loss: 15.0154 - subtract_2_loss: 0.0762
+1/1 [==============================] - ETA: 0s - loss: 33.3126 - subtract_loss: 16.6520 - subtract_1_loss: 16.6598 - subtract_2_loss: 1.2461
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-1/1 [==============================] - 0s 0s/step - loss: 30.0820 - subtract_loss: 15.0658 - subtract_1_loss: 15.0154 - subtract_2_loss: 0.0762
+1/1 [==============================] - 0s 0s/step - loss: 33.3126 - subtract_loss: 16.6520 - subtract_1_loss: 16.6598 - subtract_2_loss: 1.2461
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 11/50
 
-1/1 [==============================] - ETA: 0s - loss: 30.5897 - subtract_loss: 15.0223 - subtract_1_loss: 15.5666 - subtract_2_loss: 0.0606
+1/1 [==============================] - ETA: 0s - loss: 32.3816 - subtract_loss: 16.0671 - subtract_1_loss: 16.3137 - subtract_2_loss: 1.3977
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-1/1 [==============================] - 0s 0s/step - loss: 30.5897 - subtract_loss: 15.0223 - subtract_1_loss: 15.5666 - subtract_2_loss: 0.0606
+1/1 [==============================] - 0s 1ms/step - loss: 32.3816 - subtract_loss: 16.0671 - subtract_1_loss: 16.3137 - subtract_2_loss: 1.3977
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 12/50
 
-1/1 [==============================] - ETA: 0s - loss: 30.0090 - subtract_loss: 14.7821 - subtract_1_loss: 15.2261 - subtract_2_loss: 0.0497
+1/1 [==============================] - ETA: 0s - loss: 32.4152 - subtract_loss: 16.3148 - subtract_1_loss: 16.0996 - subtract_2_loss: 1.7834
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-1/1 [==============================] - 0s 0s/step - loss: 30.0090 - subtract_loss: 14.7821 - subtract_1_loss: 15.2261 - subtract_2_loss: 0.0497
+1/1 [==============================] - 0s 0s/step - loss: 32.4152 - subtract_loss: 16.3148 - subtract_1_loss: 16.0996 - subtract_2_loss: 1.7834
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 13/50
 
-1/1 [==============================] - ETA: 0s - loss: 28.5145 - subtract_loss: 14.3906 - subtract_1_loss: 14.1231 - subtract_2_loss: 0.0412
+1/1 [==============================] - ETA: 0s - loss: 29.8603 - subtract_loss: 14.9174 - subtract_1_loss: 14.9421 - subtract_2_loss: 1.9395
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-1/1 [==============================] - 0s 0s/step - loss: 28.5145 - subtract_loss: 14.3906 - subtract_1_loss: 14.1231 - subtract_2_loss: 0.0412
+1/1 [==============================] - 0s 0s/step - loss: 29.8603 - subtract_loss: 14.9174 - subtract_1_loss: 14.9421 - subtract_2_loss: 1.9395
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 14/50
 
-1/1 [==============================] - ETA: 0s - loss: 28.6188 - subtract_loss: 14.3899 - subtract_1_loss: 14.2281 - subtract_2_loss: 0.0245
+1/1 [==============================] - ETA: 0s - loss: 30.4905 - subtract_loss: 15.3369 - subtract_1_loss: 15.1527 - subtract_2_loss: 2.3491
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-1/1 [==============================] - 0s 16ms/step - loss: 28.6188 - subtract_loss: 14.3899 - subtract_1_loss: 14.2281 - subtract_2_loss: 0.0245
+1/1 [==============================] - 0s 0s/step - loss: 30.4905 - subtract_loss: 15.3369 - subtract_1_loss: 15.1527 - subtract_2_loss: 2.3491
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 15/50
 
-1/1 [==============================] - ETA: 0s - loss: 28.6301 - subtract_loss: 14.2120 - subtract_1_loss: 14.4172 - subtract_2_loss: 0.0176
+1/1 [==============================] - ETA: 0s - loss: 29.5051 - subtract_loss: 15.0733 - subtract_1_loss: 14.4309 - subtract_2_loss: 2.6287
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-1/1 [==============================] - 0s 0s/step - loss: 28.6301 - subtract_loss: 14.2120 - subtract_1_loss: 14.4172 - subtract_2_loss: 0.0176
+1/1 [==============================] - 0s 2ms/step - loss: 29.5051 - subtract_loss: 15.0733 - subtract_1_loss: 14.4309 - subtract_2_loss: 2.6287
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 16/50
 
-1/1 [==============================] - ETA: 0s - loss: 28.3643 - subtract_loss: 14.2681 - subtract_1_loss: 14.0954 - subtract_2_loss: 0.0102
+1/1 [==============================] - ETA: 0s - loss: 30.4683 - subtract_loss: 15.0639 - subtract_1_loss: 15.4036 - subtract_2_loss: 2.9920
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-1/1 [==============================] - 0s 0s/step - loss: 28.3643 - subtract_loss: 14.2681 - subtract_1_loss: 14.0954 - subtract_2_loss: 0.0102
+1/1 [==============================] - 0s 0s/step - loss: 30.4683 - subtract_loss: 15.0639 - subtract_1_loss: 15.4036 - subtract_2_loss: 2.9920
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 17/50
 
-1/1 [==============================] - ETA: 0s - loss: 28.6924 - subtract_loss: 14.3601 - subtract_1_loss: 14.3315 - subtract_2_loss: 0.0061
+1/1 [==============================] - ETA: 0s - loss: 29.5366 - subtract_loss: 14.6658 - subtract_1_loss: 14.8700 - subtract_2_loss: 3.4833
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-1/1 [==============================] - 0s 0s/step - loss: 28.6924 - subtract_loss: 14.3601 - subtract_1_loss: 14.3315 - subtract_2_loss: 0.0061
+1/1 [==============================] - 0s 17ms/step - loss: 29.5366 - subtract_loss: 14.6658 - subtract_1_loss: 14.8700 - subtract_2_loss: 3.4833
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 18/50
 
-1/1 [==============================] - ETA: 0s - loss: 29.0436 - subtract_loss: 14.1992 - subtract_1_loss: 14.8436 - subtract_2_loss: 0.0048
+1/1 [==============================] - ETA: 0s - loss: 29.4447 - subtract_loss: 14.9274 - subtract_1_loss: 14.5164 - subtract_2_loss: 4.4084
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-1/1 [==============================] - 0s 0s/step - loss: 29.0436 - subtract_loss: 14.1992 - subtract_1_loss: 14.8436 - subtract_2_loss: 0.0048
+1/1 [==============================] - 0s 0s/step - loss: 29.4447 - subtract_loss: 14.9274 - subtract_1_loss: 14.5164 - subtract_2_loss: 4.4084
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 19/50
 
-1/1 [==============================] - ETA: 0s - loss: 28.0580 - subtract_loss: 14.6186 - subtract_1_loss: 13.4386 - subtract_2_loss: 0.0043
+1/1 [==============================] - ETA: 0s - loss: 29.3506 - subtract_loss: 14.4912 - subtract_1_loss: 14.8585 - subtract_2_loss: 4.6745
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-1/1 [==============================] - 0s 0s/step - loss: 28.0580 - subtract_loss: 14.6186 - subtract_1_loss: 13.4386 - subtract_2_loss: 0.0043
+1/1 [==============================] - 0s 16ms/step - loss: 29.3506 - subtract_loss: 14.4912 - subtract_1_loss: 14.8585 - subtract_2_loss: 4.6745
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 20/50
 
-1/1 [==============================] - ETA: 0s - loss: 27.9231 - subtract_loss: 14.0827 - subtract_1_loss: 13.8396 - subtract_2_loss: 0.0054
+1/1 [==============================] - ETA: 0s - loss: 29.3799 - subtract_loss: 14.0507 - subtract_1_loss: 15.3283 - subtract_2_loss: 5.5779
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-1/1 [==============================] - 0s 0s/step - loss: 27.9231 - subtract_loss: 14.0827 - subtract_1_loss: 13.8396 - subtract_2_loss: 0.0054
+1/1 [==============================] - 0s 0s/step - loss: 29.3799 - subtract_loss: 14.0507 - subtract_1_loss: 15.3283 - subtract_2_loss: 5.5779
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 21/50
 
-1/1 [==============================] - ETA: 0s - loss: 27.7844 - subtract_loss: 13.9368 - subtract_1_loss: 13.8467 - subtract_2_loss: 0.0063
+1/1 [==============================] - ETA: 0s - loss: 28.9016 - subtract_loss: 14.7830 - subtract_1_loss: 14.1176 - subtract_2_loss: 5.9659
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-1/1 [==============================] - 0s 0s/step - loss: 27.7844 - subtract_loss: 13.9368 - subtract_1_loss: 13.8467 - subtract_2_loss: 0.0063
+1/1 [==============================] - 0s 0s/step - loss: 28.9016 - subtract_loss: 14.7830 - subtract_1_loss: 14.1176 - subtract_2_loss: 5.9659
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 22/50
 
-1/1 [==============================] - ETA: 0s - loss: 26.1509 - subtract_loss: 12.7657 - subtract_1_loss: 13.3843 - subtract_2_loss: 0.0079
+1/1 [==============================] - ETA: 0s - loss: 24.0440 - subtract_loss: 11.8016 - subtract_1_loss: 12.2415 - subtract_2_loss: 6.2418
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-1/1 [==============================] - 0s 0s/step - loss: 26.1509 - subtract_loss: 12.7657 - subtract_1_loss: 13.3843 - subtract_2_loss: 0.0079
+1/1 [==============================] - 0s 0s/step - loss: 24.0440 - subtract_loss: 11.8016 - subtract_1_loss: 12.2415 - subtract_2_loss: 6.2418
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 23/50
 
-1/1 [==============================] - ETA: 0s - loss: 26.5846 - subtract_loss: 13.1079 - subtract_1_loss: 13.4758 - subtract_2_loss: 0.0093
+1/1 [==============================] - ETA: 0s - loss: 20.2000 - subtract_loss: 10.0889 - subtract_1_loss: 10.1102 - subtract_2_loss: 8.6148
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-1/1 [==============================] - 0s 16ms/step - loss: 26.5846 - subtract_loss: 13.1079 - subtract_1_loss: 13.4758 - subtract_2_loss: 0.0093
+1/1 [==============================] - 0s 0s/step - loss: 20.2000 - subtract_loss: 10.0889 - subtract_1_loss: 10.1102 - subtract_2_loss: 8.6148
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 24/50
 
-1/1 [==============================] - ETA: 0s - loss: 26.5330 - subtract_loss: 12.7801 - subtract_1_loss: 13.7520 - subtract_2_loss: 0.0115
+1/1 [==============================] - ETA: 0s - loss: 18.8214 - subtract_loss: 9.4869 - subtract_1_loss: 9.3335 - subtract_2_loss: 9.7217
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-1/1 [==============================] - 0s 0s/step - loss: 26.5330 - subtract_loss: 12.7801 - subtract_1_loss: 13.7520 - subtract_2_loss: 0.0115
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+1/1 [==============================] - 0s 0s/step - loss: 18.8214 - subtract_loss: 9.4869 - subtract_1_loss: 9.3335 - subtract_2_loss: 9.7217
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 25/50
 
-1/1 [==============================] - ETA: 0s - loss: 26.1895 - subtract_loss: 12.9770 - subtract_1_loss: 13.2116 - subtract_2_loss: 0.0160
+1/1 [==============================] - ETA: 0s - loss: 18.3015 - subtract_loss: 9.1790 - subtract_1_loss: 9.1215 - subtract_2_loss: 9.2954
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-1/1 [==============================] - 0s 0s/step - loss: 26.1895 - subtract_loss: 12.9770 - subtract_1_loss: 13.2116 - subtract_2_loss: 0.0160
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+1/1 [==============================] - 0s 0s/step - loss: 18.3015 - subtract_loss: 9.1790 - subtract_1_loss: 9.1215 - subtract_2_loss: 9.2954
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 26/50
-
-1/1 [==============================] - ETA: 0s - loss: 26.9575 - subtract_loss: 13.3376 - subtract_1_loss: 13.6190 - subtract_2_loss: 0.0197
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-1/1 [==============================] - 0s 0s/step - loss: 26.9575 - subtract_loss: 13.3376 - subtract_1_loss: 13.6190 - subtract_2_loss: 0.0197
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1/1 [==============================] - ETA: 0s - loss: 16.8720 - subtract_loss: 8.4664 - subtract_1_loss: 8.4047 - subtract_2_loss: 10.5296
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+1/1 [==============================] - 0s 17ms/step - loss: 16.8720 - subtract_loss: 8.4664 - subtract_1_loss: 8.4047 - subtract_2_loss: 10.5296
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 27/50
+
+1/1 [==============================] - ETA: 0s - loss: 16.5975 - subtract_loss: 8.4535 - subtract_1_loss: 8.1430 - subtract_2_loss: 10.3873
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1/1 [==============================] - ETA: 0s - loss: 36.7595 - subtract_loss: 18.5352 - subtract_1_loss: 18.2234 - subtract_2_loss: 0.0252
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-1/1 [==============================] - 0s 0s/step - loss: 36.7595 - subtract_loss: 18.5352 - subtract_1_loss: 18.2234 - subtract_2_loss: 0.0252
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+1/1 [==============================] - 0s 0s/step - loss: 16.5975 - subtract_loss: 8.4535 - subtract_1_loss: 8.1430 - subtract_2_loss: 10.3873
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 28/50
 
-1/1 [==============================] - ETA: 0s - loss: 37.3407 - subtract_loss: 18.9702 - subtract_1_loss: 18.3697 - subtract_2_loss: 0.0199
+1/1 [==============================] - ETA: 0s - loss: 15.8854 - subtract_loss: 7.6861 - subtract_1_loss: 8.1984 - subtract_2_loss: 10.8200
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-1/1 [==============================] - 0s 16ms/step - loss: 37.3407 - subtract_loss: 18.9702 - subtract_1_loss: 18.3697 - subtract_2_loss: 0.0199
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+1/1 [==============================] - 0s 17ms/step - loss: 15.8854 - subtract_loss: 7.6861 - subtract_1_loss: 8.1984 - subtract_2_loss: 10.8200
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 29/50
 
-1/1 [==============================] - ETA: 0s - loss: 22.9425 - subtract_loss: 11.2113 - subtract_1_loss: 11.7304 - subtract_2_loss: 0.0468
+1/1 [==============================] - ETA: 0s - loss: 16.1744 - subtract_loss: 7.7582 - subtract_1_loss: 8.4152 - subtract_2_loss: 11.2090
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-1/1 [==============================] - 0s 0s/step - loss: 22.9425 - subtract_loss: 11.2113 - subtract_1_loss: 11.7304 - subtract_2_loss: 0.0468
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+1/1 [==============================] - 0s 0s/step - loss: 16.1744 - subtract_loss: 7.7582 - subtract_1_loss: 8.4152 - subtract_2_loss: 11.2090
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 30/50
+
+1/1 [==============================] - ETA: 0s - loss: 15.7533 - subtract_loss: 7.8685 - subtract_1_loss: 7.8838 - subtract_2_loss: 10.9466
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1/1 [==============================] - ETA: 0s - loss: 24.4764 - subtract_loss: 12.4809 - subtract_1_loss: 11.9946 - subtract_2_loss: 0.0699
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-1/1 [==============================] - 0s 16ms/step - loss: 24.4764 - subtract_loss: 12.4809 - subtract_1_loss: 11.9946 - subtract_2_loss: 0.0699
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+1/1 [==============================] - 0s 0s/step - loss: 15.7533 - subtract_loss: 7.8685 - subtract_1_loss: 7.8838 - subtract_2_loss: 10.9466
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 31/50
-
-1/1 [==============================] - ETA: 0s - loss: 20.5182 - subtract_loss: 10.3255 - subtract_1_loss: 10.1919 - subtract_2_loss: 0.1005
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-1/1 [==============================] - 0s 0s/step - loss: 20.5182 - subtract_loss: 10.3255 - subtract_1_loss: 10.1919 - subtract_2_loss: 0.1005
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1/1 [==============================] - ETA: 0s - loss: 16.0100 - subtract_loss: 7.9171 - subtract_1_loss: 8.0919 - subtract_2_loss: 10.9164
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+1/1 [==============================] - 0s 0s/step - loss: 16.0100 - subtract_loss: 7.9171 - subtract_1_loss: 8.0919 - subtract_2_loss: 10.9164
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 32/50
+
+1/1 [==============================] - ETA: 0s - loss: 15.6899 - subtract_loss: 8.0497 - subtract_1_loss: 7.6393 - subtract_2_loss: 10.9009
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1/1 [==============================] - ETA: 0s - loss: 20.7416 - subtract_loss: 10.2134 - subtract_1_loss: 10.5274 - subtract_2_loss: 0.1343
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-1/1 [==============================] - 0s 0s/step - loss: 20.7416 - subtract_loss: 10.2134 - subtract_1_loss: 10.5274 - subtract_2_loss: 0.1343
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+1/1 [==============================] - 0s 17ms/step - loss: 15.6899 - subtract_loss: 8.0497 - subtract_1_loss: 7.6393 - subtract_2_loss: 10.9009
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 33/50
 
-1/1 [==============================] - ETA: 0s - loss: 20.4815 - subtract_loss: 10.3237 - subtract_1_loss: 10.1569 - subtract_2_loss: 0.2192
+1/1 [==============================] - ETA: 0s - loss: 14.9528 - subtract_loss: 7.4619 - subtract_1_loss: 7.4899 - subtract_2_loss: 10.0932
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-1/1 [==============================] - 0s 16ms/step - loss: 20.4815 - subtract_loss: 10.3237 - subtract_1_loss: 10.1569 - subtract_2_loss: 0.2192
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+1/1 [==============================] - 0s 7ms/step - loss: 14.9528 - subtract_loss: 7.4619 - subtract_1_loss: 7.4899 - subtract_2_loss: 10.0932
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 34/50
 
-1/1 [==============================] - ETA: 0s - loss: 20.1500 - subtract_loss: 10.0609 - subtract_1_loss: 10.0882 - subtract_2_loss: 0.2176
+1/1 [==============================] - ETA: 0s - loss: 14.4417 - subtract_loss: 7.0585 - subtract_1_loss: 7.3822 - subtract_2_loss: 11.4412
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-1/1 [==============================] - 0s 0s/step - loss: 20.1500 - subtract_loss: 10.0609 - subtract_1_loss: 10.0882 - subtract_2_loss: 0.2176
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+1/1 [==============================] - 0s 10ms/step - loss: 14.4417 - subtract_loss: 7.0585 - subtract_1_loss: 7.3822 - subtract_2_loss: 11.4412
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 35/50
 
-1/1 [==============================] - ETA: 0s - loss: 20.0043 - subtract_loss: 9.9224 - subtract_1_loss: 10.0810 - subtract_2_loss: 0.2599
+1/1 [==============================] - ETA: 0s - loss: 13.7839 - subtract_loss: 6.7734 - subtract_1_loss: 7.0095 - subtract_2_loss: 9.7276
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-1/1 [==============================] - 0s 16ms/step - loss: 20.0043 - subtract_loss: 9.9224 - subtract_1_loss: 10.0810 - subtract_2_loss: 0.2599
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+1/1 [==============================] - 0s 0s/step - loss: 13.7839 - subtract_loss: 6.7734 - subtract_1_loss: 7.0095 - subtract_2_loss: 9.7276
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 36/50
-
-1/1 [==============================] - ETA: 0s - loss: 20.3198 - subtract_loss: 10.3089 - subtract_1_loss: 10.0100 - subtract_2_loss: 0.3269
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-1/1 [==============================] - 0s 0s/step - loss: 20.3198 - subtract_loss: 10.3089 - subtract_1_loss: 10.0100 - subtract_2_loss: 0.3269
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1/1 [==============================] - ETA: 0s - loss: 13.2287 - subtract_loss: 6.4189 - subtract_1_loss: 6.8088 - subtract_2_loss: 10.5822
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+1/1 [==============================] - 0s 17ms/step - loss: 13.2287 - subtract_loss: 6.4189 - subtract_1_loss: 6.8088 - subtract_2_loss: 10.5822
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 37/50
 
-1/1 [==============================] - ETA: 0s - loss: 19.7064 - subtract_loss: 9.7635 - subtract_1_loss: 9.9419 - subtract_2_loss: 0.4352
+1/1 [==============================] - ETA: 0s - loss: 15.3792 - subtract_loss: 7.5877 - subtract_1_loss: 7.7905 - subtract_2_loss: 7.5299
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-1/1 [==============================] - 0s 0s/step - loss: 19.7064 - subtract_loss: 9.7635 - subtract_1_loss: 9.9419 - subtract_2_loss: 0.4352
+1/1 [==============================] - 0s 0s/step - loss: 15.3792 - subtract_loss: 7.5877 - subtract_1_loss: 7.7905 - subtract_2_loss: 7.5299
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 38/50
+
+1/1 [==============================] - ETA: 0s - loss: 16.4685 - subtract_loss: 8.3321 - subtract_1_loss: 8.1354 - subtract_2_loss: 8.0356
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1/1 [==============================] - ETA: 0s - loss: 19.6642 - subtract_loss: 10.0742 - subtract_1_loss: 9.5891 - subtract_2_loss: 0.4227
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-1/1 [==============================] - 0s 0s/step - loss: 19.6642 - subtract_loss: 10.0742 - subtract_1_loss: 9.5891 - subtract_2_loss: 0.4227
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+1/1 [==============================] - 0s 0s/step - loss: 16.4685 - subtract_loss: 8.3321 - subtract_1_loss: 8.1354 - subtract_2_loss: 8.0356
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 39/50
 
-1/1 [==============================] - ETA: 0s - loss: 19.8700 - subtract_loss: 9.5443 - subtract_1_loss: 10.3247 - subtract_2_loss: 0.4461
+1/1 [==============================] - ETA: 0s - loss: 15.4841 - subtract_loss: 7.7233 - subtract_1_loss: 7.7598 - subtract_2_loss: 5.9063
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-1/1 [==============================] - 0s 0s/step - loss: 19.8700 - subtract_loss: 9.5443 - subtract_1_loss: 10.3247 - subtract_2_loss: 0.4461
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+1/1 [==============================]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> - 0s 0s/step - loss: 15.4841 - subtract_loss: 7.7233 - subtract_1_loss: 7.7598 - subtract_2_loss: 5.9063
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 40/50
+
+1/1 [==============================] - ETA: 0s - loss: 13.3117 - subtract_loss: 6.5449 - subtract_1_loss: 6.7658 - subtract_2_loss: 6.7892
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1/1 [==============================] - ETA: 0s - loss: 19.9984 - subtract_loss: 9.9940 - subtract_1_loss: 10.0034 - subtract_2_loss: 0.4603
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-1/1 [==============================] - 0s 0s/step - loss: 19.9984 - subtract_loss: 9.9940 - subtract_1_loss: 10.0034 - subtract_2_loss: 0.4603
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+1/1 [==============================] - 0s 0s/step - loss: 13.3117 - subtract_loss: 6.5449 - subtract_1_loss: 6.7658 - subtract_2_loss: 6.7892
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 41/50
 
-1/1 [==============================] - ETA: 0s - loss: 18.8381 - subtract_loss: 8.9923 - subtract_1_loss: 9.8448 - subtract_2_loss: 0.5635
+1/1 [==============================] - ETA: 0s - loss: 13.4087 - subtract_loss: 6.5451 - subtract_1_loss: 6.8626 - subtract_2_loss: 8.3927
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-1/1 [==============================] - 0s 0s/step - loss: 18.8381 - subtract_loss: 8.9923 - subtract_1_loss: 9.8448 - subtract_2_loss: 0.5635
+1/1 [==============================] - 0s 16ms/step - loss: 13.4087 - subtract_loss: 6.5451 - subtract_1_loss: 6.8626 - subtract_2_loss: 8.3927
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 42/50
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1/1 [==============================] - ETA: 0s - loss: 19.2741 - subtract_loss: 9.2896 - subtract_1_loss: 9.9835 - subtract_2_loss: 0.6436
+
+1/1 [==============================] - ETA: 0s - loss: 13.6458 - subtract_loss: 6.6175 - subtract_1_loss: 7.0273 - subtract_2_loss: 5.4221
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-1/1 [==============================] - 0s 0s/step - loss: 19.2741 - subtract_loss: 9.2896 - subtract_1_loss: 9.9835 - subtract_2_loss: 0.6436
+1/1 [==============================] - 0s 0s/step - loss: 13.6458 - subtract_loss: 6.6175 - subtract_1_loss: 7.0273 - subtract_2_loss: 5.4221
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 43/50
 
-1/1 [==============================] - ETA: 0s - loss: 19.1909 - subtract_loss: 9.2942 - subtract_1_loss: 9.8958 - subtract_2_loss: 0.6634
+1/1 [==============================] - ETA: 0s - loss: 12.6232 - subtract_loss: 6.4021 - subtract_1_loss: 6.2201 - subtract_2_loss: 5.4595
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-1/1 [==============================] - 0s 0s/step - loss: 19.1909 - subtract_loss: 9.2942 - subtract_1_loss: 9.8958 - subtract_2_loss: 0.6634
+1/1 [==============================] - 0s 17ms/step - loss: 12.6232 - subtract_loss: 6.4021 - subtract_1_loss: 6.2201 - subtract_2_loss: 5.4595
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 44/50
 
-1/1 [==============================] - ETA: 0s - loss: 19.2092 - subtract_loss: 9.7837 - subtract_1_loss: 9.4245 - subtract_2_loss: 0.8945
+1/1 [==============================] - ETA: 0s - loss: 12.6146 - subtract_loss: 6.1686 - subtract_1_loss: 6.4450 - subtract_2_loss: 5.4080
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-1/1 [==============================] - 0s 0s/step - loss: 19.2092 - subtract_loss: 9.7837 - subtract_1_loss: 9.4245 - subtract_2_loss: 0.8945
+1/1 [==============================] - 0s 0s/step - loss: 12.6146 - subtract_loss: 6.1686 - subtract_1_loss: 6.4450 - subtract_2_loss: 5.4080
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 45/50
 
-1/1 [==============================] - ETA: 0s - loss: 18.8763 - subtract_loss: 9.2977 - subtract_1_loss: 9.5776 - subtract_2_loss: 0.9960
+1/1 [==============================] - ETA: 0s - loss: 11.9627 - subtract_loss: 6.1997 - subtract_1_loss: 5.7620 - subtract_2_loss: 4.4983
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-1/1 [==============================] - 0s 16ms/step - loss: 18.8763 - subtract_loss: 9.2977 - subtract_1_loss: 9.5776 - subtract_2_loss: 0.9960
+1/1 [==============================] - 0s 17ms/step - loss: 11.9627 - subtract_loss: 6.1997 - subtract_1_loss: 5.7620 - subtract_2_loss: 4.4983
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 46/50
 
-1/1 [==============================] - ETA: 0s - loss: 19.0056 - subtract_loss: 9.4872 - subtract_1_loss: 9.5174 - subtract_2_loss: 1.3056
+1/1 [==============================] - ETA: 0s - loss: 12.0075 - subtract_loss: 5.8199 - subtract_1_loss: 6.1866 - subtract_2_loss: 4.7272
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-1/1 [==============================] - 0s 0s/step - loss: 19.0056 - subtract_loss: 9.4872 - subtract_1_loss: 9.5174 - subtract_2_loss: 1.3056
+1/1 [==============================] - 0s 0s/step - loss: 12.0075 - subtract_loss: 5.8199 - subtract_1_loss: 6.1866 - subtract_2_loss: 4.7272
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 47/50
 
-1/1 [==============================] - ETA: 0s - loss: 21.3684 - subtract_loss: 10.5048 - subtract_1_loss: 10.8626 - subtract_2_loss: 1.2958
+1/1 [==============================] - ETA: 0s - loss: 11.7255 - subtract_loss: 5.9336 - subtract_1_loss: 5.7908 - subtract_2_loss: 4.5193
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-1/1 [==============================] - 0s 16ms/step - loss: 21.3684 - subtract_loss: 10.5048 - subtract_1_loss: 10.8626 - subtract_2_loss: 1.2958
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+1/1 [==============================] - 0s 16ms/step - loss: 11.7255 - subtract_loss: 5.9336 - subtract_1_loss: 5.7908 - subtract_2_loss: 4.5193
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 48/50
 
-1/1 [==============================] - ETA: 0s - loss: 30.5000 - subtract_loss: 15.4880 - subtract_1_loss: 15.0109 - subtract_2_loss: 1.7516
+1/1 [==============================] - ETA: 0s - loss: 10.7946 - subtract_loss: 5.3564 - subtract_1_loss: 5.4372 - subtract_2_loss: 4.2582
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-1/1 [==============================] - 0s 0s/step - loss: 30.5000 - subtract_loss: 15.4880 - subtract_1_loss: 15.0109 - subtract_2_loss: 1.7516
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+1/1 [==============================] - 0s 0s/step - loss: 10.7946 - subtract_loss: 5.3564 - subtract_1_loss: 5.4372 - subtract_2_loss: 4.2582
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 49/50
 
-1/1 [==============================] - ETA: 0s - loss: 21.4588 - subtract_loss: 10.5697 - subtract_1_loss: 10.8881 - subtract_2_loss: 1.5638
+1/1 [==============================] - ETA: 0s - loss: 10.1534 - subtract_loss: 5.0484 - subtract_1_loss: 5.1040 - subtract_2_loss: 4.3439
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-1/1 [==============================] - 0s 0s/step - loss: 21.4588 - subtract_loss: 10.5697 - subtract_1_loss: 10.8881 - subtract_2_loss: 1.5638
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+1/1 [==============================] - 0s 16ms/step - loss: 10.1534 - subtract_loss: 5.0484 - subtract_1_loss: 5.1040 - subtract_2_loss: 4.3439
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 50/50
 
-1/1 [==============================] - ETA: 0s - loss: 23.3559 - subtract_loss: 11.6315 - subtract_1_loss: 11.7234 - subtract_2_loss: 2.1974
+1/1 [==============================] - ETA: 0s - loss: 9.1143 - subtract_loss: 4.5359 - subtract_1_loss: 4.5774 - subtract_2_loss: 4.1707
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-1/1 [==============================] - 0s 0s/step - loss: 23.3559 - subtract_loss: 11.6315 - subtract_1_loss: 11.7234 - subtract_2_loss: 2.1974
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+1/1 [==============================] - 0s 0s/step - loss: 9.1143 - subtract_loss: 4.5359 - subtract_1_loss: 4.5774 - subtract_2_loss: 4.1707
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.0000000e+00, 0.0000000e+00],
-       [0.0000000e+00, 0.0000000e+00],
-       [0.0000000e+00, 2.5601819e-02],
-       [0.0000000e+00, 0.0000000e+00],
-       [0.0000000e+00, 0.0000000e+00],
-       [0.0000000e+00, 0.0000000e+00],
-       [0.0000000e+00, 0.0000000e+00],
-       [0.0000000e+00, 0.0000000e+00],
-       [0.0000000e+00, 0.0000000e+00],
-       [0.0000000e+00, 1.1367827e-01],
-       [0.0000000e+00, 0.0000000e+00],
-       [0.0000000e+00, 5.3495113e-03],
-       [0.0000000e+00, 0.0000000e+00],
-       [0.0000000e+00, 0.0000000e+00],
-       [0.0000000e+00, 3.3526275e-01],
-       [0.0000000e+00, 3.3526275e-01],
-       [0.0000000e+00, 3.2681637e-03],
-       [0.0000000e+00, 0.0000000e+00],
-       [0.0000000e+00, 3.3526275e-01],
-       [0.0000000e+00, 0.0000000e+00],
-       [0.0000000e+00, 3.3526275e-01],
-       [0.0000000e+00, 0.0000000e+00],
-       [0.0000000e+00, 3.3526275e-01],
-       [0.0000000e+00, 3.7212247e-01],
-       [0.0000000e+00, 2.6252681e-01],
-       [0.0000000e+00, 4.5261186e-01],
-       [0.0000000e+00, 3.3327487e-01],
-       [0.0000000e+00, 3.6325818e-01],
-       [0.0000000e+00, 2.3328039e-01],
-       [0.0000000e+00, 1.6834729e+00],
-       [0.0000000e+00, 2.7175957e-01],
-       [0.0000000e+00, 2.2687972e-01],
-       [0.0000000e+00, 1.9363194e+00],
-       [0.0000000e+00, 3.3008335e+00]], dtype=float32)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.6257144 , 3.532742  ],
+       [0.4837575 , 3.246049  ],
+       [0.5679713 , 3.6319876 ],
+       [0.4446179 , 2.5056272 ],
+       [0.27148458, 1.187743  ],
+       [0.3145308 , 1.2875913 ],
+       [0.6310764 , 1.9044155 ],
+       [0.29512134, 1.454894  ],
+       [0.19908148, 1.060216  ],
+       [0.23953053, 0.5731588 ],
+       [0.4067282 , 1.7474911 ],
+       [0.26441786, 0.9531857 ],
+       [0.30372635, 1.3462231 ],
+       [0.24866527, 1.532618  ],
+       [0.2195199 , 0.6638908 ],
+       [0.2195199 , 0.6638908 ],
+       [0.31146023, 0.98660934],
+       [0.28024673, 1.2446697 ],
+       [0.2195199 , 0.6638908 ],
+       [0.2520355 , 1.3383278 ],
+       [0.2195199 , 0.6638908 ],
+       [0.28024673, 1.2446697 ],
+       [0.2195199 , 0.6638908 ],
+       [1.1051025 , 0.        ],
+       [1.0068581 , 0.        ],
+       [0.40310556, 0.3148892 ],
+       [0.7423812 , 0.06956735],
+       [0.20333856, 0.4884194 ],
+       [0.41005895, 0.32605022],
+       [0.2451116 , 0.5438025 ],
+       [0.23192082, 1.0162836 ],
+       [0.56259805, 3.4998913 ],
+       [2.7040057 , 0.        ],
+       [2.1555176 , 0.        ]], dtype=float32)
 </pre></div>
 </div>
 </div>
@@ -998,10 +997,10 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x1af5f9db220&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x21ddd3f8310&gt;]
 </pre></div>
 </div>
-<img alt="../../_images/82935098f2761447f2b6df7d007e58bca1d8d7e660f581e3be46633dadaa0060.png" src="../../_images/82935098f2761447f2b6df7d007e58bca1d8d7e660f581e3be46633dadaa0060.png" />
+<img alt="../../_images/a3f28d3fa709bfc0eb109cca6acf9f596c45871674d65db9affd967f2feeb7ec.png" src="../../_images/a3f28d3fa709bfc0eb109cca6acf9f596c45871674d65db9affd967f2feeb7ec.png" />
 </div>
 </div>
 </section>
@@ -1036,24 +1035,6 @@ document.write(`
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="02_Autoencoders.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">AutoEncoder</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="04_Graph_Neural_Network.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Unsupervised graph representation learning using Graph ConvNet</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
 </div>
                 </footer>
               

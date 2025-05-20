@@ -539,7 +539,7 @@ In a social network, Node2Vec can learn feature vectors for users based on their
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing transition probabilities:   0%|                                                       | 0/18 [00:00&lt;?, ?it/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing transition probabilities: 100%|███████████████████████████████████████████| 18/18 [00:00&lt;00:00, 16714.07it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing transition probabilities: 100%|██████████████████████████████████████████████████████| 18/18 [00:00&lt;?, ?it/s]
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
@@ -548,16 +548,19 @@ In a social network, Node2Vec can learn feature vectors for users based on their
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Generating walks (CPU: 1):   0%|                                                                | 0/10 [00:00&lt;?, ?it/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Generating walks (CPU: 1):  60%|█████████████████████████████████▌                      | 6/10 [00:00&lt;00:00, 49.42it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Generating walks (CPU: 1):  50%|████████████████████████████                            | 5/10 [00:00&lt;00:00, 48.14it/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Generating walks (CPU: 1): 100%|███████████████████████████████████████████████████████| 10/10 [00:00&lt;00:00, 41.37it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Generating walks (CPU: 1): 100%|███████████████████████████████████████████████████████| 10/10 [00:00&lt;00:00, 44.92it/s]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Generating walks (CPU: 1): 100%|███████████████████████████████████████████████████████| 10/10 [00:00&lt;00:00, 40.09it/s]
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
-<img alt="../../_images/999d61934f2aec763a5255a361ccf6c9750aeb86a335d1294ad2b14a4b212996.png" src="../../_images/999d61934f2aec763a5255a361ccf6c9750aeb86a335d1294ad2b14a4b212996.png" />
+<img alt="../../_images/74c72ced185fa70e7b1725c22702de9976cc35479cf3c66192b9cb5ef13441bf.png" src="../../_images/74c72ced185fa70e7b1725c22702de9976cc35479cf3c66192b9cb5ef13441bf.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -575,7 +578,7 @@ In a social network, Node2Vec can learn feature vectors for users based on their
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/a01d50da5d589374755a538fd8ae0b6dd5746b111149414fea40361b66012ecd.png" src="../../_images/a01d50da5d589374755a538fd8ae0b6dd5746b111149414fea40361b66012ecd.png" />
+<img alt="../../_images/685a491190c2ef8c5726dc265de3f7e7e9c281d08818cb0f45a3336c60231bba.png" src="../../_images/685a491190c2ef8c5726dc265de3f7e7e9c281d08818cb0f45a3336c60231bba.png" />
 </div>
 </div>
 <p>Graph learning models such as GCN (Graph Convolutional Network), GraphSAGE, or GAT (Graph Attention Network) can capture information from a node’s neighborhood and generate expressive embeddings. These embeddings are then used for classification, clustering, or regression on the nodes.</p>
@@ -619,6 +622,7 @@ In a transaction network, Edge2Vec can be used to represent the interaction betw
 <p>On the left we have an initial graph built from the previous visual scene. On the right is a possible edge-labeling of this graph when some connections were pruned based on the model’s output.</p>
 <p><img alt="edgeLevel1" src="../../_images/chap1_edge.png" />
 <img alt="edgeLevel2" src="../../_images/chap1_edge2.png" /></p>
+<p>ref: <a class="reference external" href="https://distill.pub/2021/gnn-intro/">https://distill.pub/2021/gnn-intro/</a></p>
 </section>
 </section>
 <section id="edge2vec-example">
@@ -648,7 +652,7 @@ In a transaction network, Edge2Vec can be used to represent the interaction betw
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/571b7d4f5bde44b6419ac335fba16dced2131ef7e990f4dc3ec639d4caa2bd16.png" src="../../_images/571b7d4f5bde44b6419ac335fba16dced2131ef7e990f4dc3ec639d4caa2bd16.png" />
+<img alt="../../_images/9679566ef2bd66812cd73aaf1462733b479ed8a57b6333f697f7cfa0186c3c48.png" src="../../_images/9679566ef2bd66812cd73aaf1462733b479ed8a57b6333f697f7cfa0186c3c48.png" />
 </div>
 </div>
 </section>
@@ -667,7 +671,8 @@ In bioinformatics, each graph can represent a molecule. Graph2Vec embeds each mo
 <li><p>Molecular classification</p></li>
 <li><p>Similarity search between chemical compounds</p></li>
 </ul>
-<p><img alt="graphLevel" src="../../_images/chap1_graph.png" /></p>
+<p><img alt="graphLevel" src="../../_images/chap1_graph.png" />
+ref: <a class="reference external" href="https://distill.pub/2021/gnn-intro/">https://distill.pub/2021/gnn-intro/</a></p>
 </section>
 </section>
 <section id="graph2vec-example">
@@ -682,7 +687,8 @@ In bioinformatics, each graph can represent a molecule. Graph2Vec embeds each mo
 <p><img alt="nodeLevel" src="../../_images/chap1_4.png" /></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">networkx</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nx</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">karateclub</span><span class="w"> </span><span class="kn">import</span> <span class="n">Graph2Vec</span>
 
@@ -705,12 +711,12 @@ In bioinformatics, each graph can represent a molecule. Graph2Vec embeds each mo
 <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">vec</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">embeddings</span><span class="p">):</span>
     
     <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">vec</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">vec</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">s</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">),</span> <span class="p">(</span><span class="n">vec</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">vec</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">40</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">),</span> <span class="p">(</span><span class="n">vec</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">vec</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/8bd9cd15effa8548605d96d15e4bb0da94d48b0d48346ec3216e524c3985ff63.png" src="../../_images/8bd9cd15effa8548605d96d15e4bb0da94d48b0d48346ec3216e524c3985ff63.png" />
+<img alt="../../_images/aee324613f87c38ef69850c4e3a7f37b61afee3d0a4518734954a6122456a645.png" src="../../_images/aee324613f87c38ef69850c4e3a7f37b61afee3d0a4518734954a6122456a645.png" />
 </div>
 </div>
 <hr class="docutils" />
