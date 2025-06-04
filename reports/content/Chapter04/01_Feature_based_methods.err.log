@@ -28,21 +28,46 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-from stellargraph import datasets
-from IPython.display import display, HTML
+import torch
+from torch_geometric.datasets import Planetoid
+from torch_geometric.utils import to_networkx
+import networkx as nx
+import pandas as pd
 
-dataset = datasets.PROTEINS()
-display(HTML(dataset.description))
-graphs, graph_labels = dataset.load()
+# Load Cora dataset
+dataset = Planetoid(root='data/Planetoid', name='Cora')
+data = dataset[0]
+
+# Convert to NetworkX graph (undirected for clustering)
+G = to_networkx(data, to_undirected=True)
+
+# Compute graph-based features
+degree = dict(G.degree())
+clustering = nx.clustering(G)
+pagerank = nx.pagerank(G)
+avg_neighbor_degree = nx.average_neighbor_degree(G)
+
+# Combine into a DataFrame
+features = pd.DataFrame({
+    'degree': pd.Series(degree),
+    'clustering': pd.Series(clustering),
+    'pagerank': pd.Series(pagerank),
+    'avg_neighbor_degree': pd.Series(avg_neighbor_degree)
+})
+
+print(features.head())
+
 ------------------
 
 
 [1;31m---------------------------------------------------------------------------[0m
 [1;31mModuleNotFoundError[0m                       Traceback (most recent call last)
-Cell [1;32mIn[1], line 1[0m
-[1;32m----> 1[0m [38;5;28;01mfrom[39;00m [38;5;21;01mstellargraph[39;00m [38;5;28;01mimport[39;00m datasets
-[0;32m      2[0m [38;5;28;01mfrom[39;00m [38;5;21;01mIPython[39;00m[38;5;21;01m.[39;00m[38;5;21;01mdisplay[39;00m [38;5;28;01mimport[39;00m display, HTML
-[0;32m      4[0m dataset [38;5;241m=[39m datasets[38;5;241m.[39mPROTEINS()
+Cell [1;32mIn[1], line 5[0m
+[0;32m      3[0m [38;5;28;01mfrom[39;00m[38;5;250m [39m[38;5;21;01mtorch_geometric[39;00m[38;5;21;01m.[39;00m[38;5;21;01mutils[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m to_networkx
+[0;32m      4[0m [38;5;28;01mimport[39;00m[38;5;250m [39m[38;5;21;01mnetworkx[39;00m[38;5;250m [39m[38;5;28;01mas[39;00m[38;5;250m [39m[38;5;21;01mnx[39;00m
+[1;32m----> 5[0m [38;5;28;01mimport[39;00m[38;5;250m [39m[38;5;21;01mpandas[39;00m[38;5;250m [39m[38;5;28;01mas[39;00m[38;5;250m [39m[38;5;21;01mpd[39;00m
+[0;32m      7[0m [38;5;66;03m# Load Cora dataset[39;00m
+[0;32m      8[0m dataset [38;5;241m=[39m Planetoid(root[38;5;241m=[39m[38;5;124m'[39m[38;5;124mdata/Planetoid[39m[38;5;124m'[39m, name[38;5;241m=[39m[38;5;124m'[39m[38;5;124mCora[39m[38;5;124m'[39m)
 
-[1;31mModuleNotFoundError[0m: No module named 'stellargraph'
+[1;31mModuleNotFoundError[0m: No module named 'pandas'
 

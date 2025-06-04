@@ -62,6 +62,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'content/Chapter03/01_Shallow_Embeddings';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="AutoEncoder" href="02_Autoencoders.html" />
     <link rel="prev" title="Chapter 3 : Unsupervised Graph learning" href="00_Unsupervised_Learning.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -204,8 +205,13 @@
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Shallow Embedding Methods</a></li>
 
 
+<li class="toctree-l2"><a class="reference internal" href="02_Autoencoders.html">AutoEncoder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_Structural_deep_neural_embeddings.html">Structural Deep Network Embedding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04_Graph_Neural_Network.html">🧠 Unsupervised Graph Representation Learning using GCN (Graph Convolutional Network)</a></li>
 </ul>
 </details></li>
+<li class="toctree-l1"><a class="reference internal" href="../Chapter04/01_Feature_based_methods.html">Chapter 4 : Supervised Graph Learning</a></li>
+
 </ul>
 
     </div>
@@ -440,13 +446,32 @@ document.write(`
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#graph-representation-with-global-structure-information-graphrep">Graph Representation with Global Structure Information (GraphRep)</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#motivation">Motivation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#notation-and-setup">Notation and Setup</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-the-k-th-order-proximity">What is the <span class="math notranslate nohighlight">\( k \)</span>th-Order Proximity?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objective-function">Objective Function</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-the-k-th-order-proximity">What is the <span class="math notranslate nohighlight">\( k \)</span>th-Order Proximity?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#small-graph-example-global-structure-with-graphrep">Small Graph Example: Global Structure with GraphRep</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#graph-structure">🔹 Graph Structure</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-adjacency-matrix-a">🔹 Step 1: Adjacency Matrix <span class="math notranslate nohighlight">\( A \)</span></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-degree-matrix-d">🔹 Step 2: Degree Matrix <span class="math notranslate nohighlight">\( D \)</span></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-compute-d-1-a">🔹 Step 3: Compute <span class="math notranslate nohighlight">\( D^{-1} A \)</span></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretation">🔹 Interpretation</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-compute-d-1-a-2">🔹 Step 4: Compute <span class="math notranslate nohighlight">\( (D^{-1}A)^2 \)</span></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">🔹 Interpretation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objective-function">Objective Function</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-5-left-singular-vectors-y-s-1-truncated-to-top-2">🔹 Step 5: Left Singular Vectors <span class="math notranslate nohighlight">\(  Y_s^{(1)} \)</span> (Truncated to top-2)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#y-s-2">🔹<span class="math notranslate nohighlight">\( Y_s^{(2)} \)</span></a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#final-embedding-construction">Final Embedding Construction</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parameters">Parameters</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parameters">Parameters</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-6-final-embedding-y-s-y-s-1-y-s-2">🔹 step 6: Final Embedding <span class="math notranslate nohighlight">\( Y_s = [Y_s^{(1)} \ \| \ Y_s^{(2)}] \)</span></a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#higher-order-proximity-preserved-embedding-hope">Higher-Order Proximity Preserved Embedding ( HOPE)</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Final Embedding Construction</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Final Embedding Construction</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#similarity-matrix-computation">Similarity Matrix Computation</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#katz-similarity-in-hope">Katz Similarity in HOPE</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematical-definition">🔸 Mathematical Definition</a></li>
@@ -483,7 +508,7 @@ document.write(`
 <li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#example-embedding-space-and-visualization">📊 Example: Embedding Space and Visualization</a></li>
 </ul>
 </li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">📌 Summary</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">📌 Summary</a></li>
 </ul>
 </li>
 </ul>
@@ -491,15 +516,15 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#edge2vec-learning-edge-representations-from-node-embeddings">Edge2Vec: Learning Edge Representations from Node Embeddings</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#core-idea">💡 Core Idea</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-edge-embedding-operators">🧮 Common Edge Embedding Operators</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">🧠 Intuition</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">✅ Summary</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">🧠 Intuition</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">✅ Summary</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#graph2vec-learning-vector-representations-of-entire-graphs">Graph2Vec: Learning Vector Representations of Entire Graphs</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#objective">📦 Objective</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#underlying-concept">🧩 Underlying Concept</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#algorithm-steps">🪜 Algorithm Steps</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">📌 Summary</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">📌 Summary</a></li>
 </ul>
 </li>
 </ul>
@@ -580,7 +605,7 @@ L = \frac{1}{2} \sum_{(i,j)\in E} \left(A_{i,j} - Y_{i,:} Y_{j,:}^\top \right)^2
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/ef466e0cb06d8918b86478d1b95f578db0cd6afe2f6b4dfc8119dd4543103cee.png" src="../../_images/ef466e0cb06d8918b86478d1b95f578db0cd6afe2f6b4dfc8119dd4543103cee.png" />
+<img alt="../../_images/a96869e82c11dee5b7a9c9bcaa89cca7b5b998a98c619fe3c5552adad1fafb7c.png" src="../../_images/a96869e82c11dee5b7a9c9bcaa89cca7b5b998a98c619fe3c5552adad1fafb7c.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -612,34 +637,34 @@ L = \frac{1}{2} \sum_{(i,j)\in E} \left(A_{i,j} - Y_{i,:} Y_{j,:}^\top \right)^2
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/be3541b44a73b525e91aa5208673555c2d1f1d942dca26df827b157140b5243e.png" src="../../_images/be3541b44a73b525e91aa5208673555c2d1f1d942dca26df827b157140b5243e.png" />
+<img alt="../../_images/e71bcc838db2675287acc4bb8826f57ddd4fc8de616f80fadb29f59c89e6ad02.png" src="../../_images/e71bcc838db2675287acc4bb8826f57ddd4fc8de616f80fadb29f59c89e6ad02.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>./gf not found. Reverting to Python implementation. Please compile gf, place node2vec in the path and grant executable permission
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 0.00141479, -0.00251088],
-       [ 0.00141595, -0.0025105 ],
-       [ 0.00141445, -0.00250996],
-       [ 0.00140475, -0.00251669],
-       [ 0.00141858, -0.00253019],
-       [ 0.0013891 , -0.00251295],
-       [ 0.00143506, -0.00195219],
-       [ 0.00084294, -0.00338144],
-       [ 0.00606599, -0.00197423],
-       [-0.00747745, -0.00267822],
-       [-0.0117307 , -0.00037329],
-       [-0.00657376,  0.001249  ],
-       [ 0.00448554,  0.00261612],
-       [ 0.01235323, -0.00135992],
-       [ 0.02381258, -0.00773625],
-       [ 0.02381341, -0.00773662],
-       [ 0.02381999, -0.00774757],
-       [ 0.023808  , -0.00772076],
-       [ 0.02384807, -0.00772126],
-       [ 0.02382782, -0.00779467],
-       [ 0.02366042, -0.00762512],
-       [ 0.02352409, -0.00822098],
-       [ 0.02688923, -0.00731857],
-       [ 0.02978157, -0.01174357]])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 7.82088083e-04, -8.13404272e-04],
+       [ 7.82853745e-04, -8.14869906e-04],
+       [ 7.83630437e-04, -8.09787107e-04],
+       [ 7.71588297e-04, -8.03600060e-04],
+       [ 8.12845122e-04, -7.92013511e-04],
+       [ 8.09525900e-04, -8.96718383e-04],
+       [ 4.19101437e-04, -1.09232562e-03],
+       [ 7.92443001e-04, -1.42524860e-04],
+       [ 1.15134702e-03,  2.84541906e-03],
+       [ 6.29887762e-03, -7.55370228e-03],
+       [ 1.12422107e-02, -2.54097591e-03],
+       [ 1.09115124e-02,  2.51381889e-05],
+       [ 2.41105226e-03, -1.96114217e-03],
+       [-6.75303751e-03,  1.27246267e-03],
+       [-7.92204709e-03, -2.21640189e-04],
+       [-7.92103649e-03, -2.21360683e-04],
+       [-7.92202615e-03, -2.26751505e-04],
+       [-7.91009256e-03, -2.20376636e-04],
+       [-7.94889981e-03, -1.69912797e-04],
+       [-7.76963301e-03, -3.24342590e-04],
+       [-8.37176798e-03, -4.62882252e-04],
+       [-8.12746950e-03,  3.66006581e-04],
+       [-7.22039641e-03, -1.21010017e-03],
+       [-8.39119169e-03,  3.40910987e-03]])
 </pre></div>
 </div>
 </div>
@@ -659,7 +684,7 @@ L = \frac{1}{2} \sum_{(i,j)\in E} \left(A_{i,j} - Y_{i,:} Y_{j,:}^\top \right)^2
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/e1fc02136d64f17eea45748ac174b24e4e72ab0079fe934b417732a61fa9fd89.png" src="../../_images/e1fc02136d64f17eea45748ac174b24e4e72ab0079fe934b417732a61fa9fd89.png" />
+<img alt="../../_images/2049b9f575761d83abffcc261a457383864d2a33675e052fa58ecec2f448c70b.png" src="../../_images/2049b9f575761d83abffcc261a457383864d2a33675e052fa58ecec2f448c70b.png" />
 </div>
 </div>
 </section>
@@ -710,6 +735,118 @@ X^k = (D^{-1} A)^k
 \)</span>
 where <span class="math notranslate nohighlight">\( X^k_{ij} \)</span> is the probability of moving from <span class="math notranslate nohighlight">\( v_i \)</span> to <span class="math notranslate nohighlight">\( v_j \)</span> in exactly <span class="math notranslate nohighlight">\( k \)</span> steps.</p></li>
 </ul>
+<hr class="docutils" />
+<section id="small-graph-example-global-structure-with-graphrep">
+<h3>Small Graph Example: Global Structure with GraphRep<a class="headerlink" href="#small-graph-example-global-structure-with-graphrep" title="Link to this heading">#</a></h3>
+<section id="graph-structure">
+<h4>🔹 Graph Structure<a class="headerlink" href="#graph-structure" title="Link to this heading">#</a></h4>
+<p>We define a simple undirected graph with 4 nodes:
+Graph:</p>
+<p>3–1 – 2–4</p>
+<p>Edges: (1-2), (1-3), (2-4)</p>
+</section>
+<section id="step-1-adjacency-matrix-a">
+<h4>🔹 Step 1: Adjacency Matrix <span class="math notranslate nohighlight">\( A \)</span><a class="headerlink" href="#step-1-adjacency-matrix-a" title="Link to this heading">#</a></h4>
+<p>The adjacency matrix <span class="math notranslate nohighlight">\( A \in \mathbb{R}^{4 \times 4} \)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+A = 
+\begin{bmatrix}
+0 &amp; 1 &amp; 1 &amp; 0 \\
+1 &amp; 0 &amp; 0 &amp; 1 \\
+1 &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; 1 &amp; 0 &amp; 0 \\
+\end{bmatrix}
+\end{split}\]</div>
+</section>
+<section id="step-2-degree-matrix-d">
+<h4>🔹 Step 2: Degree Matrix <span class="math notranslate nohighlight">\( D \)</span><a class="headerlink" href="#step-2-degree-matrix-d" title="Link to this heading">#</a></h4>
+<p>The degree matrix $<span class="math notranslate nohighlight">\(D \)</span>$ is diagonal with degrees of each node:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+D =
+\begin{bmatrix}
+2 &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; 2 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 1 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; 1 \\
+\end{bmatrix}
+\end{split}\]</div>
+</section>
+<section id="step-3-compute-d-1-a">
+<h4>🔹 Step 3: Compute <span class="math notranslate nohighlight">\( D^{-1} A \)</span><a class="headerlink" href="#step-3-compute-d-1-a" title="Link to this heading">#</a></h4>
+<p>The inverse degree matrix:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+D^{-1} =
+\begin{bmatrix}
+\frac{1}{2} &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; \frac{1}{2} &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 1 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; 1 \\
+\end{bmatrix}
+\end{split}\]</div>
+<p>Now compute:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+D^{-1} A =
+\begin{bmatrix}
+0 &amp; 0.5 &amp; 0.5 &amp; 0 \\
+0.5 &amp; 0 &amp; 0 &amp; 0.5 \\
+1 &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; 1 &amp; 0 &amp; 0 \\
+\end{bmatrix}
+\end{split}\]</div>
+</section>
+<section id="interpretation">
+<h4>🔹 Interpretation<a class="headerlink" href="#interpretation" title="Link to this heading">#</a></h4>
+<p>Each row of <span class="math notranslate nohighlight">\(D^{-1}A\)</span> represents <strong>transition probabilities</strong> from one node to its neighbors.</p>
+<ul class="simple">
+<li><p>Row 1: From node 1 → 50% to node 2, 50% to node 3.</p></li>
+<li><p>Row 2: From node 2 → 50% to node 1, 50% to node 4.</p></li>
+<li><p>Row 3: From node 3 → 100% to node 1.</p></li>
+<li><p>Row 4: From node 4 → 100% to node 2.</p></li>
+</ul>
+<p>This matrix is used in random walk, label propagation, and spectral methods such as <strong>GraphRep</strong>, capturing the <strong>global structure</strong> of the graph for embedding or factorization.</p>
+</section>
+<section id="step-4-compute-d-1-a-2">
+<h4>🔹 Step 4: Compute <span class="math notranslate nohighlight">\( (D^{-1}A)^2 \)</span><a class="headerlink" href="#step-4-compute-d-1-a-2" title="Link to this heading">#</a></h4>
+<div class="math notranslate nohighlight">
+\[
+(D^{-1}A)^2 = (D^{-1}A) \cdot (D^{-1}A)
+\]</div>
+<p>We perform matrix multiplication:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+(D^{-1}A)^2 =
+\begin{bmatrix}
+0.75 &amp; 0 &amp; 0 &amp; 0.25 \\
+0 &amp; 0.75 &amp; 0.25 &amp; 0 \\
+0 &amp; 0.5 &amp; 0.5 &amp; 0 \\
+0.5&amp; 0 &amp;0 &amp; 0.5 \\
+\end{bmatrix}
+\end{split}\]</div>
+</section>
+<section id="id1">
+<h4>🔹 Interpretation<a class="headerlink" href="#id1" title="Link to this heading">#</a></h4>
+<p>Each entry <span class="math notranslate nohighlight">\( (D^{-1}A)^2_{ij} \)</span> gives the probability of reaching node <span class="math notranslate nohighlight">\( j \)</span> from node <span class="math notranslate nohighlight">\( i \)</span> in <strong>2 steps</strong> under the random walk defined by <span class="math notranslate nohighlight">\( D^{-1}A \)</span>.</p>
+<p>Examples:</p>
+<ul class="simple">
+<li><p>From node 1:</p>
+<ul>
+<li><p>75% chance to return to itself after 2 steps.</p></li>
+<li><p>25% chance to reach node 4 in 2 steps.</p></li>
+</ul>
+</li>
+<li><p>From node 3:</p>
+<ul>
+<li><p>50% chance to reach node 2.</p></li>
+<li><p>50% chance to return to node 3.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
 </section>
 <hr class="docutils" />
 <section id="objective-function">
@@ -723,6 +860,35 @@ L_k = \left\| X^k - Y_s^k \cdot \left(Y_t^k\right)^{T} \right\|_F^2 \quad \text{
 <li><p>This loss measures how well the embedding matrices approximate the proximity matrix <span class="math notranslate nohighlight">\( X^k \)</span></p></li>
 </ul>
 <p>Each <span class="math notranslate nohighlight">\( L_k \)</span> is minimized <strong>independently</strong> to learn the embedding matrices <span class="math notranslate nohighlight">\( Y_s^k \)</span> and <span class="math notranslate nohighlight">\( Y_t^k \)</span>.</p>
+<hr class="docutils" />
+<p>In our example we have</p>
+<section id="step-5-left-singular-vectors-y-s-1-truncated-to-top-2">
+<h3>🔹 Step 5: Left Singular Vectors <span class="math notranslate nohighlight">\(  Y_s^{(1)} \)</span> (Truncated to top-2)<a class="headerlink" href="#step-5-left-singular-vectors-y-s-1-truncated-to-top-2" title="Link to this heading">#</a></h3>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+Y_s^{(1)} =
+\begin{bmatrix}
+\phantom{-}0.0000 &amp; \phantom{-}0.5623 \\
+-0.5623 &amp; \phantom{-}0.0000 \\
+-0.9099 &amp; -0.0000 \\
+\phantom{-}0.0000 &amp; \phantom{-}0.9099 \\
+\end{bmatrix}
+\end{split}\]</div>
+</section>
+<hr class="docutils" />
+<section id="y-s-2">
+<h3>🔹<span class="math notranslate nohighlight">\( Y_s^{(2)} \)</span><a class="headerlink" href="#y-s-2" title="Link to this heading">#</a></h3>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+Y_s^{(2)} =
+\begin{bmatrix}
+-0.7618 &amp; \phantom{-}0.0000 \\
+\phantom{-}0.0000 &amp; -0.7618 \\
+\phantom{-}0.0000 &amp; -0.6725 \\
+-0.6725 &amp; \phantom{-}0.0000 \\
+\end{bmatrix}
+\end{split}\]</div>
+</section>
 </section>
 <hr class="docutils" />
 <section id="final-embedding-construction">
@@ -745,6 +911,22 @@ Y_s = \left[ Y_s^1 \ \| \ Y_s^2 \ \| \ \cdots \ \| \ Y_s^K \right] \in \mathbb{R
 <li><p><code class="docutils literal notranslate"><span class="pre">order</span></code>: the maximum number of proximity steps considered (<span class="math notranslate nohighlight">\(K \)</span>)</p></li>
 <li><p>Final embedding dimension per node: <span class="math notranslate nohighlight">\( d \times K \)</span></p></li>
 </ul>
+<hr class="docutils" />
+<hr class="docutils" />
+<section id="step-6-final-embedding-y-s-y-s-1-y-s-2">
+<h3>🔹 step 6: Final Embedding <span class="math notranslate nohighlight">\( Y_s = [Y_s^{(1)} \ \| \ Y_s^{(2)}] \)</span><a class="headerlink" href="#step-6-final-embedding-y-s-y-s-1-y-s-2" title="Link to this heading">#</a></h3>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+Y_s =
+\begin{bmatrix}
+\phantom{-}0.0000 &amp; \phantom{-}0.5623 &amp; -0.7618 &amp; \phantom{-}0.0000 \\
+-0.5623 &amp; \phantom{-}0.0000 &amp; \phantom{-}0.0000 &amp; -0.7618 \\
+-0.9099 &amp; \phantom{-}0.0000 &amp; \phantom{-}0.0000 &amp; -0.6725 \\
+\phantom{-}0.0000 &amp; \phantom{-}0.9099 &amp; -0.6725 &amp; \phantom{-}0.0000 \\
+\end{bmatrix}
+\end{split}\]</div>
+<p>Each row corresponds to the low-dimensional representation of a node based on global structure information up to 2 hops.</p>
+</section>
 </section>
 <hr class="docutils" />
 <section id="summary">
@@ -757,6 +939,96 @@ Y_s = \left[ Y_s^1 \ \| \ Y_s^2 \ \| \ \cdots \ \| \ Y_s^K \right] \in \mathbb{R
 <li><p>Construct embeddings via <strong>matrix factorization</strong></p></li>
 <li><p>Combine embeddings from each proximity order to form the final representation</p></li>
 </ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Code of the example</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="c1"># Step 1: Define the adjacency matrix A for the small graph</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+
+<span class="c1"># Step 2: Compute the degree matrix D and its inverse</span>
+<span class="n">D</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">D_inv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">D</span><span class="p">)</span>
+
+<span class="c1"># Step 3: Compute D^-1 * A (normalized adjacency matrix)</span>
+<span class="n">DA</span> <span class="o">=</span> <span class="n">D_inv</span> <span class="o">@</span> <span class="n">A</span>
+
+<span class="c1"># Step 4: Compute (D^-1 * A)^2</span>
+<span class="n">DA2</span> <span class="o">=</span> <span class="n">DA</span> <span class="o">@</span> <span class="n">DA</span>
+
+<span class="c1"># Step 5: Choose embedding dimension (e.g., k = 2)</span>
+<span class="c1"># We use SVD on DA2 (which captures 2-hop structure)</span>
+<span class="n">U</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">Vt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">svd</span><span class="p">(</span><span class="n">DA2</span><span class="p">)</span>
+
+<span class="c1"># Truncate to top-k components for embedding</span>
+<span class="n">k</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">Y_s</span> <span class="o">=</span> <span class="n">U</span><span class="p">[:,</span> <span class="p">:</span><span class="n">k</span><span class="p">]</span>
+<span class="n">Y_t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">S</span><span class="p">[:</span><span class="n">k</span><span class="p">]))</span> <span class="o">@</span> <span class="n">Vt</span><span class="p">[:</span><span class="n">k</span><span class="p">,</span> <span class="p">:]</span>
+
+
+<span class="c1"># Final node embeddings (optional: use Y_s directly or combine Y_s and Y_t)</span>
+<span class="n">embedding</span> <span class="o">=</span> <span class="n">Y_s</span> <span class="o">@</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">S</span><span class="p">[:</span><span class="n">k</span><span class="p">]))</span>
+
+
+
+<span class="c1"># Step 1: Define a function to compute Y_s for a given power k</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">compute_graphrep_embedding</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">D_inv</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">d</span><span class="p">):</span>
+    <span class="c1"># Compute (D^-1 A)^k</span>
+    <span class="n">DA</span> <span class="o">=</span> <span class="n">D_inv</span> <span class="o">@</span> <span class="n">A</span>
+    <span class="n">DA_k</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">matrix_power</span><span class="p">(</span><span class="n">DA</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
+    
+    <span class="c1"># Apply SVD</span>
+    <span class="n">U</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">Vt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">svd</span><span class="p">(</span><span class="n">DA_k</span><span class="p">)</span>
+    
+    <span class="c1"># Truncate to top-d components</span>
+    <span class="n">Y_s_k</span> <span class="o">=</span> <span class="n">U</span><span class="p">[:,</span> <span class="p">:</span><span class="n">d</span><span class="p">]</span> <span class="o">@</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">S</span><span class="p">[:</span><span class="n">d</span><span class="p">]))</span>
+    <span class="k">return</span> <span class="n">Y_s_k</span>
+
+<span class="c1"># Parameters</span>
+<span class="n">d</span> <span class="o">=</span> <span class="mi">2</span>   <span class="c1"># embedding dimension per scale</span>
+<span class="n">K</span> <span class="o">=</span> <span class="mi">2</span>   <span class="c1"># maximum hop</span>
+
+<span class="c1"># Compute D^-1</span>
+<span class="n">D_inv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)))</span>
+
+<span class="c1"># Compute Y_s^1 and Y_s^2</span>
+<span class="n">Y_s_1</span> <span class="o">=</span> <span class="n">compute_graphrep_embedding</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">D_inv</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">d</span><span class="o">=</span><span class="n">d</span><span class="p">)</span>
+<span class="n">Y_s_2</span> <span class="o">=</span> <span class="n">compute_graphrep_embedding</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">D_inv</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">d</span><span class="o">=</span><span class="n">d</span><span class="p">)</span>
+
+<span class="c1"># Final embedding: concatenate along the feature axis</span>
+<span class="n">Y_final</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">Y_s_1</span><span class="p">,</span> <span class="n">Y_s_2</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">Y_s_1</span><span class="p">,</span> <span class="n">Y_s_2</span><span class="p">,</span> <span class="n">Y_final</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(array([[ 1.18753536e-16,  5.62341325e-01],
+        [-5.62341325e-01,  8.90651522e-17],
+        [-9.09887377e-01, -5.93767681e-17],
+        [ 0.00000000e+00,  9.09887377e-01]]),
+ array([[-0.76182285,  0.        ],
+        [ 0.        , -0.76182285],
+        [ 0.        , -0.67252367],
+        [-0.67252367,  0.        ]]),
+ array([[ 1.18753536e-16,  5.62341325e-01, -7.61822854e-01,
+          0.00000000e+00],
+        [-5.62341325e-01,  8.90651522e-17,  0.00000000e+00,
+         -7.61822854e-01],
+        [-9.09887377e-01, -5.93767681e-17,  0.00000000e+00,
+         -6.72523669e-01],
+        [ 0.00000000e+00,  9.09887377e-01, -6.72523669e-01,
+          0.00000000e+00]]))
+</pre></div>
+</div>
+</div>
+</div>
 <p>In this implementation,
 the dimension parameter represents the dimension of the embedding space, while the
 order parameter defines the maximum number of orders of proximity between nodes.
@@ -777,7 +1049,7 @@ order an embedding is computed and concatenated in the final embedding matrix.</
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/7b5557535152e263c1722919f8e17c987cc880eb8ed5f4bcb2ee661418ad56f3.png" src="../../_images/7b5557535152e263c1722919f8e17c987cc880eb8ed5f4bcb2ee661418ad56f3.png" />
+<img alt="../../_images/13f9988b6c1409af856dc7f921de0f1aacd6be5a88b83cdfb1ab791fb158de4b.png" src="../../_images/13f9988b6c1409af856dc7f921de0f1aacd6be5a88b83cdfb1ab791fb158de4b.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -827,8 +1099,8 @@ L = \left\| S - Y_s \cdot Y_t^{T} \right\|_F^2
 <li><p><span class="math notranslate nohighlight">\(\|\cdot\|_F\)</span> denotes the Frobenius norm</p></li>
 </ul>
 <p>The use of <strong>separate embeddings for source and target nodes</strong> allows HOPE to effectively capture <strong>asymmetric</strong> relationships in the graph—common in many real-world networks such as citation, hyperlink, or follower graphs.</p>
-<section id="id1">
-<h3>Final Embedding Construction<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<section id="id2">
+<h3>Final Embedding Construction<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
 <p>The final embedding of each node is obtained by <strong>concatenating</strong> its source and target embeddings:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -1188,7 +1460,7 @@ Use the learned weights of the skip-gram model to extract a low-dimensional vect
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/bbd6a1509f7709437d04c5ebdf94aa18cf20807e362bed3076763a8721c749c9.png" src="../../_images/bbd6a1509f7709437d04c5ebdf94aa18cf20807e362bed3076763a8721c749c9.png" />
+<img alt="../../_images/077db181388ae0df9757f2ba538bd346f1ad0ad44305adda05448f00d5e61129.png" src="../../_images/077db181388ae0df9757f2ba538bd346f1ad0ad44305adda05448f00d5e61129.png" />
 </div>
 </div>
 </section>
@@ -1296,8 +1568,8 @@ If we reduce these embeddings to 2 dimensions (e.g., using PCA), the relative di
 <p><img alt="image.png" src="content/Chapter03/attachment:ed88df22-91f8-4fba-bb31-71bfea80c054.png" /></p>
 </section>
 </section>
-<section id="id2">
-<h4>📌 Summary<a class="headerlink" href="#id2" title="Link to this heading">#</a></h4>
+<section id="id3">
+<h4>📌 Summary<a class="headerlink" href="#id3" title="Link to this heading">#</a></h4>
 <ul class="simple">
 <li><p>✅ Uses Skip-Gram with Negative Sampling (SGNS)</p></li>
 <li><p>🔄 Introduces <strong>biased</strong> random walks (vs. DeepWalk’s uniform ones)</p></li>
@@ -1324,7 +1596,7 @@ If we reduce these embeddings to 2 dimensions (e.g., using PCA), the relative di
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing transition probabilities:   0%|                                                       | 0/24 [00:00&lt;?, ?it/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing transition probabilities: 100%|████████████████████████████████████████████| 24/24 [00:00&lt;00:00, 1520.98it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing transition probabilities: 100%|█████████████████████████████████████████████| 24/24 [00:00&lt;00:00, 760.14it/s]
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
@@ -1333,31 +1605,34 @@ If we reduce these embeddings to 2 dimensions (e.g., using PCA), the relative di
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Generating walks (CPU: 1):   0%|                                                                | 0/10 [00:00&lt;?, ?it/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Generating walks (CPU: 1):  20%|███████████▏                                            | 2/10 [00:00&lt;00:00,  9.43it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Generating walks (CPU: 1):  20%|███████████▏                                            | 2/10 [00:00&lt;00:01,  6.59it/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Generating walks (CPU: 1):  30%|████████████████▊                                       | 3/10 [00:00&lt;00:01,  6.69it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Generating walks (CPU: 1):  30%|████████████████▊                                       | 3/10 [00:00&lt;00:01,  5.51it/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Generating walks (CPU: 1):  40%|██████████████████████▍                                 | 4/10 [00:00&lt;00:00,  6.00it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Generating walks (CPU: 1):  40%|██████████████████████▍                                 | 4/10 [00:00&lt;00:01,  5.00it/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Generating walks (CPU: 1):  50%|████████████████████████████                            | 5/10 [00:00&lt;00:00,  5.27it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Generating walks (CPU: 1):  50%|████████████████████████████                            | 5/10 [00:00&lt;00:01,  4.72it/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Generating walks (CPU: 1):  60%|█████████████████████████████████▌                      | 6/10 [00:01&lt;00:00,  5.18it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Generating walks (CPU: 1):  60%|█████████████████████████████████▌                      | 6/10 [00:01&lt;00:00,  4.42it/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Generating walks (CPU: 1):  70%|███████████████████████████████████████▏                | 7/10 [00:01&lt;00:00,  4.88it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Generating walks (CPU: 1):  70%|███████████████████████████████████████▏                | 7/10 [00:01&lt;00:00,  4.44it/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Generating walks (CPU: 1):  90%|██████████████████████████████████████████████████▍     | 9/10 [00:01&lt;00:00,  6.48it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Generating walks (CPU: 1):  80%|████████████████████████████████████████████▊           | 8/10 [00:01&lt;00:00,  4.45it/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Generating walks (CPU: 1): 100%|███████████████████████████████████████████████████████| 10/10 [00:01&lt;00:00,  6.17it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Generating walks (CPU: 1):  90%|██████████████████████████████████████████████████▍     | 9/10 [00:01&lt;00:00,  4.57it/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Generating walks (CPU: 1): 100%|███████████████████████████████████████████████████████| 10/10 [00:01&lt;00:00,  5.47it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Generating walks (CPU: 1): 100%|███████████████████████████████████████████████████████| 10/10 [00:02&lt;00:00,  4.64it/s]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Generating walks (CPU: 1): 100%|███████████████████████████████████████████████████████| 10/10 [00:02&lt;00:00,  4.38it/s]
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
@@ -1382,7 +1657,7 @@ If we reduce these embeddings to 2 dimensions (e.g., using PCA), the relative di
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/af71df8947452ff38a79242824767c259e6aff8563cadeda4fbfebd011db83b6.png" src="../../_images/af71df8947452ff38a79242824767c259e6aff8563cadeda4fbfebd011db83b6.png" />
+<img alt="../../_images/fecdd1c8f3afee41333642770a926535999e82aa14d8aeabc1e911af7ff90c5a.png" src="../../_images/fecdd1c8f3afee41333642770a926535999e82aa14d8aeabc1e911af7ff90c5a.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1392,7 +1667,7 @@ If we reduce these embeddings to 2 dimensions (e.g., using PCA), the relative di
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[-3.6396089  -0.37100485]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[-3.5758448   0.73252887]
 </pre></div>
 </div>
 </div>
@@ -1446,8 +1721,8 @@ Rather than training a new model from scratch, it derives the embedding of an ed
 </table>
 </div>
 </section>
-<section id="id3">
-<h3>🧠 Intuition<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<section id="id4">
+<h3>🧠 Intuition<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>These operations encode the <strong>interaction</strong> or <strong>relationship</strong> between the connected nodes.</p></li>
 <li><p>Once node embeddings are available, edge embeddings can be computed <strong>without retraining</strong> a new model.</p></li>
@@ -1460,8 +1735,8 @@ Rather than training a new model from scratch, it derives the embedding of an ed
 </li>
 </ul>
 </section>
-<section id="id4">
-<h3>✅ Summary<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
+<section id="id5">
+<h3>✅ Summary<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p><strong>Edge2Vec</strong> is not a separate model, but a <strong>post-processing step</strong> on top of Node2Vec (or similar).</p></li>
 <li><p>It enables transforming node-level embeddings into <strong>edge-level representations</strong>.</p></li>
@@ -1492,7 +1767,7 @@ Rather than training a new model from scratch, it derives the embedding of an ed
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/bfb7cfeaa14c5679091948df6f3650c8b3d05c08fd7564495ca2037cafbdca1a.png" src="../../_images/bfb7cfeaa14c5679091948df6f3650c8b3d05c08fd7564495ca2037cafbdca1a.png" />
+<img alt="../../_images/001091b875f5713ba04e2cea07ac8440f60918d1d63fc757e6765b6c792e44e3.png" src="../../_images/001091b875f5713ba04e2cea07ac8440f60918d1d63fc757e6765b6c792e44e3.png" />
 </div>
 </div>
 </section>
@@ -1547,8 +1822,8 @@ Graph2Vec learns embeddings for entire graphs based on their substructures.</p><
 </ol>
 </section>
 <hr class="docutils" />
-<section id="id5">
-<h3>📌 Summary<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
+<section id="id6">
+<h3>📌 Summary<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p><strong>Graph2Vec</strong> allows us to represent <strong>entire graphs</strong> in a continuous vector space.</p></li>
 <li><p>It is based on the idea of using <strong>subgraph structures as building blocks</strong>, much like words in a document.</p></li>
@@ -1585,7 +1860,7 @@ Graph2Vec learns embeddings for entire graphs based on their substructures.</p><
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/3bf8c1825bed1f1f1d54863d48d5500f0d9becf2e781a4de3e0d4906a5df28ec.png" src="../../_images/3bf8c1825bed1f1f1d54863d48d5500f0d9becf2e781a4de3e0d4906a5df28ec.png" />
+<img alt="../../_images/ceaef40593d74654d2a670c8ca5fd38f5bb89f340b62eac866bfbfed3581c628.png" src="../../_images/ceaef40593d74654d2a670c8ca5fd38f5bb89f340b62eac866bfbfed3581c628.png" />
 </div>
 </div>
 </section>
@@ -1631,6 +1906,15 @@ Graph2Vec learns embeddings for entire graphs based on their substructures.</p><
         <p class="prev-next-title">Chapter 3 : Unsupervised Graph learning</p>
       </div>
     </a>
+    <a class="right-next"
+       href="02_Autoencoders.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">AutoEncoder</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               
@@ -1655,13 +1939,32 @@ Graph2Vec learns embeddings for entire graphs based on their substructures.</p><
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#graph-representation-with-global-structure-information-graphrep">Graph Representation with Global Structure Information (GraphRep)</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#motivation">Motivation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#notation-and-setup">Notation and Setup</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-the-k-th-order-proximity">What is the <span class="math notranslate nohighlight">\( k \)</span>th-Order Proximity?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objective-function">Objective Function</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-the-k-th-order-proximity">What is the <span class="math notranslate nohighlight">\( k \)</span>th-Order Proximity?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#small-graph-example-global-structure-with-graphrep">Small Graph Example: Global Structure with GraphRep</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#graph-structure">🔹 Graph Structure</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-adjacency-matrix-a">🔹 Step 1: Adjacency Matrix <span class="math notranslate nohighlight">\( A \)</span></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-degree-matrix-d">🔹 Step 2: Degree Matrix <span class="math notranslate nohighlight">\( D \)</span></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-compute-d-1-a">🔹 Step 3: Compute <span class="math notranslate nohighlight">\( D^{-1} A \)</span></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretation">🔹 Interpretation</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-compute-d-1-a-2">🔹 Step 4: Compute <span class="math notranslate nohighlight">\( (D^{-1}A)^2 \)</span></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">🔹 Interpretation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objective-function">Objective Function</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-5-left-singular-vectors-y-s-1-truncated-to-top-2">🔹 Step 5: Left Singular Vectors <span class="math notranslate nohighlight">\(  Y_s^{(1)} \)</span> (Truncated to top-2)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#y-s-2">🔹<span class="math notranslate nohighlight">\( Y_s^{(2)} \)</span></a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#final-embedding-construction">Final Embedding Construction</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parameters">Parameters</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parameters">Parameters</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-6-final-embedding-y-s-y-s-1-y-s-2">🔹 step 6: Final Embedding <span class="math notranslate nohighlight">\( Y_s = [Y_s^{(1)} \ \| \ Y_s^{(2)}] \)</span></a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#higher-order-proximity-preserved-embedding-hope">Higher-Order Proximity Preserved Embedding ( HOPE)</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Final Embedding Construction</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Final Embedding Construction</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#similarity-matrix-computation">Similarity Matrix Computation</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#katz-similarity-in-hope">Katz Similarity in HOPE</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematical-definition">🔸 Mathematical Definition</a></li>
@@ -1698,7 +2001,7 @@ Graph2Vec learns embeddings for entire graphs based on their substructures.</p><
 <li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#example-embedding-space-and-visualization">📊 Example: Embedding Space and Visualization</a></li>
 </ul>
 </li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">📌 Summary</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">📌 Summary</a></li>
 </ul>
 </li>
 </ul>
@@ -1706,15 +2009,15 @@ Graph2Vec learns embeddings for entire graphs based on their substructures.</p><
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#edge2vec-learning-edge-representations-from-node-embeddings">Edge2Vec: Learning Edge Representations from Node Embeddings</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#core-idea">💡 Core Idea</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-edge-embedding-operators">🧮 Common Edge Embedding Operators</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">🧠 Intuition</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">✅ Summary</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">🧠 Intuition</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">✅ Summary</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#graph2vec-learning-vector-representations-of-entire-graphs">Graph2Vec: Learning Vector Representations of Entire Graphs</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#objective">📦 Objective</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#underlying-concept">🧩 Underlying Concept</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#algorithm-steps">🪜 Algorithm Steps</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">📌 Summary</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">📌 Summary</a></li>
 </ul>
 </li>
 </ul>

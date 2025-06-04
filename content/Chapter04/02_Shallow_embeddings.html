@@ -60,8 +60,6 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'content/Chapter04/02_Shallow_embeddings';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Neural Graph Learning and Graph Regularization" href="03_Graph_regularization_graph_neural_training.html" />
-    <link rel="prev" title="Chapter 4 : Supervised Graph Learning" href="01_Feature_based_methods.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -124,6 +122,8 @@
       
       
       
+        
+      
       <div class="bd-sidebar-primary bd-sidebar">
         
 
@@ -175,31 +175,41 @@
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="../../intro.html">
-                    Welcome to Graph Machhine Learning Workshop
+                    Welcome to Graph Machine Learning Workshop
                 </a>
             </li>
         </ul>
-        <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../Chapter00/chap01_intro_and_basics.html">Introduction to Graphs and Machine Learning</a></li>
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Chapter00/chap01_intro_and_basics.html">Introduction to Graph Machine Learning</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter00/help.html">Step-by-Step Setup Guide: Anaconda, Virtual Environments, and Jupyter Kernel Configuration</a></li>
 
+
+
+
+
+
+
+
+
+</ul>
+</details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../Chapter01/01_Introduction_Networkx.html">Chapter 1 : Introduction to Networkx</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter01/02_Graph_metrics.html">Chapter 1.2: Graph properties</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter01/03_Graphs_Benchmarks.html">Benchmark and Repositories</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../Chapter02/01_embedding_examples.html">Chapter 2 : Embedding Examples</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../Chapter03/00_Unsupervised_Learning.html">Chapter 3 : Unsupervised machine learning</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../Chapter03/01_Shallow_Embeddings.html">Shallow embedding methods</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Chapter03/00_Unsupervised_Learning.html">Chapter 3 : Unsupervised Graph learning</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter03/01_Shallow_Embeddings.html">Shallow Embedding Methods</a></li>
+
+
 <li class="toctree-l2"><a class="reference internal" href="../Chapter03/02_Autoencoders.html">AutoEncoder</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter03/03_Structural_deep_neural_embeddings.html">Structural Deep Network Embedding</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../Chapter03/04_Graph_Neural_Network.html">Unsupervised graph representation learning using Graph ConvNet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter03/04_Graph_Neural_Network.html">🧠 Unsupervised Graph Representation Learning using GCN (Graph Convolutional Network)</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="01_Feature_based_methods.html">Chapter 4 : Supervised Graph Learning</a></li>
 
-<li class="toctree-l1"><a class="reference internal" href="../Chapter05/01_link_prediction.html">Chapter 5: Problems with Machine Learning on Graphs</a></li>
-
-<li class="toctree-l1"><a class="reference internal" href="../Chapter06/01_Social_network_analysis.html">Chapter 6 : Machine learning on Social Netowrk Graphs</a></li>
 </ul>
 
     </div>
@@ -501,7 +511,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/bcd91aec954c788e91f4c5e4244e490d2eae5cdf37852ac0e09b9da6880a21b2.png" src="../../_images/bcd91aec954c788e91f4c5e4244e490d2eae5cdf37852ac0e09b9da6880a21b2.png" />
+<img alt="../../_images/3cd7c4f93ea0446b8d5e16d912520feaa5461d3344934446dda72368ca11af68.png" src="../../_images/3cd7c4f93ea0446b8d5e16d912520feaa5461d3344934446dda72368ca11af68.png" />
 </div>
 </div>
 <section id="degree-matrix">
@@ -717,7 +727,7 @@ document.write(`
  [0.90006109 0.05338542]]
 </pre></div>
 </div>
-<img alt="../../_images/ba1f8afc475b157e2d212c5cb674d18ab1bad9291af6e3e19c4c7e0b5f0f3120.png" src="../../_images/ba1f8afc475b157e2d212c5cb674d18ab1bad9291af6e3e19c4c7e0b5f0f3120.png" />
+<img alt="../../_images/6ad6f2052849431e15f71736637a3e90e65ac77c3e8bf251897f958f88fc1761.png" src="../../_images/6ad6f2052849431e15f71736637a3e90e65ac77c3e8bf251897f958f88fc1761.png" />
 </div>
 </div>
 </section>
@@ -737,7 +747,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/768bd85b315abc4fc208060504fbab8e62358bc8ba919bc03b4a5306c81e1b0b.png" src="../../_images/768bd85b315abc4fc208060504fbab8e62358bc8ba919bc03b4a5306c81e1b0b.png" />
+<img alt="../../_images/f578b9880a6e6f2939205b26701f4e8b1d8654bde34ec364a506625a9b9aa64f.png" src="../../_images/f578b9880a6e6f2939205b26701f4e8b1d8654bde34ec364a506625a9b9aa64f.png" />
 </div>
 </div>
 <section id="id1">
@@ -905,7 +915,7 @@ document.write(`
  [0.19630098 0.00148824]]
 </pre></div>
 </div>
-<img alt="../../_images/3073791c25df80f3932797fd8eb8883291777c3791e0424feabcdb3cd505a650.png" src="../../_images/3073791c25df80f3932797fd8eb8883291777c3791e0424feabcdb3cd505a650.png" />
+<img alt="../../_images/2c3a55c0fd5fa14ad2730f889b66a0d28c67cf97dd6890dff575422572d517cc.png" src="../../_images/2c3a55c0fd5fa14ad2730f889b66a0d28c67cf97dd6890dff575422572d517cc.png" />
 </div>
 </div>
 </section>
@@ -940,24 +950,6 @@ document.write(`
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="01_Feature_based_methods.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Chapter 4 : Supervised Graph Learning</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="03_Graph_regularization_graph_neural_training.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Neural Graph Learning and Graph Regularization</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
 </div>
                 </footer>
               
