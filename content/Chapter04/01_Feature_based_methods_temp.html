@@ -57,10 +57,9 @@
     <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'content/Chapter04/01_Feature_based_methods';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/Chapter04/01_Feature_based_methods_temp';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="prev" title="🧠 Unsupervised Graph Representation Learning using GCN (Graph Convolutional Network)" href="../Chapter03/04_Graph_Neural_Network.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -123,6 +122,8 @@
       
       
       
+        
+      
       <div class="bd-sidebar-primary bd-sidebar">
         
 
@@ -178,7 +179,7 @@
                 </a>
             </li>
         </ul>
-        <ul class="current nav bd-sidenav">
+        <ul class="nav bd-sidenav">
 <li class="toctree-l1 has-children"><a class="reference internal" href="../Chapter00/chap01_intro_and_basics.html">Introduction to Graph Machine Learning</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter00/help.html">Step-by-Step Setup Guide: Anaconda, Virtual Environments, and Jupyter Kernel Configuration</a></li>
 
@@ -207,7 +208,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../Chapter03/04_Graph_Neural_Network.html">🧠 Unsupervised Graph Representation Learning using GCN (Graph Convolutional Network)</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Chapter 4 : Supervised Graph Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01_Feature_based_methods.html">Chapter 4 : Supervised Graph Learning</a></li>
 
 </ul>
 
@@ -263,7 +264,7 @@
       
       
       
-      <li><a href="https://colab.research.google.com/github/executablebooks/jupyter-book/blob/master/docs/content/Chapter04/01_Feature_based_methods.ipynb" target="_blank"
+      <li><a href="https://colab.research.google.com/github/executablebooks/jupyter-book/blob/master/docs/content/Chapter04/01_Feature_based_methods_temp.ipynb" target="_blank"
    class="btn btn-sm dropdown-item"
    title="Launch on Colab"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -311,7 +312,7 @@
       
       
       
-      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fcontent/Chapter04/01_Feature_based_methods.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fcontent/Chapter04/01_Feature_based_methods_temp.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -341,7 +342,7 @@
       
       
       
-      <li><a href="../../_sources/content/Chapter04/01_Feature_based_methods.ipynb" target="_blank"
+      <li><a href="../../_sources/content/Chapter04/01_Feature_based_methods_temp.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -446,6 +447,12 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#workflow">Workflow</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#advantages-and-limitations">Advantages and Limitations</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-node-classification-in-a-citation-network">Example: Node Classification in a Citation Network</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-feature-extraction">Step 1: Feature Extraction</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-supervised-learning">Step 2: Supervised Learning</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-interpretation">Step 3: Interpretation</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -544,6 +551,193 @@ document.write(`
 <h3>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h3>
 <p>Classical feature-based supervised graph learning provides a foundational approach for tasks involving graph-structured data. Though gradually replaced by automated representation learning methods (e.g., Graph Neural Networks), it remains valuable for its interpretability and simplicity, especially in low-resource settings or as a baseline for comparison.</p>
 </section>
+<section id="example-node-classification-in-a-citation-network">
+<h3>Example: Node Classification in a Citation Network<a class="headerlink" href="#example-node-classification-in-a-citation-network" title="Link to this heading">#</a></h3>
+<p>Imagine a citation network where each node represents a scientific paper, and an edge exists between two nodes if one paper cites the other. Each paper belongs to one of several research areas (e.g., AI, systems, theory), and the goal is to <strong>predict the research area</strong> of a paper based on its graph structure.</p>
+<section id="step-1-feature-extraction">
+<h4>Step 1: Feature Extraction<a class="headerlink" href="#step-1-feature-extraction" title="Link to this heading">#</a></h4>
+<p>We compute several features for each paper (node):</p>
+<ul class="simple">
+<li><p><strong>Degree</strong>: Number of citations.</p></li>
+<li><p><strong>Clustering Coefficient</strong>: How tightly connected the paper’s neighbors are.</p></li>
+<li><p><strong>PageRank Score</strong>: Importance based on citation structure.</p></li>
+<li><p><strong>Average Degree of Neighbors</strong>: Captures neighborhood richness.</p></li>
+</ul>
+<p>Using a library like NetworkX in Python:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">torch_geometric.datasets</span><span class="w"> </span><span class="kn">import</span> <span class="n">Planetoid</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">torch_geometric.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">to_networkx</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">networkx</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nx</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="c1"># Load Cora dataset</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">Planetoid</span><span class="p">(</span><span class="n">root</span><span class="o">=</span><span class="s1">&#39;data/Planetoid&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Cora&#39;</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="c1"># Convert to NetworkX graph (undirected for clustering)</span>
+<span class="n">G</span> <span class="o">=</span> <span class="n">to_networkx</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">to_undirected</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Compute graph-based features</span>
+<span class="n">degree</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">degree</span><span class="p">())</span>
+<span class="n">clustering</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">clustering</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+<span class="n">pagerank</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">pagerank</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+<span class="n">avg_neighbor_degree</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">average_neighbor_degree</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+
+<span class="c1"># Combine into a DataFrame</span>
+<span class="n">features</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s1">&#39;degree&#39;</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">degree</span><span class="p">),</span>
+    <span class="s1">&#39;clustering&#39;</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">clustering</span><span class="p">),</span>
+    <span class="s1">&#39;pagerank&#39;</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">pagerank</span><span class="p">),</span>
+    <span class="s1">&#39;avg_neighbor_degree&#39;</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">avg_neighbor_degree</span><span class="p">)</span>
+<span class="p">})</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">features</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">5</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">from</span><span class="w"> </span><span class="nn">torch_geometric.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">to_networkx</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="kn">import</span><span class="w"> </span><span class="nn">networkx</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nx</span>
+<span class="ne">----&gt; </span><span class="mi">5</span> <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="c1"># Load Cora dataset</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="n">dataset</span> <span class="o">=</span> <span class="n">Planetoid</span><span class="p">(</span><span class="n">root</span><span class="o">=</span><span class="s1">&#39;data/Planetoid&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Cora&#39;</span><span class="p">)</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;pandas&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">torch_geometric.datasets</span><span class="w"> </span><span class="kn">import</span> <span class="n">Planetoid</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">torch_geometric.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">to_networkx</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">networkx</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nx</span>
+
+<span class="c1"># Load the Cora dataset</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">Planetoid</span><span class="p">(</span><span class="n">root</span><span class="o">=</span><span class="s1">&#39;data/Planetoid&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Cora&#39;</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="c1"># Convert to a NetworkX graph (undirected for clustering)</span>
+<span class="n">G</span> <span class="o">=</span> <span class="n">to_networkx</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">to_undirected</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Compute node-level features</span>
+<span class="n">degree</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">degree</span><span class="p">())</span>
+<span class="n">clustering</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">clustering</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+<span class="n">pagerank</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">pagerank</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+<span class="n">avg_neighbor_degree</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">average_neighbor_degree</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+
+<span class="c1"># Combine features manually into a list of dictionaries</span>
+<span class="n">node_features</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">():</span>
+    <span class="n">feature_dict</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;node_id&#39;</span><span class="p">:</span> <span class="n">node</span><span class="p">,</span>
+        <span class="s1">&#39;degree&#39;</span><span class="p">:</span> <span class="n">degree</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+        <span class="s1">&#39;clustering&#39;</span><span class="p">:</span> <span class="n">clustering</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span>
+        <span class="s1">&#39;pagerank&#39;</span><span class="p">:</span> <span class="n">pagerank</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span>
+        <span class="s1">&#39;avg_neighbor_degree&#39;</span><span class="p">:</span> <span class="n">avg_neighbor_degree</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
+    <span class="p">}</span>
+    <span class="n">node_features</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">feature_dict</span><span class="p">)</span>
+
+<span class="c1"># Print first 5 feature dictionaries</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">node_features</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading https://github.com/kimiyoung/planetoid/raw/master/data/ind.cora.x
+Downloading https://github.com/kimiyoung/planetoid/raw/master/data/ind.cora.tx
+Downloading https://github.com/kimiyoung/planetoid/raw/master/data/ind.cora.allx
+Downloading https://github.com/kimiyoung/planetoid/raw/master/data/ind.cora.y
+Downloading https://github.com/kimiyoung/planetoid/raw/master/data/ind.cora.ty
+Downloading https://github.com/kimiyoung/planetoid/raw/master/data/ind.cora.ally
+Downloading https://github.com/kimiyoung/planetoid/raw/master/data/ind.cora.graph
+Downloading https://github.com/kimiyoung/planetoid/raw/master/data/ind.cora.test.index
+Processing...
+Done!
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;node_id&#39;: 0, &#39;degree&#39;: 3, &#39;clustering&#39;: 0.3333333333333333, &#39;pagerank&#39;: 0.0003356029716229603, &#39;avg_neighbor_degree&#39;: 3.3333333333333335}
+{&#39;node_id&#39;: 1, &#39;degree&#39;: 3, &#39;clustering&#39;: 0, &#39;pagerank&#39;: 0.00038527094424122357, &#39;avg_neighbor_degree&#39;: 2.6666666666666665}
+{&#39;node_id&#39;: 2, &#39;degree&#39;: 5, &#39;clustering&#39;: 0, &#39;pagerank&#39;: 0.0005146369200521648, &#39;avg_neighbor_degree&#39;: 16.0}
+{&#39;node_id&#39;: 3, &#39;degree&#39;: 1, &#39;clustering&#39;: 0, &#39;pagerank&#39;: 0.00036927621861152144, &#39;avg_neighbor_degree&#39;: 1.0}
+{&#39;node_id&#39;: 4, &#39;degree&#39;: 5, &#39;clustering&#39;: 0.7, &#39;pagerank&#39;: 0.000396058502986215, &#39;avg_neighbor_degree&#39;: 6.6}
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="step-2-supervised-learning">
+<h4>Step 2: Supervised Learning<a class="headerlink" href="#step-2-supervised-learning" title="Link to this heading">#</a></h4>
+<p>Assume we have ground-truth labels for a subset of the papers indicating their field. We train a classifier using scikit-learn:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.ensemble</span><span class="w"> </span><span class="kn">import</span> <span class="n">RandomForestClassifier</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">classification_report</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="c1"># Convert list of dicts to numpy array (features)</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+    <span class="p">[</span>
+        <span class="n">node</span><span class="p">[</span><span class="s1">&#39;degree&#39;</span><span class="p">],</span>
+        <span class="n">node</span><span class="p">[</span><span class="s1">&#39;clustering&#39;</span><span class="p">],</span>
+        <span class="n">node</span><span class="p">[</span><span class="s1">&#39;pagerank&#39;</span><span class="p">],</span>
+        <span class="n">node</span><span class="p">[</span><span class="s1">&#39;avg_neighbor_degree&#39;</span><span class="p">]</span>
+    <span class="p">]</span>
+    <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">node_features</span>
+<span class="p">])</span>
+
+<span class="c1"># Get labels from PyG data</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">y</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>  <span class="c1"># class labels for each paper</span>
+
+<span class="c1"># Train/test split</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span>
+    <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span> <span class="n">stratify</span><span class="o">=</span><span class="n">y</span>
+<span class="p">)</span>
+
+<span class="c1"># Train classifier</span>
+<span class="n">clf</span> <span class="o">=</span> <span class="n">RandomForestClassifier</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+<span class="c1"># Predict and evaluate</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">classification_report</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>              precision    recall  f1-score   support
+
+           0       0.22      0.21      0.21       105
+           1       0.52      0.35      0.42        65
+           2       0.54      0.48      0.50       126
+           3       0.44      0.50      0.47       246
+           4       0.29      0.31      0.30       128
+           5       0.20      0.21      0.21        89
+           6       0.16      0.13      0.14        54
+
+    accuracy                           0.36       813
+   macro avg       0.34      0.31      0.32       813
+weighted avg       0.37      0.36      0.36       813
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="step-3-interpretation">
+<h4>Step 3: Interpretation<a class="headerlink" href="#step-3-interpretation" title="Link to this heading">#</a></h4>
+<p>The trained model learns how graph-based features (like citation degree or clustering) correlate with a paper’s field. For example, papers in “theory” may cite fewer but more central works, while “systems” papers might form densely connected communities.</p>
+<p>This method is simple, interpretable, and effective when the features are meaningful — making it a solid baseline before applying more complex methods like Graph Neural Networks.</p>
+</section>
+</section>
 </section>
 </section>
 
@@ -577,15 +771,6 @@ document.write(`
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="../Chapter03/04_Graph_Neural_Network.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">🧠 Unsupervised Graph Representation Learning using GCN (Graph Convolutional Network)</p>
-      </div>
-    </a>
 </div>
                 </footer>
               
@@ -613,6 +798,12 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#workflow">Workflow</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#advantages-and-limitations">Advantages and Limitations</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-node-classification-in-a-citation-network">Example: Node Classification in a Citation Network</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-feature-extraction">Step 1: Feature Extraction</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-supervised-learning">Step 2: Supervised Learning</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-interpretation">Step 3: Interpretation</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
