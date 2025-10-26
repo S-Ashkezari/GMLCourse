@@ -1,0 +1,1434 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>First Part: Graph Mining - Concepts and properties &#8212; Graph Machine Learning</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/Chapter01/01_Graph_metrics';</script>
+    <link rel="canonical" href="/GMLCourse/content/Chapter01/01_Graph_metrics.html" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Community Detection in Graphs" href="02_community_detection.html" />
+    <link rel="prev" title="Welcome to Graph Machine Learning" href="../../intro.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Graph Machine Learning - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Graph Machine Learning - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Welcome to Graph Machine Learning
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#"><strong>First Part: Graph Mining - Concepts and properties</strong></a></li>
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/executablebooks/jupyter-book/blob/master/docs/content/Chapter01/01_Graph_metrics.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fcontent/Chapter01/01_Graph_metrics.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/content/Chapter01/01_Graph_metrics.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>First Part: Graph Mining - Concepts and properties</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#"><strong>First Part: Graph Mining - Concepts and properties</strong></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#graph-properties">Graph properties</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-integration-metrics">a) Integration metrics (یکپارچگی)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#b-segregation-metrics">b) Segregation metrics(تفکیک پذیری)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#c-centrality-metrics">c) Centrality metrics (مرکزیت)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#d-resilience-metrics">d) Resilience metrics (پایداری/تاب آوری)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#investigating-some-of-these-properties">Investigating some of these properties</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#shortest-path">Shortest path</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#characteristic-path-lenght">Characteristic path lenght</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#efficiency">Efficiency</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#another-example">Another example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#clustering-coefficient">Clustering Coefficient</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-count-triangles">Step 1: Count triangles</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-count-connected-triples">Step 2: Count connected triples</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-compute-transitivity">Step 3: Compute Transitivity</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#centrality">Centrality</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#closeness-centrality">Closeness Centrality</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#betweenness-centrality">Betweenness Centrality</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#assortativity">Assortativity</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#assortativity-and-influencers-in-social-networks">Assortativity and Influencers in Social Networks</a></li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="first-part-graph-mining-concepts-and-properties">
+<h1><strong>First Part: Graph Mining - Concepts and properties</strong><a class="headerlink" href="#first-part-graph-mining-concepts-and-properties" title="Link to this heading">#</a></h1>
+<p>!pip install networkx==2.5
+!pip install matplotlib==3.2.2
+!pip install pandas==1.1.3
+!pip install scipy==1.6.2</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">networkx</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nx</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+
+<span class="n">default_edge_color</span> <span class="o">=</span> <span class="s1">&#39;gray&#39;</span>
+<span class="n">default_node_color</span> <span class="o">=</span> <span class="s1">&#39;#407cc9&#39;</span>
+<span class="n">enhanced_node_color</span> <span class="o">=</span> <span class="s1">&#39;#f5b042&#39;</span>
+<span class="n">enhanced_edge_color</span> <span class="o">=</span> <span class="s1">&#39;#cc2f04&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="graph-properties">
+<h1>Graph properties<a class="headerlink" href="#graph-properties" title="Link to this heading">#</a></h1>
+<p>Graph properties provide quantitative measures that characterize the structure and functionality of a network. They describe how nodes and edges are arranged and how information, influence, or resources can propagate through the system. These properties are typically grouped into four major categories—integration, segregation, centrality, and resilience metrics—each offering a distinct perspective on the network’s organization and behavior.</p>
+<section id="a-integration-metrics">
+<h2>a) Integration metrics (یکپارچگی)<a class="headerlink" href="#a-integration-metrics" title="Link to this heading">#</a></h2>
+<p>Integration metrics capture the overall connectedness of a network and evaluate how efficiently nodes can reach one another. They are primarily concerned with the ease of communication or flow across the entire system and reflect the network’s capacity to integrate information globally.</p>
+<p>Distance, path, and shortest path</p>
+<p>Characteristic path length</p>
+<p>Global and local efficiency</p>
+</section>
+<section id="b-segregation-metrics">
+<h2>b) Segregation metrics(تفکیک پذیری)<a class="headerlink" href="#b-segregation-metrics" title="Link to this heading">#</a></h2>
+<p>Segregation metrics describe the extent to which nodes form cohesive subgroups or modules within the network. They assess the degree of local clustering and reveal the presence of community structures that may correspond to specialized functions or localized interactions.</p>
+<p>Clustering coefficient</p>
+<p>Transitivity</p>
+<p>Modularity</p>
+</section>
+<section id="c-centrality-metrics">
+<h2>c) Centrality metrics (مرکزیت)<a class="headerlink" href="#c-centrality-metrics" title="Link to this heading">#</a></h2>
+<p>Centrality metrics identify the most influential or structurally significant nodes in a network. They provide insight into which nodes play key roles in maintaining connectivity, facilitating information transfer, or controlling the flow of interactions across the system.</p>
+<p>Degree centrality</p>
+<p>Closeness centrality</p>
+<p>Betweenness centrality</p>
+</section>
+<section id="d-resilience-metrics">
+<h2>d) Resilience metrics (پایداری/تاب آوری)<a class="headerlink" href="#d-resilience-metrics" title="Link to this heading">#</a></h2>
+<p>Resilience metrics assess the robustness of a network—its ability to maintain performance and structural integrity when subjected to failures, perturbations, or targeted attacks. These measures capture how networks adapt or degrade under adverse conditions, providing a quantitative understanding of stability and fault tolerance. Adverse conditions refer to situations such as node or edge failures, random noise, targeted attacks, or excessive load that can weaken the network’s connectivity and efficiency.</p>
+<p>Assortativity coefficient</p>
+<p>Network robustness indicators (e.g., size of the largest connected component, post-failure efficiency)</p>
+<p>Redundancy or fault-tolerance measures</p>
+</section>
+<section id="investigating-some-of-these-properties">
+<h2>Investigating some of these properties<a class="headerlink" href="#investigating-some-of-these-properties" title="Link to this heading">#</a></h2>
+<p><strong>distance</strong>: The concept of distance in a graph is often related to the number of edges to traverse in
+order to reach a target node from a given source node.</p>
+<p><strong>path</strong>: The set of edges connecting node to node is called a path.</p>
+<p><strong>shortest path</strong>: A shortest path between a source node and a target node is the path having the lowest number of edges compared
+to all the possible paths between <span class="math notranslate nohighlight">\(i\)</span> and <span class="math notranslate nohighlight">\(j\)</span> .</p>
+<p><strong>diameter</strong>: The diameter of a network is the number of edges contained in the longest shortest path among all possible shortest paths.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># draw a simple graph</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">draw_graph</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">node_names</span><span class="o">=</span><span class="p">{},</span> <span class="n">filename</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">node_size</span><span class="o">=</span><span class="mi">50</span><span class="p">):</span>
+    <span class="n">pos_nodes</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">spring_layout</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+    <span class="n">nx</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos_nodes</span><span class="p">,</span> <span class="n">with_labels</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">node_size</span><span class="o">=</span><span class="n">node_size</span><span class="p">,</span> <span class="n">edge_color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+    
+    <span class="n">pos_attrs</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">node</span><span class="p">,</span> <span class="n">coords</span> <span class="ow">in</span> <span class="n">pos_nodes</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">pos_attrs</span><span class="p">[</span><span class="n">node</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">coords</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">coords</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mf">0.08</span><span class="p">)</span>
+        
+    <span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_labels</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos_attrs</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="n">node_names</span><span class="p">,</span> <span class="n">font_family</span><span class="o">=</span><span class="s1">&#39;serif&#39;</span><span class="p">)</span>
+    
+    <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+    <span class="n">axis</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+    <span class="n">axis</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">([</span><span class="mf">1.2</span><span class="o">*</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">axis</span><span class="o">.</span><span class="n">get_xlim</span><span class="p">()])</span>
+    <span class="n">axis</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">([</span><span class="mf">1.2</span><span class="o">*</span><span class="n">y</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">axis</span><span class="o">.</span><span class="n">get_ylim</span><span class="p">()])</span>
+    
+    <span class="k">if</span> <span class="n">filename</span><span class="p">:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;png&quot;</span><span class="p">)</span>
+
+
+<span class="c1"># draw enhanced path on the graph</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">draw_enhanced_path</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">path_to_enhance</span><span class="p">,</span> <span class="n">node_names</span><span class="o">=</span><span class="p">{},</span> <span class="n">filename</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="n">path_edges</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">path</span><span class="p">,</span><span class="n">path</span><span class="p">[</span><span class="mi">1</span><span class="p">:]))</span>
+    <span class="n">pos_nodes</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">spring_layout</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">),</span><span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
+    <span class="n">pos_nodes</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">spring_layout</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+    <span class="n">nx</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos_nodes</span><span class="p">,</span> <span class="n">with_labels</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">node_size</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">edge_color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+    
+    <span class="n">pos_attrs</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">node</span><span class="p">,</span> <span class="n">coords</span> <span class="ow">in</span> <span class="n">pos_nodes</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">pos_attrs</span><span class="p">[</span><span class="n">node</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">coords</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">coords</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mf">0.08</span><span class="p">)</span>
+        
+    <span class="n">node_labels</span> <span class="o">=</span> <span class="p">{</span><span class="n">node</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">node</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">node_names</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">node</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">()}</span>
+    <span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_labels</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos_attrs</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="n">node_labels</span><span class="p">,</span> <span class="n">font_family</span><span class="o">=</span><span class="s1">&#39;serif&#39;</span><span class="p">)</span>
+    <span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_edges</span><span class="p">(</span><span class="n">G</span><span class="p">,</span><span class="n">pos_nodes</span><span class="p">,</span><span class="n">edgelist</span><span class="o">=</span><span class="n">path_edges</span><span class="p">,</span> <span class="n">edge_color</span><span class="o">=</span><span class="s1">&#39;#cc2f04&#39;</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mf">2.0</span><span class="p">)</span>
+    
+    <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+    <span class="n">axis</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+    <span class="n">axis</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">([</span><span class="mf">1.2</span><span class="o">*</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">axis</span><span class="o">.</span><span class="n">get_xlim</span><span class="p">()])</span>
+    <span class="n">axis</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">([</span><span class="mf">1.2</span><span class="o">*</span><span class="n">y</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">axis</span><span class="o">.</span><span class="n">get_ylim</span><span class="p">()])</span>
+    
+    <span class="k">if</span> <span class="n">filename</span><span class="p">:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;png&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="shortest-path">
+<h3>Shortest path<a class="headerlink" href="#shortest-path" title="Link to this heading">#</a></h3>
+</section>
+<section id="example">
+<h3>Example:<a class="headerlink" href="#example" title="Link to this heading">#</a></h3>
+<p>There are different paths to reach Tokyo from Dublin. However, one of them is the shortest (the edges on the shortest path are
+highlighted):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">Graph</span><span class="p">()</span>
+<span class="n">nodes</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span><span class="s1">&#39;Dublin&#39;</span><span class="p">,</span><span class="mi">2</span><span class="p">:</span><span class="s1">&#39;Paris&#39;</span><span class="p">,</span><span class="mi">3</span><span class="p">:</span><span class="s1">&#39;Milan&#39;</span><span class="p">,</span><span class="mi">4</span><span class="p">:</span><span class="s1">&#39;Rome&#39;</span><span class="p">,</span><span class="mi">5</span><span class="p">:</span><span class="s1">&#39;Naples&#39;</span><span class="p">,</span><span class="mi">6</span><span class="p">:</span><span class="s1">&#39;Moscow&#39;</span><span class="p">,</span><span class="mi">7</span><span class="p">:</span><span class="s1">&#39;Tokyo&#39;</span><span class="p">}</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_nodes_from</span><span class="p">(</span><span class="n">nodes</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">([(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">),(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">),(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">),(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">),(</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">),(</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">),(</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">),(</span><span class="mi">7</span><span class="p">,</span><span class="mi">5</span><span class="p">)])</span>
+
+
+<span class="n">path</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">shortest_path</span><span class="p">(</span><span class="n">G</span><span class="p">,</span><span class="n">source</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">target</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1, 3, 4, 5, 7]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">draw_enhanced_path</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">node_names</span><span class="o">=</span><span class="n">nodes</span><span class="p">,</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;shortest_path.png&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/f956089fd3c12e1b8b638304c63a717077c9eb61f7e4cdce70140bd57a5532a9.png" src="../../_images/f956089fd3c12e1b8b638304c63a717077c9eb61f7e4cdce70140bd57a5532a9.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">networkx</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nx</span>
+
+
+<span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">Graph</span><span class="p">()</span>
+<span class="n">nodes</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span><span class="s1">&#39;Dublin&#39;</span><span class="p">,</span><span class="mi">2</span><span class="p">:</span><span class="s1">&#39;Paris&#39;</span><span class="p">,</span><span class="mi">3</span><span class="p">:</span><span class="s1">&#39;Milan&#39;</span><span class="p">,</span><span class="mi">4</span><span class="p">:</span><span class="s1">&#39;Rome&#39;</span><span class="p">,</span><span class="mi">5</span><span class="p">:</span><span class="s1">&#39;Naples&#39;</span><span class="p">,</span><span class="mi">6</span><span class="p">:</span><span class="s1">&#39;Moscow&#39;</span><span class="p">,</span><span class="mi">7</span><span class="p">:</span><span class="s1">&#39;Tokyo&#39;</span><span class="p">}</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_nodes_from</span><span class="p">(</span><span class="n">nodes</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+
+<span class="c1"># weighted Graph</span>
+<span class="n">edges</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">700</span><span class="p">),</span>   <span class="c1"># Dublin-Paris</span>
+    <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">1200</span><span class="p">),</span>  <span class="c1"># Dublin-Milan</span>
+    <span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">1100</span><span class="p">),</span>  <span class="c1"># Paris-Milan</span>
+    <span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">600</span><span class="p">),</span>   <span class="c1"># Milan-Rome</span>
+    <span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">225</span><span class="p">),</span>   <span class="c1"># Rome-Naples</span>
+    <span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">2500</span><span class="p">),</span>  <span class="c1"># Naples-Moscow</span>
+    <span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">7400</span><span class="p">),</span>  <span class="c1"># Moscow-Tokyo</span>
+    <span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">9700</span><span class="p">)</span>   <span class="c1"># Naples-Tokyo</span>
+<span class="p">]</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_weighted_edges_from</span><span class="p">(</span><span class="n">edges</span><span class="p">)</span>
+
+<span class="c1"># shortest path (Dijkstera)</span>
+<span class="n">path</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">shortest_path</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="s1">&#39;weight&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Shortest path:&quot;</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span>
+
+<span class="c1"># sum of weights</span>
+<span class="n">length</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">shortest_path_length</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="s1">&#39;weight&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Total weight:&quot;</span><span class="p">,</span> <span class="n">length</span><span class="p">)</span>
+
+<span class="n">draw_enhanced_path</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">node_names</span><span class="o">=</span><span class="n">nodes</span><span class="p">,</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;shortest_path_weightedGraph.png&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Shortest path: [1, 3, 4, 5, 7]
+Total weight: 11725
+</pre></div>
+</div>
+<img alt="../../_images/3b36729967187f6f2f40441c635d19ad6a6ff305ffe1b00ac0555778524ff695.png" src="../../_images/3b36729967187f6f2f40441c635d19ad6a6ff305ffe1b00ac0555778524ff695.png" />
+</div>
+</div>
+</section>
+<section id="characteristic-path-lenght">
+<h3>Characteristic path lenght<a class="headerlink" href="#characteristic-path-lenght" title="Link to this heading">#</a></h3>
+<p>The characteristic path length is defined as the <strong>average of all the shortest path lengths
+between all possible pair of nodes</strong>. If <span class="math notranslate nohighlight">\(l_i\)</span> is the average path length between the node <span class="math notranslate nohighlight">\(i\)</span> and
+all the other nodes, the characteristic path length is computed as follows:</p>
+<div class="math notranslate nohighlight">
+\[\displaystyle \frac{1}{q(q-1)} \sum_{i \in V} l_i\]</div>
+<p>Here, <span class="math notranslate nohighlight">\(V\)</span> is the set of nodes in the graph and <span class="math notranslate nohighlight">\(q=|V|\)</span> represents its order.</p>
+<p>This is one of the most commonly used measures of how efficiently information is spread across a network.</p>
+<p>Networks having shorter characteristic path lengths promote the quick transfer of information and reduce costs.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nx</span><span class="o">.</span><span class="n">average_shortest_path_length</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.1904761904761907
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="efficiency">
+<h3>Efficiency<a class="headerlink" href="#efficiency" title="Link to this heading">#</a></h3>
+<p><strong>Global efficiency</strong> is the average of the inverse shortest path length for all pairs of nodes.<br />
+It provides a measure of how efficiently information can be exchanged across the network.</p>
+<p>Let <span class="math notranslate nohighlight">\(l_{ij}\)</span> denote the shortest path length between node (i) and node (j).<br />
+The global efficiency of a network with (q) nodes is defined as:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+E_{glob} = \frac{1}{q(q-1)} \sum_{\substack{i,j \in V\\ i \neq j}} \frac{1}{l_{ij}}
+\end{split}\]</div>
+<blockquote>
+<div><p>⚠️ <strong>Note:</strong> For <strong>undirected networks</strong>, the correct normalization factor is <span class="math notranslate nohighlight">\(\frac{2}{q(q-1)}\)</span>, because each pair ((i,j)) is counted only once.</p>
+</div></blockquote>
+<p><span style="color:blue"> Global efficiency reaches its maximum when the network is fully connected, and is minimal for completely disconnected networks. </span>Intuitively, <strong>shorter paths increase efficiency</strong>.</p>
+<p>Global efficiency reflects how quickly or directly information can be transmitted across the entire network.<br />
+Unlike the Characteristic Path Length, which emphasizes distances, <strong>global efficiency</strong> highlights the <strong>speed and effectiveness of information transfer</strong>.</p>
+<p>The <strong>local efficiency</strong> of a node can be computed by considering only the subgraph formed by its neighbors, without including the node itself.<br />
+This measure reflects how well information is exchanged <strong>within the immediate neighborhood</strong> of the node.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">Graph</span><span class="p">()</span>
+<span class="n">nodes</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span><span class="s1">&#39;Dublin&#39;</span><span class="p">,</span><span class="mi">2</span><span class="p">:</span><span class="s1">&#39;Paris&#39;</span><span class="p">,</span><span class="mi">3</span><span class="p">:</span><span class="s1">&#39;Milan&#39;</span><span class="p">,</span><span class="mi">4</span><span class="p">:</span><span class="s1">&#39;Rome&#39;</span><span class="p">,</span><span class="mi">5</span><span class="p">:</span><span class="s1">&#39;Naples&#39;</span><span class="p">,</span><span class="mi">6</span><span class="p">:</span><span class="s1">&#39;Moscow&#39;</span><span class="p">,</span><span class="mi">7</span><span class="p">:</span><span class="s1">&#39;Tokyo&#39;</span><span class="p">}</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_nodes_from</span><span class="p">(</span><span class="n">nodes</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">([(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">),(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">),(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">),(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">),(</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">),(</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">),(</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">),(</span><span class="mi">7</span><span class="p">,</span><span class="mi">5</span><span class="p">)])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Global efficiency:&quot;</span><span class="p">,</span><span class="n">nx</span><span class="o">.</span><span class="n">global_efficiency</span><span class="p">(</span><span class="n">G</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Local efficiency:&quot;</span><span class="p">,</span><span class="n">nx</span><span class="o">.</span><span class="n">local_efficiency</span><span class="p">(</span><span class="n">G</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Global efficiency: 0.611111111111111
+Local efficiency: 0.6666666666666667
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="another-example">
+<h3>Another example<a class="headerlink" href="#another-example" title="Link to this heading">#</a></h3>
+<p>In the following, two examples of graphs are depicted. As observed, a fully
+connected graph on the left presents a higher level of efficiency compared to a circular
+graph on the right.</p>
+<p>In a fully connected graph, each node can be reached from any other
+node in the graph, and information is exchanged rapidly across the network. However,
+in a circular graph, several nodes should instead be traversed to reach the target node,
+making it less efficient:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># higher efficiency</span>
+<span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">complete_graph</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
+<span class="n">nodes</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span><span class="s1">&#39;Dublin&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">:</span><span class="s1">&#39;Paris&#39;</span><span class="p">,</span><span class="mi">2</span><span class="p">:</span><span class="s1">&#39;Milan&#39;</span><span class="p">,</span><span class="mi">3</span><span class="p">:</span><span class="s1">&#39;Rome&#39;</span><span class="p">,</span><span class="mi">4</span><span class="p">:</span><span class="s1">&#39;Naples&#39;</span><span class="p">,</span><span class="mi">5</span><span class="p">:</span><span class="s1">&#39;Moscow&#39;</span><span class="p">,</span><span class="mi">6</span><span class="p">:</span><span class="s1">&#39;Tokyo&#39;</span><span class="p">}</span>
+
+<span class="n">ge</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">nx</span><span class="o">.</span><span class="n">global_efficiency</span><span class="p">(</span><span class="n">G</span><span class="p">),</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="c1"># place the text box in axes coords</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="o">-</span><span class="mf">.4</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.3</span><span class="p">,</span> <span class="s2">&quot;Global Efficiency:</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ge</span><span class="p">),</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">&#39;bottom&#39;</span><span class="p">);</span>
+
+<span class="n">draw_graph</span><span class="p">(</span><span class="n">G</span><span class="p">,</span><span class="n">node_names</span><span class="o">=</span><span class="n">nodes</span><span class="p">,</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;efficiency.png&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/f99ad0a58e39234d9ba75e46ec176e7cede041f90da0570eae611c25ea96946c.png" src="../../_images/f99ad0a58e39234d9ba75e46ec176e7cede041f90da0570eae611c25ea96946c.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># lower efficiency</span>
+<span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">cycle_graph</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
+<span class="n">nodes</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span><span class="s1">&#39;Dublin&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">:</span><span class="s1">&#39;Paris&#39;</span><span class="p">,</span><span class="mi">2</span><span class="p">:</span><span class="s1">&#39;Milan&#39;</span><span class="p">,</span><span class="mi">3</span><span class="p">:</span><span class="s1">&#39;Rome&#39;</span><span class="p">,</span><span class="mi">4</span><span class="p">:</span><span class="s1">&#39;Naples&#39;</span><span class="p">,</span><span class="mi">5</span><span class="p">:</span><span class="s1">&#39;Moscow&#39;</span><span class="p">,</span><span class="mi">6</span><span class="p">:</span><span class="s1">&#39;Tokyo&#39;</span><span class="p">}</span>
+
+<span class="n">le</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">nx</span><span class="o">.</span><span class="n">global_efficiency</span><span class="p">(</span><span class="n">G</span><span class="p">),</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="c1"># place the text box in axes coords</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="o">-</span><span class="mf">.4</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.3</span><span class="p">,</span> <span class="s2">&quot;Global Efficiency:</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">le</span><span class="p">),</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">&#39;bottom&#39;</span><span class="p">);</span>
+
+<span class="n">draw_graph</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">node_names</span><span class="o">=</span><span class="n">nodes</span><span class="p">,</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;less_efficiency.png&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/905576ce1b94dd57eddd23f2403ffd07674cae359c47b06e55d4bce1b54b011f.png" src="../../_images/905576ce1b94dd57eddd23f2403ffd07674cae359c47b06e55d4bce1b54b011f.png" />
+</div>
+</div>
+</section>
+<section id="clustering-coefficient">
+<h3>Clustering Coefficient<a class="headerlink" href="#clustering-coefficient" title="Link to this heading">#</a></h3>
+<p>The <strong>clustering coefficient</strong> quantifies the tendency of nodes to form tightly connected groups within a network. It captures the extent to which a node’s neighbors are also connected to each other, reflecting the presence of local cohesiveness or triangular relationships.</p>
+<p>For a <strong>single node <span class="math notranslate nohighlight">\(v\)</span></strong>, the clustering coefficient is defined as the fraction of possible triangles through that node that actually exist:</p>
+<div class="math notranslate nohighlight">
+\[
+C_v = \frac{\text{Number of triangles involving } v}{\frac{k_v (k_v - 1)}{2}}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(k_v\)</span> is the degree of node <span class="math notranslate nohighlight">\(v\)</span>, and the denominator represents the maximum number of possible edges between its neighbors.</p>
+<p>For the <strong>entire graph</strong>, the <strong>global clustering coefficient</strong> is often computed as the average over all nodes:</p>
+<div class="math notranslate nohighlight">
+\[
+C_{\text{global}} = \frac{1}{|V|} \sum_{v \in V} C_v
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(|V|\)</span> is the total number of nodes in the network.</p>
+<p><strong>Interpretation:</strong></p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(C_v = 1\)</span>: All neighbors of node <span class="math notranslate nohighlight">\(v\)</span> are fully connected, forming a complete clique.</p></li>
+<li><p><span class="math notranslate nohighlight">\(C_v = 0\)</span>: No connections exist among the neighbors of <span class="math notranslate nohighlight">\(v\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(0 &lt; C_v &lt; 1\)</span>: Partial clustering exists among the neighbors.</p></li>
+</ul>
+<p>The clustering coefficient is a fundamental measure in network analysis, providing insights into the local cohesiveness and modular organization of networks. High clustering is often indicative of community structures or functional groupings in real-world networks.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">Graph</span><span class="p">()</span>
+<span class="n">nodes</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span><span class="s1">&#39;Dublin&#39;</span><span class="p">,</span><span class="mi">2</span><span class="p">:</span><span class="s1">&#39;Paris&#39;</span><span class="p">,</span><span class="mi">3</span><span class="p">:</span><span class="s1">&#39;Milan&#39;</span><span class="p">,</span><span class="mi">4</span><span class="p">:</span><span class="s1">&#39;Rome&#39;</span><span class="p">,</span><span class="mi">5</span><span class="p">:</span><span class="s1">&#39;Naples&#39;</span><span class="p">,</span><span class="mi">6</span><span class="p">:</span><span class="s1">&#39;Moscow&#39;</span><span class="p">,</span><span class="mi">7</span><span class="p">:</span><span class="s1">&#39;Tokyo&#39;</span><span class="p">}</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_nodes_from</span><span class="p">(</span><span class="n">nodes</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">([(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">),(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">),(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">),(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">),(</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">),(</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">),(</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">),(</span><span class="mi">7</span><span class="p">,</span><span class="mi">5</span><span class="p">)])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nx</span><span class="o">.</span><span class="n">average_clustering</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.6666666666666667
+</pre></div>
+</div>
+</div>
+</div>
+<p>The <strong>local clustering coefficient</strong> is computed in networkx using the following command. The output is a Python dictionary containing, for each node (identified by the respective
+key), the corresponding value</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nx</span><span class="o">.</span><span class="n">clustering</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{1: 1.0,
+ 2: 1.0,
+ 3: 0.3333333333333333,
+ 4: 0,
+ 5: 0.3333333333333333,
+ 6: 1.0,
+ 7: 1.0}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cc</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">clustering</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+<span class="n">node_size</span><span class="o">=</span><span class="p">[(</span><span class="n">v</span> <span class="o">+</span> <span class="mf">0.1</span><span class="p">)</span> <span class="o">*</span> <span class="mi">200</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">cc</span><span class="o">.</span><span class="n">values</span><span class="p">()]</span>
+<span class="n">draw_graph</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">node_names</span><span class="o">=</span><span class="n">nodes</span><span class="p">,</span> <span class="n">node_size</span><span class="o">=</span><span class="n">node_size</span><span class="p">,</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;clustering.png&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/17f2e07d4b4f28af63abb01dcf371b26e123f3950f212c8be70c9c4c0bcc4c8e.png" src="../../_images/17f2e07d4b4f28af63abb01dcf371b26e123f3950f212c8be70c9c4c0bcc4c8e.png" />
+</div>
+</div>
+<p><strong>Transitivity</strong><br />
+Transitivity is a global measure of clustering in the network. It quantifies the overall probability that two neighbors of a node are also neighbors of each other. Formally, it is defined as:</p>
+<div class="math notranslate nohighlight">
+\[
+  T = \frac{3 \times \text{Number of triangles in the network}}{\text{Number of connected triples of nodes}}
+  \]</div>
+<p>where a <strong>connected triple</strong> is a single node with edges to an unordered pair of other nodes.<br />
+<strong>Interpretation:</strong></p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(T = 1\)</span>: All possible triangles exist; the network is highly clustered.</p></li>
+<li><p><span class="math notranslate nohighlight">\(T = 0\)</span>: No triangles; no clustering in the network.</p></li>
+</ul>
+<p><strong>Example</strong>: Consider a small network with 4 nodes and the following edges:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">1</span> <span class="o">---</span> <span class="mi">2</span>
+<span class="o">|</span>  <span class="o">/</span>
+<span class="mi">3</span>
+<span class="o">|</span>
+<span class="mi">4</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><strong>Edges:</strong> (1,2), (1,3), (2,3), (3,4)</p></li>
+<li><p>Nodes 1, 2, and 3 form a triangle. Node 4 is connected only to node 3.</p></li>
+</ul>
+<section id="step-1-count-triangles">
+<h4>Step 1: Count triangles<a class="headerlink" href="#step-1-count-triangles" title="Link to this heading">#</a></h4>
+<p>A <strong>triangle</strong> is a set of three nodes where each node is connected to the other two.</p>
+<ul class="simple">
+<li><p>Nodes 1, 2, and 3 form <strong>1 triangle</strong>.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+\text{Number of triangles} = 1
+\]</div>
+</section>
+<section id="step-2-count-connected-triples">
+<h4>Step 2: Count connected triples<a class="headerlink" href="#step-2-count-connected-triples" title="Link to this heading">#</a></h4>
+<p>A <strong>connected triple</strong> is a node with edges to an unordered pair of other nodes.</p>
+<ul class="simple">
+<li><p>Node 1: neighbors = {2,3} → 1 triple: (2,1,3)</p></li>
+<li><p>Node 2: neighbors = {1,3} → 1 triple: (1,2,3)</p></li>
+<li><p>Node 3: neighbors = {1,2,4} → 3 triples: (1,3,2), (1,3,4), (2,3,4)</p></li>
+<li><p>Node 4: neighbors = {3} → 0 triples</p></li>
+</ul>
+<p><strong>Total connected triples = 1 + 1 + 3 + 0 = 5</strong></p>
+</section>
+<section id="step-3-compute-transitivity">
+<h4>Step 3: Compute Transitivity<a class="headerlink" href="#step-3-compute-transitivity" title="Link to this heading">#</a></h4>
+<div class="math notranslate nohighlight">
+\[
+T = \frac{3 \times \text{Number of triangles}}{\text{Number of connected triples}} = \frac{3 \times 1}{5} = 0.6
+\]</div>
+<p><strong>Interpretation:</strong> There is a 60% probability that two neighbors of a node are connected.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">Graph</span><span class="p">()</span>
+<span class="n">nodes</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span><span class="s1">&#39;Dublin&#39;</span><span class="p">,</span><span class="mi">2</span><span class="p">:</span><span class="s1">&#39;Paris&#39;</span><span class="p">,</span><span class="mi">3</span><span class="p">:</span><span class="s1">&#39;Milan&#39;</span><span class="p">,</span><span class="mi">4</span><span class="p">:</span><span class="s1">&#39;Rome&#39;</span><span class="p">,</span><span class="mi">5</span><span class="p">:</span><span class="s1">&#39;Naples&#39;</span><span class="p">,</span><span class="mi">6</span><span class="p">:</span><span class="s1">&#39;Moscow&#39;</span><span class="p">,</span><span class="mi">7</span><span class="p">:</span><span class="s1">&#39;Tokyo&#39;</span><span class="p">}</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_nodes_from</span><span class="p">(</span><span class="n">nodes</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">([(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">),(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">),(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">),(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">),(</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">),(</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">),(</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">),(</span><span class="mi">7</span><span class="p">,</span><span class="mi">5</span><span class="p">)])</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">transitivity</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.5454545454545454
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Modularity</strong><br />
+Modularity quantifies the strength of division of a network into communities or modules. It compares the actual density of edges within communities to the expected density if edges were randomly distributed. Formally, for a given partition of nodes:</p>
+<div class="math notranslate nohighlight">
+\[
+  Q = \frac{1}{2m} \sum_{i,j} \left[ A_{ij} - \frac{k_i k_j}{2m} \right] \delta(c_i, c_j)
+  \]</div>
+<p>where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(A_{ij}\)</span> is the adjacency matrix,</p></li>
+<li><p><span class="math notranslate nohighlight">\(k_i\)</span> and <span class="math notranslate nohighlight">\(k_j\)</span> are the degrees of nodes <span class="math notranslate nohighlight">\(i\)</span> and <span class="math notranslate nohighlight">\(j\)</span>,</p></li>
+<li><p><span class="math notranslate nohighlight">\(m\)</span> is the total number of edges in the network,</p></li>
+<li><p><span class="math notranslate nohighlight">\(c_i\)</span> is the community assignment of node <span class="math notranslate nohighlight">\(i\)</span>,</p></li>
+<li><p><span class="math notranslate nohighlight">\(\delta(c_i, c_j) = 1\)</span> if <span class="math notranslate nohighlight">\(i\)</span> and <span class="math notranslate nohighlight">\(j\)</span> are in the same community, 0 otherwise.</p></li>
+</ul>
+<p><strong>Interpretation:</strong></p>
+<ul class="simple">
+<li><p>Higher <span class="math notranslate nohighlight">\(Q\)</span> indicates stronger community structure.</p></li>
+<li><p><span class="math notranslate nohighlight">\(Q \approx 0\)</span> implies the partition is no better than random.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">networkx.algorithms.community</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nx_comm</span>
+
+<span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">Graph</span><span class="p">()</span>
+<span class="n">nodes</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span><span class="s1">&#39;Dublin&#39;</span><span class="p">,</span><span class="mi">2</span><span class="p">:</span><span class="s1">&#39;Paris&#39;</span><span class="p">,</span><span class="mi">3</span><span class="p">:</span><span class="s1">&#39;Milan&#39;</span><span class="p">,</span><span class="mi">4</span><span class="p">:</span><span class="s1">&#39;Rome&#39;</span><span class="p">,</span><span class="mi">5</span><span class="p">:</span><span class="s1">&#39;Naples&#39;</span><span class="p">,</span><span class="mi">6</span><span class="p">:</span><span class="s1">&#39;Moscow&#39;</span><span class="p">,</span><span class="mi">7</span><span class="p">:</span><span class="s1">&#39;Tokyo&#39;</span><span class="p">}</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_nodes_from</span><span class="p">(</span><span class="n">nodes</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">([(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">),(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">),(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">),(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">),(</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">),(</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">),(</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">),(</span><span class="mi">7</span><span class="p">,</span><span class="mi">5</span><span class="p">)])</span>
+
+<span class="c1"># partitions can be provided manually</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">nx_comm</span><span class="o">.</span><span class="n">modularity</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">communities</span><span class="o">=</span><span class="p">[{</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">},{</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">}]))</span>
+
+<span class="c1"># or automatically computed using networkx</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">nx_comm</span><span class="o">.</span><span class="n">modularity</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">nx_comm</span><span class="o">.</span><span class="n">label_propagation_communities</span><span class="p">(</span><span class="n">G</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.3671875
+0.3671875
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="centrality">
+<h3>Centrality<a class="headerlink" href="#centrality" title="Link to this heading">#</a></h3>
+<p>Segregation metrics help to understand the presence of groups. However, each node in a
+graph has its own importance. To quantify it, we can use centrality metrics.</p>
+<p>One of the most common and simple centrality metrics is the <strong>degree centrality</strong> metric.
+This is directly connected with the degree of a node, measuring the number of incident
+edges on a certain node <span class="math notranslate nohighlight">\(i\)</span>.
+Intuitively, the more a node is connected to an other node, the more its degree centrality
+will assume high values. Note that, if a graph is directed, the <strong>in-degree centrality</strong> and
+<strong>out-degree centrality</strong> will be considered for each node, related to the number of incoming
+and outcoming edges, respectively. Degree centrality is computed in networkx by using
+the following command:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">Graph</span><span class="p">()</span>
+<span class="n">nodes</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span><span class="s1">&#39;Dublin&#39;</span><span class="p">,</span><span class="mi">2</span><span class="p">:</span><span class="s1">&#39;Paris&#39;</span><span class="p">,</span><span class="mi">3</span><span class="p">:</span><span class="s1">&#39;Milan&#39;</span><span class="p">,</span><span class="mi">4</span><span class="p">:</span><span class="s1">&#39;Rome&#39;</span><span class="p">,</span><span class="mi">5</span><span class="p">:</span><span class="s1">&#39;Naples&#39;</span><span class="p">,</span><span class="mi">6</span><span class="p">:</span><span class="s1">&#39;Moscow&#39;</span><span class="p">,</span><span class="mi">7</span><span class="p">:</span><span class="s1">&#39;Tokyo&#39;</span><span class="p">}</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_nodes_from</span><span class="p">(</span><span class="n">nodes</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">([(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">),(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">),(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">),(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">),(</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">),(</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">),(</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">),(</span><span class="mi">7</span><span class="p">,</span><span class="mi">5</span><span class="p">)])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nx</span><span class="o">.</span><span class="n">degree_centrality</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{1: 0.3333333333333333,
+ 2: 0.3333333333333333,
+ 3: 0.5,
+ 4: 0.3333333333333333,
+ 5: 0.5,
+ 6: 0.3333333333333333,
+ 7: 0.3333333333333333}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dc</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">degree_centrality</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+<span class="n">node_size</span><span class="o">=</span><span class="p">[(</span><span class="n">v</span> <span class="o">+</span> <span class="mf">0.01</span><span class="p">)</span> <span class="o">*</span> <span class="mi">400</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">dc</span><span class="o">.</span><span class="n">values</span><span class="p">()]</span>
+<span class="n">draw_graph</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">node_names</span><span class="o">=</span><span class="n">nodes</span><span class="p">,</span> <span class="n">node_size</span><span class="o">=</span><span class="n">node_size</span><span class="p">,</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;deg_centr.png&#39;</span><span class="p">)</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">dc</span><span class="p">,</span><span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Degree centrality&#39;</span><span class="p">])</span>
+<span class="n">df</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">nodes</span><span class="o">.</span><span class="n">values</span><span class="p">()</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Dublin</th>
+      <th>Paris</th>
+      <th>Milan</th>
+      <th>Rome</th>
+      <th>Naples</th>
+      <th>Moscow</th>
+      <th>Tokyo</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Degree centrality</th>
+      <td>0.333333</td>
+      <td>0.333333</td>
+      <td>0.5</td>
+      <td>0.333333</td>
+      <td>0.5</td>
+      <td>0.333333</td>
+      <td>0.333333</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><img alt="../../_images/87106f56ab74eb1357dc09a3c7d0d7d1688a92794f1375aa19e86d55a461a227.png" src="../../_images/87106f56ab74eb1357dc09a3c7d0d7d1688a92794f1375aa19e86d55a461a227.png" />
+</div>
+</div>
+</section>
+<section id="closeness-centrality">
+<h3>Closeness Centrality<a class="headerlink" href="#closeness-centrality" title="Link to this heading">#</a></h3>
+<p>The <strong>closeness centrality</strong> metric quantifies how close or well-connected a node is to all other nodes in the network. Intuitively, a node with high closeness centrality can quickly interact with all other nodes, while a node with low closeness centrality is more distant from the rest of the network.</p>
+<p>Formally, let <span class="math notranslate nohighlight">\(l_{ij}\)</span> denote the shortest path distance between nodes <span class="math notranslate nohighlight">\(i\)</span> and <span class="math notranslate nohighlight">\(j\)</span>. The closeness centrality of node <span class="math notranslate nohighlight">\(i\)</span> is defined as:</p>
+<div class="math notranslate nohighlight">
+\[
+C_i = \frac{1}{\sum_{j \in V, j \ne i} l_{ij}}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(V\)</span> is the set of all nodes in the network.</p>
+<p><strong>Interpretation:</strong></p>
+<ul class="simple">
+<li><p>Higher <span class="math notranslate nohighlight">\(C_i\)</span> indicates that node <span class="math notranslate nohighlight">\(i\)</span> is, on average, <strong>closer to all other nodes</strong>, facilitating faster information flow.</p></li>
+<li><p>Lower <span class="math notranslate nohighlight">\(C_i\)</span> indicates that node <span class="math notranslate nohighlight">\(i\)</span> is more <strong>peripheral</strong> in the network structure.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nx</span><span class="o">.</span><span class="n">closeness_centrality</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{1: 0.4,
+ 2: 0.4,
+ 3: 0.5454545454545454,
+ 4: 0.6,
+ 5: 0.5454545454545454,
+ 6: 0.4,
+ 7: 0.4}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dc</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">closeness_centrality</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+<span class="n">node_size</span><span class="o">=</span><span class="p">[(</span><span class="n">v</span> <span class="o">+</span> <span class="mf">0.1</span><span class="p">)</span> <span class="o">*</span> <span class="mi">400</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">dc</span><span class="o">.</span><span class="n">values</span><span class="p">()]</span>
+<span class="n">draw_graph</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">node_names</span><span class="o">=</span><span class="n">nodes</span><span class="p">,</span> <span class="n">node_size</span><span class="o">=</span><span class="n">node_size</span><span class="p">,</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;clos_centr.png&#39;</span><span class="p">)</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">dc</span><span class="p">,</span><span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Closeness centrality&#39;</span><span class="p">])</span>
+<span class="n">df</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">nodes</span><span class="o">.</span><span class="n">values</span><span class="p">()</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Dublin</th>
+      <th>Paris</th>
+      <th>Milan</th>
+      <th>Rome</th>
+      <th>Naples</th>
+      <th>Moscow</th>
+      <th>Tokyo</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Closeness centrality</th>
+      <td>0.4</td>
+      <td>0.4</td>
+      <td>0.545455</td>
+      <td>0.6</td>
+      <td>0.545455</td>
+      <td>0.4</td>
+      <td>0.4</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><img alt="../../_images/07ac79462bc025c72302e7274d5154454130b0ca4399d409d71dca673a7a4a79.png" src="../../_images/07ac79462bc025c72302e7274d5154454130b0ca4399d409d71dca673a7a4a79.png" />
+</div>
+</div>
+</section>
+<section id="betweenness-centrality">
+<h3>Betweenness Centrality<a class="headerlink" href="#betweenness-centrality" title="Link to this heading">#</a></h3>
+<p>The <strong>betweenness centrality</strong> metric measures the extent to which a node acts as a <strong>bridge</strong> or intermediary between other nodes in the network. A node may have few direct connections but still play a crucial role in maintaining network connectivity by lying on many shortest paths between other nodes.</p>
+<p>Formally, let <span class="math notranslate nohighlight">\(L_{wj}\)</span> be the total number of shortest paths between nodes <span class="math notranslate nohighlight">\(w\)</span> and <span class="math notranslate nohighlight">\(j\)</span>, and let <span class="math notranslate nohighlight">\(L_{wj}(i)\)</span> be the number of those paths that pass through node <span class="math notranslate nohighlight">\(i\)</span>. The betweenness centrality of node <span class="math notranslate nohighlight">\(i\)</span> is defined as:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+C_B(i) = \sum_{\substack{w,j \in V \\ w \ne j \ne i}} \frac{L_{wj}(i)}{L_{wj}}
+\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(V\)</span> is the set of nodes in the network.</p>
+<p><strong>Interpretation:</strong></p>
+<ul class="simple">
+<li><p>Higher <span class="math notranslate nohighlight">\(C_B(i)\)</span> indicates that node <span class="math notranslate nohighlight">\(i\)</span> frequently lies on shortest paths connecting other nodes, making it <strong>structurally important</strong> for communication and flow in the network.</p></li>
+<li><p>Nodes with low betweenness centrality do not significantly control or mediate information flow between other nodes.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nx</span><span class="o">.</span><span class="n">betweenness_centrality</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{1: 0.0,
+ 2: 0.0,
+ 3: 0.5333333333333333,
+ 4: 0.6,
+ 5: 0.5333333333333333,
+ 6: 0.0,
+ 7: 0.0}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dc</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">betweenness_centrality</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+<span class="n">node_size</span><span class="o">=</span><span class="p">[(</span><span class="n">v</span> <span class="o">+</span> <span class="mf">0.1</span><span class="p">)</span> <span class="o">*</span> <span class="mi">400</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">dc</span><span class="o">.</span><span class="n">values</span><span class="p">()]</span>
+<span class="n">draw_graph</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">node_names</span><span class="o">=</span><span class="n">nodes</span><span class="p">,</span> <span class="n">node_size</span><span class="o">=</span><span class="n">node_size</span><span class="p">,</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;bet_centrality.png&#39;</span><span class="p">)</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">dc</span><span class="p">,</span><span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Betweenness centrality&#39;</span><span class="p">])</span>
+<span class="n">df</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">nodes</span><span class="o">.</span><span class="n">values</span><span class="p">()</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Dublin</th>
+      <th>Paris</th>
+      <th>Milan</th>
+      <th>Rome</th>
+      <th>Naples</th>
+      <th>Moscow</th>
+      <th>Tokyo</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Betweenness centrality</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.533333</td>
+      <td>0.6</td>
+      <td>0.533333</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><img alt="../../_images/a081f50b2554e3fcef828192464a29b461479065da9df198f3c9048f82c67bb9.png" src="../../_images/a081f50b2554e3fcef828192464a29b461479065da9df198f3c9048f82c67bb9.png" />
+</div>
+</div>
+<p>Milan and Naples have the highest degree centrality.</p>
+<p>Rome has the highest closeness centrality since it is the closest to any other node.
+It also shows the highest betweenness centrality because of its crucial role in connecting the two visible
+clusters and keeping the whole network connected.</p>
+</section>
+<section id="assortativity">
+<h3>Assortativity<a class="headerlink" href="#assortativity" title="Link to this heading">#</a></h3>
+<p>Assortativity measures how likely it is that nodes in a network connect to other nodes that are similar to them. There are different ways to calculate this similarity, but one of the most common is using the Pearson correlation coefficient. This method looks at the degrees (number of connections) of two nodes that are directly connected by a link.</p>
+<ul class="simple">
+<li><p>If the Pearson coefficient is <strong>positive</strong>, it means that nodes tend to connect to others with a <strong>similar degree</strong> (e.g., high-degree nodes connecting to other high-degree nodes).</p></li>
+<li><p>If the coefficient is <strong>negative</strong>, it means that nodes tend to connect to others with a <strong>different degree</strong> (e.g., high-degree nodes connecting to low-degree nodes).</p></li>
+</ul>
+<p>Assortativity using the Pearson  correlation coefficient is computed in networkx by using the following
+command:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nx</span><span class="o">.</span><span class="n">degree_pearson_correlation_coefficient</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-0.6
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="assortativity-and-influencers-in-social-networks">
+<h2>Assortativity and Influencers in Social Networks<a class="headerlink" href="#assortativity-and-influencers-in-social-networks" title="Link to this heading">#</a></h2>
+<p>Most social networks are assortative—nodes with similar connectivity levels tend to connect with each other. Highly connected users often engage with other highly connected users, while those with fewer connections interact with similar peers.</p>
+<p>However, influencers like celebrities or bloggers disrupt this pattern. They receive many connections from low-degree users while also forming dense links with other influencers.</p>
+<p>This mixed pattern—many ties from low-degree to high-degree nodes, plus strong interconnections among high-degree nodes—introduces disassortativity into the network, reflecting the complex and hierarchical nature of real-world social systems.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">Graph</span><span class="p">()</span>
+<span class="n">nodes</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span><span class="s1">&#39;user1&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span><span class="s1">&#39;user2&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">:</span><span class="s1">&#39;Football player&#39;</span><span class="p">,</span> <span class="mi">4</span><span class="p">:</span><span class="s1">&#39;Fahsion blogger&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">:</span><span class="s1">&#39;user3&#39;</span><span class="p">,</span> <span class="mi">6</span><span class="p">:</span><span class="s1">&#39;user4&#39;</span><span class="p">,</span>
+         <span class="mi">7</span><span class="p">:</span><span class="s1">&#39;user5&#39;</span><span class="p">,</span> <span class="mi">8</span><span class="p">:</span><span class="s1">&#39;user6&#39;</span><span class="p">}</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_nodes_from</span><span class="p">(</span><span class="n">nodes</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">([(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">),(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">),(</span><span class="mi">7</span><span class="p">,</span><span class="mi">3</span><span class="p">),(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">),(</span><span class="mi">5</span><span class="p">,</span><span class="mi">4</span><span class="p">),(</span><span class="mi">6</span><span class="p">,</span><span class="mi">4</span><span class="p">),(</span><span class="mi">8</span><span class="p">,</span><span class="mi">4</span><span class="p">)])</span>
+
+<span class="n">draw_graph</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">node_names</span><span class="o">=</span><span class="n">nodes</span><span class="p">,</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;assortativity.png&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/ac4d73713a57f1e581523e6af343cc62a233a97bcabb545c6e40044b9a140e5f.png" src="../../_images/ac4d73713a57f1e581523e6af343cc62a233a97bcabb545c6e40044b9a140e5f.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nx</span><span class="o">.</span><span class="n">degree_pearson_correlation_coefficient</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-0.7500000000000001
+</pre></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+<p>All implemented algorithms in networkx:</p>
+<p><a class="reference external" href="https://networkx.org/documentation/stable/reference/algorithms/">https://networkx.org/documentation/stable/reference/algorithms/</a></p>
+</section>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "mlgbook"
+        },
+        kernelOptions: {
+            name: "mlgbook",
+            path: "./content\Chapter01"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'mlgbook'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../../intro.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Welcome to Graph Machine Learning</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="02_community_detection.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Community Detection in Graphs</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#"><strong>First Part: Graph Mining - Concepts and properties</strong></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#graph-properties">Graph properties</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-integration-metrics">a) Integration metrics (یکپارچگی)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#b-segregation-metrics">b) Segregation metrics(تفکیک پذیری)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#c-centrality-metrics">c) Centrality metrics (مرکزیت)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#d-resilience-metrics">d) Resilience metrics (پایداری/تاب آوری)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#investigating-some-of-these-properties">Investigating some of these properties</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#shortest-path">Shortest path</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#characteristic-path-lenght">Characteristic path lenght</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#efficiency">Efficiency</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#another-example">Another example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#clustering-coefficient">Clustering Coefficient</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-count-triangles">Step 1: Count triangles</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-count-connected-triples">Step 2: Count connected triples</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-compute-transitivity">Step 3: Compute Transitivity</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#centrality">Centrality</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#closeness-centrality">Closeness Centrality</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#betweenness-centrality">Betweenness Centrality</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#assortativity">Assortativity</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#assortativity-and-influencers-in-social-networks">Assortativity and Influencers in Social Networks</a></li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Soheila Ashkezari-T.
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Welcome to Graph Machine Learning Workshop &#8212; Graph Machine Learning</title>
+    <title>Welcome to Graph Machine Learning &#8212; Graph Machine Learning</title>
   
   
   
@@ -60,9 +60,10 @@
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'intro';</script>
+    <link rel="canonical" href="/GMLCourse/intro.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Introduction to Graph Machine Learning" href="content/Chapter00/chap01_intro_and_basics.html" />
+    <link rel="next" title="First Part: Graph Mining - Concepts and properties" href="content/Chapter01/01_Graph_metrics.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -178,40 +179,12 @@
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1 current active">
                 <a class="reference internal" href="#">
-                    Welcome to Graph Machine Learning Workshop
+                    Welcome to Graph Machine Learning
                 </a>
             </li>
         </ul>
         <ul class="nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="content/Chapter00/chap01_intro_and_basics.html">Introduction to Graph Machine Learning</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="content/Chapter00/help.html">Step-by-Step Setup Guide: Anaconda, Virtual Environments, and Jupyter Kernel Configuration</a></li>
-
-
-
-
-
-
-
-
-
-</ul>
-</details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="content/Chapter01/01_Introduction_Networkx.html">Chapter 1 : Introduction to Networkx</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="content/Chapter01/02_Graph_metrics.html">Chapter 1.2: Graph properties</a></li>
-<li class="toctree-l2"><a class="reference internal" href="content/Chapter01/03_Graphs_Benchmarks.html">Benchmark and Repositories</a></li>
-</ul>
-</details></li>
-<li class="toctree-l1"><a class="reference internal" href="content/Chapter02/01_embedding_examples.html">Chapter 2 : Embedding Examples</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="content/Chapter03/00_Unsupervised_Learning.html">Chapter 3 : Unsupervised Graph learning</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="content/Chapter03/01_Shallow_Embeddings.html">Shallow Embedding Methods</a></li>
-
-
-<li class="toctree-l2"><a class="reference internal" href="content/Chapter03/02_Autoencoders.html">AutoEncoder</a></li>
-<li class="toctree-l2"><a class="reference internal" href="content/Chapter03/03_Structural_deep_neural_embeddings.html">Structural Deep Network Embedding</a></li>
-<li class="toctree-l2"><a class="reference internal" href="content/Chapter03/04_Graph_Neural_Network.html">🧠 Unsupervised Graph Representation Learning using GCN (Graph Convolutional Network)</a></li>
-</ul>
-</details></li>
-<li class="toctree-l1"><a class="reference internal" href="content/Chapter04/01_Feature_based_methods.html">Chapter 4 : Supervised Graph Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="content/Chapter01/01_Graph_metrics.html"><strong>First Part: Graph Mining - Concepts and properties</strong></a></li>
 
 </ul>
 
@@ -398,7 +371,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Welcome to Graph Machine Learning Workshop</h1>
+    <h1>Welcome to Graph Machine Learning</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -408,7 +381,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Welcome to Graph Machine Learning Workshop</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Welcome to Graph Machine Learning</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
 </ul>
 
@@ -422,33 +395,31 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="welcome-to-graph-machine-learning-workshop">
-<h1>Welcome to Graph Machine Learning Workshop<a class="headerlink" href="#welcome-to-graph-machine-learning-workshop" title="Link to this heading">#</a></h1>
-<p><img alt="GML Workshop" src="_images/GML.jpg" /></p>
+  <section class="tex2jax_ignore mathjax_ignore" id="welcome-to-graph-machine-learning">
+<h1>Welcome to Graph Machine Learning<a class="headerlink" href="#welcome-to-graph-machine-learning" title="Link to this heading">#</a></h1>
+<p><img alt="GML" src="_images/gta.png" /></p>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="introduction">
 <h1>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h1>
-<p>This book is an educational resource for <strong>Machine Learning with Graphs</strong>, prepared specifically for use in the course at <strong>Ferdowsi University of Mashhad</strong>.</p>
-<p>It is based primarily on the book:</p>
+<p>This book serves as an educational resource on <strong>Graph Mining</strong> and <strong>Machine Learning with Graphs</strong>, developed specifically for students of <strong>Ferdowsi University of Mashhad</strong>.</p>
+<p>It begins by exploring fundamental <strong>graph mining concepts</strong> — including how to analyze, extract, and interpret meaningful patterns from graph-structured data.<br />
+Building on this foundation, the book then introduces the principles and algorithms of <strong>Graph Machine Learning</strong>, where graph theory meets modern machine learning to model complex relational data.</p>
+<p>The material is primarily based on the book:</p>
 <p><strong>Graph Machine Learning</strong><br />
 <em>Take graph data to the next level by applying machine learning techniques and algorithms</em><br />
 by Claudio Stamile, Aldo Marzullo, and Enrico Deusebio<br />
 GitHub repository: <a class="github reference external" href="https://github.com/PacktPublishing/Graph-Machine-Learning">PacktPublishing/Graph-Machine-Learning</a></p>
-<p>In addition, we draw inspiration and insights from:</p>
+<p>Additional insights are drawn from:</p>
 <ul class="simple">
 <li><p>The excellent article: <a class="reference external" href="https://distill.pub/2021/gnn-intro/">A Gentle Introduction to Graph Neural Networks</a> by <em>Distill</em></p></li>
-<li><p>Various other trusted websites and resources that provide valuable content on graph-based machine learning.</p></li>
+<li><p>Various other reliable online sources that enrich the understanding of graph-based learning.</p></li>
 </ul>
-<p>The goal of this book is to provide a structured, practical, and conceptual guide for students and researchers interested in leveraging graph structures in machine learning applications.</p>
-<p>We hope this book serves as a useful companion throughout your learning journey.</p>
+<p>The goal of this book is to offer a <strong>structured, conceptual, and hands-on</strong> guide for students and researchers interested in <strong>analyzing graph data</strong> and <strong>building intelligent models</strong> that leverage the power of graph structures.</p>
+<p>We hope this book becomes a valuable companion on your learning journey.</p>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="content/Chapter00/chap01_intro_and_basics.html">Introduction to Graph Machine Learning</a></li>
-<li class="toctree-l1"><a class="reference internal" href="content/Chapter01/01_Introduction_Networkx.html">Chapter 1 : Introduction to Networkx</a></li>
-<li class="toctree-l1"><a class="reference internal" href="content/Chapter02/01_embedding_examples.html">Chapter 2 : Embedding Examples</a></li>
-<li class="toctree-l1"><a class="reference internal" href="content/Chapter03/00_Unsupervised_Learning.html">Chapter 3 : Unsupervised Graph learning</a></li>
-<li class="toctree-l1"><a class="reference internal" href="content/Chapter04/01_Feature_based_methods.html">Chapter 4 : Supervised Graph Learning</a></li>
-<li class="toctree-l1"><a class="reference internal" href="content/Chapter04/01_Feature_based_methods.html#feature-based-methods">Feature based methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="content/Chapter01/01_Graph_metrics.html"><strong>First Part: Graph Mining - Concepts and properties</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="content/Chapter01/01_Graph_metrics.html#graph-properties">Graph properties</a></li>
 </ul>
 </div>
 </section>
@@ -484,11 +455,11 @@ GitHub repository: <a class="github reference external" href="https://github.com
                   
 <div class="prev-next-area">
     <a class="right-next"
-       href="content/Chapter00/chap01_intro_and_basics.html"
+       href="content/Chapter01/01_Graph_metrics.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Introduction to Graph Machine Learning</p>
+        <p class="prev-next-title"><strong>First Part: Graph Mining - Concepts and properties</strong></p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -508,7 +479,7 @@ GitHub repository: <a class="github reference external" href="https://github.com
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Welcome to Graph Machine Learning Workshop</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Welcome to Graph Machine Learning</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
 </ul>
 
