@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -63,6 +63,7 @@
     <link rel="canonical" href="/GMLCourse/content/Chapter01/02_community_detection.html" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Frequent Subgraph Mining" href="03_FrequentSubgraphMining.html" />
     <link rel="prev" title="First Part: Graph Mining - Concepts and properties" href="01_Graph_metrics.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -182,8 +183,13 @@
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="01_Graph_metrics.html"><strong>First Part: Graph Mining - Concepts and properties</strong></a></li>
-
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="01_Graph_metrics.html"><strong>First Part: Graph Mining - Concepts and properties</strong></a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Community Detection in Graphs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_FrequentSubgraphMining.html">Frequent Subgraph Mining</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04_Complex%20Networks%20and%20Generative%20Models.html">Complex Networks and Generative Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05_DynamicGraphsandNetworkEvolutionAnalysis.html">Dynamic Graphs and Network Evolution Analysis</a></li>
+</ul>
+</details></li>
 </ul>
 
     </div>
@@ -623,16 +629,16 @@ Choosing the most meaningful level in the hierarchy is sometimes ambiguous.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Node 1: Dublin -&gt; Community 1
-Node 2: Paris -&gt; Community 1
-Node 3: Milan -&gt; Community 1
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Node 1: Dublin -&gt; Community 0
+Node 2: Paris -&gt; Community 0
+Node 3: Milan -&gt; Community 0
 Node 4: Rome -&gt; Community 1
-Node 5: Naples -&gt; Community 0
-Node 6: Moscow -&gt; Community 0
-Node 7: Tokyo -&gt; Community 0
+Node 5: Naples -&gt; Community 1
+Node 6: Moscow -&gt; Community 1
+Node 7: Tokyo -&gt; Community 1
 </pre></div>
 </div>
-<img alt="../../_images/e821f8f6b8f2b8417ddee86f6dd87ce52dc5f253c8e49d8a38464dc5d8ae8255.png" src="../../_images/e821f8f6b8f2b8417ddee86f6dd87ce52dc5f253c8e49d8a38464dc5d8ae8255.png" />
+<img alt="../../_images/b2edcd187a248db6c30986a3b065a9345cac3445ce36cd09c4f9c9af2f94147a.png" src="../../_images/b2edcd187a248db6c30986a3b065a9345cac3445ce36cd09c4f9c9af2f94147a.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -658,7 +664,7 @@ Node 7: Tokyo -&gt; Community 0
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/ac2b0eb16119ee02d65e9c3e0c4d6bb8d411b991ea8d8269f8307e7cd82f9217.png" src="../../_images/ac2b0eb16119ee02d65e9c3e0c4d6bb8d411b991ea8d8269f8307e7cd82f9217.png" />
+<img alt="../../_images/550892abf385dc06c54af182789288e54e8c8f103457f0979a714fd4c49b32e7.png" src="../../_images/550892abf385dc06c54af182789288e54e8c8f103457f0979a714fd4c49b32e7.png" />
 </div>
 </div>
 </section>
@@ -1008,7 +1014,10 @@ It identifies edges that are most “between” communities (edges with high <st
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Communities: ([0, 1, 3, 4, 5, 6, 7, 10, 11, 12, 13, 16, 17, 19, 21], [2, 8, 9, 14, 15, 18, 20, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33])
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Communities:
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ([0, 1, 3, 4, 5, 6, 7, 10, 11, 12, 13, 16, 17, 19, 21], [2, 8, 9, 14, 15, 18, 20, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33])
 </pre></div>
 </div>
 <img alt="../../_images/73f340225fd6852ab42fbecc20dd1879ec437ccd6d431456d8f182735ceaa3f1.png" src="../../_images/73f340225fd6852ab42fbecc20dd1879ec437ccd6d431456d8f182735ceaa3f1.png" />
@@ -1067,6 +1076,15 @@ It identifies edges that are most “between” communities (edges with high <st
         <p class="prev-next-subtitle">previous</p>
         <p class="prev-next-title"><strong>First Part: Graph Mining - Concepts and properties</strong></p>
       </div>
+    </a>
+    <a class="right-next"
+       href="03_FrequentSubgraphMining.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Frequent Subgraph Mining</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
                 </footer>

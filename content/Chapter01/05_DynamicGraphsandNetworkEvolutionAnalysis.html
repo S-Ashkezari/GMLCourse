@@ -1,0 +1,878 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Dynamic Graphs and Network Evolution Analysis &#8212; Graph Machine Learning</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/Chapter01/05_DynamicGraphsandNetworkEvolutionAnalysis';</script>
+    <link rel="canonical" href="/GMLCourse/content/Chapter01/05_DynamicGraphsandNetworkEvolutionAnalysis.html" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="prev" title="Complex Networks and Generative Models" href="04_Complex%20Networks%20and%20Generative%20Models.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Graph Machine Learning - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Graph Machine Learning - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Welcome to Graph Machine Learning
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="01_Graph_metrics.html"><strong>First Part: Graph Mining - Concepts and properties</strong></a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="02_community_detection.html">Community Detection in Graphs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_FrequentSubgraphMining.html">Frequent Subgraph Mining</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04_Complex%20Networks%20and%20Generative%20Models.html">Complex Networks and Generative Models</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Dynamic Graphs and Network Evolution Analysis</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/executablebooks/jupyter-book/blob/master/docs/content/Chapter01/05_DynamicGraphsandNetworkEvolutionAnalysis.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fcontent/Chapter01/05_DynamicGraphsandNetworkEvolutionAnalysis.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/content/Chapter01/05_DynamicGraphsandNetworkEvolutionAnalysis.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Dynamic Graphs and Network Evolution Analysis</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#definitions-and-representations">1 Definitions and Representations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#temporal-dynamic-graph-formal-definition">1.1 Temporal / Dynamic Graph — formal definition</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#snapshot-vs-streaming-vs-interval-representations">1.2 Snapshot vs. Streaming vs. Interval representations</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#temporal-analogues-of-static-measures">2 Temporal analogues of static measures</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#temporal-degree-per-node">2.1 Temporal degree (per node)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#temporal-closeness-reachability-and-temporal-paths">2.2 Temporal closeness / reachability and temporal paths</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#temporal-motifs">2.3 Temporal motifs</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dynamic-network-models-brief">3 Dynamic network models (brief)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tasks-in-dynamic-graph-analysis">4 Tasks in dynamic graph analysis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#methods-for-anomaly-change-detection-core-ideas">5 Methods for anomaly &amp; change detection (core ideas)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#global-change-detection-snapshot-level">5.1 Global change detection (snapshot-level)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#local-node-level-anomaly">5.2 Local / node-level anomaly</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#subgraph-structural-anomaly">5.3 Subgraph / structural anomaly</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#embedding-based-detection">5.4 Embedding-based detection</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#algorithms-approaches-short-survey">6 Algorithms &amp; approaches (short survey)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-example-snapshot-based-anomaly-detection-python">7 Practical example: snapshot-based anomaly detection (Python)</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">np</span><span class="p">,</span> <span class="s2">&quot;float_&quot;</span><span class="p">):</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">float_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">float64</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section class="tex2jax_ignore mathjax_ignore" id="dynamic-graphs-and-network-evolution-analysis">
+<h1>Dynamic Graphs and Network Evolution Analysis<a class="headerlink" href="#dynamic-graphs-and-network-evolution-analysis" title="Link to this heading">#</a></h1>
+<p>In this session we study <strong>dynamic (temporal) graphs</strong> and methods to analyze how network structure evolves over time. We cover formal definitions, common representations, mathematical measures for temporal networks, basic models of evolution, and methods for <strong>anomaly / change detection</strong> in time-varying graphs. A small hands-on Python example (snapshot-based) is included at the end.</p>
+<hr class="docutils" />
+<section id="definitions-and-representations">
+<h2>1 Definitions and Representations<a class="headerlink" href="#definitions-and-representations" title="Link to this heading">#</a></h2>
+<section id="temporal-dynamic-graph-formal-definition">
+<h3>1.1 Temporal / Dynamic Graph — formal definition<a class="headerlink" href="#temporal-dynamic-graph-formal-definition" title="Link to this heading">#</a></h3>
+<p>A <strong>temporal graph</strong> (also: time-varying graph) is a graph whose vertex set and/or edge set can change over (continuous or discrete) time.</p>
+<p>Two common formalizations:</p>
+<p><strong>(A) Discrete-time snapshot sequence</strong></p>
+<p>A temporal graph is represented as a sequence of static graphs (snapshots)
+$<span class="math notranslate nohighlight">\(
+\mathcal{G} = \{ G^{(1)}, G^{(2)}, \dots, G^{(T)} \},
+\)</span><span class="math notranslate nohighlight">\(
+where each snapshot \)</span>G^{(t)}=(V^{(t)},E^{(t)})<span class="math notranslate nohighlight">\( is the graph observed during time interval \)</span>t<span class="math notranslate nohighlight">\( (e.g. day \)</span>t$). Snapshots can be overlapping or non-overlapping windows.</p>
+<p><strong>(B) Temporal edge list (time-stamped edges / continuous time)</strong></p>
+<p>A temporal graph is given by a set of time-stamped interactions
+$<span class="math notranslate nohighlight">\(
+\mathcal{E} = \{ (u,v,t) : \text{an interaction (or edge) between } u\text{ and } v \text{ at time } t \}.
+\)</span><span class="math notranslate nohighlight">\(
+Optionally edges have durations \)</span>(u,v,t_{start},t_{end})$.</p>
+</section>
+<hr class="docutils" />
+<section id="snapshot-vs-streaming-vs-interval-representations">
+<h3>1.2 Snapshot vs. Streaming vs. Interval representations<a class="headerlink" href="#snapshot-vs-streaming-vs-interval-representations" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Snapshot-based</strong></p>
+<ul class="simple">
+<li><p><strong>Description:</strong> Temporal graph is a sequence of static graphs (snapshots), each covering a fixed time window.</p></li>
+<li><p><strong>Use case:</strong> Batch analysis of network statistics over time.</p></li>
+<li><p><strong>Example:</strong> Daily social interactions:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">G1</span></code> = Monday interactions</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">G2</span></code> = Tuesday interactions</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">G3</span></code> = Wednesday interactions</p></li>
+</ul>
+</li>
+<li><p>Each snapshot can be analyzed independently (degree, clustering, communities).</p></li>
+</ul>
+</li>
+<li><p><strong>Streaming / Event-based</strong></p>
+<ul class="simple">
+<li><p><strong>Description:</strong> Edges arrive continuously; the graph is updated online.</p></li>
+<li><p><strong>Use case:</strong> Real-time monitoring or anomaly detection.</p></li>
+<li><p><strong>Example:</strong> Chat messages as edges <code class="docutils literal notranslate"><span class="pre">(sender,</span> <span class="pre">receiver,</span> <span class="pre">timestamp)</span></code> processed as they arrive.</p></li>
+</ul>
+</li>
+<li><p><strong>Interval / Temporal edges</strong></p>
+<ul class="simple">
+<li><p><strong>Description:</strong> Edges have a lifetime <code class="docutils literal notranslate"><span class="pre">[t_start,</span> <span class="pre">t_end]</span></code>; temporal paths respect these intervals.</p></li>
+<li><p><strong>Use case:</strong> Relationships that persist for a period of time.</p></li>
+<li><p><strong>Example:</strong> Phone calls or collaborations:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">(A,</span> <span class="pre">B,</span> <span class="pre">[10:05,</span> <span class="pre">10:15])</span></code> — a call from A to B</p></li>
+<li><p>Active collaborations between researchers</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<p><strong>Summary Table:</strong></p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Representation</p></th>
+<th class="head"><p>Data Type</p></th>
+<th class="head"><p>Time Handling</p></th>
+<th class="head"><p>Example</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Snapshot-based</p></td>
+<td><p>Static graphs per window</p></td>
+<td><p>Batch</p></td>
+<td><p>Daily social interactions</p></td>
+</tr>
+<tr class="row-odd"><td><p>Streaming</p></td>
+<td><p>Time-stamped edges</p></td>
+<td><p>Online / real-time</p></td>
+<td><p>Chat messages, network packets</p></td>
+</tr>
+<tr class="row-even"><td><p>Interval</p></td>
+<td><p>Edges with start &amp; end times</p></td>
+<td><p>Continuous or discrete</p></td>
+<td><p>Phone calls, collaborations</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="temporal-analogues-of-static-measures">
+<h2>2 Temporal analogues of static measures<a class="headerlink" href="#temporal-analogues-of-static-measures" title="Link to this heading">#</a></h2>
+<p>Many classic graph measures generalize to the temporal setting. Let <span class="math notranslate nohighlight">\(G^{(t)}=(V^{(t)},E^{(t)})\)</span> be the snapshot at time <span class="math notranslate nohighlight">\(t\)</span>.</p>
+<section id="temporal-degree-per-node">
+<h3>2.1 Temporal degree (per node)<a class="headerlink" href="#temporal-degree-per-node" title="Link to this heading">#</a></h3>
+<p>Node <span class="math notranslate nohighlight">\(v\)</span> degree at time <span class="math notranslate nohighlight">\(t\)</span>:
+$<span class="math notranslate nohighlight">\(
+d_v^{(t)} = \deg_{G^{(t)}}(v) = |\{u : (v,u)\in E^{(t)}\}|.
+\)</span>$</p>
+<p>Cumulative / aggregated degree over interval <span class="math notranslate nohighlight">\([t_1,t_2]\)</span>:
+$<span class="math notranslate nohighlight">\(
+\bar d_v(t_1,t_2)=\sum_{t=t_1}^{t_2} d_v^{(t)} \quad\text{or}\quad \frac{1}{t_2-t_1+1}\sum_{t=t_1}^{t_2} d_v^{(t)}.
+\)</span>$</p>
+</section>
+<section id="temporal-closeness-reachability-and-temporal-paths">
+<h3>2.2 Temporal closeness / reachability and temporal paths<a class="headerlink" href="#temporal-closeness-reachability-and-temporal-paths" title="Link to this heading">#</a></h3>
+<p>A <strong>temporal path</strong> is a sequence of time-ordered edges <span class="math notranslate nohighlight">\((v_0,v_1,t_1), (v_1,v_2,t_2),\dots\)</span> with <span class="math notranslate nohighlight">\(t_1 \le t_2 \le \dots\)</span> (strict inequality if edges are instantaneous and must respect causality). Temporal reachability and temporal distances depend on time ordering.</p>
+</section>
+<section id="temporal-motifs">
+<h3>2.3 Temporal motifs<a class="headerlink" href="#temporal-motifs" title="Link to this heading">#</a></h3>
+<p>Small time-respecting patterns (e.g., A→B at <span class="math notranslate nohighlight">\(t\)</span>, B→C at <span class="math notranslate nohighlight">\(t+\delta\)</span>) called <strong>temporal motifs</strong>. Counting their frequency reveals micro-dynamics.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="dynamic-network-models-brief">
+<h2>3 Dynamic network models (brief)<a class="headerlink" href="#dynamic-network-models-brief" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Edge arrival models</strong>: Random edge insertion processes (Poisson processes, temporal ER).</p></li>
+<li><p><strong>Temporal preferential attachment</strong>: time-aware Barabási–Albert variants (node/edge arrival times matter).</p></li>
+<li><p><strong>Activity-driven models</strong> (Perra et al.): each node <span class="math notranslate nohighlight">\(i\)</span> has activity <span class="math notranslate nohighlight">\(a_i\)</span> (probability to create edges per unit time).</p></li>
+</ul>
+<p>These models provide baselines to compare real evolution and detect anomalies.</p>
+</section>
+<hr class="docutils" />
+<section id="tasks-in-dynamic-graph-analysis">
+<h2>4 Tasks in dynamic graph analysis<a class="headerlink" href="#tasks-in-dynamic-graph-analysis" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p><strong>Change-point detection</strong> — detect times <span class="math notranslate nohighlight">\(t\)</span> where global network behavior changes.</p></li>
+<li><p><strong>Anomaly detection</strong> — find nodes/edges/subgraphs whose behaviour is unusual (sudden degree spike, abnormal motif frequency).</p></li>
+<li><p><strong>Dynamic community detection</strong> — track evolving communities (incremental clustering, community birth/death).</p></li>
+<li><p><strong>Temporal link prediction</strong> — predict future edges given past snapshots / events.</p></li>
+<li><p><strong>Dynamic embeddings</strong> — learn time-aware node representations (DynGEM, DynamicTriad, TGN).</p></li>
+</ol>
+</section>
+<hr class="docutils" />
+<section id="methods-for-anomaly-change-detection-core-ideas">
+<h2>5 Methods for anomaly &amp; change detection (core ideas)<a class="headerlink" href="#methods-for-anomaly-change-detection-core-ideas" title="Link to this heading">#</a></h2>
+<section id="global-change-detection-snapshot-level">
+<h3>5.1 Global change detection (snapshot-level)<a class="headerlink" href="#global-change-detection-snapshot-level" title="Link to this heading">#</a></h3>
+<p>Define a global statistic <span class="math notranslate nohighlight">\(S^{(t)}\)</span> (e.g., number of edges, modularity, spectral gap, average clustering). Declare a change at time <span class="math notranslate nohighlight">\(t\)</span> if <span class="math notranslate nohighlight">\(S^{(t)}\)</span> deviates significantly from baseline.</p>
+<p>Example statistics:</p>
+<ul class="simple">
+<li><p>Edge count: <span class="math notranslate nohighlight">\(m^{(t)}=|E^{(t)}|\)</span>.</p></li>
+<li><p>Modularity of a fixed partition: <span class="math notranslate nohighlight">\(Q^{(t)}\)</span>.</p></li>
+<li><p>Leading eigenvalue of adjacency / Laplacian.</p></li>
+</ul>
+<p>Detection can use:</p>
+<ul class="simple">
+<li><p><strong>Control charts / z-score</strong>: <span class="math notranslate nohighlight">\(z^{(t)} = (S^{(t)}-\mu)/\sigma\)</span> over window.</p></li>
+<li><p><strong>CUSUM</strong> or <strong>Page-Hinkley</strong> methods for sequential detection.</p></li>
+<li><p><strong>Scan statistics</strong>: sliding window maximum deviations.</p></li>
+</ul>
+</section>
+<section id="local-node-level-anomaly">
+<h3>5.2 Local / node-level anomaly<a class="headerlink" href="#local-node-level-anomaly" title="Link to this heading">#</a></h3>
+<p>Detect node <span class="math notranslate nohighlight">\(v\)</span> that exhibits an unusual change in a local measure (degree, ego-density, motif count).</p>
+<p>Formally, compute time series <span class="math notranslate nohighlight">\(x_v^{(t)}\)</span> (e.g., degree). Flag <span class="math notranslate nohighlight">\(v\)</span> at time <span class="math notranslate nohighlight">\(t\)</span> if
+$<span class="math notranslate nohighlight">\(
+|x_v^{(t)} - \mu_v^{(t-w,t-1)}| &gt; \tau \cdot \sigma_v^{(t-w,t-1)}
+\)</span><span class="math notranslate nohighlight">\(
+where \)</span>\mu_v,\sigma_v<span class="math notranslate nohighlight">\( are mean/std over a past window of size \)</span>w<span class="math notranslate nohighlight">\( and \)</span>\tau$ is a threshold.</p>
+</section>
+<section id="subgraph-structural-anomaly">
+<h3>5.3 Subgraph / structural anomaly<a class="headerlink" href="#subgraph-structural-anomaly" title="Link to this heading">#</a></h3>
+<p>Look for subgraphs whose frequency (or embedding) changes abruptly. Use subgraph counts or compare learned embeddings across time and flag large distances.</p>
+</section>
+<section id="embedding-based-detection">
+<h3>5.4 Embedding-based detection<a class="headerlink" href="#embedding-based-detection" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Learn node embeddings <span class="math notranslate nohighlight">\(\mathbf{z}_v^{(t)}\)</span> per snapshot or incrementally.</p></li>
+<li><p>Compute embedding drift: <span class="math notranslate nohighlight">\(\Delta_v^{(t)} = \|\mathbf{z}_v^{(t)} - \mathbf{z}_v^{(t-1)}\|\)</span>.</p></li>
+<li><p>High drift indicates potential anomaly.</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="algorithms-approaches-short-survey">
+<h2>6 Algorithms &amp; approaches (short survey)<a class="headerlink" href="#algorithms-approaches-short-survey" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Snapshot statistics + control charts</strong> — very simple, interpretable.</p></li>
+<li><p><strong>Spectral change detection</strong> — monitor eigenvalues/eigenvectors of adjacency / Laplacian.</p></li>
+<li><p><strong>Matrix / tensor decomposition over time</strong> (e.g., dynamic SVD, PARAFAC) — detect change in low-rank factors.</p></li>
+<li><p><strong>Dynamic community algorithms</strong>: incremental Louvain / Label Propagation with temporal smoothing (regularize partitions across time).</p></li>
+<li><p><strong>Temporal motif counting</strong> — compare counts to baseline (randomized temporal null models).</p></li>
+<li><p><strong>Graph neural networks for anomaly detection</strong>: learn temporal GNNs (TGN, DynGEM) and detect outliers in embedding space.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="practical-example-snapshot-based-anomaly-detection-python">
+<h2>7 Practical example: snapshot-based anomaly detection (Python)<a class="headerlink" href="#practical-example-snapshot-based-anomaly-detection-python" title="Link to this heading">#</a></h2>
+<p><strong>Goal:</strong> generate a sequence of snapshots, compute node degrees, detect nodes with sudden degree spike using rolling z-score.</p>
+<p>This example uses standard libraries (<code class="docutils literal notranslate"><span class="pre">networkx</span></code>, <code class="docutils literal notranslate"><span class="pre">numpy</span></code>, <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code>).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example: snapshot-based anomaly detection by degree z-score</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">networkx</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nx</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">defaultdict</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">make_snapshot</span><span class="p">(</span><span class="n">num_nodes</span><span class="p">,</span> <span class="n">p_edge</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Erdos-Renyi snapshot with num_nodes and edge prob p_edge&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">nx</span><span class="o">.</span><span class="n">erdos_renyi_graph</span><span class="p">(</span><span class="n">num_nodes</span><span class="p">,</span> <span class="n">p_edge</span><span class="p">)</span>
+
+<span class="c1"># Generate T snapshots; introduce an anomaly at t = anomaly_t</span>
+<span class="n">T</span> <span class="o">=</span> <span class="mi">30</span>
+<span class="n">num_nodes</span> <span class="o">=</span> <span class="mi">50</span>
+<span class="n">snapshots</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">T</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">t</span> <span class="o">==</span> <span class="mi">18</span><span class="p">:</span>
+        <span class="c1"># anomaly: suddenly more edges (increase p)</span>
+        <span class="n">G</span> <span class="o">=</span> <span class="n">make_snapshot</span><span class="p">(</span><span class="n">num_nodes</span><span class="p">,</span> <span class="n">p_edge</span><span class="o">=</span><span class="mf">0.15</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">G</span> <span class="o">=</span> <span class="n">make_snapshot</span><span class="p">(</span><span class="n">num_nodes</span><span class="p">,</span> <span class="n">p_edge</span><span class="o">=</span><span class="mf">0.03</span><span class="p">)</span>
+    <span class="n">snapshots</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+
+<span class="c1"># Compute degree time series for each node</span>
+<span class="n">degree_ts</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">t</span><span class="p">,</span> <span class="n">G</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">snapshots</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_nodes</span><span class="p">):</span>
+        <span class="n">degree_ts</span><span class="p">[</span><span class="n">v</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">degree</span><span class="p">(</span><span class="n">v</span><span class="p">))</span>
+
+<span class="c1"># Detect anomalies with rolling z-score (window w)</span>
+<span class="n">w</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">tau</span> <span class="o">=</span> <span class="mf">3.0</span>  <span class="c1"># threshold: z &gt; tau considered anomaly</span>
+<span class="n">anomalies</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>  <span class="c1"># node -&gt; list of times flagged</span>
+
+<span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_nodes</span><span class="p">):</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">degree_ts</span><span class="p">[</span><span class="n">v</span><span class="p">])</span>
+    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">T</span><span class="p">):</span>
+        <span class="n">window</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">t</span><span class="o">-</span><span class="n">w</span><span class="p">:</span><span class="n">t</span><span class="p">]</span>
+        <span class="n">mu</span> <span class="o">=</span> <span class="n">window</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+        <span class="n">sigma</span> <span class="o">=</span> <span class="n">window</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">ddof</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="k">if</span> <span class="n">window</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">ddof</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="mf">1.0</span>
+        <span class="n">z</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">-</span> <span class="n">mu</span><span class="p">)</span> <span class="o">/</span> <span class="n">sigma</span>
+        <span class="k">if</span> <span class="n">z</span> <span class="o">&gt;</span> <span class="n">tau</span><span class="p">:</span>
+            <span class="n">anomalies</span><span class="p">[</span><span class="n">v</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">t</span><span class="p">,</span> <span class="n">x</span><span class="p">[</span><span class="n">t</span><span class="p">],</span> <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">z</span><span class="p">))</span>
+
+<span class="c1"># Summarize anomalies: how many nodes flagged at each time</span>
+<span class="n">time_flags</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">v</span><span class="p">,</span> <span class="n">lst</span> <span class="ow">in</span> <span class="n">anomalies</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="o">*</span><span class="n">_</span> <span class="p">)</span> <span class="ow">in</span> <span class="n">lst</span><span class="p">:</span>
+        <span class="n">time_flags</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">T</span><span class="p">),</span> <span class="p">[</span><span class="n">G</span><span class="o">.</span><span class="n">number_of_edges</span><span class="p">()</span> <span class="k">for</span> <span class="n">G</span> <span class="ow">in</span> <span class="n">snapshots</span><span class="p">],</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Edge count per snapshot (anomaly inserted at t=18)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;t&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;edge count&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">T</span><span class="p">),</span> <span class="n">time_flags</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Number of nodes flagged as anomalous per snapshot (z&gt;3)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;t&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;num flagged nodes&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># Print a few example flagged nodes</span>
+<span class="k">for</span> <span class="n">v</span><span class="p">,</span> <span class="n">lst</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">anomalies</span><span class="o">.</span><span class="n">items</span><span class="p">())[:</span><span class="mi">10</span><span class="p">]:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Node </span><span class="si">{</span><span class="n">v</span><span class="si">}</span><span class="s2"> flagged at times: </span><span class="si">{</span><span class="n">lst</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/f32bbb79dcebf50ad68082521de9deec6f67f33df390fca83e2877484d0e7aab.png" src="../../_images/f32bbb79dcebf50ad68082521de9deec6f67f33df390fca83e2877484d0e7aab.png" />
+<img alt="../../_images/20f4940ecd25a80cc2dbd58948667252b0c459b9fc31002669e9829525388b86.png" src="../../_images/20f4940ecd25a80cc2dbd58948667252b0c459b9fc31002669e9829525388b86.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Node 0 flagged at times: [(18, 9, 1.4, 0.4898979485566356, 15.513435037626795), (27, 3, 1.0, 0.6324555320336759, 3.162277660168379)]
+Node 1 flagged at times: [(15, 3, 1.4, 0.4898979485566356, 3.2659863237109046), (18, 9, 2.0, 1.0954451150103321, 6.390096504226938)]
+Node 2 flagged at times: [(15, 4, 0.4, 0.48989794855663565, 7.348469228349534), (18, 7, 1.8, 1.469693845669907, 3.5381518506868126)]
+Node 3 flagged at times: [(18, 7, 1.8, 1.1661903789690602, 4.458963213705229)]
+Node 4 flagged at times: [(18, 7, 0.6, 0.7999999999999999, 8.000000000000002), (26, 3, 1.0, 0.6324555320336759, 3.162277660168379), (29, 5, 1.2, 0.9797958971132712, 3.878358759406699)]
+Node 5 flagged at times: [(18, 10, 1.0, 0.6324555320336759, 14.230249470757707)]
+Node 6 flagged at times: [(7, 5, 0.6, 0.7999999999999999, 5.500000000000001), (17, 3, 0.8, 0.4000000000000001, 5.499999999999999)]
+Node 8 flagged at times: [(11, 4, 1.0, 0.8944271909999159, 3.3541019662496847)]
+Node 9 flagged at times: [(5, 7, 1.6, 1.019803902718557, 5.295135648730969), (18, 8, 1.0, 0.8944271909999159, 7.826237921249264)]
+Node 10 flagged at times: [(18, 10, 1.8, 0.9797958971132713, 8.36908995450919)]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "mlgbook"
+        },
+        kernelOptions: {
+            name: "mlgbook",
+            path: "./content\Chapter01"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'mlgbook'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="04_Complex%20Networks%20and%20Generative%20Models.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Complex Networks and Generative Models</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#definitions-and-representations">1 Definitions and Representations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#temporal-dynamic-graph-formal-definition">1.1 Temporal / Dynamic Graph — formal definition</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#snapshot-vs-streaming-vs-interval-representations">1.2 Snapshot vs. Streaming vs. Interval representations</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#temporal-analogues-of-static-measures">2 Temporal analogues of static measures</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#temporal-degree-per-node">2.1 Temporal degree (per node)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#temporal-closeness-reachability-and-temporal-paths">2.2 Temporal closeness / reachability and temporal paths</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#temporal-motifs">2.3 Temporal motifs</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dynamic-network-models-brief">3 Dynamic network models (brief)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tasks-in-dynamic-graph-analysis">4 Tasks in dynamic graph analysis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#methods-for-anomaly-change-detection-core-ideas">5 Methods for anomaly &amp; change detection (core ideas)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#global-change-detection-snapshot-level">5.1 Global change detection (snapshot-level)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#local-node-level-anomaly">5.2 Local / node-level anomaly</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#subgraph-structural-anomaly">5.3 Subgraph / structural anomaly</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#embedding-based-detection">5.4 Embedding-based detection</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#algorithms-approaches-short-survey">6 Algorithms &amp; approaches (short survey)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-example-snapshot-based-anomaly-detection-python">7 Practical example: snapshot-based anomaly detection (Python)</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Soheila Ashkezari-T.
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

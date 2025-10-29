@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>5. Complex Networks and Generative Models &#8212; Graph Machine Learning</title>
+    <title>Complex Networks and Generative Models &#8212; Graph Machine Learning</title>
   
   
   
@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -63,6 +63,8 @@
     <link rel="canonical" href="/GMLCourse/content/Chapter01/04_Complex Networks and Generative Models.html" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Dynamic Graphs and Network Evolution Analysis" href="05_DynamicGraphsandNetworkEvolutionAnalysis.html" />
+    <link rel="prev" title="Frequent Subgraph Mining" href="03_FrequentSubgraphMining.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -125,8 +127,6 @@
       
       
       
-        
-      
       <div class="bd-sidebar-primary bd-sidebar">
         
 
@@ -182,9 +182,14 @@
                 </a>
             </li>
         </ul>
-        <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="01_Graph_metrics.html"><strong>First Part: Graph Mining - Concepts and properties</strong></a></li>
-
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="01_Graph_metrics.html"><strong>First Part: Graph Mining - Concepts and properties</strong></a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="02_community_detection.html">Community Detection in Graphs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_FrequentSubgraphMining.html">Frequent Subgraph Mining</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Complex Networks and Generative Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05_DynamicGraphsandNetworkEvolutionAnalysis.html">Dynamic Graphs and Network Evolution Analysis</a></li>
+</ul>
+</details></li>
 </ul>
 
     </div>
@@ -401,7 +406,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>5. Complex Networks and Generative Models</h1>
+    <h1>Complex Networks and Generative Models</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -411,30 +416,30 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">5.1 Introduction</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#small-world-networks">5.2 Small-world Networks</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">1. Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#small-world-networks">2. Small-world Networks</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#definition">Definition</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wattsstrogatz-model-ws-model">Watts–Strogatz Model (WS Model)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wattsstrogatz-ws-model-to-create-a-small-world-network">Watts–Strogatz (WS) Model to create a Small-world network</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scale-free-networks">5.3 Scale-free Networks</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scale-free-networks">3. Scale-free Networks</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Definition</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#statistical-properties">Statistical Properties</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#erdosrenyi-random-graph-model-g-n-p">5.4 Erdős–Rényi Random Graph Model <span class="math notranslate nohighlight">\( G(n, p) \)</span></a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#erdosrenyi-random-graph-model-g-n-p">4. Erdős–Rényi Random Graph Model <span class="math notranslate nohighlight">\( G(n, p) \)</span>)</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-definition">Model Definition</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#barabasialbert-ba-preferential-attachment-model">5.5 Barabási–Albert (BA) Preferential Attachment Model</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#barabasialbert-ba-preferential-attachment-model">5. Barabási–Albert (BA) Preferential Attachment Model</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#idea">Idea</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#algorithm">Algorithm</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#properties">Properties</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparison-of-models">5.6 Comparison of Models</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#applications">5.7 Applications</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">5.8 References</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparison-of-models">6. Comparison of Models</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#applications">7. Applications</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">8. References</a></li>
 </ul>
             </nav>
         </div>
@@ -447,15 +452,18 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="complex-networks-and-generative-models">
-<h1>5. Complex Networks and Generative Models<a class="headerlink" href="#complex-networks-and-generative-models" title="Link to this heading">#</a></h1>
+<h1>Complex Networks and Generative Models<a class="headerlink" href="#complex-networks-and-generative-models" title="Link to this heading">#</a></h1>
 <section id="introduction">
-<h2>5.1 Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h2>
+<h2>1. Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h2>
 <p>Many real-world systems—social media, the internet, protein interaction networks, transportation grids—can be represented as <strong>complex networks</strong>. These networks are not purely random; they often display characteristic patterns such as <strong>small-world</strong> effects or <strong>scale-free</strong> degree distributions.<br />
 Generative models aim to reproduce these structures by simulating how such networks might have formed.</p>
+<blockquote>
+<div><p><strong>Why it matters:</strong> Understanding these network structures helps in designing <strong>Graph Neural Networks</strong>, <strong>motif discovery</strong>, and other graph mining tasks, as algorithms often exploit these structural patterns.</p>
+</div></blockquote>
 </section>
 <hr class="docutils" />
 <section id="small-world-networks">
-<h2>5.2 Small-world Networks<a class="headerlink" href="#small-world-networks" title="Link to this heading">#</a></h2>
+<h2>2. Small-world Networks<a class="headerlink" href="#small-world-networks" title="Link to this heading">#</a></h2>
 <section id="definition">
 <h3>Definition<a class="headerlink" href="#definition" title="Link to this heading">#</a></h3>
 <p>A <strong>small-world network</strong> has:</p>
@@ -465,45 +473,66 @@ Generative models aim to reproduce these structures by simulating how such netwo
 </ol>
 <p>Formally:</p>
 <ul class="simple">
-<li><p>Let <span class="math notranslate nohighlight">\( G = (V, E) \)</span> with <span class="math notranslate nohighlight">\( n = |V| \)</span> and <span class="math notranslate nohighlight">\( m = |E| \)</span>.</p></li>
-<li><p><strong>Clustering coefficient</strong> for a node <span class="math notranslate nohighlight">\( v \)</span> is:
-$<span class="math notranslate nohighlight">\(
-C_v = \frac{2 \cdot |\{(u,w) \in E \;|\; u, w \in N(v)\}|}{k_v (k_v - 1)}
-\)</span><span class="math notranslate nohighlight">\(
-where \)</span> k_v <span class="math notranslate nohighlight">\( is the degree of \)</span> v <span class="math notranslate nohighlight">\( and \)</span> N(v) $ is its neighbor set.</p></li>
+<li><p>Let ( G = (V, E) ) with ( n = |V| ) and ( m = |E| ).</p></li>
+<li><p><strong>Clustering coefficient</strong> For a <strong>single node <span class="math notranslate nohighlight">\(v\)</span></strong>, the clustering coefficient is defined as the fraction of possible triangles through that node that actually exist:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+C_v = \frac{\text{Number of triangles involving } v}{\frac{k_v (k_v - 1)}{2}}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(k_v\)</span> is the degree of node <span class="math notranslate nohighlight">\(v\)</span>, and the denominator represents the maximum number of possible edges between its neighbors.</p>
+<ul class="simple">
 <li><p><strong>Average clustering coefficient</strong>:
 $<span class="math notranslate nohighlight">\(
 \overline{C} = \frac{1}{n} \sum_{v \in V} C_v
 \)</span>$</p></li>
 <li><p><strong>Average path length</strong>:
-$<span class="math notranslate nohighlight">\(
-L = \frac{1}{n(n-1)} \sum_{u \neq v} d(u,v)
-\)</span><span class="math notranslate nohighlight">\(
-where \)</span> d(u,v) $ is the shortest path distance.</p></li>
+If <span class="math notranslate nohighlight">\(l_i\)</span> is the average path length between the node <span class="math notranslate nohighlight">\(i\)</span> and
+all the other nodes, the characteristic path length is computed as follows:</p></li>
 </ul>
+<div class="math notranslate nohighlight">
+\[\displaystyle \frac{1}{q(q-1)} \sum_{i \in V} l_i\]</div>
+<p>Here, <span class="math notranslate nohighlight">\(V\)</span> is the set of nodes in the graph and <span class="math notranslate nohighlight">\(q=|V|\)</span> represents its order.</p>
 <p><strong>Small-world property</strong>:<br />
 $<span class="math notranslate nohighlight">\(
 \overline{C} \gg C_{\text{random}}, \quad L \approx L_{\text{random}}
 \)</span>$</p>
-</section>
-<section id="wattsstrogatz-model-ws-model">
-<h3>Watts–Strogatz Model (WS Model)<a class="headerlink" href="#wattsstrogatz-model-ws-model" title="Link to this heading">#</a></h3>
-<ol class="arabic simple">
-<li><p>Start with a regular ring lattice where each node is connected to its <span class="math notranslate nohighlight">\( k\)</span> nearest neighbors.</p></li>
-<li><p>With probability <span class="math notranslate nohighlight">\( p\)</span>, rewire each edge to a randomly chosen node.</p></li>
-</ol>
-<p>Parameters:</p>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(n \)</span>: number of nodes</p></li>
-<li><p><span class="math notranslate nohighlight">\( k\)</span>: mean degree</p></li>
-<li><p><span class="math notranslate nohighlight">\( p\)</span>: rewiring probability</p></li>
+<li><p><strong><span class="math notranslate nohighlight">\(C_{random}\)</span></strong>: The average clustering coefficient of a random graph with the same number of nodes and edges.</p>
+<ul>
+<li><p>In random graphs, nodes are connected randomly, so the probability of forming triangles is low.</p></li>
 </ul>
-<p>This process preserves high clustering (for small <span class="math notranslate nohighlight">\( p \)</span>) but drastically reduces <span class="math notranslate nohighlight">\( L \)</span>, producing the small-world effect.</p>
+</li>
+<li><p><strong><span class="math notranslate nohighlight">\(L_{random}\)</span></strong>: The average shortest path length in the same random graph.</p>
+<ul>
+<li><p>Even with random connections, short paths exist due to random shortcuts, so L_random is usually small.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="wattsstrogatz-ws-model-to-create-a-small-world-network">
+<h3>Watts–Strogatz (WS) Model to create a Small-world network<a class="headerlink" href="#wattsstrogatz-ws-model-to-create-a-small-world-network" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p>Start with a regular ring lattice where each node is connected to its <span class="math notranslate nohighlight">\(k\)</span> nearest neighbors.</p></li>
+<li><p>With probability <span class="math notranslate nohighlight">\(p\)</span>, rewire each edge to a randomly chosen node.</p></li>
+</ol>
+<ul class="simple">
+<li><p><strong>Parameters</strong>:</p>
+<ul>
+<li><p><span class="math notranslate nohighlight">\( n\)</span>: number of nodes</p></li>
+<li><p><span class="math notranslate nohighlight">\(k \)</span>: mean degree</p></li>
+<li><p><span class="math notranslate nohighlight">\(p \)</span>: rewiring probability</p></li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<div><p><strong>Intuition:</strong> Small rewiring keeps high clustering but reduces path length, creating the <strong>small-world effect</strong>.</p>
+</div></blockquote>
 </section>
 </section>
 <hr class="docutils" />
 <section id="scale-free-networks">
-<h2>5.3 Scale-free Networks<a class="headerlink" href="#scale-free-networks" title="Link to this heading">#</a></h2>
+<h2>3. Scale-free Networks<a class="headerlink" href="#scale-free-networks" title="Link to this heading">#</a></h2>
 <section id="id1">
 <h3>Definition<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
 <p>A network is <strong>scale-free</strong> if its degree distribution follows a <strong>power law</strong>:
@@ -517,20 +546,20 @@ Most nodes have few connections, but a small number of nodes (<strong>hubs</stro
 <section id="statistical-properties">
 <h3>Statistical Properties<a class="headerlink" href="#statistical-properties" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p><strong>Heavy-tailed distribution</strong>: Probability of large degrees decays slowly.</p></li>
+<li><p><strong>Heavy-tailed distribution</strong>: Large-degree nodes (hubs) appear with non-negligible probability.</p></li>
 <li><p><strong>Robustness</strong>: Resistant to random node failures but vulnerable to targeted attacks on hubs.</p></li>
+<li><p><strong>Relevance in GNNs / Graph Mining:</strong> Hubs can dominate message passing in GNNs or bias motif counts.</p></li>
 </ul>
 </section>
 </section>
 <hr class="docutils" />
 <section id="erdosrenyi-random-graph-model-g-n-p">
-<h2>5.4 Erdős–Rényi Random Graph Model <span class="math notranslate nohighlight">\( G(n, p) \)</span><a class="headerlink" href="#erdosrenyi-random-graph-model-g-n-p" title="Link to this heading">#</a></h2>
+<h2>4. Erdős–Rényi Random Graph Model <span class="math notranslate nohighlight">\( G(n, p) \)</span>)<a class="headerlink" href="#erdosrenyi-random-graph-model-g-n-p" title="Link to this heading">#</a></h2>
 <section id="model-definition">
 <h3>Model Definition<a class="headerlink" href="#model-definition" title="Link to this heading">#</a></h3>
-<p>Given:</p>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\( n \)</span> nodes</p></li>
-<li><p>Each possible edge is included <strong>independently</strong> with probability <span class="math notranslate nohighlight">\( p\)</span></p></li>
+<li><p>G(n, p): n nodes, each possible edge exists independently with probability p.</p></li>
+<li><p>G(n, M): n nodes, exactly M edges placed randomly.</p></li>
 </ul>
 <p><strong>Number of possible edges</strong>:
 $<span class="math notranslate nohighlight">\(
@@ -540,7 +569,7 @@ M = \binom{n}{2}
 $<span class="math notranslate nohighlight">\(
 P(k) = \binom{n-1}{k} p^k (1-p)^{n-1-k}
 \)</span><span class="math notranslate nohighlight">\(
-For large \( n \), this approximates a Poisson distribution:
+For large \)</span> n <span class="math notranslate nohighlight">\(, approximates Poisson:
 \)</span><span class="math notranslate nohighlight">\(
 P(k) \approx \frac{\lambda^k e^{-\lambda}}{k!}, \quad \lambda = p(n-1)
 \)</span>$</p>
@@ -548,16 +577,29 @@ P(k) \approx \frac{\lambda^k e^{-\lambda}}{k!}, \quad \lambda = p(n-1)
 $<span class="math notranslate nohighlight">\(
 \langle k \rangle = p (n-1)
 \)</span>$</p>
-<p><strong>Phase transition</strong>:<br />
-A giant connected component emerges when:
+<p><strong>Phase transition</strong>: A giant connected component emerges when:
 $<span class="math notranslate nohighlight">\(
 p_c = \frac{1}{n}
 \)</span>$</p>
+<ul class="simple">
+<li><p><strong>Properties</strong>:</p>
+<ul>
+<li><p><strong>Degree distribution</strong>: Approximately Poisson; most nodes have degree near the mean.</p></li>
+<li><p><strong>Clustering coefficient</strong>: Low, triangles are rare.</p></li>
+<li><p><strong>Average path length</strong>: Short, due to random connections.</p></li>
+<li><p><strong>Connectivity</strong>: A giant component emerges when p &gt; 1/n.</p></li>
+<li><p><strong>Structure</strong>: Completely random, no hubs or lattice-like patterns.</p></li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<div><p><strong>Note:</strong> Not suitable for scale-free or small-world networks; often used as a baseline in motif discovery and real network comparison.</p>
+</div></blockquote>
 </section>
 </section>
 <hr class="docutils" />
 <section id="barabasialbert-ba-preferential-attachment-model">
-<h2>5.5 Barabási–Albert (BA) Preferential Attachment Model<a class="headerlink" href="#barabasialbert-ba-preferential-attachment-model" title="Link to this heading">#</a></h2>
+<h2>5. Barabási–Albert (BA) Preferential Attachment Model<a class="headerlink" href="#barabasialbert-ba-preferential-attachment-model" title="Link to this heading">#</a></h2>
 <section id="idea">
 <h3>Idea<a class="headerlink" href="#idea" title="Link to this heading">#</a></h3>
 <p>Networks grow over time, and new nodes prefer to connect to already well-connected nodes.</p>
@@ -565,13 +607,13 @@ p_c = \frac{1}{n}
 <section id="algorithm">
 <h3>Algorithm<a class="headerlink" href="#algorithm" title="Link to this heading">#</a></h3>
 <ol class="arabic simple">
-<li><p>Start with a small connected network of <span class="math notranslate nohighlight">\( m_0 \)</span> nodes.</p></li>
+<li><p>Start with a small connected network of <span class="math notranslate nohighlight">\( m_0\)</span> nodes.</p></li>
 <li><p>At each step, add a new node with <span class="math notranslate nohighlight">\( m \le m_0 \)</span> edges.</p></li>
-<li><p><strong>Attachment probability</strong> for existing node <span class="math notranslate nohighlight">\( i \)</span>:
+<li><p><strong>Attachment probability</strong> for existing node <span class="math notranslate nohighlight">\( i\)</span>:
 $<span class="math notranslate nohighlight">\(
 \Pi(k_i) = \frac{k_i}{\sum_{j} k_j}
 \)</span><span class="math notranslate nohighlight">\(
-where \)</span> k_i <span class="math notranslate nohighlight">\( is the current degree of node \)</span> i $.</p></li>
+where \)</span> k_i <span class="math notranslate nohighlight">\( is the current degree of node \)</span> i$.</p></li>
 </ol>
 </section>
 <section id="properties">
@@ -582,39 +624,48 @@ $<span class="math notranslate nohighlight">\(
 P(k) \sim k^{-3}
 \)</span>$</p></li>
 <li><p>Captures the <strong>rich-get-richer</strong> phenomenon.</p></li>
+<li><p>Commonly observed in social networks, WWW, and citation networks.</p></li>
 </ul>
 </section>
 </section>
 <hr class="docutils" />
 <section id="comparison-of-models">
-<h2>5.6 Comparison of Models<a class="headerlink" href="#comparison-of-models" title="Link to this heading">#</a></h2>
+<h2>6. Comparison of Models<a class="headerlink" href="#comparison-of-models" title="Link to this heading">#</a></h2>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Model</p></th>
+<th class="head"><p>Scientific Category</p></th>
 <th class="head"><p>Degree Distribution</p></th>
 <th class="head"><p>Clustering</p></th>
-<th class="head"><p>Path Length</p></th>
+<th class="head"><p>Average Path Length</p></th>
 <th class="head"><p>Main Feature</p></th>
+<th class="head"><p>Real-world Examples</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>Erdős–Rényi</p></td>
-<td><p>Poisson</p></td>
+<tr class="row-even"><td><p><strong>Erdős–Rényi (ER)</strong></p></td>
+<td><p>Random graph / baseline</p></td>
+<td><p>Approximately Poisson</p></td>
 <td><p>Low</p></td>
 <td><p>Short</p></td>
-<td><p>Randomness</p></td>
+<td><p>Each edge exists independently with probability (p)</p></td>
+<td><p>Random communication networks, simple peer-to-peer connections</p></td>
 </tr>
-<tr class="row-odd"><td><p>Watts–Strogatz</p></td>
+<tr class="row-odd"><td><p><strong>Watts–Strogatz (WS)</strong></p></td>
+<td><p>Small-world</p></td>
 <td><p>Narrow (like lattice)</p></td>
 <td><p>High</p></td>
 <td><p>Short</p></td>
-<td><p>Small-world</p></td>
+<td><p>Lattice network with small rewiring; preserves clustering while reducing path length</p></td>
+<td><p>friendship networks, neural networks, power grids</p></td>
 </tr>
-<tr class="row-even"><td><p>Barabási–Albert</p></td>
-<td><p>Power law</p></td>
+<tr class="row-even"><td><p><strong>Barabási–Albert (BA)</strong></p></td>
+<td><p>Scale-free</p></td>
+<td><p>Power-law ( P(k) \sim k^{-3} )</p></td>
 <td><p>Low–Medium</p></td>
 <td><p>Short</p></td>
-<td><p>Scale-free</p></td>
+<td><p>Network growth + preferential attachment → hubs (rich-get-richer)</p></td>
+<td><p>World Wide Web, citation networks, airline routes, metabolic networks</p></td>
 </tr>
 </tbody>
 </table>
@@ -622,17 +673,18 @@ P(k) \sim k^{-3}
 </section>
 <hr class="docutils" />
 <section id="applications">
-<h2>5.7 Applications<a class="headerlink" href="#applications" title="Link to this heading">#</a></h2>
+<h2>7. Applications<a class="headerlink" href="#applications" title="Link to this heading">#</a></h2>
 <ul class="simple">
-<li><p><strong>Epidemiology</strong>: Predicting disease spread in social contact networks.</p></li>
-<li><p><strong>Web Science</strong>: Modeling hyperlink structure of the WWW.</p></li>
-<li><p><strong>Biology</strong>: Protein-protein interaction networks.</p></li>
-<li><p><strong>Infrastructure</strong>: Power grid resilience analysis.</p></li>
+<li><p><strong>Epidemiology:</strong> Predict disease spread in social networks.</p></li>
+<li><p><strong>Web Science:</strong> Modeling hyperlink structures.</p></li>
+<li><p><strong>Biology:</strong> Protein-protein interaction networks, gene regulation.</p></li>
+<li><p><strong>Infrastructure:</strong> Power grid resilience and transportation networks.</p></li>
+<li><p><strong>Graph ML &amp; Motif Mining:</strong> Understanding network topology guides <strong>sampling, feature design, and motif extraction</strong>.</p></li>
 </ul>
 </section>
 <hr class="docutils" />
 <section id="references">
-<h2>5.8 References<a class="headerlink" href="#references" title="Link to this heading">#</a></h2>
+<h2>8. References<a class="headerlink" href="#references" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Watts, D. J., &amp; Strogatz, S. H. (1998). <em>Collective dynamics of ‘small-world’ networks</em>. Nature.</p></li>
 <li><p>Barabási, A.-L., &amp; Albert, R. (1999). <em>Emergence of scaling in random networks</em>. Science.</p></li>
@@ -641,8 +693,6 @@ P(k) \sim k^{-3}
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">graph_models_for_lecture.py</span>
-
 <span class="sd">Generate, visualize, and analyze three fundamental complex network models:</span>
 <span class="sd">- Erdős–Rényi (Random graph)</span>
 <span class="sd">- Watts–Strogatz (Small-world)</span>
@@ -811,6 +861,13 @@ P(k) \sim k^{-3}
     <span class="n">ax_linear</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
 
     <span class="c1"># Log-binned histogram</span>
+    <span class="c1"># Compute the degree distribution using logarithmic binning.</span>
+    <span class="c1"># log_binned_histogram groups node degrees into bins that grow exponentially</span>
+    <span class="c1"># (e.g., [1–2], [2–4], [4–8], ...).</span>
+    <span class="c1"># This helps visualize power-law (scale-free) behavior where:</span>
+    <span class="c1">#   P(k) ~ k^(-γ)</span>
+    <span class="c1"># Log-binning smooths the heavy tail and makes the degree distribution</span>
+    <span class="c1"># appear linear on a log–log plot — a key indicator of scale-free structure.</span>
     <span class="n">centers</span><span class="p">,</span> <span class="n">pdf</span> <span class="o">=</span> <span class="n">log_binned_histogram</span><span class="p">(</span><span class="n">degs</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="n">nbins</span><span class="p">)</span>
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">centers</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
         <span class="n">ax_log</span><span class="o">.</span><span class="n">loglog</span><span class="p">(</span><span class="n">centers</span><span class="p">,</span> <span class="n">pdf</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">)</span>
@@ -825,7 +882,13 @@ P(k) \sim k^{-3}
 
 <span class="k">def</span><span class="w"> </span><span class="nf">demo</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">er_p</span><span class="o">=</span><span class="mf">0.02</span><span class="p">,</span> <span class="n">ws_k</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">ws_p</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">ba_m</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">):</span>
     <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
-
+    <span class="c1"># Parameters:</span>
+    <span class="c1">#   n       : number of nodes in the network</span>
+    <span class="c1">#   er_p    : edge creation probability in the ER model</span>
+    <span class="c1">#   ws_k    : each node is connected to its k nearest neighbors in the WS model</span>
+    <span class="c1">#   ws_p    : rewiring probability in the WS model</span>
+    <span class="c1">#   ba_m    : number of edges each new node attaches to existing nodes in the BA model</span>
+    <span class="c1">#   seed    : random seed for reproducibility</span>
     <span class="n">G_er</span> <span class="o">=</span> <span class="n">generate_erdos_renyi</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">er_p</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
     <span class="n">G_ws</span> <span class="o">=</span> <span class="n">generate_watts_strogatz</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">ws_k</span><span class="p">,</span> <span class="n">ws_p</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
     <span class="n">G_ba</span> <span class="o">=</span> <span class="n">generate_barabasi_albert</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">ba_m</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
@@ -939,6 +1002,24 @@ P(k) \sim k^{-3}
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="03_FrequentSubgraphMining.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Frequent Subgraph Mining</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="05_DynamicGraphsandNetworkEvolutionAnalysis.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Dynamic Graphs and Network Evolution Analysis</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               
@@ -955,30 +1036,30 @@ P(k) \sim k^{-3}
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">5.1 Introduction</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#small-world-networks">5.2 Small-world Networks</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">1. Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#small-world-networks">2. Small-world Networks</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#definition">Definition</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wattsstrogatz-model-ws-model">Watts–Strogatz Model (WS Model)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wattsstrogatz-ws-model-to-create-a-small-world-network">Watts–Strogatz (WS) Model to create a Small-world network</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scale-free-networks">5.3 Scale-free Networks</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scale-free-networks">3. Scale-free Networks</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Definition</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#statistical-properties">Statistical Properties</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#erdosrenyi-random-graph-model-g-n-p">5.4 Erdős–Rényi Random Graph Model <span class="math notranslate nohighlight">\( G(n, p) \)</span></a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#erdosrenyi-random-graph-model-g-n-p">4. Erdős–Rényi Random Graph Model <span class="math notranslate nohighlight">\( G(n, p) \)</span>)</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-definition">Model Definition</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#barabasialbert-ba-preferential-attachment-model">5.5 Barabási–Albert (BA) Preferential Attachment Model</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#barabasialbert-ba-preferential-attachment-model">5. Barabási–Albert (BA) Preferential Attachment Model</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#idea">Idea</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#algorithm">Algorithm</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#properties">Properties</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparison-of-models">5.6 Comparison of Models</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#applications">5.7 Applications</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">5.8 References</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparison-of-models">6. Comparison of Models</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#applications">7. Applications</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">8. References</a></li>
 </ul>
   </nav></div>
 
