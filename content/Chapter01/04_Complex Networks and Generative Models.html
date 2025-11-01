@@ -63,7 +63,7 @@
     <link rel="canonical" href="/GMLCourse/content/Chapter01/04_Complex Networks and Generative Models.html" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Dynamic Graphs and Network Evolution Analysis" href="05_DynamicGraphsandNetworkEvolutionAnalysis.html" />
+    <link rel="next" title="6. Dynamic Graphs and Network Evolution Analysis" href="05_DynamicGraphsandNetworkEvolutionAnalysis.html" />
     <link rel="prev" title="Frequent Subgraph Mining" href="03_FrequentSubgraphMining.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -187,7 +187,9 @@
 <li class="toctree-l2"><a class="reference internal" href="02_community_detection.html">Community Detection in Graphs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="03_FrequentSubgraphMining.html">Frequent Subgraph Mining</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Complex Networks and Generative Models</a></li>
-<li class="toctree-l2"><a class="reference internal" href="05_DynamicGraphsandNetworkEvolutionAnalysis.html">Dynamic Graphs and Network Evolution Analysis</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="05_DynamicGraphsandNetworkEvolutionAnalysis.html">6. Dynamic Graphs and Network Evolution Analysis</a></li>
 </ul>
 </details></li>
 </ul>
@@ -416,7 +418,40 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">1. Introduction</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Complex Networks and Generative Models</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#complex-networks-in-graph-theory">Complex Networks in Graph Theory</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-a-complex-network">What Is a Complex Network?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-characteristics-of-complex-networks">Key Characteristics of Complex Networks</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sparsity">1. <strong>Sparsity</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#heterogeneous-degree-distribution">2. <strong>Heterogeneous Degree Distribution</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#community-structure">3. <strong>Community Structure</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#power-law-degree-distribution">4. <strong>Power-Law Degree Distribution</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#small-world-property">5. <strong>Small-World Property</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scale-free-structure">6. <strong>Scale-Free Structure</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#examples-of-real-world-complex-networks">Examples of Real-World Complex Networks</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#social-networks">● Social Networks</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#biological-networks">● Biological Networks</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#technological-networks">● Technological Networks</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scientific-networks">● Scientific Networks</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-are-they-called-complex">Why Are They Called “Complex”?</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#why-use-generative-models-for-graphs">Why Use Generative Models for Graphs?</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generative-models-for-complex-networks">Generative Models for Complex Networks</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#erdosrenyi-er-random-graph"><strong>1. Erdős–Rényi (ER) Random Graph</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wattsstrogatz-small-world-model"><strong>2. Watts–Strogatz Small-World Model</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#barabasialbert-ba-scale-free-model"><strong>3. Barabási–Albert (BA) Scale-Free Model</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stochastic-block-models-sbm"><strong>4. Stochastic Block Models (SBM)</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#erdosrenyi-random-graph-model-g-n-p">1. Erdős–Rényi Random Graph Model <span class="math notranslate nohighlight">\( G(n, p) \)</span>)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-definition">Model Definition</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#small-world-networks">2. Small-world Networks</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#definition">Definition</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wattsstrogatz-ws-model-to-create-a-small-world-network">Watts–Strogatz (WS) Model to create a Small-world network</a></li>
@@ -427,20 +462,25 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#statistical-properties">Statistical Properties</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#erdosrenyi-random-graph-model-g-n-p">4. Erdős–Rényi Random Graph Model <span class="math notranslate nohighlight">\( G(n, p) \)</span>)</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-definition">Model Definition</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#barabasialbert-ba-preferential-attachment-model">5. Barabási–Albert (BA) Preferential Attachment Model</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#barabasialbert-ba-preferential-attachment-model">Barabási–Albert (BA) Preferential Attachment Model</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#idea">Idea</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#algorithm">Algorithm</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#properties">Properties</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparison-of-models">6. Comparison of Models</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#applications">7. Applications</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#stochastic-block-model-sbm">4. Stochastic Block Model (SBM)</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Idea</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Algorithm</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Properties</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparison-of-models">Comparison of Models</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#applications">Applications</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">8. References</a></li>
 </ul>
+</li>
+</ul>
+
             </nav>
         </div>
     </div>
@@ -453,13 +493,309 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="complex-networks-and-generative-models">
 <h1>Complex Networks and Generative Models<a class="headerlink" href="#complex-networks-and-generative-models" title="Link to this heading">#</a></h1>
-<section id="introduction">
-<h2>1. Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h2>
-<p>Many real-world systems—social media, the internet, protein interaction networks, transportation grids—can be represented as <strong>complex networks</strong>. These networks are not purely random; they often display characteristic patterns such as <strong>small-world</strong> effects or <strong>scale-free</strong> degree distributions.<br />
-Generative models aim to reproduce these structures by simulating how such networks might have formed.</p>
+<section id="complex-networks-in-graph-theory">
+<h2>Complex Networks in Graph Theory<a class="headerlink" href="#complex-networks-in-graph-theory" title="Link to this heading">#</a></h2>
+<p>Complex networks are a class of graphs that represent <strong>large, irregular, heterogeneous, and dynamic real-world systems</strong>. Unlike classical graphs (regular lattices, complete graphs, or simple random graphs), complex networks typically exhibit structural patterns found in natural, social, and technological systems.</p>
+</section>
+<hr class="docutils" />
+<section id="what-is-a-complex-network">
+<h2>What Is a Complex Network?<a class="headerlink" href="#what-is-a-complex-network" title="Link to this heading">#</a></h2>
+<p>A <strong>complex network</strong> is a graph whose topology reflects complicated and non-uniform relationships among many interacting components (nodes).<br />
+They are commonly used to model:</p>
+<ul class="simple">
+<li><p>social interactions</p></li>
+<li><p>biological systems</p></li>
+<li><p>communication and transportation networks</p></li>
+<li><p>scientific collaboration or citation networks</p></li>
+<li><p>technological infrastructures</p></li>
+</ul>
+<p>In short:</p>
 <blockquote>
-<div><p><strong>Why it matters:</strong> Understanding these network structures helps in designing <strong>Graph Neural Networks</strong>, <strong>motif discovery</strong>, and other graph mining tasks, as algorithms often exploit these structural patterns.</p>
+<div><p><strong>Any real-world system with many entities (nodes) and non-trivial interaction patterns (edges) is considered a complex network.</strong></p>
 </div></blockquote>
+</section>
+<hr class="docutils" />
+<section id="key-characteristics-of-complex-networks">
+<h2>Key Characteristics of Complex Networks<a class="headerlink" href="#key-characteristics-of-complex-networks" title="Link to this heading">#</a></h2>
+<section id="sparsity">
+<h3>1. <strong>Sparsity</strong><a class="headerlink" href="#sparsity" title="Link to this heading">#</a></h3>
+<p>Most real-world networks are <em>sparse</em>:<br />
+the number of edges is much smaller than the maximum possible number of edges.</p>
+</section>
+<section id="heterogeneous-degree-distribution">
+<h3>2. <strong>Heterogeneous Degree Distribution</strong><a class="headerlink" href="#heterogeneous-degree-distribution" title="Link to this heading">#</a></h3>
+<p>Nodes do not have similar degrees.<br />
+A few nodes may have extremely high degree (called <strong>hubs</strong>), while most have low degree.</p>
+<p>This is typical in <strong>scale-free networks</strong>.</p>
+</section>
+<hr class="docutils" />
+<section id="community-structure">
+<h3>3. <strong>Community Structure</strong><a class="headerlink" href="#community-structure" title="Link to this heading">#</a></h3>
+<p>Nodes often form <em>clusters</em> or <em>communities</em> where internal connections are denser than external ones.
+Examples:</p>
+<ul class="simple">
+<li><p>friendship groups in social networks</p></li>
+<li><p>functional modules in biological networks</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="power-law-degree-distribution">
+<h3>4. <strong>Power-Law Degree Distribution</strong><a class="headerlink" href="#power-law-degree-distribution" title="Link to this heading">#</a></h3>
+<p>Many complex networks follow:</p>
+<div class="math notranslate nohighlight">
+\[
+P(k) \sim k^{-\gamma}
+\]</div>
+<p>This means:</p>
+<ul class="simple">
+<li><p>high-degree nodes are rare but important</p></li>
+<li><p>there is no fixed “typical” degree</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="small-world-property">
+<h3>5. <strong>Small-World Property</strong><a class="headerlink" href="#small-world-property" title="Link to this heading">#</a></h3>
+<p>Most node pairs can be connected through very short paths.</p>
+<blockquote>
+<div><p>This is related to the famous “six degrees of separation”.</p>
+</div></blockquote>
+</section>
+<hr class="docutils" />
+<section id="scale-free-structure">
+<h3>6. <strong>Scale-Free Structure</strong><a class="headerlink" href="#scale-free-structure" title="Link to this heading">#</a></h3>
+<p>The network has <strong>no characteristic scale</strong> for node degree.<br />
+A few hubs dominate the connectivity and play a key role in stability or failure of the network.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="examples-of-real-world-complex-networks">
+<h2>Examples of Real-World Complex Networks<a class="headerlink" href="#examples-of-real-world-complex-networks" title="Link to this heading">#</a></h2>
+<section id="social-networks">
+<h3>● Social Networks<a class="headerlink" href="#social-networks" title="Link to this heading">#</a></h3>
+<p>Users are nodes; “follow” or “friendship” relations are edges.</p>
+</section>
+<section id="biological-networks">
+<h3>● Biological Networks<a class="headerlink" href="#biological-networks" title="Link to this heading">#</a></h3>
+<p>Protein-protein interaction networks, metabolic pathways.</p>
+</section>
+<section id="technological-networks">
+<h3>● Technological Networks<a class="headerlink" href="#technological-networks" title="Link to this heading">#</a></h3>
+<p>Internet topology, power grids, transportation networks.</p>
+</section>
+<section id="scientific-networks">
+<h3>● Scientific Networks<a class="headerlink" href="#scientific-networks" title="Link to this heading">#</a></h3>
+<p>Co-authorship networks, citation networks.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="why-are-they-called-complex">
+<h2>Why Are They Called “Complex”?<a class="headerlink" href="#why-are-they-called-complex" title="Link to this heading">#</a></h2>
+<p>Because their structure includes:</p>
+<ul class="simple">
+<li><p>irregular patterns</p></li>
+<li><p>long-tailed degree distributions</p></li>
+<li><p>hierarchical communities</p></li>
+<li><p>multi-scale behavior</p></li>
+<li><p>dynamic evolution</p></li>
+</ul>
+<p>And because many computational problems on these networks are <strong>NP-hard</strong>.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="why-use-generative-models-for-graphs">
+<h1>Why Use Generative Models for Graphs?<a class="headerlink" href="#why-use-generative-models-for-graphs" title="Link to this heading">#</a></h1>
+<p>Even when real-world graph datasets are available, <strong>generative models</strong> play a crucial role:</p>
+<ol class="arabic simple">
+<li><p><strong>Data Augmentation</strong><br />
+Real datasets are often small or sparse. Generative models can produce additional graphs with similar structural patterns, improving model training and reducing overfitting.</p></li>
+<li><p><strong>Algorithm Testing &amp; Simulation</strong><br />
+Generative graphs allow testing algorithms on larger or variant networks, enabling robust evaluation beyond limited real data.</p></li>
+<li><p><strong>Privacy Preservation</strong><br />
+Synthetic graphs mimic real structures without exposing sensitive information from the original dataset.</p></li>
+<li><p><strong>Understanding Graph Structure</strong><br />
+By learning the underlying distribution, generative models reveal common motifs, community structures, and degree patterns.</p></li>
+<li><p><strong>Designing New Graphs</strong><br />
+They enable creation of graphs with desired properties, useful in network design, chemistry, or social network analysis.</p></li>
+</ol>
+<p><strong>In short:</strong> even with real graphs, generative models provide scalability, safety, insight, and creative control that real data alone cannot offer.</p>
+<hr class="docutils" />
+<section id="generative-models-for-complex-networks">
+<h2>Generative Models for Complex Networks<a class="headerlink" href="#generative-models-for-complex-networks" title="Link to this heading">#</a></h2>
+<section id="erdosrenyi-er-random-graph">
+<h3><strong>1. Erdős–Rényi (ER) Random Graph</strong><a class="headerlink" href="#erdosrenyi-er-random-graph" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Simplest probabilistic model</p></li>
+<li><p>Does <em>not</em> capture real-world complexity very well</p></li>
+</ul>
+</section>
+<section id="wattsstrogatz-small-world-model">
+<h3><strong>2. Watts–Strogatz Small-World Model</strong><a class="headerlink" href="#wattsstrogatz-small-world-model" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Explains clustering + short path lengths</p></li>
+</ul>
+</section>
+<section id="barabasialbert-ba-scale-free-model">
+<h3><strong>3. Barabási–Albert (BA) Scale-Free Model</strong><a class="headerlink" href="#barabasialbert-ba-scale-free-model" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Based on <em>preferential attachment</em></p></li>
+<li><p>Explains the existence of hubs</p></li>
+</ul>
+</section>
+<section id="stochastic-block-models-sbm">
+<h3><strong>4. Stochastic Block Models (SBM)</strong><a class="headerlink" href="#stochastic-block-models-sbm" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Used for modeling <strong>community structure</strong></p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="erdosrenyi-random-graph-model-g-n-p">
+<h2>1. Erdős–Rényi Random Graph Model <span class="math notranslate nohighlight">\( G(n, p) \)</span>)<a class="headerlink" href="#erdosrenyi-random-graph-model-g-n-p" title="Link to this heading">#</a></h2>
+<section id="model-definition">
+<h3>Model Definition<a class="headerlink" href="#model-definition" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>G(n, p): n nodes, each possible edge exists independently with probability p.</p></li>
+<li><p>G(n, M): n nodes, exactly M edges placed randomly.</p></li>
+</ul>
+<p><strong>Generation Process:</strong></p>
+<ol class="arabic simple">
+<li><p>Start with <span class="math notranslate nohighlight">\(N\)</span> isolated nodes.</p></li>
+<li><p>For each pair of nodes <span class="math notranslate nohighlight">\((i, j)\)</span>, create an edge with probability <span class="math notranslate nohighlight">\(p\)</span> independently of other edges.</p></li>
+</ol>
+<p><strong>Number of possible edges</strong>:
+$<span class="math notranslate nohighlight">\(
+M = \binom{n}{2}
+\)</span>$</p>
+<p><strong>Degree distribution</strong>:
+$<span class="math notranslate nohighlight">\(
+P(k) = \binom{n-1}{k} p^k (1-p)^{n-1-k}
+\)</span><span class="math notranslate nohighlight">\(
+For large \)</span> n <span class="math notranslate nohighlight">\(, approximates Poisson:
+\)</span><span class="math notranslate nohighlight">\(
+P(k) \approx \frac{\lambda^k e^{-\lambda}}{k!}, \quad \lambda = p(n-1)
+\)</span>$</p>
+<p><strong>Average degree</strong>:
+$<span class="math notranslate nohighlight">\(
+\langle k \rangle = p (n-1)
+\)</span>$</p>
+<p><strong>Phase transition</strong>: A giant connected component emerges when:
+$<span class="math notranslate nohighlight">\(
+p_c = \frac{1}{n}
+\)</span>$</p>
+<ul class="simple">
+<li><p><strong>Properties</strong>:</p>
+<ul>
+<li><p><strong>Degree distribution</strong>: Approximately Poisson; most nodes have degree near the mean.</p></li>
+<li><p><strong>Clustering coefficient</strong>: Low, triangles are rare.</p></li>
+<li><p><strong>Average path length</strong>: Short, due to random connections.</p></li>
+<li><p><strong>Connectivity</strong>: A giant component emerges when p &gt; 1/n.</p></li>
+<li><p><strong>Structure</strong>: Completely random, no hubs or lattice-like patterns.</p></li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<div><p><strong>Note:</strong> Not suitable for scale-free or small-world networks; often used as a baseline in motif discovery and real network comparison.</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">networkx</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nx</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="c1"># Parameters</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">50</span>  <span class="c1"># number of nodes (for visualization, small n)</span>
+<span class="n">p_values</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.03</span><span class="p">,</span> <span class="mf">0.08</span><span class="p">]</span>  <span class="c1"># below, near, above critical p (~1/n)</span>
+<span class="n">titles</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;p &lt; 1/n: Small components&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;p ≈ 1/n: Components start merging&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;p &gt; 1/n: Giant component emerges&quot;</span><span class="p">]</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">p_values</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">erdos_renyi_graph</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+    <span class="n">pos</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">spring_layout</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>  <span class="c1"># fixed layout for clarity</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+    <span class="n">nx</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">with_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">node_color</span><span class="o">=</span><span class="s1">&#39;skyblue&#39;</span><span class="p">,</span> <span class="n">edge_color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">node_size</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">titles</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">AttributeError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">import</span><span class="w"> </span><span class="nn">networkx</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nx</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="c1"># Parameters</span>
+
+<span class="n">File</span> <span class="o">~</span>\<span class="n">AppData</span>\<span class="n">Local</span>\<span class="n">Programs</span>\<span class="n">Python</span>\<span class="n">Python313</span>\<span class="n">Lib</span>\<span class="n">site</span><span class="o">-</span><span class="n">packages</span>\<span class="n">networkx</span>\<span class="fm">__init__</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">64</span>
+<span class="g g-Whitespace">     </span><span class="mi">61</span> <span class="kn">import</span><span class="w"> </span><span class="nn">networkx.generators</span>
+<span class="g g-Whitespace">     </span><span class="mi">62</span> <span class="kn">from</span><span class="w"> </span><span class="nn">networkx.generators</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+<span class="ne">---&gt; </span><span class="mi">64</span> <span class="kn">import</span><span class="w"> </span><span class="nn">networkx.readwrite</span>
+<span class="g g-Whitespace">     </span><span class="mi">65</span> <span class="kn">from</span><span class="w"> </span><span class="nn">networkx.readwrite</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+<span class="g g-Whitespace">     </span><span class="mi">67</span> <span class="c1"># Need to test with SciPy, when available</span>
+
+<span class="n">File</span> <span class="o">~</span>\<span class="n">AppData</span>\<span class="n">Local</span>\<span class="n">Programs</span>\<span class="n">Python</span>\<span class="n">Python313</span>\<span class="n">Lib</span>\<span class="n">site</span><span class="o">-</span><span class="n">packages</span>\<span class="n">networkx</span>\<span class="n">readwrite</span>\<span class="fm">__init__</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">15</span>
+<span class="g g-Whitespace">     </span><span class="mi">13</span> <span class="kn">from</span><span class="w"> </span><span class="nn">networkx.readwrite.nx_yaml</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+<span class="g g-Whitespace">     </span><span class="mi">14</span> <span class="kn">from</span><span class="w"> </span><span class="nn">networkx.readwrite.gml</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+<span class="ne">---&gt; </span><span class="mi">15</span> <span class="kn">from</span><span class="w"> </span><span class="nn">networkx.readwrite.graphml</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+<span class="g g-Whitespace">     </span><span class="mi">16</span> <span class="kn">from</span><span class="w"> </span><span class="nn">networkx.readwrite.gexf</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+<span class="g g-Whitespace">     </span><span class="mi">17</span> <span class="kn">from</span><span class="w"> </span><span class="nn">networkx.readwrite.nx_shp</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+
+<span class="n">File</span> <span class="o">~</span>\<span class="n">AppData</span>\<span class="n">Local</span>\<span class="n">Programs</span>\<span class="n">Python</span>\<span class="n">Python313</span>\<span class="n">Lib</span>\<span class="n">site</span><span class="o">-</span><span class="n">packages</span>\<span class="n">networkx</span>\<span class="n">readwrite</span>\<span class="n">graphml</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">344</span>
+<span class="g g-Whitespace">    </span><span class="mi">340</span>             <span class="k">raise</span> <span class="n">nx</span><span class="o">.</span><span class="n">NetworkXError</span><span class="p">(</span><span class="s2">&quot;file not successfully read as graphml&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">341</span>     <span class="k">return</span> <span class="n">glist</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="ne">--&gt; </span><span class="mi">344</span> <span class="k">class</span><span class="w"> </span><span class="nc">GraphML</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">345</span>     <span class="n">NS_GRAPHML</span> <span class="o">=</span> <span class="s2">&quot;http://graphml.graphdrawing.org/xmlns&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">346</span>     <span class="n">NS_XSI</span> <span class="o">=</span> <span class="s2">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+
+<span class="nn">File ~\AppData\Local\Programs\Python\Python313\Lib\site-packages\networkx\readwrite\graphml.py:377,</span> in <span class="ni">GraphML</span><span class="nt">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">370</span>     <span class="k">pass</span>
+<span class="g g-Whitespace">    </span><span class="mi">371</span> <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">372</span>     <span class="c1"># prepend so that python types are created upon read (last entry wins)</span>
+<span class="g g-Whitespace">    </span><span class="mi">373</span>     <span class="n">types</span> <span class="o">=</span> <span class="p">[</span>
+<span class="g g-Whitespace">    </span><span class="mi">374</span>         <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">,</span> <span class="s2">&quot;float&quot;</span><span class="p">),</span>
+<span class="g g-Whitespace">    </span><span class="mi">375</span>         <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">,</span> <span class="s2">&quot;float&quot;</span><span class="p">),</span>
+<span class="g g-Whitespace">    </span><span class="mi">376</span>         <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float16</span><span class="p">,</span> <span class="s2">&quot;float&quot;</span><span class="p">),</span>
+<span class="ne">--&gt; </span><span class="mi">377</span>         <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float_</span><span class="p">,</span> <span class="s2">&quot;float&quot;</span><span class="p">),</span>
+<span class="g g-Whitespace">    </span><span class="mi">378</span>         <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int_</span><span class="p">,</span> <span class="s2">&quot;int&quot;</span><span class="p">),</span>
+<span class="g g-Whitespace">    </span><span class="mi">379</span>         <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int8</span><span class="p">,</span> <span class="s2">&quot;int&quot;</span><span class="p">),</span>
+<span class="g g-Whitespace">    </span><span class="mi">380</span>         <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int16</span><span class="p">,</span> <span class="s2">&quot;int&quot;</span><span class="p">),</span>
+<span class="g g-Whitespace">    </span><span class="mi">381</span>         <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">,</span> <span class="s2">&quot;int&quot;</span><span class="p">),</span>
+<span class="g g-Whitespace">    </span><span class="mi">382</span>         <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">,</span> <span class="s2">&quot;int&quot;</span><span class="p">),</span>
+<span class="g g-Whitespace">    </span><span class="mi">383</span>         <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">,</span> <span class="s2">&quot;int&quot;</span><span class="p">),</span>
+<span class="g g-Whitespace">    </span><span class="mi">384</span>         <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">uint16</span><span class="p">,</span> <span class="s2">&quot;int&quot;</span><span class="p">),</span>
+<span class="g g-Whitespace">    </span><span class="mi">385</span>         <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">uint32</span><span class="p">,</span> <span class="s2">&quot;int&quot;</span><span class="p">),</span>
+<span class="g g-Whitespace">    </span><span class="mi">386</span>         <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">uint64</span><span class="p">,</span> <span class="s2">&quot;int&quot;</span><span class="p">),</span>
+<span class="g g-Whitespace">    </span><span class="mi">387</span>         <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int_</span><span class="p">,</span> <span class="s2">&quot;int&quot;</span><span class="p">),</span>
+<span class="g g-Whitespace">    </span><span class="mi">388</span>         <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">intc</span><span class="p">,</span> <span class="s2">&quot;int&quot;</span><span class="p">),</span>
+<span class="g g-Whitespace">    </span><span class="mi">389</span>         <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">intp</span><span class="p">,</span> <span class="s2">&quot;int&quot;</span><span class="p">),</span>
+<span class="g g-Whitespace">    </span><span class="mi">390</span>     <span class="p">]</span> <span class="o">+</span> <span class="n">types</span>
+<span class="g g-Whitespace">    </span><span class="mi">392</span> <span class="n">xml_type</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">types</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">393</span> <span class="n">python_type</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">types</span><span class="p">)</span>
+
+<span class="nn">File ~\AppData\Local\Programs\Python\Python313\Lib\site-packages\numpy\__init__.py:413,</span> in <span class="ni">__getattr__</span><span class="nt">(attr)</span>
+<span class="g g-Whitespace">    </span><span class="mi">410</span>     <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="n">__former_attrs__</span><span class="p">[</span><span class="n">attr</span><span class="p">],</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">412</span> <span class="k">if</span> <span class="n">attr</span> <span class="ow">in</span> <span class="n">__expired_attributes__</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">413</span>     <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">414</span>         <span class="sa">f</span><span class="s2">&quot;`np.</span><span class="si">{</span><span class="n">attr</span><span class="si">}</span><span class="s2">` was removed in the NumPy 2.0 release. &quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">415</span>         <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">__expired_attributes__</span><span class="p">[</span><span class="n">attr</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">416</span>         <span class="n">name</span><span class="o">=</span><span class="kc">None</span>
+<span class="g g-Whitespace">    </span><span class="mi">417</span>     <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">419</span> <span class="k">if</span> <span class="n">attr</span> <span class="o">==</span> <span class="s2">&quot;chararray&quot;</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">420</span>     <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">421</span>         <span class="s2">&quot;`np.chararray` is deprecated and will be removed from &quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">422</span>         <span class="s2">&quot;the main namespace in the future. Use an array with a string &quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">423</span>         <span class="s2">&quot;or bytes dtype instead.&quot;</span><span class="p">,</span> <span class="ne">DeprecationWarning</span><span class="p">,</span> <span class="n">stacklevel</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="ne">AttributeError</span>: `np.float_` was removed in the NumPy 2.0 release. Use `np.float64` instead.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 </section>
 <hr class="docutils" />
 <section id="small-world-networks">
@@ -473,7 +809,7 @@ Generative models aim to reproduce these structures by simulating how such netwo
 </ol>
 <p>Formally:</p>
 <ul class="simple">
-<li><p>Let ( G = (V, E) ) with ( n = |V| ) and ( m = |E| ).</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\( G = (V, E)\)</span> with <span class="math notranslate nohighlight">\( n = |V|\)</span> and <span class="math notranslate nohighlight">\( m = |E|\)</span>.</p></li>
 <li><p><strong>Clustering coefficient</strong> For a <strong>single node <span class="math notranslate nohighlight">\(v\)</span></strong>, the clustering coefficient is defined as the fraction of possible triangles through that node that actually exist:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
@@ -513,7 +849,7 @@ $<span class="math notranslate nohighlight">\(
 <section id="wattsstrogatz-ws-model-to-create-a-small-world-network">
 <h3>Watts–Strogatz (WS) Model to create a Small-world network<a class="headerlink" href="#wattsstrogatz-ws-model-to-create-a-small-world-network" title="Link to this heading">#</a></h3>
 <ol class="arabic simple">
-<li><p>Start with a regular ring lattice where each node is connected to its <span class="math notranslate nohighlight">\(k\)</span> nearest neighbors.</p></li>
+<li><p>Start with a regular ring lattice where each node is connected to  <span class="math notranslate nohighlight">\(k/2\)</span> of its right nearest neighbors and  <span class="math notranslate nohighlight">\(k/2\)</span> of its left nearest neighbors.</p></li>
 <li><p>With probability <span class="math notranslate nohighlight">\(p\)</span>, rewire each edge to a randomly chosen node.</p></li>
 </ol>
 <ul class="simple">
@@ -550,56 +886,51 @@ Most nodes have few connections, but a small number of nodes (<strong>hubs</stro
 <li><p><strong>Robustness</strong>: Resistant to random node failures but vulnerable to targeted attacks on hubs.</p></li>
 <li><p><strong>Relevance in GNNs / Graph Mining:</strong> Hubs can dominate message passing in GNNs or bias motif counts.</p></li>
 </ul>
-</section>
-</section>
 <hr class="docutils" />
-<section id="erdosrenyi-random-graph-model-g-n-p">
-<h2>4. Erdős–Rényi Random Graph Model <span class="math notranslate nohighlight">\( G(n, p) \)</span>)<a class="headerlink" href="#erdosrenyi-random-graph-model-g-n-p" title="Link to this heading">#</a></h2>
-<section id="model-definition">
-<h3>Model Definition<a class="headerlink" href="#model-definition" title="Link to this heading">#</a></h3>
-<ul class="simple">
-<li><p>G(n, p): n nodes, each possible edge exists independently with probability p.</p></li>
-<li><p>G(n, M): n nodes, exactly M edges placed randomly.</p></li>
-</ul>
-<p><strong>Number of possible edges</strong>:
-$<span class="math notranslate nohighlight">\(
-M = \binom{n}{2}
-\)</span>$</p>
-<p><strong>Degree distribution</strong>:
-$<span class="math notranslate nohighlight">\(
-P(k) = \binom{n-1}{k} p^k (1-p)^{n-1-k}
-\)</span><span class="math notranslate nohighlight">\(
-For large \)</span> n <span class="math notranslate nohighlight">\(, approximates Poisson:
-\)</span><span class="math notranslate nohighlight">\(
-P(k) \approx \frac{\lambda^k e^{-\lambda}}{k!}, \quad \lambda = p(n-1)
-\)</span>$</p>
-<p><strong>Average degree</strong>:
-$<span class="math notranslate nohighlight">\(
-\langle k \rangle = p (n-1)
-\)</span>$</p>
-<p><strong>Phase transition</strong>: A giant connected component emerges when:
-$<span class="math notranslate nohighlight">\(
-p_c = \frac{1}{n}
-\)</span>$</p>
-<ul class="simple">
-<li><p><strong>Properties</strong>:</p>
-<ul>
-<li><p><strong>Degree distribution</strong>: Approximately Poisson; most nodes have degree near the mean.</p></li>
-<li><p><strong>Clustering coefficient</strong>: Low, triangles are rare.</p></li>
-<li><p><strong>Average path length</strong>: Short, due to random connections.</p></li>
-<li><p><strong>Connectivity</strong>: A giant component emerges when p &gt; 1/n.</p></li>
-<li><p><strong>Structure</strong>: Completely random, no hubs or lattice-like patterns.</p></li>
-</ul>
-</li>
-</ul>
-<blockquote>
-<div><p><strong>Note:</strong> Not suitable for scale-free or small-world networks; often used as a baseline in motif discovery and real network comparison.</p>
-</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">networkx</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nx</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="c1"># Create a small graph with a hub</span>
+<span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">Graph</span><span class="p">()</span>
+
+<span class="c1"># Add nodes</span>
+<span class="n">nodes</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">))</span>  <span class="c1"># 10 nodes</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_nodes_from</span><span class="p">(</span><span class="n">nodes</span><span class="p">)</span>
+
+<span class="c1"># Define hub and edges</span>
+<span class="n">hub</span> <span class="o">=</span> <span class="mi">8</span>
+<span class="n">edges</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="n">hub</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="n">hub</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="n">hub</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="p">(</span><span class="n">hub</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>  <span class="c1"># hub connections</span>
+    <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>  <span class="c1"># small cluster connections</span>
+    <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span> <span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">),</span> <span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>  <span class="c1"># another cluster</span>
+<span class="p">]</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">(</span><span class="n">edges</span><span class="p">)</span>
+
+<span class="c1"># Position nodes using spring layout</span>
+<span class="n">pos</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">spring_layout</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="c1"># Draw graph</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">with_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">node_color</span><span class="o">=</span><span class="s1">&#39;skyblue&#39;</span><span class="p">,</span> <span class="n">edge_color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">node_size</span><span class="o">=</span><span class="mi">800</span><span class="p">)</span>
+
+<span class="c1"># Highlight the hub</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_nodes</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">nodelist</span><span class="o">=</span><span class="p">[</span><span class="n">hub</span><span class="p">],</span> <span class="n">node_color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">,</span> <span class="n">node_size</span><span class="o">=</span><span class="mi">900</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Example: Hub Node Dominates Message Passing / Motif Counting&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/38d7b5160eb44ce106a11d4087ae7dd57d3d04e99cd51fedd8dd3dccf35b5da8.png" src="../../_images/38d7b5160eb44ce106a11d4087ae7dd57d3d04e99cd51fedd8dd3dccf35b5da8.png" />
+</div>
+</div>
 </section>
 </section>
-<hr class="docutils" />
 <section id="barabasialbert-ba-preferential-attachment-model">
-<h2>5. Barabási–Albert (BA) Preferential Attachment Model<a class="headerlink" href="#barabasialbert-ba-preferential-attachment-model" title="Link to this heading">#</a></h2>
+<h2>Barabási–Albert (BA) Preferential Attachment Model<a class="headerlink" href="#barabasialbert-ba-preferential-attachment-model" title="Link to this heading">#</a></h2>
 <section id="idea">
 <h3>Idea<a class="headerlink" href="#idea" title="Link to this heading">#</a></h3>
 <p>Networks grow over time, and new nodes prefer to connect to already well-connected nodes.</p>
@@ -609,7 +940,7 @@ p_c = \frac{1}{n}
 <ol class="arabic simple">
 <li><p>Start with a small connected network of <span class="math notranslate nohighlight">\( m_0\)</span> nodes.</p></li>
 <li><p>At each step, add a new node with <span class="math notranslate nohighlight">\( m \le m_0 \)</span> edges.</p></li>
-<li><p><strong>Attachment probability</strong> for existing node <span class="math notranslate nohighlight">\( i\)</span>:
+<li><p><strong>Attachment probability</strong> for adding a new edge to the existing node <span class="math notranslate nohighlight">\( i\)</span>:
 $<span class="math notranslate nohighlight">\(
 \Pi(k_i) = \frac{k_i}{\sum_{j} k_j}
 \)</span><span class="math notranslate nohighlight">\(
@@ -628,9 +959,80 @@ P(k) \sim k^{-3}
 </ul>
 </section>
 </section>
+</section>
 <hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="stochastic-block-model-sbm">
+<h1>4. Stochastic Block Model (SBM)<a class="headerlink" href="#stochastic-block-model-sbm" title="Link to this heading">#</a></h1>
+<section id="id2">
+<h2>Idea<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>SBM generates graphs with <strong>community structure</strong>.</p></li>
+<li><p>Nodes are partitioned into <strong>k blocks (communities)</strong>.</p></li>
+<li><p>The probability of an edge between two nodes depends on their community membership.</p></li>
+</ul>
+</section>
+<section id="id3">
+<h2>Algorithm<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>Assign each node to a community.</p></li>
+<li><p>Define a <strong>k × k matrix P</strong> with connection probabilities:</p>
+<ul class="simple">
+<li><p>(P_{ab}) = probability of connecting a node in community a to a node in community b.</p></li>
+</ul>
+</li>
+<li><p>For each pair of nodes (i, j):</p>
+<ul class="simple">
+<li><p>Identify their communities (a, b)</p></li>
+<li><p>Add an edge with probability (P_{ab})</p></li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="id4">
+<h2>Properties<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Captures <strong>modular or clustered structure</strong></p></li>
+<li><p>Allows <strong>flexible intra- and inter-community connectivity</strong></p></li>
+<li><p>Random but preserves community structure</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">networkx</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nx</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="c1"># Parameters</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">10</span>  <span class="c1"># number of nodes</span>
+<span class="n">k</span> <span class="o">=</span> <span class="mi">2</span>   <span class="c1"># number of communities</span>
+<span class="n">sizes</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>  <span class="c1"># nodes per community</span>
+<span class="n">p_in</span> <span class="o">=</span> <span class="mf">0.8</span>      <span class="c1"># probability within community</span>
+<span class="n">p_out</span> <span class="o">=</span> <span class="mf">0.1</span>     <span class="c1"># probability between communities</span>
+
+<span class="c1"># Create probability matrix</span>
+<span class="n">P</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">p_in</span><span class="p">,</span> <span class="n">p_out</span><span class="p">],</span>
+              <span class="p">[</span><span class="n">p_out</span><span class="p">,</span> <span class="n">p_in</span><span class="p">]])</span>
+
+<span class="c1"># Generate SBM graph</span>
+<span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">stochastic_block_model</span><span class="p">(</span><span class="n">sizes</span><span class="p">,</span> <span class="n">P</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="c1"># Assign colors to communities</span>
+<span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;skyblue&#39;</span><span class="p">]</span><span class="o">*</span><span class="n">sizes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="s1">&#39;orange&#39;</span><span class="p">]</span><span class="o">*</span><span class="n">sizes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="c1"># Draw graph</span>
+<span class="n">pos</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">spring_layout</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">with_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">node_color</span><span class="o">=</span><span class="n">colors</span><span class="p">,</span> <span class="n">edge_color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">node_size</span><span class="o">=</span><span class="mi">800</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Stochastic Block Model Example: 2 Communities&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/2a96dbbe3baddd89bdf2e7120da757f9785a959110cd184ab0cb27dfa02b1501.png" src="../../_images/2a96dbbe3baddd89bdf2e7120da757f9785a959110cd184ab0cb27dfa02b1501.png" />
+</div>
+</div>
+</section>
 <section id="comparison-of-models">
-<h2>6. Comparison of Models<a class="headerlink" href="#comparison-of-models" title="Link to this heading">#</a></h2>
+<h2>Comparison of Models<a class="headerlink" href="#comparison-of-models" title="Link to this heading">#</a></h2>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Model</p></th>
@@ -657,15 +1059,23 @@ P(k) \sim k^{-3}
 <td><p>High</p></td>
 <td><p>Short</p></td>
 <td><p>Lattice network with small rewiring; preserves clustering while reducing path length</p></td>
-<td><p>friendship networks, neural networks, power grids</p></td>
+<td><p>Friendship networks, neural networks, power grids</p></td>
 </tr>
 <tr class="row-even"><td><p><strong>Barabási–Albert (BA)</strong></p></td>
 <td><p>Scale-free</p></td>
-<td><p>Power-law ( P(k) \sim k^{-3} )</p></td>
+<td><p>Power-law (<span class="math notranslate nohighlight">\(P(k) \sim k^{-3}\)</span>)</p></td>
 <td><p>Low–Medium</p></td>
 <td><p>Short</p></td>
 <td><p>Network growth + preferential attachment → hubs (rich-get-richer)</p></td>
 <td><p>World Wide Web, citation networks, airline routes, metabolic networks</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Stochastic Block Model (SBM)</strong></p></td>
+<td><p>Community / modular networks</p></td>
+<td><p>Can be arbitrary (depends on P matrix)</p></td>
+<td><p>Medium–High</p></td>
+<td><p>Medium–Short</p></td>
+<td><p>Nodes assigned to communities; intra-community edges denser than inter-community edges</p></td>
+<td><p>Social networks with communities, collaboration networks, biological networks</p></td>
 </tr>
 </tbody>
 </table>
@@ -673,7 +1083,7 @@ P(k) \sim k^{-3}
 </section>
 <hr class="docutils" />
 <section id="applications">
-<h2>7. Applications<a class="headerlink" href="#applications" title="Link to this heading">#</a></h2>
+<h2>Applications<a class="headerlink" href="#applications" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p><strong>Epidemiology:</strong> Predict disease spread in social networks.</p></li>
 <li><p><strong>Web Science:</strong> Modeling hyperlink structures.</p></li>
@@ -692,213 +1102,52 @@ P(k) \sim k^{-3}
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">Generate, visualize, and analyze three fundamental complex network models:</span>
-<span class="sd">- Erdős–Rényi (Random graph)</span>
-<span class="sd">- Watts–Strogatz (Small-world)</span>
-<span class="sd">- Barabási–Albert (Scale-free)</span>
-
-<span class="sd">Fully compatible with Python 3.13 and NumPy 2.0+.</span>
-
-<span class="sd">Required packages:</span>
-<span class="sd">- networkx</span>
-<span class="sd">- numpy</span>
-<span class="sd">- matplotlib</span>
-<span class="sd">- scipy</span>
-
-<span class="sd">Install with:</span>
-<span class="sd">pip install networkx numpy matplotlib scipy</span>
-<span class="sd">&quot;&quot;&quot;</span>
-
-<span class="c1"># --- Compatibility patch for NumPy 2.0+ ---</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">np</span><span class="p">,</span> <span class="s2">&quot;float_&quot;</span><span class="p">):</span>
-    <span class="n">np</span><span class="o">.</span><span class="n">float_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">float64</span>
-<span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">np</span><span class="p">,</span> <span class="s2">&quot;int_&quot;</span><span class="p">):</span>
-    <span class="n">np</span><span class="o">.</span><span class="n">int_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">int64</span>
-
-<span class="kn">import</span><span class="w"> </span><span class="nn">networkx</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nx</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
-
-<span class="c1"># --- Utility Functions ---</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">largest_connected_subgraph</span><span class="p">(</span><span class="n">G</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Returns the largest connected component of graph G as a subgraph.</span>
-<span class="sd">    Ensures computations like average shortest path length are valid.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="n">nx</span><span class="o">.</span><span class="n">is_connected</span><span class="p">(</span><span class="n">G</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">G</span>
-    <span class="n">components</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">nx</span><span class="o">.</span><span class="n">connected_components</span><span class="p">(</span><span class="n">G</span><span class="p">))</span>
-    <span class="n">largest_comp</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">components</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="nb">len</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">G</span><span class="o">.</span><span class="n">subgraph</span><span class="p">(</span><span class="n">largest_comp</span><span class="p">)</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">safe_average_shortest_path_length</span><span class="p">(</span><span class="n">G</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Computes average shortest path length on the largest connected component (GCC).</span>
-<span class="sd">    Returns np.nan if the graph is empty or too small.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="n">G</span><span class="o">.</span><span class="n">number_of_nodes</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
-    <span class="n">GCC</span> <span class="o">=</span> <span class="n">largest_connected_subgraph</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">GCC</span><span class="o">.</span><span class="n">number_of_nodes</span><span class="p">()</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">:</span>
-        <span class="k">return</span> <span class="mf">0.0</span>
-    <span class="k">return</span> <span class="n">nx</span><span class="o">.</span><span class="n">average_shortest_path_length</span><span class="p">(</span><span class="n">GCC</span><span class="p">)</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">degree_distribution</span><span class="p">(</span><span class="n">G</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Returns an array of node degrees.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">d</span> <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">G</span><span class="o">.</span><span class="n">degree</span><span class="p">()])</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">log_binned_histogram</span><span class="p">(</span><span class="n">degrees</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">30</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Computes histogram on log-spaced bins for degree distribution visualization.</span>
-<span class="sd">    Returns bin centers and normalized PDF values.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">degrees</span> <span class="o">=</span> <span class="n">degrees</span><span class="p">[</span><span class="n">degrees</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span>  <span class="c1"># exclude zeros to avoid log(0)</span>
-    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">degrees</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([]),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([])</span>
-    <span class="n">min_deg</span><span class="p">,</span> <span class="n">max_deg</span> <span class="o">=</span> <span class="n">degrees</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">degrees</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
-    <span class="n">log_bins</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">min_deg</span><span class="p">)),</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">max_deg</span><span class="p">),</span> <span class="n">bins</span><span class="p">)</span>
-    <span class="n">counts</span><span class="p">,</span> <span class="n">edges</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">histogram</span><span class="p">(</span><span class="n">degrees</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="n">log_bins</span><span class="p">)</span>
-    <span class="n">centers</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">edges</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">edges</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
-    <span class="n">pdf</span> <span class="o">=</span> <span class="n">counts</span> <span class="o">/</span> <span class="p">(</span><span class="n">counts</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">edges</span><span class="p">))</span>
-    <span class="k">return</span> <span class="n">centers</span><span class="p">,</span> <span class="n">pdf</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">estimate_power_law_exponent</span><span class="p">(</span><span class="n">degrees</span><span class="p">,</span> <span class="n">k_min</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Estimates the power-law exponent (gamma) for the degree distribution tail.</span>
-<span class="sd">    Uses continuous MLE approximation from Clauset et al. (2009).</span>
-<span class="sd">    Returns (gamma_hat, k_min_used, tail_size).</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">tail</span> <span class="o">=</span> <span class="n">degrees</span><span class="p">[</span><span class="n">degrees</span> <span class="o">&gt;=</span> <span class="n">k_min</span><span class="p">]</span>
-    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">tail</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="n">k_min</span><span class="p">,</span> <span class="n">n</span>
-    <span class="n">denom</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">tail</span> <span class="o">/</span> <span class="p">(</span><span class="n">k_min</span> <span class="o">-</span> <span class="mf">0.5</span><span class="p">)))</span>
-    <span class="n">gamma_hat</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">+</span> <span class="n">n</span> <span class="o">/</span> <span class="n">denom</span>
-    <span class="k">return</span> <span class="n">gamma_hat</span><span class="p">,</span> <span class="n">k_min</span><span class="p">,</span> <span class="n">n</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">graph_summary_stats</span><span class="p">(</span><span class="n">G</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Computes key metrics for graph G:</span>
-<span class="sd">    - number of nodes &amp; edges</span>
-<span class="sd">    - average degree &amp; degree std</span>
-<span class="sd">    - average clustering coefficient &amp; transitivity</span>
-<span class="sd">    - average shortest path length (on largest connected component)</span>
-<span class="sd">    - fraction of nodes in largest connected component</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">degs</span> <span class="o">=</span> <span class="n">degree_distribution</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
-    <span class="n">n_nodes</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="n">number_of_nodes</span><span class="p">()</span>
-    <span class="n">GCC</span> <span class="o">=</span> <span class="n">largest_connected_subgraph</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
-    <span class="n">frac_in_GCC</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">GCC</span><span class="p">)</span> <span class="o">/</span> <span class="nb">max</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_nodes</span><span class="p">)</span>
-
-    <span class="n">stats</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s2">&quot;Nodes&quot;</span><span class="p">:</span> <span class="n">n_nodes</span><span class="p">,</span>
-        <span class="s2">&quot;Edges&quot;</span><span class="p">:</span> <span class="n">G</span><span class="o">.</span><span class="n">number_of_edges</span><span class="p">(),</span>
-        <span class="s2">&quot;Avg Degree&quot;</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">degs</span><span class="p">))</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">degs</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="mf">0.0</span><span class="p">,</span>
-        <span class="s2">&quot;Degree Std&quot;</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">degs</span><span class="p">))</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">degs</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="mf">0.0</span><span class="p">,</span>
-        <span class="s2">&quot;Avg Clustering&quot;</span><span class="p">:</span> <span class="n">nx</span><span class="o">.</span><span class="n">average_clustering</span><span class="p">(</span><span class="n">G</span><span class="p">),</span>
-        <span class="s2">&quot;Transitivity&quot;</span><span class="p">:</span> <span class="n">nx</span><span class="o">.</span><span class="n">transitivity</span><span class="p">(</span><span class="n">G</span><span class="p">),</span>
-        <span class="s2">&quot;Avg Shortest Path (GCC)&quot;</span><span class="p">:</span> <span class="n">safe_average_shortest_path_length</span><span class="p">(</span><span class="n">G</span><span class="p">),</span>
-        <span class="s2">&quot;Fraction Nodes in GCC&quot;</span><span class="p">:</span> <span class="n">frac_in_GCC</span><span class="p">,</span>
-    <span class="p">}</span>
-    <span class="k">return</span> <span class="n">stats</span>
-
-<span class="c1"># --- Graph Model Generators ---</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># --- Graph Model Generators ---</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">generate_erdos_renyi</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Generates an Erdős–Rényi random graph G(n, p)</span>
-<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">nx</span><span class="o">.</span><span class="n">erdos_renyi_graph</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">generate_watts_strogatz</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">p_rewire</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Generates a Watts–Strogatz small-world graph</span>
-<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">nx</span><span class="o">.</span><span class="n">watts_strogatz_graph</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">p_rewire</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">generate_barabasi_albert</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Generates a Barabási–Albert scale-free graph</span>
-<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">nx</span><span class="o">.</span><span class="n">barabasi_albert_graph</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
 
-<span class="c1"># --- Visualization Functions ---</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">plot_graph</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">node_size</span><span class="o">=</span><span class="mi">50</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">generate_stochastic_block_model</span><span class="p">(</span><span class="n">sizes</span><span class="p">,</span> <span class="n">p_matrix</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Plots the graph using spring layout, coloring nodes by degree.</span>
+<span class="sd">    Generates a Stochastic Block Model (SBM) graph.</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters:</span>
+<span class="sd">    - sizes: list of integers, number of nodes in each community</span>
+<span class="sd">    - p_matrix: k x k matrix of connection probabilities between communities</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="n">ax</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
-    <span class="n">degrees</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">degree</span><span class="p">())</span>
-    <span class="n">pos</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">spring_layout</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
-    <span class="n">nodes</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">([</span><span class="n">pos</span><span class="p">[</span><span class="n">n</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">()],</span>
-                       <span class="p">[</span><span class="n">pos</span><span class="p">[</span><span class="n">n</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">()],</span>
-                       <span class="n">c</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">degrees</span><span class="o">.</span><span class="n">values</span><span class="p">()),</span>
-                       <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;plasma&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="n">node_size</span><span class="p">)</span>
-    <span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_edges</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
-    <span class="n">cbar</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">nodes</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
-    <span class="n">cbar</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="s1">&#39;Node Degree&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">nx</span><span class="o">.</span><span class="n">stochastic_block_model</span><span class="p">(</span><span class="n">sizes</span><span class="p">,</span> <span class="n">p_matrix</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
 
-<span class="k">def</span><span class="w"> </span><span class="nf">plot_degree_distribution</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">ax_linear</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ax_log</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">nbins</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Degree Distribution&#39;</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Plots degree distribution in linear and log-log scale.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">degs</span> <span class="o">=</span> <span class="n">degree_distribution</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
-    <span class="c1"># Linear histogram</span>
-    <span class="k">if</span> <span class="n">ax_linear</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">ax_log</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">ax_linear</span><span class="p">,</span> <span class="n">ax_log</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
-    <span class="n">ax_linear</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">degs</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="nb">range</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">degs</span><span class="o">.</span><span class="n">max</span><span class="p">())</span> <span class="o">+</span> <span class="mi">2</span><span class="p">),</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
-    <span class="n">ax_linear</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Degree k&#39;</span><span class="p">)</span>
-    <span class="n">ax_linear</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Probability&#39;</span><span class="p">)</span>
-    <span class="n">ax_linear</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">title</span> <span class="o">+</span> <span class="s1">&#39; (Linear bins)&#39;</span><span class="p">)</span>
-    <span class="n">ax_linear</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
-
-    <span class="c1"># Log-binned histogram</span>
-    <span class="c1"># Compute the degree distribution using logarithmic binning.</span>
-    <span class="c1"># log_binned_histogram groups node degrees into bins that grow exponentially</span>
-    <span class="c1"># (e.g., [1–2], [2–4], [4–8], ...).</span>
-    <span class="c1"># This helps visualize power-law (scale-free) behavior where:</span>
-    <span class="c1">#   P(k) ~ k^(-γ)</span>
-    <span class="c1"># Log-binning smooths the heavy tail and makes the degree distribution</span>
-    <span class="c1"># appear linear on a log–log plot — a key indicator of scale-free structure.</span>
-    <span class="n">centers</span><span class="p">,</span> <span class="n">pdf</span> <span class="o">=</span> <span class="n">log_binned_histogram</span><span class="p">(</span><span class="n">degs</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="n">nbins</span><span class="p">)</span>
-    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">centers</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="n">ax_log</span><span class="o">.</span><span class="n">loglog</span><span class="p">(</span><span class="n">centers</span><span class="p">,</span> <span class="n">pdf</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">ax_log</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="s1">&#39;No positive degrees&#39;</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">ax_log</span><span class="o">.</span><span class="n">transAxes</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">)</span>
-    <span class="n">ax_log</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Degree k (log)&#39;</span><span class="p">)</span>
-    <span class="n">ax_log</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;PDF (log)&#39;</span><span class="p">)</span>
-    <span class="n">ax_log</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">title</span> <span class="o">+</span> <span class="s1">&#39; (Log-log scale)&#39;</span><span class="p">)</span>
-    <span class="n">ax_log</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">which</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
 
 <span class="c1"># --- Main Demo Function ---</span>
 
-<span class="k">def</span><span class="w"> </span><span class="nf">demo</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">er_p</span><span class="o">=</span><span class="mf">0.02</span><span class="p">,</span> <span class="n">ws_k</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">ws_p</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">ba_m</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">demo</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">er_p</span><span class="o">=</span><span class="mf">0.02</span><span class="p">,</span> <span class="n">ws_k</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">ws_p</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">ba_m</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+         <span class="n">sbm_sizes</span><span class="o">=</span><span class="p">[</span><span class="mi">250</span><span class="p">,</span> <span class="mi">250</span><span class="p">],</span> <span class="n">sbm_p_in</span><span class="o">=</span><span class="mf">0.08</span><span class="p">,</span> <span class="n">sbm_p_out</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span>
+         <span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">):</span>
     <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
-    <span class="c1"># Parameters:</span>
-    <span class="c1">#   n       : number of nodes in the network</span>
-    <span class="c1">#   er_p    : edge creation probability in the ER model</span>
-    <span class="c1">#   ws_k    : each node is connected to its k nearest neighbors in the WS model</span>
-    <span class="c1">#   ws_p    : rewiring probability in the WS model</span>
-    <span class="c1">#   ba_m    : number of edges each new node attaches to existing nodes in the BA model</span>
-    <span class="c1">#   seed    : random seed for reproducibility</span>
+
+    <span class="c1"># Generate graphs</span>
     <span class="n">G_er</span> <span class="o">=</span> <span class="n">generate_erdos_renyi</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">er_p</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
     <span class="n">G_ws</span> <span class="o">=</span> <span class="n">generate_watts_strogatz</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">ws_k</span><span class="p">,</span> <span class="n">ws_p</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
     <span class="n">G_ba</span> <span class="o">=</span> <span class="n">generate_barabasi_albert</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">ba_m</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
 
-    <span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">18</span><span class="p">,</span> <span class="mi">16</span><span class="p">))</span>  <span class="c1"># 3 rows, 3 cols</span>
+    <span class="c1"># SBM probability matrix</span>
+    <span class="n">k</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">sbm_sizes</span><span class="p">)</span>
+    <span class="n">p_matrix</span> <span class="o">=</span> <span class="p">[[</span><span class="n">sbm_p_in</span> <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="n">j</span> <span class="k">else</span> <span class="n">sbm_p_out</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">k</span><span class="p">)]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">k</span><span class="p">)]</span>
+    <span class="n">G_sbm</span> <span class="o">=</span> <span class="n">generate_stochastic_block_model</span><span class="p">(</span><span class="n">sbm_sizes</span><span class="p">,</span> <span class="n">p_matrix</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
+
+    <span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">18</span><span class="p">,</span> <span class="mi">20</span><span class="p">))</span>  <span class="c1"># 4 models now</span>
 
     <span class="n">graph_data</span> <span class="o">=</span> <span class="p">[</span>
         <span class="p">(</span><span class="s2">&quot;Erdős–Rényi (Random Graph)&quot;</span><span class="p">,</span> <span class="n">G_er</span><span class="p">),</span>
         <span class="p">(</span><span class="s2">&quot;Watts–Strogatz (Small-world)&quot;</span><span class="p">,</span> <span class="n">G_ws</span><span class="p">),</span>
         <span class="p">(</span><span class="s2">&quot;Barabási–Albert (Scale-free)&quot;</span><span class="p">,</span> <span class="n">G_ba</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;Stochastic Block Model (SBM)&quot;</span><span class="p">,</span> <span class="n">G_sbm</span><span class="p">)</span>
     <span class="p">]</span>
 
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">--- Network Models Summary ---</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
@@ -928,9 +1177,8 @@ P(k) \sim k^{-3}
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>--- Network Models Summary ---
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Erdős–Rényi (Random Graph):
+
+Erdős–Rényi (Random Graph):
   Nodes                    : 500
   Edges                    : 2437
   Avg Degree               : 9.7480
@@ -940,9 +1188,8 @@ P(k) \sim k^{-3}
   Avg Shortest Path (GCC)  : 2.9674
   Fraction Nodes in GCC    : 1.0000
   Estimated power-law exponent (gamma) from tail: 1.5496 (k_min=2, tail size=500)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Watts–Strogatz (Small-world):
+
+Watts–Strogatz (Small-world):
   Nodes                    : 500
   Edges                    : 1500
   Avg Degree               : 6.0000
@@ -952,21 +1199,31 @@ P(k) \sim k^{-3}
   Avg Shortest Path (GCC)  : 6.9900
   Fraction Nodes in GCC    : 1.0000
   Estimated power-law exponent (gamma) from tail: 1.7235 (k_min=2, tail size=500)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Barabási–Albert (Scale-free):
+
+Barabási–Albert (Scale-free):
   Nodes                    : 500
   Edges                    : 1491
   Avg Degree               : 5.9640
-  Degree Std               : 6.3525
-  Avg Clustering           : 0.0618
-  Transitivity             : 0.0322
-  Avg Shortest Path (GCC)  : 3.2350
+  Degree Std               : 6.8521
+  Avg Clustering           : 0.0559
+  Transitivity             : 0.0295
+  Avg Shortest Path (GCC)  : 3.1906
   Fraction Nodes in GCC    : 1.0000
-  Estimated power-law exponent (gamma) from tail: 1.8692 (k_min=2, tail size=500)
+  Estimated power-law exponent (gamma) from tail: 1.8732 (k_min=2, tail size=500)
+
+Stochastic Block Model (SBM):
+  Nodes                    : 500
+  Edges                    : 5570
+  Avg Degree               : 22.2800
+  Degree Std               : 4.6002
+  Avg Clustering           : 0.0667
+  Transitivity             : 0.0657
+  Avg Shortest Path (GCC)  : 2.3833
+  Fraction Nodes in GCC    : 1.0000
+  Estimated power-law exponent (gamma) from tail: 1.3737 (k_min=2, tail size=500)
 </pre></div>
 </div>
-<img alt="../../_images/dd30884e002dad3874345e6b0c68a2bae44278af22e13d5958bd4cc1e91a70e9.png" src="../../_images/dd30884e002dad3874345e6b0c68a2bae44278af22e13d5958bd4cc1e91a70e9.png" />
+<img alt="../../_images/71b8aa66605cb28bf290d20489b07891d6687d813fdcf3ceddeaf1270e91e4e8.png" src="../../_images/71b8aa66605cb28bf290d20489b07891d6687d813fdcf3ceddeaf1270e91e4e8.png" />
 </div>
 </div>
 </section>
@@ -981,16 +1238,16 @@ P(k) \sim k^{-3}
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "mlgbook"
+            mode: "python"
         },
         kernelOptions: {
-            name: "mlgbook",
+            name: "python3",
             path: "./content\Chapter01"
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'mlgbook'</script>
+    <script>kernelName = 'python3'</script>
 
                 </article>
               
@@ -1016,7 +1273,7 @@ P(k) \sim k^{-3}
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Dynamic Graphs and Network Evolution Analysis</p>
+        <p class="prev-next-title">6. Dynamic Graphs and Network Evolution Analysis</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1036,7 +1293,40 @@ P(k) \sim k^{-3}
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">1. Introduction</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Complex Networks and Generative Models</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#complex-networks-in-graph-theory">Complex Networks in Graph Theory</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-a-complex-network">What Is a Complex Network?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-characteristics-of-complex-networks">Key Characteristics of Complex Networks</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sparsity">1. <strong>Sparsity</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#heterogeneous-degree-distribution">2. <strong>Heterogeneous Degree Distribution</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#community-structure">3. <strong>Community Structure</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#power-law-degree-distribution">4. <strong>Power-Law Degree Distribution</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#small-world-property">5. <strong>Small-World Property</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scale-free-structure">6. <strong>Scale-Free Structure</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#examples-of-real-world-complex-networks">Examples of Real-World Complex Networks</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#social-networks">● Social Networks</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#biological-networks">● Biological Networks</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#technological-networks">● Technological Networks</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scientific-networks">● Scientific Networks</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-are-they-called-complex">Why Are They Called “Complex”?</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#why-use-generative-models-for-graphs">Why Use Generative Models for Graphs?</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generative-models-for-complex-networks">Generative Models for Complex Networks</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#erdosrenyi-er-random-graph"><strong>1. Erdős–Rényi (ER) Random Graph</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wattsstrogatz-small-world-model"><strong>2. Watts–Strogatz Small-World Model</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#barabasialbert-ba-scale-free-model"><strong>3. Barabási–Albert (BA) Scale-Free Model</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stochastic-block-models-sbm"><strong>4. Stochastic Block Models (SBM)</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#erdosrenyi-random-graph-model-g-n-p">1. Erdős–Rényi Random Graph Model <span class="math notranslate nohighlight">\( G(n, p) \)</span>)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-definition">Model Definition</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#small-world-networks">2. Small-world Networks</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#definition">Definition</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wattsstrogatz-ws-model-to-create-a-small-world-network">Watts–Strogatz (WS) Model to create a Small-world network</a></li>
@@ -1047,20 +1337,25 @@ P(k) \sim k^{-3}
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#statistical-properties">Statistical Properties</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#erdosrenyi-random-graph-model-g-n-p">4. Erdős–Rényi Random Graph Model <span class="math notranslate nohighlight">\( G(n, p) \)</span>)</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-definition">Model Definition</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#barabasialbert-ba-preferential-attachment-model">5. Barabási–Albert (BA) Preferential Attachment Model</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#barabasialbert-ba-preferential-attachment-model">Barabási–Albert (BA) Preferential Attachment Model</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#idea">Idea</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#algorithm">Algorithm</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#properties">Properties</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparison-of-models">6. Comparison of Models</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#applications">7. Applications</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#stochastic-block-model-sbm">4. Stochastic Block Model (SBM)</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Idea</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Algorithm</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Properties</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparison-of-models">Comparison of Models</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#applications">Applications</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">8. References</a></li>
 </ul>
+</li>
+</ul>
+
   </nav></div>
 
 </div></div>

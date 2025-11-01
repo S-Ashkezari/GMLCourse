@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Dynamic Graphs and Network Evolution Analysis &#8212; Graph Machine Learning</title>
+    <title>6. Dynamic Graphs and Network Evolution Analysis &#8212; Graph Machine Learning</title>
   
   
   
@@ -186,7 +186,9 @@
 <li class="toctree-l2"><a class="reference internal" href="02_community_detection.html">Community Detection in Graphs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="03_FrequentSubgraphMining.html">Frequent Subgraph Mining</a></li>
 <li class="toctree-l2"><a class="reference internal" href="04_Complex%20Networks%20and%20Generative%20Models.html">Complex Networks and Generative Models</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Dynamic Graphs and Network Evolution Analysis</a></li>
+
+
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">6. Dynamic Graphs and Network Evolution Analysis</a></li>
 </ul>
 </details></li>
 </ul>
@@ -405,7 +407,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Dynamic Graphs and Network Evolution Analysis</h1>
+    <h1>6. Dynamic Graphs and Network Evolution Analysis</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -415,28 +417,28 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#definitions-and-representations">1 Definitions and Representations</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#temporal-dynamic-graph-formal-definition">1.1 Temporal / Dynamic Graph — formal definition</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#snapshot-vs-streaming-vs-interval-representations">1.2 Snapshot vs. Streaming vs. Interval representations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#definitions-and-representations">6.1 Definitions and Representations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#temporal-dynamic-graph-formal-definition">6.1.1 Temporal / Dynamic Graph — formal definition</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#snapshot-vs-streaming-vs-interval-representations">6.1.2 Snapshot vs. Streaming vs. Interval representations</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#temporal-analogues-of-static-measures">2 Temporal analogues of static measures</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#temporal-degree-per-node">2.1 Temporal degree (per node)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#temporal-closeness-reachability-and-temporal-paths">2.2 Temporal closeness / reachability and temporal paths</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#temporal-motifs">2.3 Temporal motifs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#temporal-analogues-of-static-measures">6.2 Temporal analogues of static measures</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#temporal-degree-per-node">6.2.1 Temporal degree (per node)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#temporal-closeness-reachability-and-temporal-paths">6.2.2 Temporal closeness / reachability and temporal paths</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#temporal-motifs">6.2.3 Temporal motifs</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dynamic-network-models-brief">3 Dynamic network models (brief)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tasks-in-dynamic-graph-analysis">4 Tasks in dynamic graph analysis</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#methods-for-anomaly-change-detection-core-ideas">5 Methods for anomaly &amp; change detection (core ideas)</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#global-change-detection-snapshot-level">5.1 Global change detection (snapshot-level)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#local-node-level-anomaly">5.2 Local / node-level anomaly</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#subgraph-structural-anomaly">5.3 Subgraph / structural anomaly</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#embedding-based-detection">5.4 Embedding-based detection</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dynamic-network-models-brief">6.3 Dynamic network models (brief)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tasks-in-dynamic-graph-analysis">6.4 Tasks in dynamic graph analysis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#methods-for-anomaly-change-detection-core-ideas">6.5 Methods for anomaly &amp; change detection (core ideas)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#global-change-detection-snapshot-level">6.5.1 Global change detection (snapshot-level)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#local-node-level-anomaly">6.5.2 Local / node-level anomaly</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#subgraph-structural-anomaly">6.5.3 Subgraph / structural anomaly</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#embedding-based-detection">6.5.4 Embedding-based detection</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#algorithms-approaches-short-survey">6 Algorithms &amp; approaches (short survey)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-example-snapshot-based-anomaly-detection-python">7 Practical example: snapshot-based anomaly detection (Python)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#algorithms-approaches-short-survey">6.6 Algorithms &amp; approaches (short survey)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-example-snapshot-based-anomaly-detection-python">6.7 Practical example: snapshot-based anomaly detection (Python)</a></li>
 </ul>
             </nav>
         </div>
@@ -448,23 +450,14 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">np</span><span class="p">,</span> <span class="s2">&quot;float_&quot;</span><span class="p">):</span>
-    <span class="n">np</span><span class="o">.</span><span class="n">float_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">float64</span>
-</pre></div>
-</div>
-</div>
-</div>
-<section class="tex2jax_ignore mathjax_ignore" id="dynamic-graphs-and-network-evolution-analysis">
-<h1>Dynamic Graphs and Network Evolution Analysis<a class="headerlink" href="#dynamic-graphs-and-network-evolution-analysis" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="dynamic-graphs-and-network-evolution-analysis">
+<h1>6. Dynamic Graphs and Network Evolution Analysis<a class="headerlink" href="#dynamic-graphs-and-network-evolution-analysis" title="Link to this heading">#</a></h1>
 <p>In this session we study <strong>dynamic (temporal) graphs</strong> and methods to analyze how network structure evolves over time. We cover formal definitions, common representations, mathematical measures for temporal networks, basic models of evolution, and methods for <strong>anomaly / change detection</strong> in time-varying graphs. A small hands-on Python example (snapshot-based) is included at the end.</p>
 <hr class="docutils" />
 <section id="definitions-and-representations">
-<h2>1 Definitions and Representations<a class="headerlink" href="#definitions-and-representations" title="Link to this heading">#</a></h2>
+<h2>6.1 Definitions and Representations<a class="headerlink" href="#definitions-and-representations" title="Link to this heading">#</a></h2>
 <section id="temporal-dynamic-graph-formal-definition">
-<h3>1.1 Temporal / Dynamic Graph — formal definition<a class="headerlink" href="#temporal-dynamic-graph-formal-definition" title="Link to this heading">#</a></h3>
+<h3>6.1.1 Temporal / Dynamic Graph — formal definition<a class="headerlink" href="#temporal-dynamic-graph-formal-definition" title="Link to this heading">#</a></h3>
 <p>A <strong>temporal graph</strong> (also: time-varying graph) is a graph whose vertex set and/or edge set can change over (continuous or discrete) time.</p>
 <p>Two common formalizations:</p>
 <p><strong>(A) Discrete-time snapshot sequence</strong></p>
@@ -482,7 +475,7 @@ Optionally edges have durations \)</span>(u,v,t_{start},t_{end})$.</p>
 </section>
 <hr class="docutils" />
 <section id="snapshot-vs-streaming-vs-interval-representations">
-<h3>1.2 Snapshot vs. Streaming vs. Interval representations<a class="headerlink" href="#snapshot-vs-streaming-vs-interval-representations" title="Link to this heading">#</a></h3>
+<h3>6.1.2 Snapshot vs. Streaming vs. Interval representations<a class="headerlink" href="#snapshot-vs-streaming-vs-interval-representations" title="Link to this heading">#</a></h3>
 <ol class="arabic simple">
 <li><p><strong>Snapshot-based</strong></p>
 <ul class="simple">
@@ -550,10 +543,10 @@ Optionally edges have durations \)</span>(u,v,t_{start},t_{end})$.</p>
 </section>
 <hr class="docutils" />
 <section id="temporal-analogues-of-static-measures">
-<h2>2 Temporal analogues of static measures<a class="headerlink" href="#temporal-analogues-of-static-measures" title="Link to this heading">#</a></h2>
+<h2>6.2 Temporal analogues of static measures<a class="headerlink" href="#temporal-analogues-of-static-measures" title="Link to this heading">#</a></h2>
 <p>Many classic graph measures generalize to the temporal setting. Let <span class="math notranslate nohighlight">\(G^{(t)}=(V^{(t)},E^{(t)})\)</span> be the snapshot at time <span class="math notranslate nohighlight">\(t\)</span>.</p>
 <section id="temporal-degree-per-node">
-<h3>2.1 Temporal degree (per node)<a class="headerlink" href="#temporal-degree-per-node" title="Link to this heading">#</a></h3>
+<h3>6.2.1 Temporal degree (per node)<a class="headerlink" href="#temporal-degree-per-node" title="Link to this heading">#</a></h3>
 <p>Node <span class="math notranslate nohighlight">\(v\)</span> degree at time <span class="math notranslate nohighlight">\(t\)</span>:
 $<span class="math notranslate nohighlight">\(
 d_v^{(t)} = \deg_{G^{(t)}}(v) = |\{u : (v,u)\in E^{(t)}\}|.
@@ -564,17 +557,17 @@ $<span class="math notranslate nohighlight">\(
 \)</span>$</p>
 </section>
 <section id="temporal-closeness-reachability-and-temporal-paths">
-<h3>2.2 Temporal closeness / reachability and temporal paths<a class="headerlink" href="#temporal-closeness-reachability-and-temporal-paths" title="Link to this heading">#</a></h3>
+<h3>6.2.2 Temporal closeness / reachability and temporal paths<a class="headerlink" href="#temporal-closeness-reachability-and-temporal-paths" title="Link to this heading">#</a></h3>
 <p>A <strong>temporal path</strong> is a sequence of time-ordered edges <span class="math notranslate nohighlight">\((v_0,v_1,t_1), (v_1,v_2,t_2),\dots\)</span> with <span class="math notranslate nohighlight">\(t_1 \le t_2 \le \dots\)</span> (strict inequality if edges are instantaneous and must respect causality). Temporal reachability and temporal distances depend on time ordering.</p>
 </section>
 <section id="temporal-motifs">
-<h3>2.3 Temporal motifs<a class="headerlink" href="#temporal-motifs" title="Link to this heading">#</a></h3>
+<h3>6.2.3 Temporal motifs<a class="headerlink" href="#temporal-motifs" title="Link to this heading">#</a></h3>
 <p>Small time-respecting patterns (e.g., A→B at <span class="math notranslate nohighlight">\(t\)</span>, B→C at <span class="math notranslate nohighlight">\(t+\delta\)</span>) called <strong>temporal motifs</strong>. Counting their frequency reveals micro-dynamics.</p>
 </section>
 </section>
 <hr class="docutils" />
 <section id="dynamic-network-models-brief">
-<h2>3 Dynamic network models (brief)<a class="headerlink" href="#dynamic-network-models-brief" title="Link to this heading">#</a></h2>
+<h2>6.3 Dynamic network models (brief)<a class="headerlink" href="#dynamic-network-models-brief" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p><strong>Edge arrival models</strong>: Random edge insertion processes (Poisson processes, temporal ER).</p></li>
 <li><p><strong>Temporal preferential attachment</strong>: time-aware Barabási–Albert variants (node/edge arrival times matter).</p></li>
@@ -584,7 +577,7 @@ $<span class="math notranslate nohighlight">\(
 </section>
 <hr class="docutils" />
 <section id="tasks-in-dynamic-graph-analysis">
-<h2>4 Tasks in dynamic graph analysis<a class="headerlink" href="#tasks-in-dynamic-graph-analysis" title="Link to this heading">#</a></h2>
+<h2>6.4 Tasks in dynamic graph analysis<a class="headerlink" href="#tasks-in-dynamic-graph-analysis" title="Link to this heading">#</a></h2>
 <ol class="arabic simple">
 <li><p><strong>Change-point detection</strong> — detect times <span class="math notranslate nohighlight">\(t\)</span> where global network behavior changes.</p></li>
 <li><p><strong>Anomaly detection</strong> — find nodes/edges/subgraphs whose behaviour is unusual (sudden degree spike, abnormal motif frequency).</p></li>
@@ -595,9 +588,9 @@ $<span class="math notranslate nohighlight">\(
 </section>
 <hr class="docutils" />
 <section id="methods-for-anomaly-change-detection-core-ideas">
-<h2>5 Methods for anomaly &amp; change detection (core ideas)<a class="headerlink" href="#methods-for-anomaly-change-detection-core-ideas" title="Link to this heading">#</a></h2>
+<h2>6.5 Methods for anomaly &amp; change detection (core ideas)<a class="headerlink" href="#methods-for-anomaly-change-detection-core-ideas" title="Link to this heading">#</a></h2>
 <section id="global-change-detection-snapshot-level">
-<h3>5.1 Global change detection (snapshot-level)<a class="headerlink" href="#global-change-detection-snapshot-level" title="Link to this heading">#</a></h3>
+<h3>6.5.1 Global change detection (snapshot-level)<a class="headerlink" href="#global-change-detection-snapshot-level" title="Link to this heading">#</a></h3>
 <p>Define a global statistic <span class="math notranslate nohighlight">\(S^{(t)}\)</span> (e.g., number of edges, modularity, spectral gap, average clustering). Declare a change at time <span class="math notranslate nohighlight">\(t\)</span> if <span class="math notranslate nohighlight">\(S^{(t)}\)</span> deviates significantly from baseline.</p>
 <p>Example statistics:</p>
 <ul class="simple">
@@ -613,7 +606,7 @@ $<span class="math notranslate nohighlight">\(
 </ul>
 </section>
 <section id="local-node-level-anomaly">
-<h3>5.2 Local / node-level anomaly<a class="headerlink" href="#local-node-level-anomaly" title="Link to this heading">#</a></h3>
+<h3>6.5.2 Local / node-level anomaly<a class="headerlink" href="#local-node-level-anomaly" title="Link to this heading">#</a></h3>
 <p>Detect node <span class="math notranslate nohighlight">\(v\)</span> that exhibits an unusual change in a local measure (degree, ego-density, motif count).</p>
 <p>Formally, compute time series <span class="math notranslate nohighlight">\(x_v^{(t)}\)</span> (e.g., degree). Flag <span class="math notranslate nohighlight">\(v\)</span> at time <span class="math notranslate nohighlight">\(t\)</span> if
 $<span class="math notranslate nohighlight">\(
@@ -622,11 +615,11 @@ $<span class="math notranslate nohighlight">\(
 where \)</span>\mu_v,\sigma_v<span class="math notranslate nohighlight">\( are mean/std over a past window of size \)</span>w<span class="math notranslate nohighlight">\( and \)</span>\tau$ is a threshold.</p>
 </section>
 <section id="subgraph-structural-anomaly">
-<h3>5.3 Subgraph / structural anomaly<a class="headerlink" href="#subgraph-structural-anomaly" title="Link to this heading">#</a></h3>
+<h3>6.5.3 Subgraph / structural anomaly<a class="headerlink" href="#subgraph-structural-anomaly" title="Link to this heading">#</a></h3>
 <p>Look for subgraphs whose frequency (or embedding) changes abruptly. Use subgraph counts or compare learned embeddings across time and flag large distances.</p>
 </section>
 <section id="embedding-based-detection">
-<h3>5.4 Embedding-based detection<a class="headerlink" href="#embedding-based-detection" title="Link to this heading">#</a></h3>
+<h3>6.5.4 Embedding-based detection<a class="headerlink" href="#embedding-based-detection" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Learn node embeddings <span class="math notranslate nohighlight">\(\mathbf{z}_v^{(t)}\)</span> per snapshot or incrementally.</p></li>
 <li><p>Compute embedding drift: <span class="math notranslate nohighlight">\(\Delta_v^{(t)} = \|\mathbf{z}_v^{(t)} - \mathbf{z}_v^{(t-1)}\|\)</span>.</p></li>
@@ -636,7 +629,7 @@ where \)</span>\mu_v,\sigma_v<span class="math notranslate nohighlight">\( are m
 </section>
 <hr class="docutils" />
 <section id="algorithms-approaches-short-survey">
-<h2>6 Algorithms &amp; approaches (short survey)<a class="headerlink" href="#algorithms-approaches-short-survey" title="Link to this heading">#</a></h2>
+<h2>6.6 Algorithms &amp; approaches (short survey)<a class="headerlink" href="#algorithms-approaches-short-survey" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p><strong>Snapshot statistics + control charts</strong> — very simple, interpretable.</p></li>
 <li><p><strong>Spectral change detection</strong> — monitor eigenvalues/eigenvectors of adjacency / Laplacian.</p></li>
@@ -648,7 +641,7 @@ where \)</span>\mu_v,\sigma_v<span class="math notranslate nohighlight">\( are m
 </section>
 <hr class="docutils" />
 <section id="practical-example-snapshot-based-anomaly-detection-python">
-<h2>7 Practical example: snapshot-based anomaly detection (Python)<a class="headerlink" href="#practical-example-snapshot-based-anomaly-detection-python" title="Link to this heading">#</a></h2>
+<h2>6.7 Practical example: snapshot-based anomaly detection (Python)<a class="headerlink" href="#practical-example-snapshot-based-anomaly-detection-python" title="Link to this heading">#</a></h2>
 <p><strong>Goal:</strong> generate a sequence of snapshots, compute node degrees, detect nodes with sudden degree spike using rolling z-score.</p>
 <p>This example uses standard libraries (<code class="docutils literal notranslate"><span class="pre">networkx</span></code>, <code class="docutils literal notranslate"><span class="pre">numpy</span></code>, <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code>).</p>
 <div class="cell docutils container">
@@ -725,18 +718,18 @@ where \)</span>\mu_v,\sigma_v<span class="math notranslate nohighlight">\( are m
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/6c760b32f628e5ac3482bdda8b569d9621ee07c399e8307a47b9d510bbb5f951.png" src="../../_images/6c760b32f628e5ac3482bdda8b569d9621ee07c399e8307a47b9d510bbb5f951.png" />
-<img alt="../../_images/80cbfc9b16f57032e8333f16ded5054063d96d32aedc6069b500aacee4d080ba.png" src="../../_images/80cbfc9b16f57032e8333f16ded5054063d96d32aedc6069b500aacee4d080ba.png" />
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Node 0 flagged at times: [(8, 3, 1.0, 0.6324555320336759, 3.162277660168379), (18, 7, 1.8, 0.7483314773547883, 6.948792289723034)]
-Node 1 flagged at times: [(12, 3, 1.4, 0.4898979485566356, 3.2659863237109046), (18, 4, 1.2, 0.4000000000000001, 6.999999999999998)]
-Node 2 flagged at times: [(18, 7, 0.8, 0.7483314773547883, 8.285098499285155), (26, 5, 1.0, 0.6324555320336759, 6.324555320336758)]
-Node 3 flagged at times: [(9, 3, 0.8, 0.4, 5.5), (16, 6, 1.0, 1.0, 5.0)]
-Node 4 flagged at times: [(18, 8, 1.6, 1.3564659966250538, 4.7181425969567075), (28, 3, 1.0, 0.6324555320336759, 3.162277660168379)]
-Node 5 flagged at times: [(13, 3, 1.0, 0.6324555320336759, 3.162277660168379), (18, 7, 1.6, 1.624807680927192, 3.323470256441984)]
-Node 6 flagged at times: [(18, 7, 1.0, 0.6324555320336759, 9.486832980505138), (25, 4, 0.8, 0.7483314773547883, 4.27617987059879)]
-Node 7 flagged at times: [(13, 2, 0.4, 0.48989794855663565, 3.265986323710904), (18, 7, 1.4, 0.4898979485566356, 11.430952132988164), (28, 6, 0.8, 0.7483314773547883, 6.948792289723034)]
-Node 8 flagged at times: [(13, 4, 1.4, 0.4898979485566356, 5.30722777603022), (18, 6, 1.4, 1.4966629547095764, 3.0735042819928804)]
-Node 9 flagged at times: [(18, 7, 1.0, 0.6324555320336759, 9.486832980505138)]
+<img alt="../../_images/57d72b6efc95fb290e9f20e65d02055cf1d52dcc4df8fc8776c951046b340e0b.png" src="../../_images/57d72b6efc95fb290e9f20e65d02055cf1d52dcc4df8fc8776c951046b340e0b.png" />
+<img alt="../../_images/baa1080d58f763722de3de059e75f4d750343ba62ed954ef4b82fe0045971039.png" src="../../_images/baa1080d58f763722de3de059e75f4d750343ba62ed954ef4b82fe0045971039.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Node 0 flagged at times: [(9, 4, 1.0, 0.6324555320336759, 4.743416490252569), (16, 4, 1.0, 0.8944271909999159, 3.3541019662496847), (18, 9, 1.4, 1.4966629547095764, 5.077963596336064), (25, 3, 1.0, 0.6324555320336759, 3.162277660168379)]
+Node 1 flagged at times: [(5, 3, 0.4, 0.48989794855663565, 5.307227776030219), (14, 3, 1.4, 0.4898979485566356, 3.2659863237109046), (18, 5, 1.4, 0.8000000000000002, 4.499999999999999), (24, 4, 1.0, 0.6324555320336759, 4.743416490252569)]
+Node 2 flagged at times: [(12, 3, 1.4, 0.4898979485566356, 3.2659863237109046), (18, 7, 0.8, 0.7483314773547883, 8.285098499285155)]
+Node 3 flagged at times: [(6, 5, 2.0, 0.6324555320336759, 4.743416490252569), (12, 3, 0.4, 0.48989794855663565, 5.307227776030219), (18, 11, 1.0, 0.6324555320336759, 15.811388300841896)]
+Node 4 flagged at times: [(18, 5, 0.6, 0.7999999999999999, 5.500000000000001), (25, 4, 0.6, 0.7999999999999999, 4.25)]
+Node 5 flagged at times: [(14, 4, 1.2, 0.7483314773547883, 3.741657386773941), (18, 12, 1.4, 1.3564659966250538, 7.814423676209547), (29, 3, 1.0, 0.6324555320336759, 3.162277660168379)]
+Node 6 flagged at times: [(14, 2, 0.4, 0.48989794855663565, 3.265986323710904), (18, 9, 1.2, 0.4000000000000001, 19.499999999999996), (24, 5, 0.8, 0.7483314773547883, 5.612486080160912)]
+Node 7 flagged at times: [(18, 9, 0.6, 0.7999999999999999, 10.500000000000002)]
+Node 8 flagged at times: [(12, 4, 1.6, 0.4898979485566356, 4.898979485566357), (18, 8, 1.4, 0.8, 8.249999999999998)]
+Node 9 flagged at times: [(18, 7, 1.0, 0.8944271909999159, 6.708203932499369), (25, 3, 0.6, 0.48989794855663565, 4.898979485566356)]
 </pre></div>
 </div>
 </div>
@@ -799,28 +792,28 @@ Node 9 flagged at times: [(18, 7, 1.0, 0.6324555320336759, 9.486832980505138)]
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#definitions-and-representations">1 Definitions and Representations</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#temporal-dynamic-graph-formal-definition">1.1 Temporal / Dynamic Graph — formal definition</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#snapshot-vs-streaming-vs-interval-representations">1.2 Snapshot vs. Streaming vs. Interval representations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#definitions-and-representations">6.1 Definitions and Representations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#temporal-dynamic-graph-formal-definition">6.1.1 Temporal / Dynamic Graph — formal definition</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#snapshot-vs-streaming-vs-interval-representations">6.1.2 Snapshot vs. Streaming vs. Interval representations</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#temporal-analogues-of-static-measures">2 Temporal analogues of static measures</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#temporal-degree-per-node">2.1 Temporal degree (per node)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#temporal-closeness-reachability-and-temporal-paths">2.2 Temporal closeness / reachability and temporal paths</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#temporal-motifs">2.3 Temporal motifs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#temporal-analogues-of-static-measures">6.2 Temporal analogues of static measures</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#temporal-degree-per-node">6.2.1 Temporal degree (per node)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#temporal-closeness-reachability-and-temporal-paths">6.2.2 Temporal closeness / reachability and temporal paths</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#temporal-motifs">6.2.3 Temporal motifs</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dynamic-network-models-brief">3 Dynamic network models (brief)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tasks-in-dynamic-graph-analysis">4 Tasks in dynamic graph analysis</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#methods-for-anomaly-change-detection-core-ideas">5 Methods for anomaly &amp; change detection (core ideas)</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#global-change-detection-snapshot-level">5.1 Global change detection (snapshot-level)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#local-node-level-anomaly">5.2 Local / node-level anomaly</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#subgraph-structural-anomaly">5.3 Subgraph / structural anomaly</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#embedding-based-detection">5.4 Embedding-based detection</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dynamic-network-models-brief">6.3 Dynamic network models (brief)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tasks-in-dynamic-graph-analysis">6.4 Tasks in dynamic graph analysis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#methods-for-anomaly-change-detection-core-ideas">6.5 Methods for anomaly &amp; change detection (core ideas)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#global-change-detection-snapshot-level">6.5.1 Global change detection (snapshot-level)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#local-node-level-anomaly">6.5.2 Local / node-level anomaly</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#subgraph-structural-anomaly">6.5.3 Subgraph / structural anomaly</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#embedding-based-detection">6.5.4 Embedding-based detection</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#algorithms-approaches-short-survey">6 Algorithms &amp; approaches (short survey)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-example-snapshot-based-anomaly-detection-python">7 Practical example: snapshot-based anomaly detection (Python)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#algorithms-approaches-short-survey">6.6 Algorithms &amp; approaches (short survey)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-example-snapshot-based-anomaly-detection-python">6.7 Practical example: snapshot-based anomaly detection (Python)</a></li>
 </ul>
   </nav></div>
 
