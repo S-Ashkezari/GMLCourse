@@ -28,97 +28,97 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-import networkx as nx
-import matplotlib.pyplot as plt
+# --- Graph Model Generators ---
 
-# Parameters
-n = 50  # number of nodes (for visualization, small n)
-p_values = [0.01, 0.03, 0.08]  # below, near, above critical p (~1/n)
-titles = ["p < 1/n: Small components",
-          "p ≈ 1/n: Components start merging",
-          "p > 1/n: Giant component emerges"]
+def generate_erdos_renyi(n, p, seed=None):
+    return nx.erdos_renyi_graph(n, p, seed=seed)
 
-plt.figure(figsize=(15, 5))
+def generate_watts_strogatz(n, k, p_rewire, seed=None):
+    return nx.watts_strogatz_graph(n, k, p_rewire, seed=seed)
 
-for i, p in enumerate(p_values, 1):
-    G = nx.erdos_renyi_graph(n, p)
-    pos = nx.spring_layout(G, seed=42)  # fixed layout for clarity
-    plt.subplot(1, 3, i)
-    nx.draw(G, pos, with_labels=True, node_color='skyblue', edge_color='gray', node_size=500)
-    plt.title(titles[i-1], fontsize=12)
+def generate_barabasi_albert(n, m, seed=None):
+    return nx.barabasi_albert_graph(n, m, seed=seed)
 
-plt.tight_layout()
-plt.show()
+def generate_stochastic_block_model(sizes, p_matrix, seed=None):
+    """
+    Generates a Stochastic Block Model (SBM) graph.
+    
+    Parameters:
+    - sizes: list of integers, number of nodes in each community
+    - p_matrix: k x k matrix of connection probabilities between communities
+    """
+    return nx.stochastic_block_model(sizes, p_matrix, seed=seed)
+
+
+# --- Main Demo Function ---
+
+def demo(n=500, er_p=0.02, ws_k=6, ws_p=0.05, ba_m=3,
+         sbm_sizes=[250, 250], sbm_p_in=0.08, sbm_p_out=0.01,
+         seed=42):
+    np.random.seed(seed)
+
+    # Generate graphs
+    G_er = generate_erdos_renyi(n, er_p, seed=seed)
+    G_ws = generate_watts_strogatz(n, ws_k, ws_p, seed=seed)
+    G_ba = generate_barabasi_albert(n, ba_m, seed=seed)
+
+    # SBM probability matrix
+    k = len(sbm_sizes)
+    p_matrix = [[sbm_p_in if i==j else sbm_p_out for j in range(k)] for i in range(k)]
+    G_sbm = generate_stochastic_block_model(sbm_sizes, p_matrix, seed=seed)
+
+    fig, axes = plt.subplots(4, 3, figsize=(18, 20))  # 4 models now
+
+    graph_data = [
+        ("Erdős–Rényi (Random Graph)", G_er),
+        ("Watts–Strogatz (Small-world)", G_ws),
+        ("Barabási–Albert (Scale-free)", G_ba),
+        ("Stochastic Block Model (SBM)", G_sbm)
+    ]
+
+    print("\n--- Network Models Summary ---\n")
+
+    for i, (name, G) in enumerate(graph_data):
+        plot_graph(G, title=name, ax=axes[i, 0])
+        plot_degree_distribution(G, ax_linear=axes[i, 1], ax_log=axes[i, 2], title=name)
+
+        stats = graph_summary_stats(G)
+        degs = degree_distribution(G)
+        gamma_hat, k_min, tail_size = estimate_power_law_exponent(degs, k_min=2)
+
+        print(f"{name}:")
+        for key, val in stats.items():
+            print(f"  {key:25}: {val:.4f}" if isinstance(val, float) else f"  {key:25}: {val}")
+        print(f"  Estimated power-law exponent (gamma) from tail: {gamma_hat:.4f} (k_min={k_min}, tail size={tail_size})\n")
+
+    plt.tight_layout()
+    plt.show()
+
+
+# --- Run demo when executed as script ---
+if __name__ == "__main__":
+    demo()
 
 ------------------
 
+----- stdout -----
 
-[31m---------------------------------------------------------------------------[39m
-[31mAttributeError[39m                            Traceback (most recent call last)
-[36mCell[39m[36m [39m[32mIn[1][39m[32m, line 1[39m
-[32m----> [39m[32m1[39m [38;5;28;01mimport[39;00m[38;5;250m [39m[34;01mnetworkx[39;00m[38;5;250m [39m[38;5;28;01mas[39;00m[38;5;250m [39m[34;01mnx[39;00m
-[32m      2[39m [38;5;28;01mimport[39;00m[38;5;250m [39m[34;01mmatplotlib[39;00m[34;01m.[39;00m[34;01mpyplot[39;00m[38;5;250m [39m[38;5;28;01mas[39;00m[38;5;250m [39m[34;01mplt[39;00m
-[32m      4[39m [38;5;66;03m# Parameters[39;00m
+--- Network Models Summary ---
+------------------
 
-[36mFile [39m[32m~\AppData\Local\Programs\Python\Python313\Lib\site-packages\networkx\__init__.py:64[39m
-[32m     61[39m [38;5;28;01mimport[39;00m[38;5;250m [39m[34;01mnetworkx[39;00m[34;01m.[39;00m[34;01mgenerators[39;00m
-[32m     62[39m [38;5;28;01mfrom[39;00m[38;5;250m [39m[34;01mnetworkx[39;00m[34;01m.[39;00m[34;01mgenerators[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m *
-[32m---> [39m[32m64[39m [38;5;28;01mimport[39;00m[38;5;250m [39m[34;01mnetworkx[39;00m[34;01m.[39;00m[34;01mreadwrite[39;00m
-[32m     65[39m [38;5;28;01mfrom[39;00m[38;5;250m [39m[34;01mnetworkx[39;00m[34;01m.[39;00m[34;01mreadwrite[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m *
-[32m     67[39m [38;5;66;03m# Need to test with SciPy, when available[39;00m
+[1;31m---------------------------------------------------------------------------[0m
+[1;31mNameError[0m                                 Traceback (most recent call last)
+Cell [1;32mIn[4], line 70[0m
+[0;32m     68[0m [38;5;66;03m# --- Run demo when executed as script ---[39;00m
+[0;32m     69[0m [38;5;28;01mif[39;00m [38;5;18m__name__[39m [38;5;241m==[39m [38;5;124m"[39m[38;5;124m__main__[39m[38;5;124m"[39m:
+[1;32m---> 70[0m     [43mdemo[49m[43m([49m[43m)[49m
 
-[36mFile [39m[32m~\AppData\Local\Programs\Python\Python313\Lib\site-packages\networkx\readwrite\__init__.py:15[39m
-[32m     13[39m [38;5;28;01mfrom[39;00m[38;5;250m [39m[34;01mnetworkx[39;00m[34;01m.[39;00m[34;01mreadwrite[39;00m[34;01m.[39;00m[34;01mnx_yaml[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m *
-[32m     14[39m [38;5;28;01mfrom[39;00m[38;5;250m [39m[34;01mnetworkx[39;00m[34;01m.[39;00m[34;01mreadwrite[39;00m[34;01m.[39;00m[34;01mgml[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m *
-[32m---> [39m[32m15[39m [38;5;28;01mfrom[39;00m[38;5;250m [39m[34;01mnetworkx[39;00m[34;01m.[39;00m[34;01mreadwrite[39;00m[34;01m.[39;00m[34;01mgraphml[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m *
-[32m     16[39m [38;5;28;01mfrom[39;00m[38;5;250m [39m[34;01mnetworkx[39;00m[34;01m.[39;00m[34;01mreadwrite[39;00m[34;01m.[39;00m[34;01mgexf[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m *
-[32m     17[39m [38;5;28;01mfrom[39;00m[38;5;250m [39m[34;01mnetworkx[39;00m[34;01m.[39;00m[34;01mreadwrite[39;00m[34;01m.[39;00m[34;01mnx_shp[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m *
+Cell [1;32mIn[4], line 52[0m, in [0;36mdemo[1;34m(n, er_p, ws_k, ws_p, ba_m, sbm_sizes, sbm_p_in, sbm_p_out, seed)[0m
+[0;32m     49[0m [38;5;28mprint[39m([38;5;124m"[39m[38;5;130;01m\n[39;00m[38;5;124m--- Network Models Summary ---[39m[38;5;130;01m\n[39;00m[38;5;124m"[39m)
+[0;32m     51[0m [38;5;28;01mfor[39;00m i, (name, G) [38;5;129;01min[39;00m [38;5;28menumerate[39m(graph_data):
+[1;32m---> 52[0m     [43mplot_graph[49m(G, title[38;5;241m=[39mname, ax[38;5;241m=[39maxes[i, [38;5;241m0[39m])
+[0;32m     53[0m     plot_degree_distribution(G, ax_linear[38;5;241m=[39maxes[i, [38;5;241m1[39m], ax_log[38;5;241m=[39maxes[i, [38;5;241m2[39m], title[38;5;241m=[39mname)
+[0;32m     55[0m     stats [38;5;241m=[39m graph_summary_stats(G)
 
-[36mFile [39m[32m~\AppData\Local\Programs\Python\Python313\Lib\site-packages\networkx\readwrite\graphml.py:344[39m
-[32m    340[39m             [38;5;28;01mraise[39;00m nx.NetworkXError([33m"[39m[33mfile not successfully read as graphml[39m[33m"[39m)
-[32m    341[39m     [38;5;28;01mreturn[39;00m glist[[32m0[39m]
-[32m--> [39m[32m344[39m [38;5;28;43;01mclass[39;49;00m[38;5;250;43m [39;49m[34;43;01mGraphML[39;49;00m[43m:[49m
-[32m    345[39m [43m    [49m[43mNS_GRAPHML[49m[43m [49m[43m=[49m[43m [49m[33;43m"[39;49m[33;43mhttp://graphml.graphdrawing.org/xmlns[39;49m[33;43m"[39;49m
-[32m    346[39m [43m    [49m[43mNS_XSI[49m[43m [49m[43m=[49m[43m [49m[33;43m"[39;49m[33;43mhttp://www.w3.org/2001/XMLSchema-instance[39;49m[33;43m"[39;49m
-
-[36mFile [39m[32m~\AppData\Local\Programs\Python\Python313\Lib\site-packages\networkx\readwrite\graphml.py:377[39m, in [36mGraphML[39m[34m()[39m
-[32m    370[39m     [38;5;28;01mpass[39;00m
-[32m    371[39m [38;5;28;01melse[39;00m:
-[32m    372[39m     [38;5;66;03m# prepend so that python types are created upon read (last entry wins)[39;00m
-[32m    373[39m     types = [
-[32m    374[39m         (np.float64, [33m"[39m[33mfloat[39m[33m"[39m),
-[32m    375[39m         (np.float32, [33m"[39m[33mfloat[39m[33m"[39m),
-[32m    376[39m         (np.float16, [33m"[39m[33mfloat[39m[33m"[39m),
-[32m--> [39m[32m377[39m         ([43mnp[49m[43m.[49m[43mfloat_[49m, [33m"[39m[33mfloat[39m[33m"[39m),
-[32m    378[39m         (np.int_, [33m"[39m[33mint[39m[33m"[39m),
-[32m    379[39m         (np.int8, [33m"[39m[33mint[39m[33m"[39m),
-[32m    380[39m         (np.int16, [33m"[39m[33mint[39m[33m"[39m),
-[32m    381[39m         (np.int32, [33m"[39m[33mint[39m[33m"[39m),
-[32m    382[39m         (np.int64, [33m"[39m[33mint[39m[33m"[39m),
-[32m    383[39m         (np.uint8, [33m"[39m[33mint[39m[33m"[39m),
-[32m    384[39m         (np.uint16, [33m"[39m[33mint[39m[33m"[39m),
-[32m    385[39m         (np.uint32, [33m"[39m[33mint[39m[33m"[39m),
-[32m    386[39m         (np.uint64, [33m"[39m[33mint[39m[33m"[39m),
-[32m    387[39m         (np.int_, [33m"[39m[33mint[39m[33m"[39m),
-[32m    388[39m         (np.intc, [33m"[39m[33mint[39m[33m"[39m),
-[32m    389[39m         (np.intp, [33m"[39m[33mint[39m[33m"[39m),
-[32m    390[39m     ] + types
-[32m    392[39m xml_type = [38;5;28mdict[39m(types)
-[32m    393[39m python_type = [38;5;28mdict[39m([38;5;28mreversed[39m(a) [38;5;28;01mfor[39;00m a [38;5;129;01min[39;00m types)
-
-[36mFile [39m[32m~\AppData\Local\Programs\Python\Python313\Lib\site-packages\numpy\__init__.py:413[39m, in [36m__getattr__[39m[34m(attr)[39m
-[32m    410[39m     [38;5;28;01mraise[39;00m [38;5;167;01mAttributeError[39;00m(__former_attrs__[attr], name=[38;5;28;01mNone[39;00m)
-[32m    412[39m [38;5;28;01mif[39;00m attr [38;5;129;01min[39;00m __expired_attributes__:
-[32m--> [39m[32m413[39m     [38;5;28;01mraise[39;00m [38;5;167;01mAttributeError[39;00m(
-[32m    414[39m         [33mf[39m[33m"[39m[33m`np.[39m[38;5;132;01m{[39;00mattr[38;5;132;01m}[39;00m[33m` was removed in the NumPy 2.0 release. [39m[33m"[39m
-[32m    415[39m         [33mf[39m[33m"[39m[38;5;132;01m{[39;00m__expired_attributes__[attr][38;5;132;01m}[39;00m[33m"[39m,
-[32m    416[39m         name=[38;5;28;01mNone[39;00m
-[32m    417[39m     )
-[32m    419[39m [38;5;28;01mif[39;00m attr == [33m"[39m[33mchararray[39m[33m"[39m:
-[32m    420[39m     warnings.warn(
-[32m    421[39m         [33m"[39m[33m`np.chararray` is deprecated and will be removed from [39m[33m"[39m
-[32m    422[39m         [33m"[39m[33mthe main namespace in the future. Use an array with a string [39m[33m"[39m
-[32m    423[39m         [33m"[39m[33mor bytes dtype instead.[39m[33m"[39m, [38;5;167;01mDeprecationWarning[39;00m, stacklevel=[32m2[39m)
-
-[31mAttributeError[39m: `np.float_` was removed in the NumPy 2.0 release. Use `np.float64` instead.
+[1;31mNameError[0m: name 'plot_graph' is not defined
 
