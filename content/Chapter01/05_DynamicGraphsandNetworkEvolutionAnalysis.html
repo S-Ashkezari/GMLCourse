@@ -63,6 +63,7 @@
     <link rel="canonical" href="/GMLCourse/content/Chapter01/05_DynamicGraphsandNetworkEvolutionAnalysis.html" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Introduction to Graph Machine Learning" href="../Chapter02/01_intro_and_basics.html" />
     <link rel="prev" title="Complex Networks and Generative Models" href="04_Complex%20Networks%20and%20Generative%20Models.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -189,6 +190,11 @@
 
 
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Dynamic Graphs and Network Evolution Analysis</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Chapter02/01_intro_and_basics.html">Introduction to Graph Machine Learning</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter02/02_gnn_primer.html">Neural Network Essentials for Understanding GNNs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter02/03_embedding_examples.html">Graph Representation Learning</a></li>
 </ul>
 </details></li>
 </ul>
@@ -467,11 +473,12 @@ document.write(`
 <p>A <strong>temporal graph</strong> (also: time-varying graph) is a graph whose vertex set and/or edge set can change over (continuous or discrete) time.</p>
 <p>Two common formalizations:</p>
 <p><strong>(A) Discrete-time snapshot sequence</strong></p>
-<p>A temporal graph is represented as a sequence of static graphs (snapshots)
-$<span class="math notranslate nohighlight">\(
+<p>A temporal graph is represented as a sequence of static graphs (snapshots)</p>
+<div class="math notranslate nohighlight">
+\[
 \mathcal{G} = \{ G^{(1)}, G^{(2)}, \dots, G^{(T)} \},
-\)</span><span class="math notranslate nohighlight">\(
-where each snapshot \)</span>G^{(t)}=(V^{(t)},E^{(t)})<span class="math notranslate nohighlight">\( is the graph observed during time interval \)</span>t<span class="math notranslate nohighlight">\( (e.g. day \)</span>t$). Snapshots can be overlapping or non-overlapping windows.</p>
+\]</div>
+<p>where each snapshot <span class="math notranslate nohighlight">\(G^{(t)}=(V^{(t)},E^{(t)})\)</span> is the graph observed during time interval <span class="math notranslate nohighlight">\(t\)</span> (e.g. day <span class="math notranslate nohighlight">\(t\)</span>). Snapshots can be overlapping or non-overlapping windows.</p>
 <p><strong>(B) Temporal edge list (time-stamped edges / continuous time)</strong></p>
 <p>A temporal graph is given by a set of time-stamped interactions
 $<span class="math notranslate nohighlight">\(
@@ -784,18 +791,18 @@ where \)</span>\mu_v,\sigma_v<span class="math notranslate nohighlight">\( are m
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/ea9cf775ef638664cce2eb0e575bdc8b5cd9dad9d307cab6e6eab874a0709ac9.png" src="../../_images/ea9cf775ef638664cce2eb0e575bdc8b5cd9dad9d307cab6e6eab874a0709ac9.png" />
-<img alt="../../_images/ae479a843508a4271c8adbcb37b18e966ca8e994c3a4643c26cd418393a33ea5.png" src="../../_images/ae479a843508a4271c8adbcb37b18e966ca8e994c3a4643c26cd418393a33ea5.png" />
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Node 0 flagged at times: [(18, 10, 1.4, 1.3564659966250538, 6.340004114660576), (29, 3, 1.0, 0.6324555320336759, 3.162277660168379)]
-Node 1 flagged at times: [(6, 4, 0.8, 0.4, 8.0), (14, 4, 0.6, 0.48989794855663565, 6.9402209378856705), (18, 7, 2.0, 1.4142135623730951, 3.5355339059327373)]
-Node 2 flagged at times: [(6, 4, 0.8, 0.7483314773547883, 4.27617987059879), (13, 5, 1.4, 0.8000000000000002, 4.499999999999999), (18, 10, 2.4, 1.4966629547095764, 5.077963596336064), (29, 4, 1.2, 0.4000000000000001, 6.999999999999998)]
-Node 3 flagged at times: [(8, 3, 1.0, 0.6324555320336759, 3.162277660168379), (18, 7, 1.0, 0.8944271909999159, 6.708203932499369), (28, 4, 1.2, 0.7483314773547883, 3.741657386773941)]
-Node 4 flagged at times: [(18, 9, 1.0, 0.8944271909999159, 8.94427190999916)]
-Node 5 flagged at times: [(13, 5, 1.4, 0.4898979485566356, 7.3484692283495345), (25, 3, 1.0, 0.6324555320336759, 3.162277660168379)]
-Node 6 flagged at times: [(14, 2, 0.4, 0.48989794855663565, 3.265986323710904), (18, 7, 0.6, 0.7999999999999999, 8.000000000000002)]
-Node 7 flagged at times: [(18, 7, 0.8, 0.9797958971132713, 6.327848502189877)]
-Node 8 flagged at times: [(14, 4, 1.0, 0.6324555320336759, 4.743416490252569), (26, 4, 1.6, 0.4898979485566356, 4.898979485566357)]
-Node 9 flagged at times: [(13, 2, 0.4, 0.48989794855663565, 3.265986323710904), (17, 3, 1.2, 0.4000000000000001, 4.499999999999999), (18, 6, 1.6, 0.8, 5.5)]
+<img alt="../../_images/33533203eeae8e80b89a41ece9fb18612d368123ddb442a279e50c770b86acc7.png" src="../../_images/33533203eeae8e80b89a41ece9fb18612d368123ddb442a279e50c770b86acc7.png" />
+<img alt="../../_images/a464a6239fb567b4d5eef250c44625da34d883af296d506464b321b615977a5b.png" src="../../_images/a464a6239fb567b4d5eef250c44625da34d883af296d506464b321b615977a5b.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Node 0 flagged at times: [(18, 13, 1.6, 0.8, 14.25)]
+Node 1 flagged at times: [(18, 11, 1.0, 1.0954451150103321, 9.128709291752768), (24, 5, 1.0, 0.8944271909999159, 4.47213595499958)]
+Node 2 flagged at times: [(18, 11, 1.6, 1.624807680927192, 5.785300076028639), (27, 3, 0.4, 0.48989794855663565, 5.307227776030219)]
+Node 3 flagged at times: [(18, 8, 1.2, 0.9797958971132713, 6.9402209378856705)]
+Node 4 flagged at times: [(14, 4, 0.2, 0.4000000000000001, 9.499999999999998), (18, 11, 1.8, 1.32664991614216, 6.934760925288562), (24, 5, 1.4, 0.8, 4.5)]
+Node 5 flagged at times: [(18, 5, 1.2, 0.7483314773547883, 5.077963596336063), (24, 4, 1.2, 0.7483314773547883, 3.741657386773941)]
+Node 6 flagged at times: [(18, 5, 0.6, 0.48989794855663565, 8.981462390204987)]
+Node 7 flagged at times: [(11, 3, 0.6, 0.48989794855663565, 4.898979485566356)]
+Node 8 flagged at times: [(18, 9, 1.6, 0.4898979485566356, 15.105186747162932)]
+Node 10 flagged at times: [(5, 3, 0.4, 0.48989794855663565, 5.307227776030219), (18, 11, 0.6, 0.48989794855663565, 21.228911104120876)]
 </pre></div>
 </div>
 </div>
@@ -841,6 +848,15 @@ Node 9 flagged at times: [(13, 2, 0.4, 0.48989794855663565, 3.265986323710904), 
         <p class="prev-next-subtitle">previous</p>
         <p class="prev-next-title">Complex Networks and Generative Models</p>
       </div>
+    </a>
+    <a class="right-next"
+       href="../Chapter02/01_intro_and_basics.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Introduction to Graph Machine Learning</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
                 </footer>

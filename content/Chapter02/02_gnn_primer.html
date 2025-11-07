@@ -1,0 +1,884 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Neural Network Essentials for Understanding GNNs &#8212; Graph Machine Learning</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/Chapter02/02_gnn_primer';</script>
+    <link rel="canonical" href="/GMLCourse/content/Chapter02/02_gnn_primer.html" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Graph Representation Learning" href="03_embedding_examples.html" />
+    <link rel="prev" title="Introduction to Graph Machine Learning" href="01_intro_and_basics.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Graph Machine Learning - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Graph Machine Learning - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Welcome to Graph Machine Learning
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Chapter01/01_Graph_metrics.html"><strong>First Part: Graph Mining - Concepts and properties</strong></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter01/02_community_detection.html">Community Detection in Graphs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter01/03_FrequentSubgraphMining.html">Frequent Subgraph Mining</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter01/04_Complex%20Networks%20and%20Generative%20Models.html">Complex Networks and Generative Models</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="../Chapter01/05_DynamicGraphsandNetworkEvolutionAnalysis.html">Dynamic Graphs and Network Evolution Analysis</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="01_intro_and_basics.html">Introduction to Graph Machine Learning</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Neural Network Essentials for Understanding GNNs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_embedding_examples.html">Graph Representation Learning</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/executablebooks/jupyter-book/blob/master/docs/content/Chapter02/02_gnn_primer.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fcontent/Chapter02/02_gnn_primer.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/content/Chapter02/02_gnn_primer.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Neural Network Essentials for Understanding GNNs</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-a-neural-network">1. What Is a Neural Network?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#forward-and-backward-propagation">2. Forward and Backward Propagation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loss-functions">3. Loss Functions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-are-embeddings">4. What Are Embeddings?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#definition">Definition</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#types-of-embeddings">Types of Embeddings</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-information-embeddings-capture">What information embeddings capture</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-embeddings-are-learned-common-objectives">How embeddings are learned (common objectives)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-gnns-produce-embeddings-message-passing-view">How GNNs produce embeddings (message passing view)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-considerations">Practical considerations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#similarity-downstream-use">Similarity &amp; downstream use</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-standard-neural-networks-fail-on-graph-data">5. Why Standard Neural Networks Fail on Graph Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#assumption-1-fixed-size-inputs"><strong>Assumption 1 — Fixed-size Inputs</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#assumption-2-regular-euclidean-structure"><strong>Assumption 2 — Regular Euclidean Structure</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#assumption-3-positional-ordering-permutation-sensitivity"><strong>Assumption 3 — Positional Ordering (Permutation Sensitivity)</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#assumption-4-locality-is-predefined"><strong>Assumption 4 — Locality Is Predefined</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#assumption-5-shared-weights-expect-same-structure-everywhere"><strong>Assumption 5 — Shared Weights Expect Same Structure Everywhere</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-why-standard-nns-cannot-handle-graphs">Summary: Why Standard NNs Cannot Handle Graphs</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="neural-network-essentials-for-understanding-gnns">
+<h1>Neural Network Essentials for Understanding GNNs<a class="headerlink" href="#neural-network-essentials-for-understanding-gnns" title="Link to this heading">#</a></h1>
+<section id="what-is-a-neural-network">
+<h2>1. What Is a Neural Network?<a class="headerlink" href="#what-is-a-neural-network" title="Link to this heading">#</a></h2>
+<p>A neural network is a stack of layers, where each layer applies a linear transformation
+followed by a nonlinear activation:</p>
+<div class="math notranslate nohighlight">
+\[
+h^{(l+1)} = \sigma(W^{(l)} h^{(l)} + b^{(l)})
+\]</div>
+<p><img alt="NN" src="../../_images/nn2.jpg" /></p>
+<p>Key concepts:</p>
+<ul class="simple">
+<li><p><strong>Neuron</strong>: linear combination + activation</p></li>
+<li><p><strong>Layer</strong>: collection of neurons</p></li>
+<li><p><strong>Network</strong>: sequence of layers</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="forward-and-backward-propagation">
+<h2>2. Forward and Backward Propagation<a class="headerlink" href="#forward-and-backward-propagation" title="Link to this heading">#</a></h2>
+<p><strong>Forward pass:</strong> compute outputs layer by layer.<br />
+<strong>Backward pass:</strong> compute gradients and update parameters.</p>
+<div class="math notranslate nohighlight">
+\[
+\theta \leftarrow \theta - \eta\, \nabla_\theta \mathcal{L}
+\]</div>
+<p>Why it matters for GNNs:</p>
+<ul class="simple">
+<li><p>GNNs also use forward/backward propagation.</p></li>
+<li><p>Gradients flow through aggregation operations over graph neighbors.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="loss-functions">
+<h2>3. Loss Functions<a class="headerlink" href="#loss-functions" title="Link to this heading">#</a></h2>
+<p>Loss measures the distance between prediction and target.</p>
+<p>Common losses:</p>
+<ul class="simple">
+<li><p><strong>Cross Entropy</strong> (classification)
+$<span class="math notranslate nohighlight">\(
+\mathcal{L}(y, \hat{y})=-(y\log(\hat{y}) + (1-y)\log(1-\hat{y}))
+\)</span>$</p></li>
+<li><p><strong>MSE</strong> (regression)
+$<span class="math notranslate nohighlight">\(
+\mathcal{L}(y, \hat{y})=(y-\hat{y})^{2}
+\)</span>$</p></li>
+</ul>
+<p>In GNNs, loss depends on the task:</p>
+<ul class="simple">
+<li><p>Node classification</p></li>
+<li><p>Link prediction</p></li>
+<li><p>Graph classification</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="what-are-embeddings">
+<h2>4. What Are Embeddings?<a class="headerlink" href="#what-are-embeddings" title="Link to this heading">#</a></h2>
+<section id="definition">
+<h3>Definition<a class="headerlink" href="#definition" title="Link to this heading">#</a></h3>
+<p>An <strong>embedding</strong> is a dense vector representation of a discrete entity (node, edge, subgraph, or entire graph) in a continuous vector space:
+$<span class="math notranslate nohighlight">\(
+h_v \in \mathbb{R}^d
+\)</span>$
+where (d) is the embedding dimension. Embeddings aim to encode structural, attribute, and task-relevant information into a compact numeric form.</p>
+</section>
+<hr class="docutils" />
+<section id="types-of-embeddings">
+<h3>Types of Embeddings<a class="headerlink" href="#types-of-embeddings" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Node embeddings:</strong> represent individual nodes (h_v).</p></li>
+<li><p><strong>Edge embeddings:</strong> represent relationships; can be derived from node embeddings (e.g., concatenation, difference, or learned).</p></li>
+<li><p><strong>Graph embeddings:</strong> summarize the whole graph (readout of node embeddings).</p></li>
+<li><p><strong>Subgraph embeddings:</strong> represent a substructure or motif.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="what-information-embeddings-capture">
+<h3>What information embeddings capture<a class="headerlink" href="#what-information-embeddings-capture" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Structural context:</strong> e.g., position in the graph, neighborhood structure.</p></li>
+<li><p><strong>Attributes:</strong> node features (text, numeric, categorical) are integrated.</p></li>
+<li><p><strong>Task-specific signals:</strong> class labels or link existence if trained supervisedly.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="how-embeddings-are-learned-common-objectives">
+<h3>How embeddings are learned (common objectives)<a class="headerlink" href="#how-embeddings-are-learned-common-objectives" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Supervised learning:</strong> optimize loss on a downstream task (e.g., node classification):
+$<span class="math notranslate nohighlight">\(
+\min_\theta \mathcal{L}_{\text{task}}(f_\theta(H), Y)
+\)</span>$</p></li>
+<li><p><strong>Unsupervised / self-supervised:</strong></p>
+<ul class="simple">
+<li><p><strong>Reconstruction:</strong> reconstruct adjacency or features (autoencoders).</p></li>
+<li><p><strong>Contrastive:</strong> maximize agreement of positive pairs (e.g., DGI, GraphCL).</p></li>
+<li><p><strong>Random-walk-based:</strong> learn embeddings so that co-occurring nodes in random walks are similar (DeepWalk, node2vec).</p></li>
+</ul>
+</li>
+</ol>
+</section>
+<hr class="docutils" />
+<section id="how-gnns-produce-embeddings-message-passing-view">
+<h3>How GNNs produce embeddings (message passing view)<a class="headerlink" href="#how-gnns-produce-embeddings-message-passing-view" title="Link to this heading">#</a></h3>
+<p>Initialization:
+$<span class="math notranslate nohighlight">\(
+h_v^{(0)} = x_v \quad(\text{or a learnable vector if no features})
+\)</span>$</p>
+<p>One layer (general form):
+$<span class="math notranslate nohighlight">\(
+m_v^{(l)} = \text{AGG}\big(\{ \phi(h_v^{(l)}, h_u^{(l)}, e_{uv}) : u\in\mathcal{N}(v)\}\big)
+\)</span><span class="math notranslate nohighlight">\(
+\)</span><span class="math notranslate nohighlight">\(
+h_v^{(l+1)} = \psi(h_v^{(l)}, m_v^{(l)})
+\)</span><span class="math notranslate nohighlight">\(
+A simple linearized GCN layer:
+\)</span><span class="math notranslate nohighlight">\(
+H^{(l+1)} = \sigma(\widehat{A} H^{(l)} W^{(l)})
+\)</span>$
+where (\widehat{A}) is a (normalized) adjacency matrix with self-loops.</p>
+</section>
+<hr class="docutils" />
+<section id="practical-considerations">
+<h3>Practical considerations<a class="headerlink" href="#practical-considerations" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Dimension (d):</strong> common choices 32–512. Larger (d) → more capacity but more computation and overfitting risk.</p></li>
+<li><p><strong>Normalization:</strong> unit-normalize embeddings when using cosine similarity.</p></li>
+<li><p><strong>Aggregation choice:</strong> sum/mean/max — affects expressiveness and scale.</p></li>
+<li><p><strong>Initial features:</strong> if no features, use one-hot or learnable embeddings.</p></li>
+<li><p><strong>Regularization:</strong> dropout, weight decay; prevents oversmoothing in deep GNNs.</p></li>
+<li><p><strong>Interpretability:</strong> visualize with t-SNE/UMAP; inspect nearest neighbors in embedding space.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="similarity-downstream-use">
+<h3>Similarity &amp; downstream use<a class="headerlink" href="#similarity-downstream-use" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Use <strong>cosine similarity</strong> or <strong>dot product</strong> to compare embeddings:
+$<span class="math notranslate nohighlight">\(
+\text{sim}(h_i,h_j) = \frac{h_i^\top h_j}{\|h_i\|\|h_j\|}
+\)</span>$</p></li>
+<li><p>For link prediction: score edges by similarity or by an MLP on concatenated embeddings.</p></li>
+<li><p>For graph classification: apply a graph-level readout (mean/sum/attention) to node embeddings, then a classifier.</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="why-standard-neural-networks-fail-on-graph-data">
+<h2>5. Why Standard Neural Networks Fail on Graph Data<a class="headerlink" href="#why-standard-neural-networks-fail-on-graph-data" title="Link to this heading">#</a></h2>
+<p>Traditional neural network architectures (MLPs, CNNs, RNNs) are designed under
+specific assumptions about the structure of the input. Graphs violate <em>all</em> of
+these assumptions, which is why a specialized architecture (GNN) is required.</p>
+<hr class="docutils" />
+<section id="assumption-1-fixed-size-inputs">
+<h3><strong>Assumption 1 — Fixed-size Inputs</strong><a class="headerlink" href="#assumption-1-fixed-size-inputs" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>MLPs expect an input vector of a fixed length.</p></li>
+<li><p>CNNs expect images of fixed height × width × channels.</p></li>
+<li><p>RNNs expect sequences with a consistent structure.</p></li>
+</ul>
+<p><strong>Graph reality:</strong><br />
+Graphs vary in:</p>
+<ul class="simple">
+<li><p>number of nodes</p></li>
+<li><p>number of edges</p></li>
+<li><p>structure<br />
+So you cannot flatten a graph into a fixed-size vector.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="assumption-2-regular-euclidean-structure">
+<h3><strong>Assumption 2 — Regular Euclidean Structure</strong><a class="headerlink" href="#assumption-2-regular-euclidean-structure" title="Link to this heading">#</a></h3>
+<p>CNNs rely on grids:</p>
+<ul class="simple">
+<li><p>each pixel has exactly 8 neighbors</p></li>
+<li><p>spatial locality is well-defined</p></li>
+<li><p>convolution uses shared kernels with the same shape everywhere</p></li>
+</ul>
+<p><strong>Graph reality:</strong><br />
+Graphs are <strong>non-Euclidean</strong>:</p>
+<ul class="simple">
+<li><p>no fixed neighborhood size</p></li>
+<li><p>no grid structure</p></li>
+<li><p>distance between nodes is not spatial</p></li>
+<li><p>no consistent notion of “up/down/left/right”</p></li>
+</ul>
+<p>Thus:<br />
+<strong>Convolutions cannot be applied directly to graphs</strong> because there is no regular local geometry.</p>
+<img src="figures/cnn_gnn.png" width="400px" style="display:block; margin:auto;">
+<img src="figures/conv1.png" width="600px" style="display:block; margin:auto;">
+<img src="figures/conv2.png" width="600px" style="display:block; margin:auto;">
+<p>ref:<a class="reference external" href="https://distill.pub/2021/understanding-gnns/">https://distill.pub/2021/understanding-gnns/</a></p>
+</section>
+<hr class="docutils" />
+<section id="assumption-3-positional-ordering-permutation-sensitivity">
+<h3><strong>Assumption 3 — Positional Ordering (Permutation Sensitivity)</strong><a class="headerlink" href="#assumption-3-positional-ordering-permutation-sensitivity" title="Link to this heading">#</a></h3>
+<p>In sequences (RNNs) or images (CNNs):</p>
+<ul class="simple">
+<li><p>ordering of elements is meaningful</p></li>
+<li><p>index = position (e.g., pixel (i, j))</p></li>
+</ul>
+<p>If you permute input dimensions in a CNN, everything breaks.</p>
+<p><strong>Graph reality:</strong><br />
+Graphs must be <strong>permutation invariant</strong>:<br />
+Renaming nodes should not change the output.<br />
+But MLPs/CNNs/RNNs are <em>not</em> permutation invariant.</p>
+<p>Example: nodes {1, 2, 3} → reorder to {3, 1, 2}<br />
+The graph is identical, but an MLP sees a totally different input vector.</p>
+<p><img alt="permutation" src="../../_images/permute.png" /></p>
+<p>ref:<a class="reference external" href="https://distill.pub/2021/gnn-intro/">https://distill.pub/2021/gnn-intro/</a></p>
+</section>
+<hr class="docutils" />
+<section id="assumption-4-locality-is-predefined">
+<h3><strong>Assumption 4 — Locality Is Predefined</strong><a class="headerlink" href="#assumption-4-locality-is-predefined" title="Link to this heading">#</a></h3>
+<p>CNNs know that:</p>
+<ul class="simple">
+<li><p>neighbors are nearby pixels</p></li>
+<li><p>kernels look only at local spatial patches</p></li>
+</ul>
+<p><strong>Graph reality:</strong><br />
+Graph neighborhoods are irregular:</p>
+<ul class="simple">
+<li><p>node A may have 2 neighbors</p></li>
+<li><p>node B may have 15</p></li>
+<li><p>no spatial distance</p></li>
+<li><p>edges represent arbitrary relationships</p></li>
+</ul>
+<p>So classical CNN locality <strong>cannot</strong> be defined on arbitrary graph neighborhoods.</p>
+</section>
+<hr class="docutils" />
+<section id="assumption-5-shared-weights-expect-same-structure-everywhere">
+<h3><strong>Assumption 5 — Shared Weights Expect Same Structure Everywhere</strong><a class="headerlink" href="#assumption-5-shared-weights-expect-same-structure-everywhere" title="Link to this heading">#</a></h3>
+<p>CNN kernels assume the same pattern repeats everywhere (translation invariance).</p>
+<p><strong>Graph reality:</strong><br />
+Nodes do not have identical local shapes.<br />
+Neighborhood sizes differ.<br />
+Graph positions are not directly comparable.</p>
+<p>Thus weight sharing is non-trivial.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="summary-why-standard-nns-cannot-handle-graphs">
+<h2>Summary: Why Standard NNs Cannot Handle Graphs<a class="headerlink" href="#summary-why-standard-nns-cannot-handle-graphs" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Property</p></th>
+<th class="head"><p>Standard NN Requirement</p></th>
+<th class="head"><p>Graph Reality</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Input size</p></td>
+<td><p>Fixed</p></td>
+<td><p>Variable</p></td>
+</tr>
+<tr class="row-odd"><td><p>Structure</p></td>
+<td><p>Grid/sequence</p></td>
+<td><p>Arbitrary graph</p></td>
+</tr>
+<tr class="row-even"><td><p>Ordering</p></td>
+<td><p>Important</p></td>
+<td><p>Irrelevant</p></td>
+</tr>
+<tr class="row-odd"><td><p>Locality</p></td>
+<td><p>Spatial</p></td>
+<td><p>Topological</p></td>
+</tr>
+<tr class="row-even"><td><p>Neighborhood size</p></td>
+<td><p>Fixed</p></td>
+<td><p>Variable</p></td>
+</tr>
+<tr class="row-odd"><td><p>Invariance</p></td>
+<td><p>No</p></td>
+<td><p>Must be permutation-invariant</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Hence, MLPs/CNNs/RNNs fail on graph-structured data.</p>
+<p>This is the motivation for <strong>Graph Neural Networks (GNNs)</strong>.</p>
+<hr class="docutils" />
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "mlgbook"
+        },
+        kernelOptions: {
+            name: "mlgbook",
+            path: "./content\Chapter02"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'mlgbook'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="01_intro_and_basics.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Introduction to Graph Machine Learning</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="03_embedding_examples.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Graph Representation Learning</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-a-neural-network">1. What Is a Neural Network?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#forward-and-backward-propagation">2. Forward and Backward Propagation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loss-functions">3. Loss Functions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-are-embeddings">4. What Are Embeddings?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#definition">Definition</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#types-of-embeddings">Types of Embeddings</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-information-embeddings-capture">What information embeddings capture</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-embeddings-are-learned-common-objectives">How embeddings are learned (common objectives)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-gnns-produce-embeddings-message-passing-view">How GNNs produce embeddings (message passing view)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-considerations">Practical considerations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#similarity-downstream-use">Similarity &amp; downstream use</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-standard-neural-networks-fail-on-graph-data">5. Why Standard Neural Networks Fail on Graph Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#assumption-1-fixed-size-inputs"><strong>Assumption 1 — Fixed-size Inputs</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#assumption-2-regular-euclidean-structure"><strong>Assumption 2 — Regular Euclidean Structure</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#assumption-3-positional-ordering-permutation-sensitivity"><strong>Assumption 3 — Positional Ordering (Permutation Sensitivity)</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#assumption-4-locality-is-predefined"><strong>Assumption 4 — Locality Is Predefined</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#assumption-5-shared-weights-expect-same-structure-everywhere"><strong>Assumption 5 — Shared Weights Expect Same Structure Everywhere</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-why-standard-nns-cannot-handle-graphs">Summary: Why Standard NNs Cannot Handle Graphs</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Soheila Ashkezari-T.
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
