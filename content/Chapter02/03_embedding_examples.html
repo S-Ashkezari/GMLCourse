@@ -551,7 +551,7 @@ In a social network, Node2Vec can learn embeddings for users based on network co
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing transition probabilities:   0%|                                                       | 0/18 [00:00&lt;?, ?it/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing transition probabilities: 100%|████████████████████████████████████████████| 18/18 [00:00&lt;00:00, 4192.67it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing transition probabilities: 100%|██████████████████████████████████████████████████████| 18/18 [00:00&lt;?, ?it/s]
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
@@ -560,22 +560,16 @@ In a social network, Node2Vec can learn embeddings for users based on network co
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Generating walks (CPU: 1):   0%|                                                                | 0/10 [00:00&lt;?, ?it/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Generating walks (CPU: 1):  30%|████████████████▊                                       | 3/10 [00:00&lt;00:00, 27.05it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Generating walks (CPU: 1):  60%|█████████████████████████████████▌                      | 6/10 [00:00&lt;00:00, 47.64it/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Generating walks (CPU: 1):  60%|█████████████████████████████████▌                      | 6/10 [00:00&lt;00:00, 21.88it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Generating walks (CPU: 1):  90%|██████████████████████████████████████████████████▍     | 9/10 [00:00&lt;00:00, 22.40it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Generating walks (CPU: 1): 100%|███████████████████████████████████████████████████████| 10/10 [00:00&lt;00:00, 20.52it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Generating walks (CPU: 1): 100%|███████████████████████████████████████████████████████| 10/10 [00:00&lt;00:00, 39.94it/s]
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
-<img alt="../../_images/50fe298487e45073815313afde6171fabfb7a76fd9229acd49fc1e981b32a7e5.png" src="../../_images/50fe298487e45073815313afde6171fabfb7a76fd9229acd49fc1e981b32a7e5.png" />
+<img alt="../../_images/10899d8f97fba878163a7301000b9ed15442bb83d971150c824426b7db0de32f.png" src="../../_images/10899d8f97fba878163a7301000b9ed15442bb83d971150c824426b7db0de32f.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -593,7 +587,7 @@ In a social network, Node2Vec can learn embeddings for users based on network co
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/48ba1aff17106132417104feba2d76d402b3d8bc7a14b1dbff1dfb85ee432fbd.png" src="../../_images/48ba1aff17106132417104feba2d76d402b3d8bc7a14b1dbff1dfb85ee432fbd.png" />
+<img alt="../../_images/28f3b4b353011d79057fba07d4d5e7a456eedaa725be5d37ac5121b58c0de20f.png" src="../../_images/28f3b4b353011d79057fba07d4d5e7a456eedaa725be5d37ac5121b58c0de20f.png" />
 </div>
 </div>
 <p>Graph learning models such as GCN (Graph Convolutional Network), GraphSAGE, or GAT (Graph Attention Network) can capture information from a node’s neighborhood and generate expressive embeddings. These embeddings are then used for classification, clustering, or regression on the nodes.</p>
@@ -621,7 +615,7 @@ ref: <a class="reference external" href="https://distill.pub/2021/gnn-intro/">ht
 <p>Suppose the embeddings for Edge A and Edge B are very similar. This indicates that the relationship type—between a manager and a developer—is structurally or semantically meaningful and consistent across the graph.</p>
 <p>✅ Conclusion:
 When two edges have similar embeddings, it reflects a similarity in the patterns of interaction between their respective nodes. This can be used to analyze recurring relationship types, detect anomalies, or predict new potential links in the graph.</p>
-<p><img alt="nodeLevel" src="../../_images/chap1_3.png" /></p>
+<img src="figures/chap1_3.png" width="400px" style="display:block; margin:auto;">
 <p><strong>Edge2Vec</strong> generates embeddings for edges by combining the embeddings of the two endpoint nodes using binary operations such as:</p>
 <ul class="simple">
 <li><p>Hadamard product</p></li>
@@ -635,8 +629,8 @@ In a transaction network, Edge2Vec can be used to represent the interaction betw
 <li><p>Anomaly detection in communications</p></li>
 </ul>
 <p>On the left we have an initial graph built from the previous visual scene. On the right is a possible edge-labeling of this graph when some connections were pruned based on the model’s output.</p>
-<p><img alt="edgeLevel1" src="../../_images/chap1_edge.png" />
-<img alt="edgeLevel2" src="../../_images/chap1_edge2.png" /></p>
+<img src="figures/chap1_edge.png" width="600px" style="display:block; margin:auto;">
+<img src="figures/chap1_edge2.png" width="600px" style="display:block; margin:auto;">
 <p>ref: <a class="reference external" href="https://distill.pub/2021/gnn-intro/">https://distill.pub/2021/gnn-intro/</a></p>
 </section>
 </section>
@@ -667,7 +661,7 @@ In a transaction network, Edge2Vec can be used to represent the interaction betw
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/07aec9fd34f6f45be99275691d2dbb38d8df067981eddd26eafdcd858fe75100.png" src="../../_images/07aec9fd34f6f45be99275691d2dbb38d8df067981eddd26eafdcd858fe75100.png" />
+<img alt="../../_images/bc525dbf3ca4b9c7534f0df72103c1276d9f9e48e506f910aa29afba0eb3d68e.png" src="../../_images/bc525dbf3ca4b9c7534f0df72103c1276d9f9e48e506f910aa29afba0eb3d68e.png" />
 </div>
 </div>
 </section>
@@ -699,7 +693,7 @@ ref: <a class="reference external" href="https://distill.pub/2021/gnn-intro/">ht
 <li><p>Each graph is embedded into a 2D vector space using the Graph2Vec algorithm.</p></li>
 <li><p>The resulting vectors are plotted in Euclidean space.</p></li>
 </ul>
-<p><img alt="nodeLevel" src="../../_images/chap1_4.png" /></p>
+<img src="figures/chap1_4.png" width="400px" style="display:block; margin:auto;">
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">networkx</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nx</span>
@@ -785,7 +779,7 @@ ref: <a class="reference external" href="https://distill.pub/2021/gnn-intro/">ht
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/bf5e2271fb371b6446b3e7f88eeed6b913317df9cde2d7ac9505790c872011c0.png" src="../../_images/bf5e2271fb371b6446b3e7f88eeed6b913317df9cde2d7ac9505790c872011c0.png" />
+<img alt="../../_images/5be523889d485177e7c38abec752ab2ee59b1706ead1fbe88274aa191cedb906.png" src="../../_images/5be523889d485177e7c38abec752ab2ee59b1706ead1fbe88274aa191cedb906.png" />
 </div>
 </div>
 <hr class="docutils" />

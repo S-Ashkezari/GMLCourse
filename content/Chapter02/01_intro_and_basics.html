@@ -502,13 +502,6 @@ document.write(`
 <p>Many real-world phenomena involve the spread of information across nodes. Graph ML captures this through techniques like message passing, which are absent in traditional models.</p>
 <hr class="docutils" />
 <p>Graph ML is a rapidly growing area at the intersection of machine learning and network science. It leverages both the features of individual entities (nodes) and their connections (edges) to make predictions, uncover patterns, and generate meaningful representations. Recent advances in <strong>Graph Neural Networks (GNNs)</strong> have made it possible to apply deep learning directly to graph-structured data, enabling breakthroughs in various domains.</p>
-<p>This workshop is designed to provide a hands-on introduction to the core concepts, techniques, and tools used in Graph Machine Learning. We will cover:</p>
-<ul class="simple">
-<li><p>The fundamentals of graph theory and graph data structures</p></li>
-<li><p>Techniques for feature extraction and graph representation</p></li>
-<li><p>Introduction to Graph Neural Networks and their applications</p></li>
-<li><p>Practical exercises using Python libraries such as <code class="docutils literal notranslate"><span class="pre">NetworkX</span></code> and <code class="docutils literal notranslate"><span class="pre">PyTorch</span> <span class="pre">Geometric</span></code></p></li>
-</ul>
 <blockquote>
 <div><p>Let’s explore how learning from connections can lead to deeper insights!</p>
 </div></blockquote>
@@ -561,12 +554,12 @@ In contrast, graph data models complex relationships between instances, useful i
 <p>• <strong>Static Graphs</strong>
 These graphs do not change over time. The nodes and edges remain fixed after the graph is created.</p>
 <p>Example: Road maps, power grids, or anatomical brain networks.</p>
-<p><img alt="Static Graphs" src="../../_images/chap0_1.png" /></p>
+<img src="figures/chap0_1.png" width="600px" style="display:block; margin:auto;">
 <p>• <strong>Dynamic Graphs</strong>
 These graphs evolve over time, with nodes and/or edges appearing, disappearing, or changing attributes.</p>
 <p>Example: Social networks where users form new connections or communication patterns evolve.</p>
-<p>📌 Dynamic graphs often require temporal modeling techniques to capture the sequence or frequency of changes.
-<img alt="Static Graphs" src="../../_images/chap0_2.ppm" /></p>
+<p>📌 Dynamic graphs often require temporal modeling techniques to capture the sequence or frequency of changes.</p>
+<img src="figures/chap0_2.ppm" width="600px" style="display:block; margin:auto;">
 <p>• <strong>Homogeneous vs. Heterogeneous Graphs</strong>
 Homogeneous Graphs contain only one type of node and edge.</p>
 <p>Heterogeneous Graphs consist of multiple types of nodes and/or edges, each possibly representing different entities or relationships.</p>
@@ -574,8 +567,8 @@ Homogeneous Graphs contain only one type of node and edge.</p>
 In a biological knowledge graph:</p>
 <p>Nodes: proteins, diseases, drugs</p>
 <p>Edges: interactions, treatments, causes</p>
-<p>📌 Heterogeneous graphs require models that can handle multiple semantics simultaneously.
-<img alt="Static Graphs" src="../../_images/chap0_3.png" /></p>
+<p>📌 Heterogeneous graphs require models that can handle multiple semantics simultaneously.</p>
+<img src="figures/chap0_3.png" width="600px" style="display:block; margin:auto;">
 </section>
 <section id="definition-of-graphs-and-basic-concepts">
 <h2>3. Definition of Graphs and Basic Concepts<a class="headerlink" href="#definition-of-graphs-and-basic-concepts" title="Link to this heading">#</a></h2>

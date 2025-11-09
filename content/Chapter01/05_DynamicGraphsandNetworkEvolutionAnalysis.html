@@ -672,10 +672,31 @@ $<span class="math notranslate nohighlight">\(
 <li><p>Leading eigenvalue of adjacency / Laplacian.</p></li>
 </ul>
 <p>Detection can use:</p>
-<ul class="simple">
-<li><p><strong>Control charts / z-score</strong>: <span class="math notranslate nohighlight">\(z^{(t)} = (S^{(t)}-\mu)/\sigma\)</span> over window.</p></li>
-<li><p><strong>CUSUM</strong> or <strong>Page-Hinkley</strong> methods for sequential detection.</p></li>
-<li><p><strong>Scan statistics</strong>: sliding window maximum deviations.</p></li>
+<ul>
+<li><p><strong>Control charts / z-score</strong>:<br />
+Monitor a standardized statistic  <span class="math notranslate nohighlight">\(z^{(t)} = \frac{S^{(t)} - \mu}{\sigma}\)</span> over a moving window.<br />
+A significant deviation (e.g., <span class="math notranslate nohighlight">\(|z^{(t)}| &gt; 3\)</span>) indicates a global anomaly.<br />
+<em>Simple and effective for abrupt changes.</em></p></li>
+<li><p><strong>CUSUM</strong> or <strong>Page-Hinkley</strong> methods for sequential detection.<br />
+Accumulates small deviations to detect gradual drifts that individual points may miss.<br />
+Update recursively:<br />
+$<span class="math notranslate nohighlight">\(
+C_t = \max(0, C_{t-1} + S^{(t)} - (\mu + k))
+\)</span><span class="math notranslate nohighlight">\(
+and signal a change when \)</span>C_t &gt; h$.</p>
+<p>Tracks cumulative deviations relative to a reference value <em>k</em>, which defines how large a shift must be to be considered meaningful.<br />
+Typically, <span class="math notranslate nohighlight">\(k = \Delta/2\)</span>, where Δ is the minimal detectable change.<br />
+Smaller <span class="math notranslate nohighlight">\(k\)</span> → more sensitivity; larger <span class="math notranslate nohighlight">\(k\)</span> → fewer false alarms.</p>
+<p>CUSUM can detect small shifts that persist over time, because it accumulates deviations instead of examining each point independently.</p>
+<p>Page–Hinkley Test tracks the cumulative difference between the current mean and its historical minimum.<br />
+A change is detected when the accumulated difference exceeds a threshold λ.<br />
+<em>Widely used for real-time drift detection in data streams.</em></p>
+</li>
+<li><p><strong>Scan statistics</strong>: sliding window maximum deviations.</p>
+<p>Slides a temporal or spatial window and computes a local statistic (e.g., mean, variance, edge density).<br />
+The maximum deviation within the window indicates localized or short-term anomalies.<br />
+<em>Effective for transient or burst-like events in dynamic graphs.</em></p>
+</li>
 </ul>
 </section>
 <section id="local-node-level-anomaly">
@@ -791,18 +812,18 @@ where \)</span>\mu_v,\sigma_v<span class="math notranslate nohighlight">\( are m
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/33533203eeae8e80b89a41ece9fb18612d368123ddb442a279e50c770b86acc7.png" src="../../_images/33533203eeae8e80b89a41ece9fb18612d368123ddb442a279e50c770b86acc7.png" />
-<img alt="../../_images/a464a6239fb567b4d5eef250c44625da34d883af296d506464b321b615977a5b.png" src="../../_images/a464a6239fb567b4d5eef250c44625da34d883af296d506464b321b615977a5b.png" />
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Node 0 flagged at times: [(18, 13, 1.6, 0.8, 14.25)]
-Node 1 flagged at times: [(18, 11, 1.0, 1.0954451150103321, 9.128709291752768), (24, 5, 1.0, 0.8944271909999159, 4.47213595499958)]
-Node 2 flagged at times: [(18, 11, 1.6, 1.624807680927192, 5.785300076028639), (27, 3, 0.4, 0.48989794855663565, 5.307227776030219)]
-Node 3 flagged at times: [(18, 8, 1.2, 0.9797958971132713, 6.9402209378856705)]
-Node 4 flagged at times: [(14, 4, 0.2, 0.4000000000000001, 9.499999999999998), (18, 11, 1.8, 1.32664991614216, 6.934760925288562), (24, 5, 1.4, 0.8, 4.5)]
-Node 5 flagged at times: [(18, 5, 1.2, 0.7483314773547883, 5.077963596336063), (24, 4, 1.2, 0.7483314773547883, 3.741657386773941)]
-Node 6 flagged at times: [(18, 5, 0.6, 0.48989794855663565, 8.981462390204987)]
-Node 7 flagged at times: [(11, 3, 0.6, 0.48989794855663565, 4.898979485566356)]
-Node 8 flagged at times: [(18, 9, 1.6, 0.4898979485566356, 15.105186747162932)]
-Node 10 flagged at times: [(5, 3, 0.4, 0.48989794855663565, 5.307227776030219), (18, 11, 0.6, 0.48989794855663565, 21.228911104120876)]
+<img alt="../../_images/c2b850dc5da044deeba488b0a7e2a678cb46523087bbcf93c8d62471dd7a8707.png" src="../../_images/c2b850dc5da044deeba488b0a7e2a678cb46523087bbcf93c8d62471dd7a8707.png" />
+<img alt="../../_images/86428909686cf0513886df93d7f63374c191954ad0ac1d894cb2cc4189db9d08.png" src="../../_images/86428909686cf0513886df93d7f63374c191954ad0ac1d894cb2cc4189db9d08.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Node 0 flagged at times: [(18, 7, 2.0, 0.8944271909999159, 5.5901699437494745)]
+Node 1 flagged at times: [(7, 5, 0.8, 0.4, 10.5), (14, 3, 1.0, 0.6324555320336759, 3.162277660168379), (18, 7, 1.6, 1.2, 4.500000000000001), (24, 3, 1.0, 0.6324555320336759, 3.162277660168379)]
+Node 2 flagged at times: [(18, 10, 1.0, 1.0954451150103321, 8.215838362577493)]
+Node 3 flagged at times: [(18, 8, 1.4, 1.4966629547095764, 4.409810491555002)]
+Node 4 flagged at times: [(17, 4, 0.8, 0.7483314773547883, 4.27617987059879), (18, 8, 1.6, 1.3564659966250536, 4.718142596956708)]
+Node 5 flagged at times: [(18, 8, 1.6, 1.2000000000000002, 5.333333333333333), (26, 4, 1.2, 0.7483314773547883, 3.741657386773941)]
+Node 6 flagged at times: [(11, 4, 1.8, 0.4, 5.5), (18, 6, 1.2, 0.7483314773547883, 6.414269805898185), (25, 3, 1.0, 0.6324555320336759, 3.162277660168379)]
+Node 7 flagged at times: [(5, 4, 0.6, 0.48989794855663565, 6.9402209378856705), (18, 9, 1.8, 0.7483314773547883, 9.621404708847278), (27, 6, 1.2, 1.1661903789690602, 4.115966043420212)]
+Node 8 flagged at times: [(18, 4, 1.4, 0.4898979485566356, 5.30722777603022)]
+Node 9 flagged at times: [(15, 3, 0.6, 0.48989794855663565, 4.898979485566356), (18, 6, 1.2, 1.1661903789690602, 4.115966043420212)]
 </pre></div>
 </div>
 </div>
