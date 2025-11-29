@@ -63,6 +63,8 @@
     <link rel="canonical" href="/GMLCourse/content/Chapter03/02_Autoencoders.html" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Contrastive Learning" href="03_ConstrativeLearning.html" />
+    <link rel="prev" title="Shallow Embedding Methods" href="01_Shallow_Embeddings.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -125,8 +127,6 @@
       
       
       
-        
-      
       <div class="bd-sidebar-primary bd-sidebar">
         
 
@@ -182,7 +182,7 @@
                 </a>
             </li>
         </ul>
-        <ul class="nav bd-sidenav">
+        <ul class="current nav bd-sidenav">
 <li class="toctree-l1 has-children"><a class="reference internal" href="../Chapter01/01_Graph_metrics.html"><strong>First Part: Graph Mining - Concepts and properties</strong></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter01/02_community_detection.html">Community Detection in Graphs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter01/03_FrequentSubgraphMining.html">Frequent Subgraph Mining</a></li>
@@ -197,6 +197,21 @@
 <li class="toctree-l2"><a class="reference internal" href="../Chapter02/03_embedding_examples.html">Graph Representation Learning</a></li>
 </ul>
 </details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="00_Unsupervised_Learning.html">Unsupervised Graph learning</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="01_Shallow_Embeddings.html">Shallow Embedding Methods</a></li>
+
+
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">AutoEncoder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_ConstrativeLearning.html">Contrastive Learning</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="04_Graph%20Data%20Augmentation%20and%20Sampling%20Techniques.html">Graph Mining Presentation</a></li>
+
+
+
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../Chapter04/01_Feature_based_methods.html">Supervised Learning on Graphs</a></li>
+
 </ul>
 
     </div>
@@ -423,73 +438,29 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-do-autoencoders-differ-from-classical-techniques-like-pca">How Do Autoencoders Differ from Classical Techniques like PCA?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#comparison-with-other-dimensionality-reduction-techniques-t-sne-umap-isomap">Comparison with Other Dimensionality Reduction Techniques (t-SNE, UMAP, Isomap)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematical-formulation-of-an-autoencoder">Mathematical Formulation of an Autoencoder</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loss-function">Loss Function</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mean-squared-error-mse">1. Mean Squared Error (MSE):</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#binary-cross-entropy-bce">2. Binary Cross-Entropy (BCE):</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematical-formulation-of-an-autoencoder">Mathematical Formulation of an Autoencoder</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#loss-function">Loss Function</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#mean-squared-error-mse">1. Mean Squared Error (MSE):</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#binary-cross-entropy-bce">2. Binary Cross-Entropy (BCE):</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#intuition-example-effect-of-prediction-on-bce-loss">Intuition Example: Effect of Prediction on BCE Loss</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#training-objective-and-embedding-calculation">Training Objective and Embedding Calculation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gradient-based-update">Gradient-Based Update</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#training-objective">Training Objective</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optional-regularization">Optional Regularization</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#denoising-autoencoder-dae">Denoising Autoencoder (DAE)</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Introduction</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematical-formulation">Mathematical Formulation</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#encoder"><strong>Encoder</strong></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#decoder"><strong>Decoder</strong></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id2"><strong>Loss Function</strong></a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-idea">Key Idea</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#implementation-with-pytorch">Implementation with PyTorch</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variational-autoencoder-vae">Variational Autoencoder (VAE)</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Introduction</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#generative-process">Generative Process</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inference-model-encoder">Inference Model (Encoder)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reparameterization-trick">Reparameterization Trick</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#decoder-generative-network">Decoder (Generative Network)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#loss-function-evidence-lower-bound-elbo">Loss Function: Evidence Lower Bound (ELBO)</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#breakdown">Breakdown:</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#total-vae-loss">Total VAE Loss:</a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#probabilities-summary">Probabilities Summary</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-insights">Key Insights</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#benefits-of-vaes">Benefits of VAEs</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-table">Summary Table</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#generating-new-data-with-vae">Generating New Data with VAE</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#optional-regularization">Optional Regularization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variants-of-autoencoders">Variants of Autoencoders</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#graph-autoencoder-gae">Graph Autoencoder (GAE)</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Introduction</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Introduction</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-considerations">Key Considerations</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Mathematical Formulation</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Encoder</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">Decoder</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">Loss Function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematical-formulation">Mathematical Formulation</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#encoder">Encoder</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#decoder">Decoder</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Loss Function</a></li>
 </ul>
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#negative-edge-sampling">Negative Edge Sampling</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#graph-variational-autoencoder-gvae">Graph Variational Autoencoder (GVAE)</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">Introduction</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">Mathematical Formulation</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id11"><strong>Encoder</strong></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id12"><strong>Decoder</strong></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id13"><strong>Loss Function</strong></a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#implementation-with-pytorch-geometric">Implementation with PyTorch Geometric</a></li>
 </ul>
 </li>
 </ul>
@@ -520,60 +491,11 @@ document.write(`
 <li><p><strong>Anomaly detection</strong></p></li>
 <li><p><strong>Pretraining</strong> for downstream tasks (feature extraction)</p></li>
 </ul>
+<blockquote>
+<div><p><strong>Note for graph data:</strong> On graphs, autoencoders can learn embeddings for nodes or entire graphs, which can be used for tasks such as <strong>link prediction</strong>, <strong>node classification</strong>, or <strong>graph clustering</strong>. Graph Autoencoders (GAEs) extend this idea using GNN-based encoders.</p>
+</div></blockquote>
+</section>
 <hr class="docutils" />
-<section id="how-do-autoencoders-differ-from-classical-techniques-like-pca">
-<h3>How Do Autoencoders Differ from Classical Techniques like PCA?<a class="headerlink" href="#how-do-autoencoders-differ-from-classical-techniques-like-pca" title="Link to this heading">#</a></h3>
-<p>While both PCA and autoencoders can be used for dimensionality reduction, they differ in several important aspects:</p>
-<div class="pst-scrollable-table-container"><table class="table">
-<thead>
-<tr class="row-odd"><th class="head"><p>Feature</p></th>
-<th class="head"><p>PCA</p></th>
-<th class="head"><p>Autoencoder</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p><strong>Model type</strong></p></td>
-<td><p>Linear</p></td>
-<td><p>Non-linear (via neural networks)</p></td>
-</tr>
-<tr class="row-odd"><td><p><strong>Feature extraction</strong></p></td>
-<td><p>Orthogonal linear projections</p></td>
-<td><p>Learned non-linear transformations</p></td>
-</tr>
-<tr class="row-even"><td><p><strong>Capacity</strong></p></td>
-<td><p>Captures only global linear patterns</p></td>
-<td><p>Can model complex and hierarchical features</p></td>
-</tr>
-<tr class="row-odd"><td><p><strong>Training</strong></p></td>
-<td><p>Closed-form solution</p></td>
-<td><p>Requires gradient-based optimization</p></td>
-</tr>
-<tr class="row-even"><td><p><strong>Output</strong></p></td>
-<td><p>Linearly decorrelated features</p></td>
-<td><p>Non-linear embeddings, not necessarily orthogonal</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>In fact, PCA is a special case of an autoencoder with:</p>
-<ul class="simple">
-<li><p>a single hidden layer,</p></li>
-<li><p>linear activations,</p></li>
-<li><p>and squared error loss.</p></li>
-</ul>
-<p>Autoencoders, by using multiple non-linear layers and various regularizations, offer <strong>much more flexible and powerful representations</strong>, especially for real-world high-dimensional data.</p>
-</section>
-<section id="comparison-with-other-dimensionality-reduction-techniques-t-sne-umap-isomap">
-<h3>Comparison with Other Dimensionality Reduction Techniques (t-SNE, UMAP, Isomap)<a class="headerlink" href="#comparison-with-other-dimensionality-reduction-techniques-t-sne-umap-isomap" title="Link to this heading">#</a></h3>
-<p>Unlike PCA and autoencoders, <strong>t-SNE</strong>, <strong>UMAP</strong>, and <strong>Isomap</strong> are <strong>non-parametric</strong> manifold learning methods primarily used for <strong>visualization</strong> in 2D or 3D. Their differences from autoencoders include:</p>
-<ul class="simple">
-<li><p>They <strong>do not learn a mapping function</strong> from input to embedding; instead, they optimize embedding positions directly.</p></li>
-<li><p>They are not easily generalizable to new/unseen data points (i.e., no encoder).</p></li>
-<li><p>Autoencoders, in contrast, <strong>learn a parametric mapping</strong> and can generalize to new inputs, which makes them more suitable for tasks beyond visualization (e.g., generative modeling, feature extraction, transfer learning).</p></li>
-</ul>
-<p>Thus, while t-SNE and UMAP are effective for low-dimensional plots, autoencoders are more versatile for downstream machine learning tasks.</p>
-</section>
-</section>
 <section id="mathematical-formulation-of-an-autoencoder">
 <h2>Mathematical Formulation of an Autoencoder<a class="headerlink" href="#mathematical-formulation-of-an-autoencoder" title="Link to this heading">#</a></h2>
 <p>Let <span class="math notranslate nohighlight">\(x \in \mathbb{R}^n\)</span> be an input vector (e.g., a flattened image).</p>
@@ -598,11 +520,13 @@ document.write(`
 <li><p><span class="math notranslate nohighlight">\(\phi = \{W_d, b_d\}\)</span> are the decoder parameters,</p></li>
 <li><p><span class="math notranslate nohighlight">\(\sigma\)</span> is a non-linear activation function (e.g., ReLU, sigmoid).</p></li>
 </ul>
+</section>
+<hr class="docutils" />
 <section id="loss-function">
-<h3>Loss Function<a class="headerlink" href="#loss-function" title="Link to this heading">#</a></h3>
+<h2>Loss Function<a class="headerlink" href="#loss-function" title="Link to this heading">#</a></h2>
 <p>The goal is to minimize the reconstruction loss between the input <span class="math notranslate nohighlight">\(x\)</span> and the output <span class="math notranslate nohighlight">\(\hat{x}\)</span>.</p>
 <section id="mean-squared-error-mse">
-<h4>1. Mean Squared Error (MSE):<a class="headerlink" href="#mean-squared-error-mse" title="Link to this heading">#</a></h4>
+<h3>1. Mean Squared Error (MSE):<a class="headerlink" href="#mean-squared-error-mse" title="Link to this heading">#</a></h3>
 <div class="math notranslate nohighlight">
 \[
 \mathcal{L}(x, \hat{x}) = \|x - \hat{x}\|^2 = \sum_{i=1}^{n} (x_i - \hat{x}_i)^2
@@ -610,50 +534,17 @@ document.write(`
 <p>Used for real-valued inputs.</p>
 </section>
 <section id="binary-cross-entropy-bce">
-<h4>2. Binary Cross-Entropy (BCE):<a class="headerlink" href="#binary-cross-entropy-bce" title="Link to this heading">#</a></h4>
+<h3>2. Binary Cross-Entropy (BCE):<a class="headerlink" href="#binary-cross-entropy-bce" title="Link to this heading">#</a></h3>
 <div class="math notranslate nohighlight">
 \[
 \mathcal{L}(x, \hat{x}) = -\sum_{i=1}^{n} \left[ x_i \log(\hat{x}_i) + (1 - x_i) \log(1 - \hat{x}_i) \right]
 \]</div>
 <p>Used when <span class="math notranslate nohighlight">\(x_i \in [0, 1]\)</span>, such as with normalized grayscale images.</p>
 </section>
-<section id="intuition-example-effect-of-prediction-on-bce-loss">
-<h4>Intuition Example: Effect of Prediction on BCE Loss<a class="headerlink" href="#intuition-example-effect-of-prediction-on-bce-loss" title="Link to this heading">#</a></h4>
-<div class="pst-scrollable-table-container"><table class="table">
-<thead>
-<tr class="row-odd"><th class="head"><p>True Value <span class="math notranslate nohighlight">\(x_i\)</span></p></th>
-<th class="head"><p>Predicted <span class="math notranslate nohighlight">\(\hat{x}_i\)</span></p></th>
-<th class="head"><p>Contribution to Loss</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>1</p></td>
-<td><p>0.99</p></td>
-<td><p><span class="math notranslate nohighlight">\(\approx 0.01005\)</span> (good)</p></td>
-</tr>
-<tr class="row-odd"><td><p>1</p></td>
-<td><p>0.01</p></td>
-<td><p><span class="math notranslate nohighlight">\(\approx 4.60517\)</span> (bad)</p></td>
-</tr>
-<tr class="row-even"><td><p>0</p></td>
-<td><p>0.01</p></td>
-<td><p><span class="math notranslate nohighlight">\(\approx 0.01005\)</span> (good)</p></td>
-</tr>
-<tr class="row-odd"><td><p>0</p></td>
-<td><p>0.99</p></td>
-<td><p><span class="math notranslate nohighlight">\(\approx 4.60517\)</span> (bad)</p></td>
-</tr>
-<tr class="row-even"><td><p></p></td>
-<td><p></p></td>
-<td><p><strong>Total: <span class="math notranslate nohighlight">\(\approx 9.2304\)</span></strong></p></td>
-</tr>
-</tbody>
-</table>
-</div>
 </section>
-</section>
-<section id="training-objective">
-<h3>Training Objective<a class="headerlink" href="#training-objective" title="Link to this heading">#</a></h3>
+<hr class="docutils" />
+<section id="training-objective-and-embedding-calculation">
+<h2>Training Objective and Embedding Calculation<a class="headerlink" href="#training-objective-and-embedding-calculation" title="Link to this heading">#</a></h2>
 <p>Minimize the average reconstruction loss over all training samples:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -665,9 +556,28 @@ document.write(`
 <li><p><span class="math notranslate nohighlight">\(x^{(j)}\)</span> is the <span class="math notranslate nohighlight">\(j\)</span>-th input sample,</p></li>
 <li><p><span class="math notranslate nohighlight">\(\hat{x}^{(j)} = g_\phi(f_\theta(x^{(j)}))\)</span> is the reconstruction.</p></li>
 </ul>
+<blockquote>
+<div><p><strong>Key point:</strong> The embedding <span class="math notranslate nohighlight">\(z^{(j)} = f_\theta(x^{(j)})\)</span> is obtained as the output of the encoder. Its quality is <strong>indirectly optimized</strong> by minimizing the reconstruction loss via <strong>gradient descent</strong> on the network parameters <span class="math notranslate nohighlight">\(\theta\)</span> and <span class="math notranslate nohighlight">\(\phi\)</span>.<br />
+As training progresses, the embeddings become more informative and capture the most salient features of the input data.</p>
+</div></blockquote>
+<section id="gradient-based-update">
+<h3>Gradient-Based Update<a class="headerlink" href="#gradient-based-update" title="Link to this heading">#</a></h3>
+<p>During training, the network parameters are updated using backpropagation:</p>
+<div class="math notranslate nohighlight">
+\[
+\theta \leftarrow \theta - \eta \frac{\partial \mathcal{L}}{\partial \theta}, \quad
+\phi \leftarrow \phi - \eta \frac{\partial \mathcal{L}}{\partial \phi}
+\]</div>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\eta\)</span> is the learning rate.</p></li>
+<li><p>Gradients are computed automatically with respect to the loss.</p></li>
+<li><p>The embeddings <span class="math notranslate nohighlight">\(z = f_\theta(x)\)</span> <strong>improve indirectly</strong> as the network weights are optimized.</p></li>
+</ul>
 </section>
+</section>
+<hr class="docutils" />
 <section id="optional-regularization">
-<h3>Optional Regularization<a class="headerlink" href="#optional-regularization" title="Link to this heading">#</a></h3>
+<h2>Optional Regularization<a class="headerlink" href="#optional-regularization" title="Link to this heading">#</a></h2>
 <p>To improve generalization, regularization terms can be added:</p>
 <ul>
 <li><p><strong>L2 weight decay:</strong></p>
@@ -678,6 +588,17 @@ document.write(`
 </li>
 <li><p><strong>Sparsity penalty:</strong> Encourages sparse activations in the latent space.</p></li>
 </ul>
+</section>
+<hr class="docutils" />
+<section id="variants-of-autoencoders">
+<h2>Variants of Autoencoders<a class="headerlink" href="#variants-of-autoencoders" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Denoising Autoencoder:</strong> Learns to reconstruct clean inputs from noisy versions.</p></li>
+<li><p><strong>Sparse Autoencoder:</strong> Encourages sparse latent codes for more interpretable embeddings.</p></li>
+<li><p><strong>Variational Autoencoder (VAE):</strong> Probabilistic autoencoder that learns distributions over latent variables.</p></li>
+<li><p><strong>Graph Autoencoder (GAE):</strong> Uses GNNs to encode node or graph information into embeddings.</p></li>
+</ul>
+<hr class="docutils" />
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#pip install torch==2.4.1 torchvision==0.15.2 --index-url https://download.pytorch.org/whl/cpu</span>
@@ -914,564 +835,11 @@ tensor([[10.0645,  7.0116,  7.3378,  0.0000,  0.0000,  1.0820,  0.0000, 11.0301,
 </div>
 </div>
 </section>
-</section>
-<section id="denoising-autoencoder-dae">
-<h2>Denoising Autoencoder (DAE)<a class="headerlink" href="#denoising-autoencoder-dae" title="Link to this heading">#</a></h2>
-<section id="id1">
-<h3>Introduction<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
-<p>A <strong>Denoising Autoencoder (DAE)</strong> is an extension of the traditional autoencoder. It is trained to reconstruct the <strong>original clean input</strong> from a <strong>noisy version</strong> of that input. By doing so, it learns <strong>robust and invariant feature representations</strong>, rather than simply learning to replicate the input.</p>
-<p>This is useful in scenarios where input data may be <strong>corrupted by noise</strong>, and we still want to extract reliable features for downstream tasks.</p>
-</section>
-<hr class="docutils" />
-<section id="mathematical-formulation">
-<h3>Mathematical Formulation<a class="headerlink" href="#mathematical-formulation" title="Link to this heading">#</a></h3>
-<p>Let <span class="math notranslate nohighlight">\(x \in \mathbb{R}^n\)</span> be a clean input vector, and let <span class="math notranslate nohighlight">\(\tilde{x} \in \mathbb{R}^n\)</span> be a <strong>noisy version</strong> of <span class="math notranslate nohighlight">\(x\)</span>, sampled from a <strong>corruption distribution</strong> <span class="math notranslate nohighlight">\(q(\tilde{x} \mid x)\)</span>. The goal of the DAE is to recover <span class="math notranslate nohighlight">\(x\)</span> from <span class="math notranslate nohighlight">\(\tilde{x}\)</span>.</p>
-<hr class="docutils" />
-<section id="encoder">
-<h4><strong>Encoder</strong><a class="headerlink" href="#encoder" title="Link to this heading">#</a></h4>
-<p>Maps the corrupted input <span class="math notranslate nohighlight">\(\tilde{x}\)</span> to a latent representation <span class="math notranslate nohighlight">\(z \in \mathbb{R}^m\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[
-z = f_{\theta}(\tilde{x}) = \sigma(W_e \tilde{x} + b_e)
-\]</div>
-</section>
-<hr class="docutils" />
-<section id="decoder">
-<h4><strong>Decoder</strong><a class="headerlink" href="#decoder" title="Link to this heading">#</a></h4>
-<p>Reconstructs the clean input <span class="math notranslate nohighlight">\(x\)</span> from the latent representation <span class="math notranslate nohighlight">\(z\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[
-\hat{x} = g_{\phi}(z) = \sigma(W_d z + b_d)
-\]</div>
-</section>
-<hr class="docutils" />
-<section id="id2">
-<h4><strong>Loss Function</strong><a class="headerlink" href="#id2" title="Link to this heading">#</a></h4>
-<p>The DAE is trained to minimize the <strong>expected reconstruction error</strong> over the noise distribution:</p>
-<div class="math notranslate nohighlight">
-\[
-\mathcal{L}_{\text{DAE}}(x, \hat{x}) = \mathbb{E}_{\tilde{x} \sim q(\tilde{x}|x)} \left[ \|x - g_{\phi}(f_{\theta}(\tilde{x}))\|^2 \right]
-\]</div>
-<p>Alternatively, for binary inputs (e.g., binarized images), <strong>Binary Cross-Entropy (BCE)</strong> loss is often used:</p>
-<div class="math notranslate nohighlight">
-\[
-\mathcal{L}_{\text{DAE}}(x, \hat{x}) = -\sum_{i=1}^{n} \left[ x_i \log \hat{x}_i + (1 - x_i) \log (1 - \hat{x}_i) \right]
-\]</div>
-</section>
-</section>
-<hr class="docutils" />
-<section id="key-idea">
-<h3>Key Idea<a class="headerlink" href="#key-idea" title="Link to this heading">#</a></h3>
-<p>The corruption process <span class="math notranslate nohighlight">\(q(\tilde{x} \mid x)\)</span> could include:</p>
-<ul class="simple">
-<li><p><strong>Additive Gaussian noise</strong></p></li>
-<li><p><strong>Salt-and-pepper noise</strong></p></li>
-<li><p><strong>Random masking (e.g., setting a fraction of inputs to 0)</strong></p></li>
-</ul>
-<p>By learning to recover the original <span class="math notranslate nohighlight">\(x\)</span> from <span class="math notranslate nohighlight">\(\tilde{x}\)</span>, the DAE generalizes better and avoids simply memorizing training data.</p>
-</section>
-<hr class="docutils" />
-<section id="implementation-with-pytorch">
-<h3>Implementation with PyTorch<a class="headerlink" href="#implementation-with-pytorch" title="Link to this heading">#</a></h3>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define Denoising Autoencoder model</span>
-<span class="k">class</span><span class="w"> </span><span class="nc">DenoisingAutoencoder</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_dim</span><span class="o">=</span><span class="mi">784</span><span class="p">,</span> <span class="n">encoding_dim</span><span class="o">=</span><span class="mi">32</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">DenoisingAutoencoder</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">encoder</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span>
-            <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">input_dim</span><span class="p">,</span> <span class="n">encoding_dim</span><span class="p">),</span>
-            <span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">()</span>
-        <span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">decoder</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span>
-            <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">encoding_dim</span><span class="p">,</span> <span class="n">input_dim</span><span class="p">),</span>
-            <span class="n">nn</span><span class="o">.</span><span class="n">Sigmoid</span><span class="p">()</span>
-        <span class="p">)</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-        <span class="n">z</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">encoder</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-        <span class="n">out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">decoder</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">out</span>
-
-<span class="c1"># Add noise to input</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">add_noise</span><span class="p">(</span><span class="n">inputs</span><span class="p">,</span> <span class="n">noise_factor</span><span class="o">=</span><span class="mf">0.3</span><span class="p">):</span>
-    <span class="n">noisy</span> <span class="o">=</span> <span class="n">inputs</span> <span class="o">+</span> <span class="n">noise_factor</span> <span class="o">*</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn_like</span><span class="p">(</span><span class="n">inputs</span><span class="p">)</span>
-    <span class="n">noisy</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">noisy</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">noisy</span>
-
-<span class="c1"># Model, optimizer</span>
-<span class="n">dae_model</span> <span class="o">=</span> <span class="n">DenoisingAutoencoder</span><span class="p">()</span>
-<span class="n">criterion</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">MSELoss</span><span class="p">()</span>
-<span class="n">optimizer</span> <span class="o">=</span> <span class="n">optim</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">dae_model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">)</span>
-
-<span class="c1"># Training loop</span>
-<span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">):</span>
-    <span class="k">for</span> <span class="n">imgs</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">train_loader</span><span class="p">:</span>
-        <span class="n">imgs</span> <span class="o">=</span> <span class="n">imgs</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">imgs</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-        <span class="n">noisy_imgs</span> <span class="o">=</span> <span class="n">add_noise</span><span class="p">(</span><span class="n">imgs</span><span class="p">)</span>
-        <span class="n">outputs</span> <span class="o">=</span> <span class="n">dae_model</span><span class="p">(</span><span class="n">noisy_imgs</span><span class="p">)</span>
-        <span class="n">loss</span> <span class="o">=</span> <span class="n">criterion</span><span class="p">(</span><span class="n">outputs</span><span class="p">,</span> <span class="n">imgs</span><span class="p">)</span>
-
-        <span class="n">optimizer</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
-        <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
-        <span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;DAE Epoch [</span><span class="si">{</span><span class="n">epoch</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">/20], Loss: </span><span class="si">{</span><span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">()</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-
-<span class="c1"># Visualization</span>
-<span class="n">dae_model</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
-<span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
-    <span class="n">imgs</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="nb">iter</span><span class="p">(</span><span class="n">test_loader</span><span class="p">))</span>
-    <span class="n">imgs</span> <span class="o">=</span> <span class="n">imgs</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">imgs</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-    <span class="n">noisy_imgs</span> <span class="o">=</span> <span class="n">add_noise</span><span class="p">(</span><span class="n">imgs</span><span class="p">)</span>
-    <span class="n">outputs</span> <span class="o">=</span> <span class="n">dae_model</span><span class="p">(</span><span class="n">noisy_imgs</span><span class="p">)</span>
-
-    <span class="n">n</span> <span class="o">=</span> <span class="mi">10</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-        <span class="c1"># Original</span>
-        <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">imgs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">28</span><span class="p">,</span> <span class="mi">28</span><span class="p">)</span><span class="o">.</span><span class="n">numpy</span><span class="p">(),</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
-        <span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
-
-        <span class="c1"># Noisy</span>
-        <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">n</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">noisy_imgs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">28</span><span class="p">,</span> <span class="mi">28</span><span class="p">)</span><span class="o">.</span><span class="n">numpy</span><span class="p">(),</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
-        <span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
-
-        <span class="c1"># Denoised</span>
-        <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">n</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">outputs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">28</span><span class="p">,</span> <span class="mi">28</span><span class="p">)</span><span class="o">.</span><span class="n">numpy</span><span class="p">(),</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
-        <span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>DAE Epoch [1/20], Loss: 0.0485
-DAE Epoch [2/20], Loss: 0.0344
-DAE Epoch [3/20], Loss: 0.0309
-DAE Epoch [4/20], Loss: 0.0265
-DAE Epoch [5/20], Loss: 0.0242
-DAE Epoch [6/20], Loss: 0.0238
-DAE Epoch [7/20], Loss: 0.0233
-DAE Epoch [8/20], Loss: 0.0233
-DAE Epoch [9/20], Loss: 0.0249
-DAE Epoch [10/20], Loss: 0.0218
-DAE Epoch [11/20], Loss: 0.0235
-DAE Epoch [12/20], Loss: 0.0223
-DAE Epoch [13/20], Loss: 0.0227
-DAE Epoch [14/20], Loss: 0.0252
-DAE Epoch [15/20], Loss: 0.0245
-DAE Epoch [16/20], Loss: 0.0238
-DAE Epoch [17/20], Loss: 0.0212
-DAE Epoch [18/20], Loss: 0.0216
-DAE Epoch [19/20], Loss: 0.0233
-DAE Epoch [20/20], Loss: 0.0223
-</pre></div>
-</div>
-<img alt="../../_images/4cfe70d072c0f0e20b332811761c9ade69d563c09e9ce2658325c81ba7731d73.png" src="../../_images/4cfe70d072c0f0e20b332811761c9ade69d563c09e9ce2658325c81ba7731d73.png" />
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.manifold</span><span class="w"> </span><span class="kn">import</span> <span class="n">TSNE</span>
-
-<span class="n">dae_model</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
-<span class="n">embeddings</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="n">labels</span> <span class="o">=</span> <span class="p">[]</span>
-
-<span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
-    <span class="k">for</span> <span class="n">imgs</span><span class="p">,</span> <span class="n">lbls</span> <span class="ow">in</span> <span class="n">test_loader</span><span class="p">:</span>
-        <span class="n">imgs</span> <span class="o">=</span> <span class="n">imgs</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">imgs</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-        <span class="n">z</span> <span class="o">=</span> <span class="n">dae_model</span><span class="o">.</span><span class="n">encoder</span><span class="p">(</span><span class="n">imgs</span><span class="p">)</span>
-        <span class="n">embeddings</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
-        <span class="n">labels</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">lbls</span><span class="p">)</span>
-
-<span class="c1"># Stack all batches</span>
-<span class="n">embeddings</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">(</span><span class="n">embeddings</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
-<span class="n">labels</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
-
-<span class="c1"># Reduce to 2D using t-SNE</span>
-<span class="n">tsne</span> <span class="o">=</span> <span class="n">TSNE</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="s1">&#39;pca&#39;</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
-<span class="n">z_2d</span> <span class="o">=</span> <span class="n">tsne</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">embeddings</span><span class="p">)</span>
-
-<span class="c1"># Plot</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
-<span class="n">scatter</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">z_2d</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">z_2d</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;tab10&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">scatter</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Digit Label&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;2D Embedding Space (t-SNE on Encoder Output)&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../../_images/c24bd684a672ce9fed58d70ef473f08571129a71642aa271ffb5262753762b7a.png" src="../../_images/c24bd684a672ce9fed58d70ef473f08571129a71642aa271ffb5262753762b7a.png" />
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Assume the model is already trained and ready</span>
-
-<span class="c1"># Set the model to evaluation mode</span>
-<span class="n">model</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
-
-<span class="c1"># Get one batch from the test data</span>
-<span class="n">dataiter</span> <span class="o">=</span> <span class="nb">iter</span><span class="p">(</span><span class="n">test_loader</span><span class="p">)</span>
-<span class="n">images</span><span class="p">,</span> <span class="n">labels</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">dataiter</span><span class="p">)</span>
-
-<span class="c1"># Prepare (flatten) the images</span>
-<span class="n">images_flat</span> <span class="o">=</span> <span class="n">images</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">images</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-
-<span class="c1"># Get the embeddings from the encoder</span>
-<span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
-    <span class="n">embeddings</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">encoder</span><span class="p">(</span><span class="n">images_flat</span><span class="p">)</span>
-
-<span class="c1"># Display the first 10 embeddings</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Embedding for first 10 test images:&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">embeddings</span><span class="p">[:</span><span class="mi">10</span><span class="p">])</span>
-
-
-<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.manifold</span><span class="w"> </span><span class="kn">import</span> <span class="n">TSNE</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
-
-<span class="c1"># dimension redunction for visualization</span>
-<span class="n">tsne</span> <span class="o">=</span> <span class="n">TSNE</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
-<span class="n">embeddings_2d</span> <span class="o">=</span> <span class="n">tsne</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">embeddings</span><span class="p">[:</span><span class="mi">100</span><span class="p">]</span><span class="o">.</span><span class="n">numpy</span><span class="p">())</span>  <span class="c1"># فقط 100 تصویر اول</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">embeddings_2d</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">embeddings_2d</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">labels</span><span class="p">[:</span><span class="mi">100</span><span class="p">],</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;tab10&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;2D Embedding of Test Images&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Dimension 1&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Dimension 2&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-</section>
-<section id="variational-autoencoder-vae">
-<h2>Variational Autoencoder (VAE)<a class="headerlink" href="#variational-autoencoder-vae" title="Link to this heading">#</a></h2>
-<section id="id3">
-<h3>Introduction<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
-<p>A <strong>Variational Autoencoder (VAE)</strong> is a generative model that learns to encode input data into a <strong>distribution over a latent space</strong>, and then decode from this latent space to reconstruct the input.</p>
-<p>Unlike standard autoencoders that map inputs to fixed latent vectors, VAEs map inputs to <strong>probability distributions</strong>, allowing:</p>
-<ul class="simple">
-<li><p>Smooth interpolation</p></li>
-<li><p>Meaningful latent representations</p></li>
-<li><p>Probabilistic generation of new samples</p></li>
-</ul>
-</section>
-<hr class="docutils" />
-<section id="generative-process">
-<h3>Generative Process<a class="headerlink" href="#generative-process" title="Link to this heading">#</a></h3>
-<p>Let:</p>
-<ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(x \in \mathbb{R}^D\)</span> be the observed data (e.g., an image),</p></li>
-<li><p><span class="math notranslate nohighlight">\(z \in \mathbb{R}^d\)</span> be the latent variable (hidden representation).</p></li>
-</ul>
-<p>The VAE assumes the following <strong>generative process</strong>:</p>
-<ol class="arabic simple">
-<li><p><strong>Prior distribution over latent variables</strong>:
-<span class="math notranslate nohighlight">\(p(z) = \mathcal{N}(z \mid 0, I)\)</span></p>
-<ul class="simple">
-<li><p>This is the <strong>prior</strong>: a simple standard normal distribution.</p></li>
-<li><p>It reflects our assumption about <span class="math notranslate nohighlight">\(z\)</span> before seeing any data.</p></li>
-</ul>
-</li>
-<li><p><strong>Likelihood (decoder) – probability of data given latent variable</strong>:
-<span class="math notranslate nohighlight">\(
-p_{\theta}(x|z)
-\)</span></p>
-<ul class="simple">
-<li><p>This is the <strong>likelihood</strong>, or <strong>decoder</strong>.</p></li>
-<li><p>It models the probability of observing <span class="math notranslate nohighlight">\(x\)</span> given the latent variable <span class="math notranslate nohighlight">\(z\)</span>.</p></li>
-<li><p>Typically parameterized by a neural network with parameters <span class="math notranslate nohighlight">\(\theta\)</span>.</p>
-<ul>
-<li><p>For binary data: <span class="math notranslate nohighlight">\(p_{\theta}(x|z)\)</span> is a Bernoulli distribution.</p></li>
-<li><p>For continuous data: <span class="math notranslate nohighlight">\(p_{\theta}(x|z)\)</span> is a Gaussian.</p></li>
-</ul>
-</li>
-</ul>
-</li>
-</ol>
-<p>Thus, the <strong>joint distribution</strong> is:
-<span class="math notranslate nohighlight">\(
-p_{\theta}(x, z) = p(z) \cdot p_{\theta}(x|z)
-\)</span></p>
-</section>
-<hr class="docutils" />
-<section id="inference-model-encoder">
-<h3>Inference Model (Encoder)<a class="headerlink" href="#inference-model-encoder" title="Link to this heading">#</a></h3>
-<p>The <strong>posterior distribution</strong> <span class="math notranslate nohighlight">\(p(z|x)\)</span> is typically <strong>intractable</strong>, so we approximate it with a variational distribution:</p>
-<div class="math notranslate nohighlight">
-\[
-q_{\phi}(z|x) = \mathcal{N}(z \mid \mu(x), \text{diag}(\sigma^2(x)))
-\]</div>
-<ul class="simple">
-<li><p>This is the <strong>variational posterior</strong> or <strong>encoder</strong>.</p></li>
-<li><p>It models the distribution over latent variables <span class="math notranslate nohighlight">\(z\)</span> given input <span class="math notranslate nohighlight">\(x\)</span>.</p></li>
-<li><p>The mean <span class="math notranslate nohighlight">\(\mu(x)\)</span> and variance <span class="math notranslate nohighlight">\(\sigma^2(x)\)</span> are outputs of a neural network with parameters <span class="math notranslate nohighlight">\(\phi\)</span>.</p></li>
-</ul>
-</section>
-<hr class="docutils" />
-<section id="reparameterization-trick">
-<h3>Reparameterization Trick<a class="headerlink" href="#reparameterization-trick" title="Link to this heading">#</a></h3>
-<p>To allow backpropagation through sampling, we use the <strong>reparameterization trick</strong>:</p>
-<div class="math notranslate nohighlight">
-\[
-z = \mu(x) + \sigma(x) \odot \epsilon, \quad \epsilon \sim \mathcal{N}(0, I)
-\]</div>
-<p>This makes the sampling process differentiable, enabling end-to-end training of both encoder and decoder.</p>
-</section>
-<hr class="docutils" />
-<section id="decoder-generative-network">
-<h3>Decoder (Generative Network)<a class="headerlink" href="#decoder-generative-network" title="Link to this heading">#</a></h3>
-<p>Given a latent variable <span class="math notranslate nohighlight">\(z\)</span>, the decoder predicts the reconstruction <span class="math notranslate nohighlight">\(\hat{x}\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[
-\hat{x} = g_{\theta}(z)
-\]</div>
-<p>This maps <span class="math notranslate nohighlight">\(z\)</span> to the parameters of the distribution <span class="math notranslate nohighlight">\(p_{\theta}(x|z)\)</span>:</p>
-<ul class="simple">
-<li><p>For binary <span class="math notranslate nohighlight">\(x\)</span>: outputs probabilities for each pixel (Bernoulli)</p></li>
-<li><p>For continuous <span class="math notranslate nohighlight">\(x\)</span>: outputs mean and variance (Gaussian)</p></li>
-</ul>
-</section>
-<hr class="docutils" />
-<section id="loss-function-evidence-lower-bound-elbo">
-<h3>Loss Function: Evidence Lower Bound (ELBO)<a class="headerlink" href="#loss-function-evidence-lower-bound-elbo" title="Link to this heading">#</a></h3>
-<p>We aim to <strong>maximize the marginal likelihood</strong> <span class="math notranslate nohighlight">\(p(x)\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[
-p(x) = \int p_{\theta}(x|z) p(z) \, dz
-\]</div>
-<p>But this is intractable due to the integral. So we maximize the <strong>Evidence Lower Bound (ELBO)</strong> instead:</p>
-<div class="math notranslate nohighlight">
-\[
-\mathcal{L}_{\text{ELBO}}(x) = \mathbb{E}_{q_{\phi}(z|x)}[\log p_{\theta}(x|z)] - \text{KL}(q_{\phi}(z|x) \| p(z))
-\]</div>
-<section id="breakdown">
-<h4>Breakdown:<a class="headerlink" href="#breakdown" title="Link to this heading">#</a></h4>
-<ol class="arabic simple">
-<li><p><strong>Reconstruction Term</strong> (negative expected log-likelihood):
-$<span class="math notranslate nohighlight">\(
-\mathcal{L}_{\text{recon}} = -\mathbb{E}_{q_{\phi}(z|x)}[\log p_{\theta}(x|z)]
-\)</span>$</p>
-<ul class="simple">
-<li><p>Measures how well the model reconstructs <span class="math notranslate nohighlight">\(x\)</span> from <span class="math notranslate nohighlight">\(z\)</span>.</p></li>
-<li><p>For binary data: binary cross-entropy loss.</p></li>
-<li><p>For continuous data: typically mean squared error.</p></li>
-</ul>
-</li>
-<li><p><strong>KL Divergence Term</strong>:
-$<span class="math notranslate nohighlight">\(
-\text{KL}(q_{\phi}(z|x) \| p(z)) = \frac{1}{2} \sum_{i=1}^{d} \left( \sigma_i^2 + \mu_i^2 - \log \sigma_i^2 - 1 \right)
-\)</span>$</p>
-<ul class="simple">
-<li><p>Encourages <span class="math notranslate nohighlight">\(q_{\phi}(z|x)\)</span> to stay close to the prior <span class="math notranslate nohighlight">\(p(z)\)</span>.</p></li>
-<li><p>Acts as a regularizer.</p></li>
-</ul>
-</li>
-</ol>
-</section>
-<section id="total-vae-loss">
-<h4>Total VAE Loss:<a class="headerlink" href="#total-vae-loss" title="Link to this heading">#</a></h4>
-<p>To train the model, we <strong>minimize</strong> the negative ELBO:</p>
-<div class="math notranslate nohighlight">
-\[
-\mathcal{L}_{\text{VAE}}(x) = \mathcal{L}_{\text{recon}} + \text{KL}(q_{\phi}(z|x) \| p(z))
-\]</div>
-</section>
-</section>
-<hr class="docutils" />
-<section id="probabilities-summary">
-<h3>Probabilities Summary<a class="headerlink" href="#probabilities-summary" title="Link to this heading">#</a></h3>
-<div class="pst-scrollable-table-container"><table class="table">
-<thead>
-<tr class="row-odd"><th class="head"><p>Symbol</p></th>
-<th class="head"><p>Meaning</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(p(z)\)</span></p></td>
-<td><p>Prior over latent variables: <span class="math notranslate nohighlight">\(\mathcal{N}(0, I)\)</span></p></td>
-</tr>
-<tr class="row-odd"><td><p>$p_{\theta}(x</p></td>
-<td><p>z)$</p></td>
-</tr>
-<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(p(x)\)</span></p></td>
-<td><p>Marginal likelihood: true probability of data (intractable)</p></td>
-</tr>
-<tr class="row-odd"><td><p>$q_{\phi}(z</p></td>
-<td><p>x)$</p></td>
-</tr>
-<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\hat{x}\)</span></p></td>
-<td><p>Reconstructed version of <span class="math notranslate nohighlight">\(x\)</span> decoded from <span class="math notranslate nohighlight">\(z\)</span></p></td>
-</tr>
-</tbody>
-</table>
-</div>
-</section>
-<hr class="docutils" />
-<section id="key-insights">
-<h3>Key Insights<a class="headerlink" href="#key-insights" title="Link to this heading">#</a></h3>
-<ul class="simple">
-<li><p><strong>KL divergence</strong> regularizes the encoder to match the prior distribution.</p></li>
-<li><p>The <strong>reconstruction term</strong> ensures high-fidelity output.</p></li>
-<li><p>The <strong>reparameterization trick</strong> allows gradient-based learning despite sampling.</p></li>
-</ul>
-</section>
-<hr class="docutils" />
-<section id="benefits-of-vaes">
-<h3>Benefits of VAEs<a class="headerlink" href="#benefits-of-vaes" title="Link to this heading">#</a></h3>
-<ul class="simple">
-<li><p><strong>Generative power</strong>: Can generate new, coherent samples</p></li>
-<li><p><strong>Structured latent space</strong>: Smooth, interpretable embeddings</p></li>
-<li><p><strong>Uncertainty modeling</strong>: Each input maps to a distribution, not a point</p></li>
-</ul>
-</section>
-<hr class="docutils" />
-<section id="summary-table">
-<h3>Summary Table<a class="headerlink" href="#summary-table" title="Link to this heading">#</a></h3>
-<div class="pst-scrollable-table-container"><table class="table">
-<thead>
-<tr class="row-odd"><th class="head"><p>Component</p></th>
-<th class="head"><p>Standard Autoencoder</p></th>
-<th class="head"><p>Variational Autoencoder</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>Latent Representation</p></td>
-<td><p>Fixed deterministic vector</p></td>
-<td><p>Distribution (mean &amp; variance)</p></td>
-</tr>
-<tr class="row-odd"><td><p>Output</p></td>
-<td><p>Deterministic reconstruction</p></td>
-<td><p>Sampled from a generative model</p></td>
-</tr>
-<tr class="row-even"><td><p>Loss Function</p></td>
-<td><p>Reconstruction error only</p></td>
-<td><p>Reconstruction + KL divergence</p></td>
-</tr>
-<tr class="row-odd"><td><p>Sampling Capability</p></td>
-<td><p>Not generative</p></td>
-<td><p>Generative via latent sampling</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">### Implementation with PyTorch</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">torch.nn.functional</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">F</span>
-
-<span class="k">class</span><span class="w"> </span><span class="nc">VAE</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_dim</span><span class="o">=</span><span class="mi">784</span><span class="p">,</span> <span class="n">hidden_dim</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span> <span class="n">latent_dim</span><span class="o">=</span><span class="mi">20</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">VAE</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">fc1</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">input_dim</span><span class="p">,</span> <span class="n">hidden_dim</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">fc21</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">hidden_dim</span><span class="p">,</span> <span class="n">latent_dim</span><span class="p">)</span>  <span class="c1"># mean</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">fc22</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">hidden_dim</span><span class="p">,</span> <span class="n">latent_dim</span><span class="p">)</span>  <span class="c1"># log-variance</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">fc3</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">latent_dim</span><span class="p">,</span> <span class="n">hidden_dim</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">fc4</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">hidden_dim</span><span class="p">,</span> <span class="n">input_dim</span><span class="p">)</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">encode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-        <span class="n">h1</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fc1</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">fc21</span><span class="p">(</span><span class="n">h1</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">fc22</span><span class="p">(</span><span class="n">h1</span><span class="p">)</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">reparameterize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">logvar</span><span class="p">):</span>
-        <span class="n">std</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">logvar</span><span class="p">)</span>
-        <span class="n">eps</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn_like</span><span class="p">(</span><span class="n">std</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">mu</span> <span class="o">+</span> <span class="n">eps</span> <span class="o">*</span> <span class="n">std</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">decode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">z</span><span class="p">):</span>
-        <span class="n">h3</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fc3</span><span class="p">(</span><span class="n">z</span><span class="p">))</span>
-        <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">sigmoid</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fc4</span><span class="p">(</span><span class="n">h3</span><span class="p">))</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-        <span class="n">mu</span><span class="p">,</span> <span class="n">logvar</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-        <span class="n">z</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">reparameterize</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">logvar</span><span class="p">)</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">z</span><span class="p">),</span> <span class="n">mu</span><span class="p">,</span> <span class="n">logvar</span>
-
-<span class="c1"># Loss function</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">vae_loss_function</span><span class="p">(</span><span class="n">recon_x</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">logvar</span><span class="p">):</span>
-    <span class="n">BCE</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">binary_cross_entropy</span><span class="p">(</span><span class="n">recon_x</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">reduction</span><span class="o">=</span><span class="s1">&#39;sum&#39;</span><span class="p">)</span>
-    <span class="n">KLD</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">torch</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">logvar</span> <span class="o">-</span> <span class="n">mu</span><span class="o">.</span><span class="n">pow</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">-</span> <span class="n">logvar</span><span class="o">.</span><span class="n">exp</span><span class="p">())</span>
-    <span class="k">return</span> <span class="n">BCE</span> <span class="o">+</span> <span class="n">KLD</span>
-
-<span class="c1"># Training loop</span>
-<span class="n">vae</span> <span class="o">=</span> <span class="n">VAE</span><span class="p">()</span>
-<span class="n">optimizer</span> <span class="o">=</span> <span class="n">optim</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">vae</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">)</span>
-
-<span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">):</span>
-    <span class="k">for</span> <span class="n">imgs</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">train_loader</span><span class="p">:</span>
-        <span class="n">imgs</span> <span class="o">=</span> <span class="n">imgs</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">imgs</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-        <span class="n">recon_batch</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">logvar</span> <span class="o">=</span> <span class="n">vae</span><span class="p">(</span><span class="n">imgs</span><span class="p">)</span>
-        <span class="n">loss</span> <span class="o">=</span> <span class="n">vae_loss_function</span><span class="p">(</span><span class="n">recon_batch</span><span class="p">,</span> <span class="n">imgs</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">logvar</span><span class="p">)</span>
-
-        <span class="n">optimizer</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
-        <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
-        <span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;VAE Epoch [</span><span class="si">{</span><span class="n">epoch</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">/20], Loss: </span><span class="si">{</span><span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">()</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>VAE Epoch [1/20], Loss: 13020.7021
-VAE Epoch [2/20], Loss: 11994.2080
-VAE Epoch [3/20], Loss: 11372.3105
-VAE Epoch [4/20], Loss: 10670.6484
-VAE Epoch [5/20], Loss: 10496.4316
-VAE Epoch [6/20], Loss: 11592.9043
-VAE Epoch [7/20], Loss: 10311.1201
-VAE Epoch [8/20], Loss: 10910.4326
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="generating-new-data-with-vae">
-<h3>Generating New Data with VAE<a class="headerlink" href="#generating-new-data-with-vae" title="Link to this heading">#</a></h3>
-<p>One of the key capabilities of a Variational Autoencoder (VAE) is its generative nature. After training the model, we can sample new points from the latent space and decode them into the data space to generate entirely new examples.</p>
-<p>In this case, we demonstrate this by drawing random samples from a standard normal distribution in the latent space and passing them through the decoder. Since the VAE was trained on MNIST digits, the output will be synthetic handwritten digits that resemble the training data — even though they are not exact copies of any original input.</p>
-<p>This process highlights how VAEs learn a continuous, structured latent representation of data that enables meaningful and smooth sampling for generation.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Generate new samples from the latent space</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
-
-<span class="n">vae</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>  <span class="c1"># Set model to evaluation mode</span>
-<span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
-    <span class="c1"># Sample 10 random latent vectors from a standard normal distribution</span>
-    <span class="n">z</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>  <span class="c1"># latent_dim = 20</span>
-    <span class="n">generated</span> <span class="o">=</span> <span class="n">vae</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
-
-    <span class="c1"># Plot the generated images</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
-        <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">generated</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="mi">28</span><span class="p">,</span> <span class="mi">28</span><span class="p">)</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">(),</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
-        <span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;Generated Digits from VAE Latent Space&#39;</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../../_images/f1c54dec41f0b475d85b0be4d506fa55a6ba3fdc8ca76f7b373a85a2403ff8f5.png" src="../../_images/f1c54dec41f0b475d85b0be4d506fa55a6ba3fdc8ca76f7b373a85a2403ff8f5.png" />
-</div>
-</div>
-</section>
-</section>
 <hr class="docutils" />
 <section id="graph-autoencoder-gae">
 <h2>Graph Autoencoder (GAE)<a class="headerlink" href="#graph-autoencoder-gae" title="Link to this heading">#</a></h2>
-<section id="id4">
-<h3>Introduction<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
+<section id="id1">
+<h3>Introduction<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
 <p>A <strong>Graph Autoencoder (GAE)</strong> is a type of neural network designed to learn low-dimensional representations of nodes in graph-structured data by following the encoder–decoder paradigm. The encoder maps the input node features and graph topology to a latent space, and the decoder attempts to reconstruct the graph structure—typically the adjacency matrix—from these embeddings.</p>
 <p>GAEs are widely used in:</p>
 <ul class="simple">
@@ -1498,15 +866,15 @@ VAE Epoch [8/20], Loss: 10910.4326
 </ul>
 </section>
 <hr class="docutils" />
-<section id="id5">
-<h3>Mathematical Formulation<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
+<section id="mathematical-formulation">
+<h3>Mathematical Formulation<a class="headerlink" href="#mathematical-formulation" title="Link to this heading">#</a></h3>
 <p>Let:</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(A \in \mathbb{R}^{n \times n}\)</span> be the adjacency matrix of the graph</p></li>
 <li><p><span class="math notranslate nohighlight">\(X \in \mathbb{R}^{n \times d}\)</span> be the node feature matrix</p></li>
 </ul>
-<section id="id6">
-<h4>Encoder<a class="headerlink" href="#id6" title="Link to this heading">#</a></h4>
+<section id="encoder">
+<h4>Encoder<a class="headerlink" href="#encoder" title="Link to this heading">#</a></h4>
 <p>A Graph Neural Network (e.g., GCN) encodes each node into a latent representation:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -1514,8 +882,8 @@ Z = \text{GNN}(X, A)
 \]</div>
 <p>where <span class="math notranslate nohighlight">\(Z \in \mathbb{R}^{n \times h}\)</span> is the matrix of node embeddings, with <span class="math notranslate nohighlight">\(h\)</span> being the embedding dimension.</p>
 </section>
-<section id="id7">
-<h4>Decoder<a class="headerlink" href="#id7" title="Link to this heading">#</a></h4>
+<section id="decoder">
+<h4>Decoder<a class="headerlink" href="#decoder" title="Link to this heading">#</a></h4>
 <p>The decoder reconstructs the adjacency matrix via the inner product of embeddings:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -1523,8 +891,8 @@ Z = \text{GNN}(X, A)
 \]</div>
 <p>where <span class="math notranslate nohighlight">\(\sigma\)</span> is the sigmoid function and <span class="math notranslate nohighlight">\(\hat{A}\)</span> is the reconstructed adjacency matrix.</p>
 </section>
-<section id="id8">
-<h4>Loss Function<a class="headerlink" href="#id8" title="Link to this heading">#</a></h4>
+<section id="id2">
+<h4>Loss Function<a class="headerlink" href="#id2" title="Link to this heading">#</a></h4>
 <p><strong>Naive (Frobenius norm / squared reconstruction loss):</strong></p>
 <div class="math notranslate nohighlight">
 \[
@@ -2062,221 +1430,6 @@ Epoch 500, Loss: 0.6231
 </div>
 </section>
 </section>
-<section id="graph-variational-autoencoder-gvae">
-<h2>Graph Variational Autoencoder (GVAE)<a class="headerlink" href="#graph-variational-autoencoder-gvae" title="Link to this heading">#</a></h2>
-<section id="id9">
-<h3>Introduction<a class="headerlink" href="#id9" title="Link to this heading">#</a></h3>
-<p>Graph Variational Autoencoders (GVAE) combine the power of variational autoencoders with graph neural networks to learn <strong>probabilistic latent representations</strong> of nodes in graph-structured data. Like traditional VAEs, GVAEs encode inputs into a distribution (typically Gaussian) rather than a deterministic point, which allows for uncertainty modeling and generative capabilities.</p>
-<p>They are particularly effective for:</p>
-<ul class="simple">
-<li><p><strong>Link prediction</strong></p></li>
-<li><p><strong>Uncertainty modeling</strong> in node embeddings</p></li>
-<li><p><strong>Robust representation learning</strong> under noise</p></li>
-</ul>
-</section>
-<hr class="docutils" />
-<section id="id10">
-<h3>Mathematical Formulation<a class="headerlink" href="#id10" title="Link to this heading">#</a></h3>
-<p>Let:</p>
-<ul class="simple">
-<li><p><span class="math notranslate nohighlight">\( A \in \mathbb{R}^{n \times n} \)</span>: adjacency matrix</p></li>
-<li><p><span class="math notranslate nohighlight">\( X \in \mathbb{R}^{n \times d} \)</span>: node feature matrix</p></li>
-</ul>
-<section id="id11">
-<h4><strong>Encoder</strong><a class="headerlink" href="#id11" title="Link to this heading">#</a></h4>
-<p>The encoder learns parameters of a Gaussian distribution:</p>
-<div class="math notranslate nohighlight">
-\[
-\mu = \text{GNN}_\mu(X, A), \quad \log \sigma^2 = \text{GNN}_\sigma(X, A)
-\]</div>
-<p>Sample latent embeddings via the <strong>reparameterization trick</strong>:</p>
-<div class="math notranslate nohighlight">
-\[
-Z = \mu + \sigma \odot \epsilon, \quad \epsilon \sim \mathcal{N}(0, I)
-\]</div>
-</section>
-<section id="id12">
-<h4><strong>Decoder</strong><a class="headerlink" href="#id12" title="Link to this heading">#</a></h4>
-<p>The decoder reconstructs the graph structure:</p>
-<div class="math notranslate nohighlight">
-\[
-\hat{A} = \sigma(ZZ^T)
-\]</div>
-</section>
-<section id="id13">
-<h4><strong>Loss Function</strong><a class="headerlink" href="#id13" title="Link to this heading">#</a></h4>
-<p>The objective combines a reconstruction loss with a KL divergence regularization:</p>
-<div class="math notranslate nohighlight">
-\[
-\mathcal{L}_{\text{GVAE}} = \mathbb{E}_{q(Z|X,A)}[\log p(A|Z)] - \text{KL}(q(Z|X,A) \| p(Z))
-\]</div>
-</section>
-</section>
-<hr class="docutils" />
-<section id="implementation-with-pytorch-geometric">
-<h3>Implementation with PyTorch Geometric<a class="headerlink" href="#implementation-with-pytorch-geometric" title="Link to this heading">#</a></h3>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">torch.nn.functional</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">F</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">torch_geometric.nn</span><span class="w"> </span><span class="kn">import</span> <span class="n">GCNConv</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">torch_geometric.datasets</span><span class="w"> </span><span class="kn">import</span> <span class="n">Planetoid</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">torch_geometric.transforms</span><span class="w"> </span><span class="kn">import</span> <span class="n">NormalizeFeatures</span><span class="p">,</span> <span class="n">RandomLinkSplit</span>
-
-<span class="c1"># Load and preprocess dataset</span>
-<span class="n">dataset</span> <span class="o">=</span> <span class="n">Planetoid</span><span class="p">(</span><span class="n">root</span><span class="o">=</span><span class="s1">&#39;/tmp/Cora&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Cora&#39;</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">NormalizeFeatures</span><span class="p">())</span>
-<span class="n">data</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-
-<span class="c1"># Random link split</span>
-<span class="n">transform</span> <span class="o">=</span> <span class="n">RandomLinkSplit</span><span class="p">(</span><span class="n">is_undirected</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">split_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">add_negative_train_samples</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">train_data</span><span class="p">,</span> <span class="n">val_data</span><span class="p">,</span> <span class="n">test_data</span> <span class="o">=</span> <span class="n">transform</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-
-<span class="c1"># GVAE Encoder</span>
-<span class="k">class</span><span class="w"> </span><span class="nc">GVAEEncoder</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">in_channels</span><span class="p">,</span> <span class="n">out_channels</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">gc1</span> <span class="o">=</span> <span class="n">GCNConv</span><span class="p">(</span><span class="n">in_channels</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">out_channels</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">gc_mu</span> <span class="o">=</span> <span class="n">GCNConv</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">out_channels</span><span class="p">,</span> <span class="n">out_channels</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">gc_logvar</span> <span class="o">=</span> <span class="n">GCNConv</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">out_channels</span><span class="p">,</span> <span class="n">out_channels</span><span class="p">)</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">edge_index</span><span class="p">):</span>
-        <span class="n">h</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">gc1</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">edge_index</span><span class="p">))</span>
-        <span class="n">mu</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gc_mu</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">edge_index</span><span class="p">)</span>
-        <span class="n">logvar</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gc_logvar</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">edge_index</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">mu</span><span class="p">,</span> <span class="n">logvar</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">reparameterize</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">logvar</span><span class="p">):</span>
-    <span class="n">std</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">logvar</span><span class="p">)</span>
-    <span class="n">eps</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn_like</span><span class="p">(</span><span class="n">std</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">mu</span> <span class="o">+</span> <span class="n">eps</span> <span class="o">*</span> <span class="n">std</span>
-
-<span class="c1"># Device and model</span>
-<span class="n">device</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s1">&#39;cuda&#39;</span> <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span> <span class="k">else</span> <span class="s1">&#39;cpu&#39;</span><span class="p">)</span>
-<span class="n">model</span> <span class="o">=</span> <span class="n">GVAEEncoder</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">num_features</span><span class="p">,</span> <span class="mi">64</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
-<span class="n">optimizer</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
-
-<span class="n">x</span> <span class="o">=</span> <span class="n">train_data</span><span class="o">.</span><span class="n">x</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
-<span class="n">edge_index</span> <span class="o">=</span> <span class="n">train_data</span><span class="o">.</span><span class="n">edge_index</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
-
-<span class="c1"># Loss: binary cross-entropy + KL divergence</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">loss_fn</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">pos_edge</span><span class="p">,</span> <span class="n">neg_edge</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">logvar</span><span class="p">):</span>
-    <span class="n">pos_score</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">sigmoid</span><span class="p">((</span><span class="n">z</span><span class="p">[</span><span class="n">pos_edge</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">*</span> <span class="n">z</span><span class="p">[</span><span class="n">pos_edge</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
-    <span class="n">neg_score</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">sigmoid</span><span class="p">((</span><span class="n">z</span><span class="p">[</span><span class="n">neg_edge</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">*</span> <span class="n">z</span><span class="p">[</span><span class="n">neg_edge</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
-
-    <span class="n">pos_loss</span> <span class="o">=</span> <span class="o">-</span><span class="n">torch</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">pos_score</span> <span class="o">+</span> <span class="mf">1e-15</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
-    <span class="n">neg_loss</span> <span class="o">=</span> <span class="o">-</span><span class="n">torch</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">neg_score</span> <span class="o">+</span> <span class="mf">1e-15</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
-    <span class="n">recon_loss</span> <span class="o">=</span> <span class="n">pos_loss</span> <span class="o">+</span> <span class="n">neg_loss</span>
-
-    <span class="n">kl_div</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">torch</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">logvar</span> <span class="o">-</span> <span class="n">mu</span><span class="o">.</span><span class="n">pow</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">-</span> <span class="n">logvar</span><span class="o">.</span><span class="n">exp</span><span class="p">(),</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
-    <span class="k">return</span> <span class="n">recon_loss</span> <span class="o">+</span> <span class="n">kl_div</span>
-
-<span class="c1"># Training loop</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">train</span><span class="p">():</span>
-    <span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
-    <span class="n">optimizer</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
-    <span class="n">mu</span><span class="p">,</span> <span class="n">logvar</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">edge_index</span><span class="p">)</span>
-    <span class="n">z</span> <span class="o">=</span> <span class="n">reparameterize</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">logvar</span><span class="p">)</span>
-
-    <span class="n">pos_edge</span> <span class="o">=</span> <span class="n">train_data</span><span class="o">.</span><span class="n">pos_edge_label_index</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
-    <span class="n">neg_edge</span> <span class="o">=</span> <span class="n">train_data</span><span class="o">.</span><span class="n">neg_edge_label_index</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
-
-    <span class="n">loss</span> <span class="o">=</span> <span class="n">loss_fn</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">pos_edge</span><span class="p">,</span> <span class="n">neg_edge</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">logvar</span><span class="p">)</span>
-    <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
-    <span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
-    <span class="k">return</span> <span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
-
-<span class="c1"># Run training</span>
-<span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">201</span><span class="p">):</span>
-    <span class="n">loss</span> <span class="o">=</span> <span class="n">train</span><span class="p">()</span>
-    <span class="k">if</span> <span class="n">epoch</span> <span class="o">%</span> <span class="mi">10</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Epoch </span><span class="si">{</span><span class="n">epoch</span><span class="si">}</span><span class="s1">, Loss: </span><span class="si">{</span><span class="n">loss</span><span class="si">:</span><span class="s1">.4f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-
-
-<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-
-<span class="c1"># Function to plot adjacency matrix</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">plot_adj_matrix</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mf">1.0</span><span class="p">):</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="n">vmax</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-
-<span class="c1"># Run training</span>
-<span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">201</span><span class="p">):</span>
-    <span class="n">loss</span> <span class="o">=</span> <span class="n">train</span><span class="p">()</span>
-    <span class="k">if</span> <span class="n">epoch</span> <span class="o">%</span> <span class="mi">10</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Epoch </span><span class="si">{</span><span class="n">epoch</span><span class="si">}</span><span class="s1">, Loss: </span><span class="si">{</span><span class="n">loss</span><span class="si">:</span><span class="s1">.4f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-
-<span class="c1"># ======= Reconstruction after training =======</span>
-<span class="n">model</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
-<span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
-    <span class="n">mu</span><span class="p">,</span> <span class="n">logvar</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">edge_index</span><span class="p">)</span>
-    <span class="n">z</span> <span class="o">=</span> <span class="n">reparameterize</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">logvar</span><span class="p">)</span>
-    <span class="n">adj_reconstructed</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">sigmoid</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">z</span><span class="o">.</span><span class="n">t</span><span class="p">()))</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
-
-<span class="c1"># ======= Original adjacency (for comparison) =======</span>
-<span class="n">original_adj</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">data</span><span class="o">.</span><span class="n">num_nodes</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">num_nodes</span><span class="p">))</span>
-<span class="n">original_adj</span><span class="p">[</span><span class="n">data</span><span class="o">.</span><span class="n">edge_index</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">data</span><span class="o">.</span><span class="n">edge_index</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span> <span class="o">=</span> <span class="mi">1</span>
-<span class="n">original_adj</span> <span class="o">=</span> <span class="n">original_adj</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
-
-<span class="c1"># ======= Plot original and reconstructed adjacency =======</span>
-<span class="n">plot_adj_matrix</span><span class="p">(</span><span class="n">original_adj</span><span class="p">[:</span><span class="mi">100</span><span class="p">,</span> <span class="p">:</span><span class="mi">100</span><span class="p">],</span> <span class="s2">&quot;Original Adjacency (partial)&quot;</span><span class="p">)</span>
-<span class="n">plot_adj_matrix</span><span class="p">(</span><span class="n">adj_reconstructed</span><span class="p">[:</span><span class="mi">100</span><span class="p">,</span> <span class="p">:</span><span class="mi">100</span><span class="p">],</span> <span class="s2">&quot;Reconstructed Adjacency (partial)&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 10, Loss: 5.9581
-Epoch 20, Loss: 6.1213
-Epoch 30, Loss: 6.0866
-Epoch 40, Loss: 5.9531
-Epoch 50, Loss: 5.8172
-Epoch 60, Loss: 5.8643
-Epoch 70, Loss: 5.9574
-Epoch 80, Loss: 6.0560
-Epoch 90, Loss: 6.0929
-Epoch 100, Loss: 5.8261
-Epoch 110, Loss: 6.0114
-Epoch 120, Loss: 5.8629
-Epoch 130, Loss: 5.9690
-Epoch 140, Loss: 5.8276
-Epoch 150, Loss: 5.9307
-Epoch 160, Loss: 5.9110
-Epoch 170, Loss: 5.7449
-Epoch 180, Loss: 5.7574
-Epoch 190, Loss: 5.8821
-Epoch 200, Loss: 5.7373
-Epoch 10, Loss: 5.9005
-Epoch 20, Loss: 5.8312
-Epoch 30, Loss: 5.9049
-Epoch 40, Loss: 5.8705
-Epoch 50, Loss: 5.9588
-Epoch 60, Loss: 5.8244
-Epoch 70, Loss: 6.0323
-Epoch 80, Loss: 5.7924
-Epoch 90, Loss: 6.0420
-Epoch 100, Loss: 5.6374
-Epoch 110, Loss: 5.8845
-Epoch 120, Loss: 5.7895
-Epoch 130, Loss: 6.0201
-Epoch 140, Loss: 5.6767
-Epoch 150, Loss: 5.8892
-Epoch 160, Loss: 5.9167
-Epoch 170, Loss: 5.8043
-Epoch 180, Loss: 5.7969
-Epoch 190, Loss: 5.6548
-Epoch 200, Loss: 5.6711
-</pre></div>
-</div>
-<img alt="../../_images/28b3ebeee757475f9def863783fa05bb7b64c0893e91f15a1d6cdeebeef66506.png" src="../../_images/28b3ebeee757475f9def863783fa05bb7b64c0893e91f15a1d6cdeebeef66506.png" />
-<img alt="../../_images/2d637ddbccbd1c751d00bc420810a025883dd13b69193c04ef09643799688597.png" src="../../_images/2d637ddbccbd1c751d00bc420810a025883dd13b69193c04ef09643799688597.png" />
-</div>
-</div>
-</section>
-</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -2309,6 +1462,24 @@ Epoch 200, Loss: 5.6711
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="01_Shallow_Embeddings.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Shallow Embedding Methods</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="03_ConstrativeLearning.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Contrastive Learning</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               
@@ -2325,73 +1496,29 @@ Epoch 200, Loss: 5.6711
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-do-autoencoders-differ-from-classical-techniques-like-pca">How Do Autoencoders Differ from Classical Techniques like PCA?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#comparison-with-other-dimensionality-reduction-techniques-t-sne-umap-isomap">Comparison with Other Dimensionality Reduction Techniques (t-SNE, UMAP, Isomap)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematical-formulation-of-an-autoencoder">Mathematical Formulation of an Autoencoder</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loss-function">Loss Function</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mean-squared-error-mse">1. Mean Squared Error (MSE):</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#binary-cross-entropy-bce">2. Binary Cross-Entropy (BCE):</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematical-formulation-of-an-autoencoder">Mathematical Formulation of an Autoencoder</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#loss-function">Loss Function</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#mean-squared-error-mse">1. Mean Squared Error (MSE):</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#binary-cross-entropy-bce">2. Binary Cross-Entropy (BCE):</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#intuition-example-effect-of-prediction-on-bce-loss">Intuition Example: Effect of Prediction on BCE Loss</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#training-objective-and-embedding-calculation">Training Objective and Embedding Calculation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gradient-based-update">Gradient-Based Update</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#training-objective">Training Objective</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optional-regularization">Optional Regularization</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#denoising-autoencoder-dae">Denoising Autoencoder (DAE)</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Introduction</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematical-formulation">Mathematical Formulation</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#encoder"><strong>Encoder</strong></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#decoder"><strong>Decoder</strong></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id2"><strong>Loss Function</strong></a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-idea">Key Idea</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#implementation-with-pytorch">Implementation with PyTorch</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variational-autoencoder-vae">Variational Autoencoder (VAE)</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Introduction</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#generative-process">Generative Process</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inference-model-encoder">Inference Model (Encoder)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reparameterization-trick">Reparameterization Trick</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#decoder-generative-network">Decoder (Generative Network)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#loss-function-evidence-lower-bound-elbo">Loss Function: Evidence Lower Bound (ELBO)</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#breakdown">Breakdown:</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#total-vae-loss">Total VAE Loss:</a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#probabilities-summary">Probabilities Summary</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-insights">Key Insights</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#benefits-of-vaes">Benefits of VAEs</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-table">Summary Table</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#generating-new-data-with-vae">Generating New Data with VAE</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#optional-regularization">Optional Regularization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variants-of-autoencoders">Variants of Autoencoders</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#graph-autoencoder-gae">Graph Autoencoder (GAE)</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Introduction</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Introduction</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-considerations">Key Considerations</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Mathematical Formulation</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Encoder</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">Decoder</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">Loss Function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematical-formulation">Mathematical Formulation</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#encoder">Encoder</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#decoder">Decoder</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Loss Function</a></li>
 </ul>
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#negative-edge-sampling">Negative Edge Sampling</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#graph-variational-autoencoder-gvae">Graph Variational Autoencoder (GVAE)</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">Introduction</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">Mathematical Formulation</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id11"><strong>Encoder</strong></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id12"><strong>Decoder</strong></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id13"><strong>Loss Function</strong></a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#implementation-with-pytorch-geometric">Implementation with PyTorch Geometric</a></li>
 </ul>
 </li>
 </ul>

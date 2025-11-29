@@ -197,6 +197,21 @@
 <li class="toctree-l2"><a class="reference internal" href="../Chapter02/03_embedding_examples.html">Graph Representation Learning</a></li>
 </ul>
 </details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="00_Unsupervised_Learning.html">Unsupervised Graph learning</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="01_Shallow_Embeddings.html">Shallow Embedding Methods</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="02_Autoencoders.html">AutoEncoder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_ConstrativeLearning.html">Contrastive Learning</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="04_Graph%20Data%20Augmentation%20and%20Sampling%20Techniques.html">Graph Mining Presentation</a></li>
+
+
+
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../Chapter04/01_Feature_based_methods.html">Supervised Learning on Graphs</a></li>
+
 </ul>
 
     </div>
@@ -424,9 +439,9 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#structural-deep-network-embedding-sdne">Structural Deep Network Embedding (SDNE)</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">🔍 Introduction</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#intuition">🧠 Intuition</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematical-formulation">🧮 Mathematical Formulation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#intuition">Intuition</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematical-formulation">Mathematical Formulation</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#autoencoder-for-second-order-proximity">1. Autoencoder for Second-Order Proximity</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#first-order-proximity-loss">2. First-Order Proximity Loss</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#regularization">3. Regularization</a></li>
@@ -453,7 +468,7 @@ document.write(`
 <section id="structural-deep-network-embedding-sdne">
 <h2>Structural Deep Network Embedding (SDNE)<a class="headerlink" href="#structural-deep-network-embedding-sdne" title="Link to this heading">#</a></h2>
 <section id="introduction">
-<h3>🔍 Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h3>
+<h3>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h3>
 <p><strong>Structural Deep Network Embedding (SDNE)</strong> is a graph embedding technique that leverages deep neural networks (specifically deep autoencoders) to learn low-dimensional representations of nodes in a graph. The goal is to embed nodes such that the structural properties of the graph are preserved, capturing both:</p>
 <ul class="simple">
 <li><p><strong>First-order proximity</strong>: which reflects the direct connections between nodes (local pairwise similarity).</p></li>
@@ -463,7 +478,7 @@ document.write(`
 </section>
 <hr class="docutils" />
 <section id="intuition">
-<h3>🧠 Intuition<a class="headerlink" href="#intuition" title="Link to this heading">#</a></h3>
+<h3>Intuition<a class="headerlink" href="#intuition" title="Link to this heading">#</a></h3>
 <p>SDNE tries to ensure two key properties in the embedding space:</p>
 <ol class="arabic simple">
 <li><p><strong>First-order proximity</strong>: If two nodes <span class="math notranslate nohighlight">\(i\)</span> and <span class="math notranslate nohighlight">\(j\)</span> are connected directly in the graph, their embeddings <span class="math notranslate nohighlight">\(y_i\)</span> and <span class="math notranslate nohighlight">\(y_j\)</span> should be close (small distance).</p></li>
@@ -477,7 +492,7 @@ document.write(`
 </section>
 <hr class="docutils" />
 <section id="mathematical-formulation">
-<h3>🧮 Mathematical Formulation<a class="headerlink" href="#mathematical-formulation" title="Link to this heading">#</a></h3>
+<h3>Mathematical Formulation<a class="headerlink" href="#mathematical-formulation" title="Link to this heading">#</a></h3>
 <p>Consider a graph with:</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(n\)</span> nodes,</p></li>
@@ -961,37 +976,36 @@ Model parameters: 367,266
 Starting training...
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch    0 | Total: 1.211166 | Recon: 0.321569 | First: 82.224136 | Reg: 156.398056
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch    0 | Total: 1.143096 | Recon: 0.321016 | First: 75.498299 | Reg: 156.342743
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch   50 | Total: 0.121786 | Recon: 0.089456 | First: 0.732225 | Reg: 158.343018
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch   50 | Total: 0.123498 | Recon: 0.089474 | First: 0.862480 | Reg: 158.168396
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch  100 | Total: 0.116073 | Recon: 0.078523 | First: 0.959701 | Reg: 158.175629
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch  100 | Total: 0.116889 | Recon: 0.076981 | First: 1.337046 | Reg: 157.936920
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch  150 | Total: 0.112605 | Recon: 0.067116 | First: 1.733734 | Reg: 158.057266
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch  150 | Total: 0.106067 | Recon: 0.068555 | First: 1.088618 | Reg: 157.707230
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch  200 | Total: 0.097753 | Recon: 0.060854 | First: 0.843860 | Reg: 157.931290
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch  200 | Total: 0.089068 | Recon: 0.046958 | First: 1.410483 | Reg: 157.531845
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch  250 | Total: 0.088970 | Recon: 0.043577 | First: 1.755599 | Reg: 157.770859
-Early stopping at epoch 268
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch  250 | Total: 0.092341 | Recon: 0.043474 | First: 2.025556 | Reg: 157.396194
 </pre></div>
 </div>
-<img alt="../../_images/a66a42690c4fe0f75d06732be61e819493fa776f22335fc308c6f423a165f0d2.png" src="../../_images/a66a42690c4fe0f75d06732be61e819493fa776f22335fc308c6f423a165f0d2.png" />
+<img alt="../../_images/5a3b5e1e1ddc227dfa08c9d08e986d0dae01e32fa37f89957abdf66f56349c49.png" src="../../_images/5a3b5e1e1ddc227dfa08c9d08e986d0dae01e32fa37f89957abdf66f56349c49.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>==================================================
 RECONSTRUCTION EVALUATION RESULTS
 ==================================================
-Mean Squared Error: 0.056423
-Binary Accuracy: 0.9291
-Precision: 0.8854
-Recall: 0.5449
-F1-Score: 0.6746
+Mean Squared Error: 0.033112
+Binary Accuracy: 0.9498
+Precision: 0.9804
+Recall: 0.6410
+F1-Score: 0.7752
 Original Edges: 156
-Reconstructed Edges: 96
-Correctly Reconstructed Edges: 85
+Reconstructed Edges: 102
+Correctly Reconstructed Edges: 100
 </pre></div>
 </div>
 </div>
@@ -1047,9 +1061,9 @@ Correctly Reconstructed Edges: 85
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#structural-deep-network-embedding-sdne">Structural Deep Network Embedding (SDNE)</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">🔍 Introduction</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#intuition">🧠 Intuition</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematical-formulation">🧮 Mathematical Formulation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#intuition">Intuition</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematical-formulation">Mathematical Formulation</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#autoencoder-for-second-order-proximity">1. Autoencoder for Second-Order Proximity</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#first-order-proximity-loss">2. First-Order Proximity Loss</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#regularization">3. Regularization</a></li>

@@ -1,0 +1,1120 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Shallow Embedding Methods &#8212; Graph Machine Learning</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/Chapter04/02_Shallow_embeddings';</script>
+    <link rel="canonical" href="/GMLCourse/content/Chapter04/02_Shallow_embeddings.html" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="prev" title="Supervised Learning on Graphs" href="01_Feature_based_methods.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Graph Machine Learning - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Graph Machine Learning - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Welcome to Graph Machine Learning
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Chapter01/01_Graph_metrics.html"><strong>First Part: Graph Mining - Concepts and properties</strong></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter01/02_community_detection.html">Community Detection in Graphs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter01/03_FrequentSubgraphMining.html">Frequent Subgraph Mining</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter01/04_Complex%20Networks%20and%20Generative%20Models.html">Complex Networks and Generative Models</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="../Chapter01/05_DynamicGraphsandNetworkEvolutionAnalysis.html">Dynamic Graphs and Network Evolution Analysis</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Chapter02/01_intro_and_basics.html">Introduction to Graph Machine Learning</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter02/02_gnn_primer.html">Neural Network Essentials for Understanding GNNs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter02/03_embedding_examples.html">Graph Representation Learning</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Chapter03/00_Unsupervised_Learning.html">Unsupervised Graph learning</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter03/01_Shallow_Embeddings.html">Shallow Embedding Methods</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="../Chapter03/02_Autoencoders.html">AutoEncoder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter03/03_ConstrativeLearning.html">Contrastive Learning</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../Chapter03/04_Graph%20Data%20Augmentation%20and%20Sampling%20Techniques.html">Graph Mining Presentation</a></li>
+
+
+
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="01_Feature_based_methods.html">Supervised Learning on Graphs</a></li>
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/executablebooks/jupyter-book/blob/master/docs/content/Chapter04/02_Shallow_embeddings.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fcontent/Chapter04/02_Shallow_embeddings.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/content/Chapter04/02_Shallow_embeddings.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Shallow Embedding Methods</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#unsupervised-vs-supervised-embedding-methods">Unsupervised vs. Supervised Embedding Methods</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#label-propagation-algorithm-lpa">Label Propagation Algorithm (LPA)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#description">Description</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#intuition">Intuition</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematical-formulation">Mathematical Formulation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#characteristics">Characteristics</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#label-spreading-algorithm-lsa">Label Spreading Algorithm (LSA)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#motivation">Motivation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Mathematical Formulation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-differences-between-lpa-and-lsa">Key Differences Between LPA and LSA</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#numerical-example-of-lpa-and-lsa">Numerical Example of LPA and LSA</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#label-propagation-lpa">Label Propagation (LPA)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#label-spreading-lsa">Label Spreading (LSA)</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="shallow-embedding-methods">
+<h1>Shallow Embedding Methods<a class="headerlink" href="#shallow-embedding-methods" title="Link to this heading">#</a></h1>
+<p>In the realm of <strong>semi-supervised learning on graphs</strong>, shallow embedding methods like <strong>Label Propagation</strong> and <strong>Label Spreading</strong> serve as foundational algorithms. These methods leverage the <strong>graph structure and limited labeled data</strong> to infer labels for the remaining nodes.</p>
+<p>Unlike supervised deep models (like GNNs), these algorithms do <strong>not require training parameters</strong>, and they propagate label information through the graph topology using simple matrix operations.</p>
+<section id="unsupervised-vs-supervised-embedding-methods">
+<h2>Unsupervised vs. Supervised Embedding Methods<a class="headerlink" href="#unsupervised-vs-supervised-embedding-methods" title="Link to this heading">#</a></h2>
+<p>The main difference between <strong>unsupervised</strong> and <strong>supervised</strong> embedding techniques lies in their objectives:</p>
+<ul class="simple">
+<li><p><strong>Unsupervised methods</strong> aim to learn node (or graph) embeddings that preserve structural patterns, often useful for clustering or link prediction.</p></li>
+<li><p><strong>Supervised methods</strong>, in contrast, seek to learn embeddings that are <strong>useful for a specific prediction task</strong>, such as <strong>node classification</strong>, using available label information.</p></li>
+</ul>
+<p>Shallow methods like <strong>Label Propagation</strong> and <strong>Label Spreading</strong> fall under the umbrella of <strong>semi-supervised learning</strong>, where a small subset of nodes are labeled, and the goal is to infer the labels of the rest.</p>
+</section>
+<hr class="docutils" />
+<section id="label-propagation-algorithm-lpa">
+<h2>Label Propagation Algorithm (LPA)<a class="headerlink" href="#label-propagation-algorithm-lpa" title="Link to this heading">#</a></h2>
+<section id="description">
+<h3>Description<a class="headerlink" href="#description" title="Link to this heading">#</a></h3>
+<p>The <strong>Label Propagation Algorithm (LPA)</strong> is a classic, non-parametric algorithm for <strong>semi-supervised node classification</strong>. It works by <strong>iteratively propagating labels</strong> from labeled nodes to their neighbors.</p>
+<p>The key idea:</p>
+<blockquote>
+<div><p>If two nodes are connected or likely to co-occur in a random walk, they are likely to belong to the same class.</p>
+</div></blockquote>
+</section>
+<section id="intuition">
+<h3>Intuition<a class="headerlink" href="#intuition" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Each labeled node <strong>keeps its label fixed</strong> during training.</p></li>
+<li><p>Labels of unlabeled nodes are updated in each iteration based on their neighbors’ current labels.</p></li>
+<li><p>Over time, labels diffuse throughout the graph.</p></li>
+</ul>
+</section>
+<section id="mathematical-formulation">
+<h3>Mathematical Formulation<a class="headerlink" href="#mathematical-formulation" title="Link to this heading">#</a></h3>
+<p>Let:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\( G = (V, E) \)</span> be the graph with <span class="math notranslate nohighlight">\( |V| = n \)</span> nodes.</p></li>
+<li><p><span class="math notranslate nohighlight">\( \mathbf{A} \in \mathbb{R}^{n \times n} \)</span>: Adjacency matrix</p></li>
+<li><p><span class="math notranslate nohighlight">\( \mathbf{D} \)</span>: Diagonal degree matrix, where <span class="math notranslate nohighlight">\( D_{ii} = \sum_j A_{ij} \)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\( \mathbf{Y} \in \mathbb{R}^{n \times c} \)</span>: Label matrix (one-hot vectors for known classes):</p></li>
+<li><p>Each row corresponds to a node.</p></li>
+<li><p>If a node <span class="math notranslate nohighlight">\( i \)</span> is labeled with class <span class="math notranslate nohighlight">\( k \)</span>, then <span class="math notranslate nohighlight">\( Y_{ik} = 1 \)</span>, and all other entries in row <span class="math notranslate nohighlight">\( i \)</span> are zero.</p></li>
+<li><p>If a node is <strong>unlabeled</strong>, its row in <span class="math notranslate nohighlight">\( \mathbf{Y} \)</span> is all zeros.</p></li>
+</ul>
+<p>The label propagation update rule is:</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{F}^{(t+1)} = \mathbf{S} \cdot \mathbf{F}^{(t)}, \quad \text{where} \quad \mathbf{S} = \mathbf{D}^{-1} \mathbf{A}
+\]</div>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\( \mathbf{F}^{(t)} \)</span>: Soft label distribution at iteration <span class="math notranslate nohighlight">\(t\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\( \mathbf{S} \)</span>: Normalized transition matrix (row-stochastic)</p></li>
+<li><p>After each step, <strong>labels of initially labeled nodes are reset</strong> to their original values.</p></li>
+<li><p><span class="math notranslate nohighlight">\( \mathbf{F}^{(0)} = \mathbf{Y} \)</span></p></li>
+</ul>
+<p>That is:</p>
+<ul class="simple">
+<li><p><strong>Labeled nodes</strong>: initialized with <strong>one-hot vectors</strong> corresponding to their class.</p></li>
+<li><p><strong>Unlabeled nodes</strong>: initialized with <strong>zero vectors</strong>.</p></li>
+</ul>
+</section>
+<section id="characteristics">
+<h3>Characteristics<a class="headerlink" href="#characteristics" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Fast and scalable (no learning)</p></li>
+<li><p>Deterministic convergence</p></li>
+<li><p>Sensitive to <strong>incorrect initial labels</strong>, because they remain unchanged and errors propagate.</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="label-spreading-algorithm-lsa">
+<h2>Label Spreading Algorithm (LSA)<a class="headerlink" href="#label-spreading-algorithm-lsa" title="Link to this heading">#</a></h2>
+<section id="motivation">
+<h3>Motivation<a class="headerlink" href="#motivation" title="Link to this heading">#</a></h3>
+<p>Label Propagation’s main weakness is its <strong>rigid treatment of labeled nodes</strong> — their labels remain fixed throughout the iterations. This rigidity can be harmful when:</p>
+<ul class="simple">
+<li><p>Labeled data is noisy or incorrect.</p></li>
+<li><p>The graph is sparse or contains ambiguous connections.</p></li>
+</ul>
+<p>To address this, <strong>Label Spreading</strong> allows <strong>labels to “float” and adapt</strong>, including for initially labeled nodes.</p>
+</section>
+<section id="id1">
+<h3>Mathematical Formulation<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<p>Let:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\( \mathbf{A} \in \mathbb{R}^{n \times n} \)</span>: Adjacency matrix</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathbf{D} \)</span>: Degree matrix</p></li>
+<li><p><span class="math notranslate nohighlight">\( \mathbf{L} \)</span>: Normalized graph Laplacian</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{L} = \mathbf{I} - \mathbf{D}^{-1/2} \mathbf{A} \mathbf{D}^{-1/2}
+\]</div>
+<p>Instead of using the transition matrix <span class="math notranslate nohighlight">\( \mathbf{S} \)</span>, Label Spreading defines:</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{S} = \mathbf{D}^{-1/2} \mathbf{A} \mathbf{D}^{-1/2}
+\]</div>
+<p>The update rule becomes:</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{F}^{(t+1)} = \alpha \cdot \mathbf{S} \cdot \mathbf{F}^{(t)} + (1 - \alpha) \cdot \mathbf{Y}
+\]</div>
+<p>Where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\( \alpha \in (0,1) \)</span>: Controls the strength of propagation vs. prior label adherence</p></li>
+<li><p><span class="math notranslate nohighlight">\( \mathbf{Y}\)</span>: Original label matrix</p></li>
+<li><p>Unlike LPA, <strong>initial labels are not clamped</strong> — they evolve during training.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="key-differences-between-lpa-and-lsa">
+<h3>Key Differences Between LPA and LSA<a class="headerlink" href="#key-differences-between-lpa-and-lsa" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Feature</p></th>
+<th class="head"><p>Label Propagation (LPA)</p></th>
+<th class="head"><p>Label Spreading (LSA)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Fixed labels</p></td>
+<td><p>Yes (clamped)</p></td>
+<td><p>No (adaptive)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Robust to noisy labels</p></td>
+<td><p>No</p></td>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-even"><td><p>Update matrix</p></td>
+<td><p><span class="math notranslate nohighlight">\( \mathbf{S} = \mathbf{D}^{-1} \mathbf{A} \)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\( \mathbf{S} = \mathbf{D}^{-1/2} \mathbf{A} \mathbf{D}^{-1/2} \)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>Inspired by</p></td>
+<td><p>Random walk</p></td>
+<td><p>Heat diffusion / harmonic functions</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="numerical-example-of-lpa-and-lsa">
+<h2>Numerical Example of LPA and LSA<a class="headerlink" href="#numerical-example-of-lpa-and-lsa" title="Link to this heading">#</a></h2>
+<p>We consider a simple graph with <strong>4 nodes</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Node</span> <span class="mi">0</span> <span class="o">--</span> <span class="n">Node</span> <span class="mi">1</span> <span class="o">--</span> <span class="n">Node</span> <span class="mi">2</span> <span class="o">--</span> <span class="n">Node</span> <span class="mi">3</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Node 0 is labeled with class 0</p></li>
+<li><p>Node 3 is labeled with class 1</p></li>
+<li><p>Nodes 1 and 2 are <strong>unlabeled</strong></p></li>
+</ul>
+<p>There are 2 classes in total.</p>
+<p>Adjacency Matrix <span class="math notranslate nohighlight">\( \mathbf{A} \)</span></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\mathbf{A} =
+\begin{bmatrix}
+0 &amp; 1 &amp; 0 &amp; 0 \\
+1 &amp; 0 &amp; 1 &amp; 0 \\
+0 &amp; 1 &amp; 0 &amp; 1 \\
+0 &amp; 0 &amp; 1 &amp; 0 \\
+\end{bmatrix}
+\end{split}\]</div>
+<p>Degree Matrix <span class="math notranslate nohighlight">\( \mathbf{D} \)</span></p>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{D} = \text{diag}(1, 2, 2, 1)
+\]</div>
+<p>Label Matrix <span class="math notranslate nohighlight">\( \mathbf{Y} = \mathbf{F}^{(0)} \)</span></p>
+<p>Each node has a one-hot vector for its label:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\mathbf{F}^{(0)} =
+\begin{bmatrix}
+1 &amp; 0 \\
+0 &amp; 0 \\
+0 &amp; 0 \\
+0 &amp; 1 \\
+\end{bmatrix}
+\end{split}\]</div>
+<ul class="simple">
+<li><p>Node 0: class 0</p></li>
+<li><p>Node 3: class 1</p></li>
+<li><p>Nodes 1 &amp; 2: unknown</p></li>
+</ul>
+</section>
+<section id="label-propagation-lpa">
+<h2>Label Propagation (LPA)<a class="headerlink" href="#label-propagation-lpa" title="Link to this heading">#</a></h2>
+<p>Transition Matrix <span class="math notranslate nohighlight">\( \mathbf{S} = \mathbf{D}^{-1} \mathbf{A} \)</span></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\mathbf{S} =
+\begin{bmatrix}
+0   &amp; 1.0 &amp; 0   &amp; 0 \\
+0.5 &amp; 0   &amp; 0.5 &amp; 0 \\
+0   &amp; 0.5 &amp; 0   &amp; 0.5 \\
+0   &amp; 0   &amp; 1.0 &amp; 0 \\
+\end{bmatrix}
+\end{split}\]</div>
+<p>Iteration 1 (before clamping)</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\mathbf{F}^{(1)} = \mathbf{S} \cdot \mathbf{F}^{(0)} =
+\begin{bmatrix}
+0.0 &amp; 0.0 \\
+0.5 &amp; 0.5 \\
+0.0 &amp; 0.5 \\
+0.0 &amp; 0.0 \\
+\end{bmatrix}
+\end{split}\]</div>
+<p>Then, <strong>reset labeled nodes</strong> (clamp):</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\mathbf{F}^{(1)} =
+\begin{bmatrix}
+1.0 &amp; 0.0 \\
+0.5 &amp; 0.5 \\
+0.0 &amp; 0.5 \\
+0.0 &amp; 1.0 \\
+\end{bmatrix}
+\end{split}\]</div>
+<p>Iteration 2 (after clamping)</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\mathbf{F}^{(2)} = \mathbf{S} \cdot \mathbf{F}^{(1)} =
+\begin{bmatrix}
+0.5 &amp; 0.5 \\
+0.5 &amp; 0.25 \\
+0.25 &amp; 0.75 \\
+0.0 &amp; 0.5 \\
+\end{bmatrix}
+\end{split}\]</div>
+<p>Reset labeled nodes again:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\mathbf{F}^{(2)} =
+\begin{bmatrix}
+1.0 &amp; 0.0 \\
+0.5 &amp; 0.25 \\
+0.25 &amp; 0.75 \\
+0.0 &amp; 1.0 \\
+\end{bmatrix}
+\end{split}\]</div>
+</section>
+<section id="label-spreading-lsa">
+<h2>Label Spreading (LSA)<a class="headerlink" href="#label-spreading-lsa" title="Link to this heading">#</a></h2>
+<p>Normalized Transition Matrix</p>
+<p>First compute:</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{S} = \mathbf{D}^{-1/2} \cdot \mathbf{A} \cdot \mathbf{D}^{-1/2}
+\]</div>
+<p>With:</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{D}^{-1/2} \approx \text{diag}(1.0,\ 0.707,\ 0.707,\ 1.0)
+\]</div>
+<p>Then:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\mathbf{S} \approx
+\begin{bmatrix}
+0 &amp; 0.707 &amp; 0     &amp; 0 \\
+0.707 &amp; 0 &amp; 0.5   &amp; 0 \\
+0 &amp; 0.5   &amp; 0 &amp; 0.707 \\
+0 &amp; 0     &amp; 0.707 &amp; 0 \\
+\end{bmatrix}
+\end{split}\]</div>
+<p>Update Rule</p>
+<p>With <span class="math notranslate nohighlight">\( \alpha = 0.8 \)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{F}^{(t+1)} = \alpha \cdot \mathbf{S} \cdot \mathbf{F}^{(t)} + (1 - \alpha) \cdot \mathbf{Y}
+\]</div>
+<p>Note:</p>
+<ul class="simple">
+<li><p>No clamping here!</p></li>
+<li><p>Even labeled nodes can evolve.</p></li>
+</ul>
+<p>Summary</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Node</p></th>
+<th class="head"><p>Initially Labeled</p></th>
+<th class="head"><p>Final Prediction (approx.)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>class 0</p></td>
+<td><p>Remains near class 0</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>-</p></td>
+<td><p>Between class 0 and 1</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>-</p></td>
+<td><p>Closer to class 1</p></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>class 1</p></td>
+<td><p>Remains near class 1</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr class="docutils" />
+<ul class="simple">
+<li><p><strong>Label Propagation</strong>: good for clean labels, less flexible</p></li>
+<li><p><strong>Label Spreading</strong>: better for noisy labels, more robust</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">networkx</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nx</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.semi_supervised</span><span class="w"> </span><span class="kn">import</span> <span class="n">LabelPropagation</span><span class="p">,</span> <span class="n">LabelSpreading</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">accuracy_score</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics.pairwise</span><span class="w"> </span><span class="kn">import</span> <span class="n">pairwise_kernels</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">torch_geometric.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">from_networkx</span><span class="p">,</span> <span class="n">to_scipy_sparse_matrix</span>
+
+<span class="c1"># Step 1: Create a synthetic graph with 3 communities</span>
+<span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">connected_caveman_graph</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>  <span class="c1"># 3 clusters, each with 20 nodes</span>
+<span class="n">true_labels</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+    <span class="n">true_labels</span> <span class="o">+=</span> <span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="mi">20</span>
+<span class="n">true_labels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">true_labels</span><span class="p">)</span>
+
+<span class="c1"># Visualize original graph with true labels</span>
+<span class="n">pos</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">spring_layout</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">node_color</span><span class="o">=</span><span class="n">true_labels</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">Set1</span><span class="p">,</span> <span class="n">node_size</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">with_labels</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Original Graph with True Labels&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># Convert to PyG data format</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">torch_geometric.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">from_networkx</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">from_networkx</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+<span class="n">data</span><span class="o">.</span><span class="n">num_nodes</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="n">number_of_nodes</span><span class="p">()</span>
+
+<span class="c1"># Simulate node features (for sklearn compatibility)</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">num_nodes</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+
+<span class="c1"># Step 2: Create semi-supervised labels</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">true_labels</span>
+<span class="n">y_semi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full_like</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">train_idx</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># label 3 nodes per class</span>
+<span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+    <span class="n">idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">y</span> <span class="o">==</span> <span class="n">c</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">sel</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">y_semi</span><span class="p">[</span><span class="n">sel</span><span class="p">]</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">sel</span><span class="p">]</span>
+    <span class="n">train_idx</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">sel</span><span class="p">)</span>
+
+<span class="n">test_idx</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">))</span> <span class="k">if</span> <span class="n">i</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">train_idx</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">7</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">accuracy_score</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics.pairwise</span><span class="w"> </span><span class="kn">import</span> <span class="n">pairwise_kernels</span>
+<span class="ne">----&gt; </span><span class="mi">7</span> <span class="kn">from</span><span class="w"> </span><span class="nn">torch_geometric.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">from_networkx</span><span class="p">,</span> <span class="n">to_scipy_sparse_matrix</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="c1"># Step 1: Create a synthetic graph with 3 communities</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">connected_caveman_graph</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>  <span class="c1"># 3 clusters, each with 20 nodes</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;torch_geometric&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Step 3: Label Spreading using graph structure as kernel</span>
+
+<span class="c1"># Build adjacency</span>
+<span class="n">adj</span> <span class="o">=</span> <span class="n">to_scipy_sparse_matrix</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">edge_index</span><span class="p">,</span> <span class="n">num_nodes</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">num_nodes</span><span class="p">)</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span>
+<span class="n">W</span> <span class="o">=</span> <span class="p">(</span><span class="n">adj</span> <span class="o">+</span> <span class="n">adj</span><span class="o">.</span><span class="n">T</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+
+<span class="c1"># Define fixed kernel</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">my_affinity</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">W</span>
+
+<span class="c1"># Label Spreading</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">LabelSpreading</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="n">my_affinity</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">X</span><span class="p">),</span> <span class="n">y_semi</span><span class="p">)</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">transduction_</span>
+
+<span class="c1"># Accuracy</span>
+<span class="n">acc</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="n">test_idx</span><span class="p">],</span> <span class="n">y_pred</span><span class="p">[</span><span class="n">test_idx</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Graph-based Label Spreading Accuracy: </span><span class="si">{</span><span class="n">acc</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Step 4: Visualize predicted labels</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">node_color</span><span class="o">=</span><span class="n">y_pred</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">Set1</span><span class="p">,</span> <span class="n">node_size</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">with_labels</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Predicted Labels by Label Spreading&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Graph-based Label Spreading Accuracy: 1.0000
+</pre></div>
+</div>
+<img alt="../../_images/9f868135b258cc14c0fc7693891be4f2c811695374cf024e3c3968c38a460e60.png" src="../../_images/9f868135b258cc14c0fc7693891be4f2c811695374cf024e3c3968c38a460e60.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">networkx</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nx</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">torch_geometric.datasets</span><span class="w"> </span><span class="kn">import</span> <span class="n">Planetoid</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">torch_geometric.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">to_networkx</span>
+
+<span class="c1"># Load Cora dataset</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">Planetoid</span><span class="p">(</span><span class="n">root</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Cora&#39;</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="c1"># Convert to NetworkX graph</span>
+<span class="n">G</span> <span class="o">=</span> <span class="n">to_networkx</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">to_undirected</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="c1">#nx.draw(G, node_size=20, with_labels=False)</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">node_size</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">with_labels</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">node_color</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">tab10</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Cora Graph Visualization&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/9eba1a6e1a55baf2d7e9d22f77a11781e9365569ddea36ebb66886fe56431b1f.png" src="../../_images/9eba1a6e1a55baf2d7e9d22f77a11781e9365569ddea36ebb66886fe56431b1f.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.semi_supervised</span><span class="w"> </span><span class="kn">import</span> <span class="n">LabelPropagation</span><span class="p">,</span> <span class="n">LabelSpreading</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">torch_geometric.datasets</span><span class="w"> </span><span class="kn">import</span> <span class="n">Planetoid</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="c1"># Load Cora dataset</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">Planetoid</span><span class="p">(</span><span class="n">root</span><span class="o">=</span><span class="s1">&#39;data/Planetoid&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Cora&#39;</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="c1"># Convert to numpy</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">x</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">y</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+<span class="n">train_mask</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">train_mask</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+<span class="n">test_mask</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">test_mask</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+
+<span class="c1"># Initialize semi-supervised labels</span>
+<span class="n">y_semi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full_like</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">fill_value</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">y_semi</span><span class="p">[</span><span class="n">train_mask</span><span class="p">]</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">train_mask</span><span class="p">]</span>
+
+<span class="c1"># === Label Propagation ===</span>
+<span class="n">lp_model</span> <span class="o">=</span> <span class="n">LabelPropagation</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s1">&#39;knn&#39;</span><span class="p">,</span> <span class="n">n_neighbors</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">lp_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y_semi</span><span class="p">)</span>
+<span class="n">y_pred_lp</span> <span class="o">=</span> <span class="n">lp_model</span><span class="o">.</span><span class="n">transduction_</span>
+
+<span class="c1"># Compute accuracy</span>
+<span class="n">acc_lp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">y_pred_lp</span><span class="p">[</span><span class="n">test_mask</span><span class="p">]</span> <span class="o">==</span> <span class="n">y</span><span class="p">[</span><span class="n">test_mask</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Label Propagation Accuracy: </span><span class="si">{</span><span class="n">acc_lp</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># === Label Spreading ===</span>
+<span class="n">ls_model</span> <span class="o">=</span> <span class="n">LabelSpreading</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s1">&#39;knn&#39;</span><span class="p">,</span> <span class="n">n_neighbors</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">ls_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y_semi</span><span class="p">)</span>
+<span class="n">y_pred_ls</span> <span class="o">=</span> <span class="n">ls_model</span><span class="o">.</span><span class="n">transduction_</span>
+
+<span class="c1"># Compute accuracy</span>
+<span class="n">acc_ls</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">y_pred_ls</span><span class="p">[</span><span class="n">test_mask</span><span class="p">]</span> <span class="o">==</span> <span class="n">y</span><span class="p">[</span><span class="n">test_mask</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Label Spreading Accuracy: </span><span class="si">{</span><span class="n">acc_ls</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Label Propagation Accuracy: 0.1750
+Label Spreading Accuracy: 0.2330
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.semi_supervised</span><span class="w"> </span><span class="kn">import</span> <span class="n">LabelSpreading</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">accuracy_score</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">torch_geometric.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">to_scipy_sparse_matrix</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics.pairwise</span><span class="w"> </span><span class="kn">import</span> <span class="n">pairwise_kernels</span>
+
+<span class="c1"># Step 1: Build normalized adjacency (e.g., symmetric)</span>
+<span class="n">adj</span> <span class="o">=</span> <span class="n">to_scipy_sparse_matrix</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">edge_index</span><span class="p">,</span> <span class="n">num_nodes</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">num_nodes</span><span class="p">)</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span>
+<span class="n">W</span> <span class="o">=</span> <span class="p">(</span><span class="n">adj</span> <span class="o">+</span> <span class="n">adj</span><span class="o">.</span><span class="n">T</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>  <span class="c1"># symmetric</span>
+
+<span class="c1"># Step 2: Define a custom kernel function (identity kernel)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">my_affinity</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">W</span>  <span class="c1"># just return fixed affinity regardless of input</span>
+
+<span class="c1"># Step 3: Run label spreading using the custom kernel</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">LabelSpreading</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="n">my_affinity</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">X</span><span class="p">),</span> <span class="n">y_semi</span><span class="p">)</span>  <span class="c1"># X ignored because kernel is fixed</span>
+
+<span class="c1"># Step 4: Accuracy</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">transduction_</span>
+<span class="n">acc</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="n">test_mask</span><span class="p">],</span> <span class="n">y_pred</span><span class="p">[</span><span class="n">test_mask</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Label Spreading (real graph) Accuracy: </span><span class="si">{</span><span class="n">acc</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Label Spreading (real graph) Accuracy: 0.7000
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "mlgbook"
+        },
+        kernelOptions: {
+            name: "mlgbook",
+            path: "./content\Chapter04"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'mlgbook'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="01_Feature_based_methods.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Supervised Learning on Graphs</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#unsupervised-vs-supervised-embedding-methods">Unsupervised vs. Supervised Embedding Methods</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#label-propagation-algorithm-lpa">Label Propagation Algorithm (LPA)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#description">Description</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#intuition">Intuition</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematical-formulation">Mathematical Formulation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#characteristics">Characteristics</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#label-spreading-algorithm-lsa">Label Spreading Algorithm (LSA)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#motivation">Motivation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Mathematical Formulation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-differences-between-lpa-and-lsa">Key Differences Between LPA and LSA</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#numerical-example-of-lpa-and-lsa">Numerical Example of LPA and LSA</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#label-propagation-lpa">Label Propagation (LPA)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#label-spreading-lsa">Label Spreading (LSA)</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Soheila Ashkezari-T.
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

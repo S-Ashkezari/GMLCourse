@@ -1,0 +1,808 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Contrastive Learning &#8212; Graph Machine Learning</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/Chapter03/03_ConstrativeLearning';</script>
+    <link rel="canonical" href="/GMLCourse/content/Chapter03/03_ConstrativeLearning.html" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Graph Mining Presentation" href="04_Graph%20Data%20Augmentation%20and%20Sampling%20Techniques.html" />
+    <link rel="prev" title="AutoEncoder" href="02_Autoencoders.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Graph Machine Learning - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Graph Machine Learning - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Welcome to Graph Machine Learning
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Chapter01/01_Graph_metrics.html"><strong>First Part: Graph Mining - Concepts and properties</strong></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter01/02_community_detection.html">Community Detection in Graphs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter01/03_FrequentSubgraphMining.html">Frequent Subgraph Mining</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter01/04_Complex%20Networks%20and%20Generative%20Models.html">Complex Networks and Generative Models</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="../Chapter01/05_DynamicGraphsandNetworkEvolutionAnalysis.html">Dynamic Graphs and Network Evolution Analysis</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Chapter02/01_intro_and_basics.html">Introduction to Graph Machine Learning</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter02/02_gnn_primer.html">Neural Network Essentials for Understanding GNNs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter02/03_embedding_examples.html">Graph Representation Learning</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="00_Unsupervised_Learning.html">Unsupervised Graph learning</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="01_Shallow_Embeddings.html">Shallow Embedding Methods</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="02_Autoencoders.html">AutoEncoder</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Contrastive Learning</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="04_Graph%20Data%20Augmentation%20and%20Sampling%20Techniques.html">Graph Mining Presentation</a></li>
+
+
+
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../Chapter04/01_Feature_based_methods.html">Supervised Learning on Graphs</a></li>
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/executablebooks/jupyter-book/blob/master/docs/content/Chapter03/03_ConstrativeLearning.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fcontent/Chapter03/03_ConstrativeLearning.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/content/Chapter03/03_ConstrativeLearning.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Contrastive Learning</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Contrastive Learning</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Contrastive Learning</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#core-idea">Core Idea</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematical-formulation">Mathematical Formulation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#similarity-function">Similarity Function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#infonce-loss">InfoNCE Loss</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#gradient-with-respect-to-anchor-embedding">Gradient with Respect to Anchor Embedding</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#intuition">Intuition:</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contrastive-learning-for-graphs">Contrastive Learning for Graphs</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#node-level-contrast-locallocal">1. Node-Level Contrast (Local–Local)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#subgraph-level-contrast-localglobal">2. Subgraph-Level Contrast (Local–Global)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#graph-level-contrast-globalglobal">3. Graph-Level Contrast (Global–Global)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cross-view-contrast">4. Cross-View Contrast</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#graph-augmentations">Graph Augmentations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparison-with-autoencoders">Comparison With Autoencoders</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#advantages-in-graph-representation-learning">Advantages in Graph Representation Learning</a></li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="contrastive-learning">
+<h1>Contrastive Learning<a class="headerlink" href="#contrastive-learning" title="Link to this heading">#</a></h1>
+<p>While autoencoders are effective for learning embeddings in an unsupervised manner, newer <strong>self-supervised techniques such as contrastive learning</strong> have shown superior performance in preserving fine-grained similarities between nodes or graphs.</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1>Contrastive Learning<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
+<p>Contrastive learning is a self-supervised framework designed to learn representations by <strong>pulling semantically similar samples closer</strong> and <strong>pushing dissimilar samples apart</strong> in the embedding space.<br />
+Instead of reconstructing the input (as autoencoders do), contrastive learning shapes the geometry of the latent space directly, ensuring that similarity becomes an organizing principle for representation.</p>
+<p>In graph representation learning, this approach has become central because graphs naturally contain positive and negative relational structure (e.g., connected vs. unconnected nodes, augmented views of the same graph, or subgraphs drawn from related regions).</p>
+<hr class="docutils" />
+<section id="core-idea">
+<h2>Core Idea<a class="headerlink" href="#core-idea" title="Link to this heading">#</a></h2>
+<p>Given two paired inputs that should be similar—called a <strong>positive pair</strong>—the model must produce embeddings whose distance is small.<br />
+Conversely, embeddings for <strong>negative pairs</strong> should be far apart.</p>
+<p>Let</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(x_i\)</span> and <span class="math notranslate nohighlight">\(x_i'\)</span> be a positive pair (two “views” of the same node or graph),</p></li>
+<li><p><span class="math notranslate nohighlight">\(x_i\)</span> and <span class="math notranslate nohighlight">\(x_j'\)</span> for <span class="math notranslate nohighlight">\(j \neq i\)</span> be negative pairs.</p></li>
+</ul>
+<p>An encoder <span class="math notranslate nohighlight">\(f_\theta(\cdot)\)</span> produces representations:</p>
+<div class="math notranslate nohighlight">
+\[
+z_i = f_\theta(x_i), \qquad z_i' = f_\theta(x_i').
+\]</div>
+<p>The contrastive objective ensures:</p>
+<ul class="simple">
+<li><p><strong>alignment</strong> of the positive pair,</p></li>
+<li><p><strong>uniformity</strong> of embeddings by spreading negative samples.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="mathematical-formulation">
+<h2>Mathematical Formulation<a class="headerlink" href="#mathematical-formulation" title="Link to this heading">#</a></h2>
+<section id="similarity-function">
+<h3>Similarity Function<a class="headerlink" href="#similarity-function" title="Link to this heading">#</a></h3>
+<p>A common choice is cosine similarity:</p>
+<div class="math notranslate nohighlight">
+\[
+\text{sim}(z, z') = \frac{z^\top z'}{\|z\|\|z'\|}.
+\]</div>
+</section>
+<section id="infonce-loss">
+<h3>InfoNCE Loss<a class="headerlink" href="#infonce-loss" title="Link to this heading">#</a></h3>
+<blockquote>
+<div><p>NCE: Noise-Contrastive Estimation</p>
+</div></blockquote>
+<p>For a single sample <span class="math notranslate nohighlight">\(i\)</span>, the InfoNCE loss is defined as:</p>
+<div class="math notranslate nohighlight">
+\[
+\mathcal{L}_i = - \log \frac{\exp(\text{sim}(z_i, z_i') / \tau)}{\sum_{j=1}^{N} \exp(\text{sim}(z_i, z_j') / \tau)}
+\]</div>
+<p>where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(z_i\)</span> = embedding of the anchor sample</p></li>
+<li><p><span class="math notranslate nohighlight">\(z_i'\)</span> = embedding of the positive sample</p></li>
+<li><p><span class="math notranslate nohighlight">\(z_j'\)</span> = embeddings of all candidate samples (including positives and negatives)</p></li>
+<li><p><span class="math notranslate nohighlight">\(\text{sim}(\cdot, \cdot)\)</span> = similarity function (e.g., dot product or cosine)</p></li>
+<li><p><span class="math notranslate nohighlight">\(\tau\)</span> = temperature parameter</p></li>
+</ul>
+<p>The full loss averaged over all samples is:</p>
+<div class="math notranslate nohighlight">
+\[
+\mathcal{L} = \frac{1}{N} \sum_{i=1}^{N} \mathcal{L}_i
+\]</div>
+<p>This objective encourages <strong>high similarity for positives</strong> and <strong>low similarity for negatives</strong>.</p>
+<hr class="docutils" />
+<section id="gradient-with-respect-to-anchor-embedding">
+<h4>Gradient with Respect to Anchor Embedding<a class="headerlink" href="#gradient-with-respect-to-anchor-embedding" title="Link to this heading">#</a></h4>
+<p>Assuming <span class="math notranslate nohighlight">\(\text{sim}(z_i, z_j') = z_i^\top z_j'\)</span> (dot product), define the softmax probabilities:</p>
+<div class="math notranslate nohighlight">
+\[
+p_{ij} = \frac{\exp(z_i^\top z_j' / \tau)}{\sum_{k=1}^{N} \exp(z_i^\top z_k' / \tau)}
+\]</div>
+<p>Then the gradient of (\mathcal{L}_i) with respect to (z_i) is:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+\frac{\partial \mathcal{L}_i}{\partial z_i} 
+&amp;= - \frac{\partial}{\partial z_i} \log \frac{e^{z_i^\top z_i' / \tau}}{\sum_j e^{z_i^\top z_j' / \tau}} \\
+&amp;= - \frac{1}{\tau} z_i' + \frac{1}{\tau} \sum_j p_{ij} z_j' \\
+&amp;= \frac{1}{\tau} \left( \sum_j p_{ij} z_j' - z_i' \right)
+\end{aligned}
+\end{split}\]</div>
+</section>
+<section id="intuition">
+<h4>Intuition:<a class="headerlink" href="#intuition" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p>The positive sample <span class="math notranslate nohighlight">\(z_i'\)</span> <strong>pulls</strong> the anchor <span class="math notranslate nohighlight">\(z_i\)</span> closer.</p></li>
+<li><p>The negatives, weighted by softmax probabilities <span class="math notranslate nohighlight">\(p_{ij}\)</span>, <strong>push</strong> <span class="math notranslate nohighlight">\(z_i\)</span> away.</p></li>
+<li><p>Gradients flow back through the encoder parameters <span class="math notranslate nohighlight">\(f_\theta(x_i)\)</span>, updating the embeddings indirectly.</p></li>
+</ul>
+</section>
+</section>
+</section>
+<hr class="docutils" />
+<section id="contrastive-learning-for-graphs">
+<h2>Contrastive Learning for Graphs<a class="headerlink" href="#contrastive-learning-for-graphs" title="Link to this heading">#</a></h2>
+<p>Graphs provide natural ways to define positive and negative pairs:</p>
+<section id="node-level-contrast-locallocal">
+<h3>1. Node-Level Contrast (Local–Local)<a class="headerlink" href="#node-level-contrast-locallocal" title="Link to this heading">#</a></h3>
+<p>Two augmented views of the same node’s neighborhood.</p>
+<p>Used in: <strong>DGI, GRACE, BGRL</strong></p>
+</section>
+<section id="subgraph-level-contrast-localglobal">
+<h3>2. Subgraph-Level Contrast (Local–Global)<a class="headerlink" href="#subgraph-level-contrast-localglobal" title="Link to this heading">#</a></h3>
+<p>Contrast a node representation with a global summary of the entire graph.</p>
+<p>Used in: <strong>Deep Graph Infomax</strong></p>
+</section>
+<section id="graph-level-contrast-globalglobal">
+<h3>3. Graph-Level Contrast (Global–Global)<a class="headerlink" href="#graph-level-contrast-globalglobal" title="Link to this heading">#</a></h3>
+<p>Two differently augmented versions of the full graph are positive pairs.</p>
+<p>Used in: <strong>GraphCL</strong></p>
+</section>
+<section id="cross-view-contrast">
+<h3>4. Cross-View Contrast<a class="headerlink" href="#cross-view-contrast" title="Link to this heading">#</a></h3>
+<p>Contrast between views from different encoders or operators<br />
+(e.g., message-passing vs. diffusion-based).</p>
+<p>Used in: <strong>MVGRL</strong></p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="graph-augmentations">
+<h2>Graph Augmentations<a class="headerlink" href="#graph-augmentations" title="Link to this heading">#</a></h2>
+<p>Graph-specific augmentations commonly include:</p>
+<ul class="simple">
+<li><p>node dropping</p></li>
+<li><p>edge perturbation</p></li>
+<li><p>feature masking</p></li>
+<li><p>attribute corruption</p></li>
+<li><p>random-walk subgraph sampling</p></li>
+<li><p>diffusion-based smoothing</p></li>
+</ul>
+<p>Augmentations must preserve <strong>semantic identity</strong> while introducing variability.</p>
+</section>
+<hr class="docutils" />
+<section id="comparison-with-autoencoders">
+<h2>Comparison With Autoencoders<a class="headerlink" href="#comparison-with-autoencoders" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Aspect</p></th>
+<th class="head"><p>Autoencoder</p></th>
+<th class="head"><p>Contrastive Learning</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Objective</p></td>
+<td><p>Reconstruct input</p></td>
+<td><p>Maximize agreement between views</p></td>
+</tr>
+<tr class="row-odd"><td><p>Embedding Shape</p></td>
+<td><p>Indirect (via decoder)</p></td>
+<td><p>Directly shaped by similarity</p></td>
+</tr>
+<tr class="row-even"><td><p>Negatives</p></td>
+<td><p>Not required</p></td>
+<td><p>Typically essential</p></td>
+</tr>
+<tr class="row-odd"><td><p>Graph Augmentations</p></td>
+<td><p>Optional</p></td>
+<td><p>Crucial</p></td>
+</tr>
+<tr class="row-even"><td><p>Strength</p></td>
+<td><p>Good for compression</p></td>
+<td><p>Strong discriminative embeddings</p></td>
+</tr>
+<tr class="row-odd"><td><p>Weakness</p></td>
+<td><p>May collapse to identity mapping</p></td>
+<td><p>Sensitive to augmentation quality</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Contrastive learning typically produces <strong>higher-quality, task-effective</strong> embeddings.</p>
+</section>
+<hr class="docutils" />
+<section id="advantages-in-graph-representation-learning">
+<h2>Advantages in Graph Representation Learning<a class="headerlink" href="#advantages-in-graph-representation-learning" title="Link to this heading">#</a></h2>
+<p>Contrastive learning is particularly effective for graphs due to:</p>
+<ul class="simple">
+<li><p>robustness to noise and sparsity</p></li>
+<li><p>better capturing of <strong>structural equivalence</strong></p></li>
+<li><p>scalability</p></li>
+<li><p>suitability for node/graph classification, clustering, and link prediction</p></li>
+</ul>
+<hr class="docutils" />
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "mlgbook"
+        },
+        kernelOptions: {
+            name: "mlgbook",
+            path: "./content\Chapter03"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'mlgbook'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="02_Autoencoders.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">AutoEncoder</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="04_Graph%20Data%20Augmentation%20and%20Sampling%20Techniques.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Graph Mining Presentation</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Contrastive Learning</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Contrastive Learning</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#core-idea">Core Idea</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematical-formulation">Mathematical Formulation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#similarity-function">Similarity Function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#infonce-loss">InfoNCE Loss</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#gradient-with-respect-to-anchor-embedding">Gradient with Respect to Anchor Embedding</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#intuition">Intuition:</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contrastive-learning-for-graphs">Contrastive Learning for Graphs</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#node-level-contrast-locallocal">1. Node-Level Contrast (Local–Local)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#subgraph-level-contrast-localglobal">2. Subgraph-Level Contrast (Local–Global)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#graph-level-contrast-globalglobal">3. Graph-Level Contrast (Global–Global)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cross-view-contrast">4. Cross-View Contrast</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#graph-augmentations">Graph Augmentations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparison-with-autoencoders">Comparison With Autoencoders</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#advantages-in-graph-representation-learning">Advantages in Graph Representation Learning</a></li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Soheila Ashkezari-T.
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

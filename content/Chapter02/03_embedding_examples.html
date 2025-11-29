@@ -63,6 +63,7 @@
     <link rel="canonical" href="/GMLCourse/content/Chapter02/03_embedding_examples.html" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Unsupervised Graph learning" href="../Chapter03/00_Unsupervised_Learning.html" />
     <link rel="prev" title="Neural Network Essentials for Understanding GNNs" href="02_gnn_primer.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -196,6 +197,21 @@
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Graph Representation Learning</a></li>
 </ul>
 </details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Chapter03/00_Unsupervised_Learning.html">Unsupervised Graph learning</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter03/01_Shallow_Embeddings.html">Shallow Embedding Methods</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="../Chapter03/02_Autoencoders.html">AutoEncoder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter03/03_ConstrativeLearning.html">Contrastive Learning</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../Chapter03/04_Graph%20Data%20Augmentation%20and%20Sampling%20Techniques.html">Graph Mining Presentation</a></li>
+
+
+
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../Chapter04/01_Feature_based_methods.html">Supervised Learning on Graphs</a></li>
+
 </ul>
 
     </div>
@@ -429,15 +445,9 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#node2vec-example">Node2Vec example</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#edge-level-tasks">Edge-level tasks</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#edge2vec-edge-level-embedding">🔹 Edge2Vec – <em>Edge-Level Embedding</em></a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#edge-level-tasks">Edge-level tasks</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#edge2vec-example">Edge2Vec example</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#graph-level-tasks">Graph-level tasks</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#graph2vec-graph-level-embedding">🔹 Graph2Vec – <em>Graph-Level Embedding</em></a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#graph-level-tasks">Graph-level tasks</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#graph2vec-example">Graph2Vec Example</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>
@@ -473,13 +483,15 @@ Each level focuses on capturing structural patterns relevant to its target unit 
 <section id="node-level-tasks">
 <h2>Node-Level Tasks<a class="headerlink" href="#node-level-tasks" title="Link to this heading">#</a></h2>
 <p>Node-level tasks aim to predict attributes or labels for individual nodes within a graph.<br />
-These models leverage both node features and the surrounding structural context—i.e., how each node is connected to others—to learn meaningful node representations.</p>
+These models utilize both node features and the surrounding structural context—i.e., how each node is connected to others—to learn meaningful node representations.</p>
 <p>In a social network, for example:</p>
 <ul class="simple">
 <li><p><strong>Nodes</strong> correspond to users</p></li>
 <li><p><strong>Edges</strong> represent interactions or relationships</p></li>
 </ul>
 <p>A node-level task might predict whether a user belongs to a particular community, shares specific interests, or behaves similarly to others.</p>
+<img src="figures/community.webp" width="300px" style="display:block; margin:auto;">
+<p><a class="reference external" href="https://medium.com/data-science/community-detection-algorithms-9bd8951e7dae">https://medium.com/data-science/community-detection-algorithms-9bd8951e7dae</a></p>
 <hr class="docutils" />
 <section id="node2vec-node-level-embedding-method">
 <h3>🔹 Node2Vec – <em>Node-Level Embedding Method</em><a class="headerlink" href="#node2vec-node-level-embedding-method" title="Link to this heading">#</a></h3>
@@ -560,16 +572,19 @@ In a social network, Node2Vec can learn embeddings for users based on network co
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Generating walks (CPU: 1):   0%|                                                                | 0/10 [00:00&lt;?, ?it/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Generating walks (CPU: 1):  60%|█████████████████████████████████▌                      | 6/10 [00:00&lt;00:00, 47.64it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Generating walks (CPU: 1):  50%|████████████████████████████                            | 5/10 [00:00&lt;00:00, 42.15it/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Generating walks (CPU: 1): 100%|███████████████████████████████████████████████████████| 10/10 [00:00&lt;00:00, 39.94it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Generating walks (CPU: 1): 100%|███████████████████████████████████████████████████████| 10/10 [00:00&lt;00:00, 38.67it/s]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Generating walks (CPU: 1): 100%|███████████████████████████████████████████████████████| 10/10 [00:00&lt;00:00, 35.54it/s]
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
-<img alt="../../_images/10899d8f97fba878163a7301000b9ed15442bb83d971150c824426b7db0de32f.png" src="../../_images/10899d8f97fba878163a7301000b9ed15442bb83d971150c824426b7db0de32f.png" />
+<img alt="../../_images/7d2aa9e1dd250ae169fdddc847f1ee3a69b8b4fb3771ac8f7acca31a3c590976.png" src="../../_images/7d2aa9e1dd250ae169fdddc847f1ee3a69b8b4fb3771ac8f7acca31a3c590976.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -587,12 +602,12 @@ In a social network, Node2Vec can learn embeddings for users based on network co
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/28f3b4b353011d79057fba07d4d5e7a456eedaa725be5d37ac5121b58c0de20f.png" src="../../_images/28f3b4b353011d79057fba07d4d5e7a456eedaa725be5d37ac5121b58c0de20f.png" />
+<img alt="../../_images/05d6e71ab9e1a02346ffc0d9ea04bdfb767a9e6684f1b3315b367668ec77985d.png" src="../../_images/05d6e71ab9e1a02346ffc0d9ea04bdfb767a9e6684f1b3315b367668ec77985d.png" />
 </div>
 </div>
 <p>Graph learning models such as GCN (Graph Convolutional Network), GraphSAGE, or GAT (Graph Attention Network) can capture information from a node’s neighborhood and generate expressive embeddings. These embeddings are then used for classification, clustering, or regression on the nodes.</p>
-<p><img alt="nodeLevelExample" src="../../_images/chap1_6.png" />
-ref: <a class="reference external" href="https://distill.pub/2021/gnn-intro/">https://distill.pub/2021/gnn-intro/</a></p>
+<img src="figures/chap1_6.png" width="700px" style="display:block; margin:auto;">
+<p>ref: <a class="reference external" href="https://distill.pub/2021/gnn-intro/">https://distill.pub/2021/gnn-intro/</a></p>
 </section>
 <hr class="docutils" />
 <section id="edge-level-tasks">
@@ -603,9 +618,9 @@ ref: <a class="reference external" href="https://distill.pub/2021/gnn-intro/">ht
 <li><p>predict whether two people are likely to become friends in the future (link prediction), or</p></li>
 <li><p>determine the type of relationship between two individuals (e.g., friendship, collaboration, or competition).</p></li>
 </ul>
+ <img src="figures/linkPred.png" width="200px" style="display:block; margin:auto;">
 <p>Graph learning models often <strong>compute embeddings for each node, and then combine the embeddings of two connected nodes (using operations such as sum, product, or difference) to obtain a feature vector for the edge</strong>, which can be used for prediction.</p>
-<section id="edge2vec-edge-level-embedding">
-<h3>🔹 Edge2Vec – <em>Edge-Level Embedding</em><a class="headerlink" href="#edge2vec-edge-level-embedding" title="Link to this heading">#</a></h3>
+<p>🔹 Edge2Vec Edge-Level Embedding</p>
 <p>Understanding Edge-Level Embedding through an Example:</p>
 <p>Consider a graph representing a workplace network, where each node corresponds to an employee. Let’s examine two edges:</p>
 <ul class="simple">
@@ -632,7 +647,6 @@ In a transaction network, Edge2Vec can be used to represent the interaction betw
 <img src="figures/chap1_edge.png" width="600px" style="display:block; margin:auto;">
 <img src="figures/chap1_edge2.png" width="600px" style="display:block; margin:auto;">
 <p>ref: <a class="reference external" href="https://distill.pub/2021/gnn-intro/">https://distill.pub/2021/gnn-intro/</a></p>
-</section>
 </section>
 <section id="edge2vec-example">
 <h2>Edge2Vec example<a class="headerlink" href="#edge2vec-example" title="Link to this heading">#</a></h2>
@@ -661,7 +675,7 @@ In a transaction network, Edge2Vec can be used to represent the interaction betw
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/bc525dbf3ca4b9c7534f0df72103c1276d9f9e48e506f910aa29afba0eb3d68e.png" src="../../_images/bc525dbf3ca4b9c7534f0df72103c1276d9f9e48e506f910aa29afba0eb3d68e.png" />
+<img alt="../../_images/bb08890d1b3147731a25f573762cb10601f622c684d0117a33588ad86f399702.png" src="../../_images/bb08890d1b3147731a25f573762cb10601f622c684d0117a33588ad86f399702.png" />
 </div>
 </div>
 </section>
@@ -671,18 +685,17 @@ In a transaction network, Edge2Vec can be used to represent the interaction betw
 <p>In Graph-level tasks, the objective is to predict a global property or label for the entire graph. In these scenarios, each graph is treated as a single data instance.</p>
 <p>For example, in the field of chemistry, a molecule can be represented as a graph where nodes are atoms and edges are chemical bonds. A graph-level task could be to predict whether the molecule has medicinal properties or what kind of smell it produces.</p>
 <p>In these models, node embeddings are first computed, and then a global pooling operation (such as mean, sum, or attention-based pooling) is used to aggregate node features into a single vector representing the entire graph. This vector is then used for downstream predictions.</p>
-<section id="graph2vec-graph-level-embedding">
-<h3>🔹 Graph2Vec – <em>Graph-Level Embedding</em><a class="headerlink" href="#graph2vec-graph-level-embedding" title="Link to this heading">#</a></h3>
-<p><strong>Graph2Vec</strong> provides a single embedding for an entire graph. It treats each graph like a document composed of rooted subgraphs and applies ideas from Doc2Vec to learn its representation.</p>
+<p>🔹 Graph2Vec – <em>Graph-Level Embedding</em></p>
+<p><strong>Graph2Vec</strong> provides a single embedding for an entire graph. It treats each graph like a document composed of rooted subgraphs and applies ideas from Doc2Vec to learn its representation.
+<img src="figures/chap1_4.png" width="300px" style="display:block; margin:auto;"></p>
 <p><strong>Example</strong>:<br />
 In bioinformatics, each graph can represent a molecule. Graph2Vec embeds each molecule into a vector space for:</p>
 <ul class="simple">
 <li><p>Molecular classification</p></li>
 <li><p>Similarity search between chemical compounds</p></li>
 </ul>
-<p><img alt="graphLevel" src="../../_images/chap1_graph.png" />
-ref: <a class="reference external" href="https://distill.pub/2021/gnn-intro/">https://distill.pub/2021/gnn-intro/</a></p>
-</section>
+<img src="figures/chap1_graph.png" width="700px" style="display:block; margin:auto;">
+<p>ref: <a class="reference external" href="https://distill.pub/2021/gnn-intro/">https://distill.pub/2021/gnn-intro/</a></p>
 </section>
 <section id="graph2vec-example">
 <h2>Graph2Vec Example<a class="headerlink" href="#graph2vec-example" title="Link to this heading">#</a></h2>
@@ -693,7 +706,6 @@ ref: <a class="reference external" href="https://distill.pub/2021/gnn-intro/">ht
 <li><p>Each graph is embedded into a 2D vector space using the Graph2Vec algorithm.</p></li>
 <li><p>The resulting vectors are plotted in Euclidean space.</p></li>
 </ul>
-<img src="figures/chap1_4.png" width="400px" style="display:block; margin:auto;">
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">networkx</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nx</span>
@@ -779,7 +791,7 @@ ref: <a class="reference external" href="https://distill.pub/2021/gnn-intro/">ht
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/5be523889d485177e7c38abec752ab2ee59b1706ead1fbe88274aa191cedb906.png" src="../../_images/5be523889d485177e7c38abec752ab2ee59b1706ead1fbe88274aa191cedb906.png" />
+<img alt="../../_images/816ee3da739ebff770d28c8489ef66f46737ab203c4b527dcfad270ee776b44e.png" src="../../_images/816ee3da739ebff770d28c8489ef66f46737ab203c4b527dcfad270ee776b44e.png" />
 </div>
 </div>
 <hr class="docutils" />
@@ -855,6 +867,15 @@ ref: <a class="reference external" href="https://distill.pub/2021/gnn-intro/">ht
         <p class="prev-next-title">Neural Network Essentials for Understanding GNNs</p>
       </div>
     </a>
+    <a class="right-next"
+       href="../Chapter03/00_Unsupervised_Learning.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Unsupervised Graph learning</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               
@@ -878,15 +899,9 @@ ref: <a class="reference external" href="https://distill.pub/2021/gnn-intro/">ht
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#node2vec-example">Node2Vec example</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#edge-level-tasks">Edge-level tasks</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#edge2vec-edge-level-embedding">🔹 Edge2Vec – <em>Edge-Level Embedding</em></a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#edge-level-tasks">Edge-level tasks</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#edge2vec-example">Edge2Vec example</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#graph-level-tasks">Graph-level tasks</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#graph2vec-graph-level-embedding">🔹 Graph2Vec – <em>Graph-Level Embedding</em></a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#graph-level-tasks">Graph-level tasks</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#graph2vec-example">Graph2Vec Example</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>

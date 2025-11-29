@@ -197,6 +197,21 @@
 <li class="toctree-l2"><a class="reference internal" href="../Chapter02/03_embedding_examples.html">Graph Representation Learning</a></li>
 </ul>
 </details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Chapter03/00_Unsupervised_Learning.html">Unsupervised Graph learning</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter03/01_Shallow_Embeddings.html">Shallow Embedding Methods</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="../Chapter03/02_Autoencoders.html">AutoEncoder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter03/03_ConstrativeLearning.html">Contrastive Learning</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../Chapter03/04_Graph%20Data%20Augmentation%20and%20Sampling%20Techniques.html">Graph Mining Presentation</a></li>
+
+
+
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../Chapter04/01_Feature_based_methods.html">Supervised Learning on Graphs</a></li>
+
 </ul>
 
     </div>
@@ -812,18 +827,18 @@ where \)</span>\mu_v,\sigma_v<span class="math notranslate nohighlight">\( are m
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/c2b850dc5da044deeba488b0a7e2a678cb46523087bbcf93c8d62471dd7a8707.png" src="../../_images/c2b850dc5da044deeba488b0a7e2a678cb46523087bbcf93c8d62471dd7a8707.png" />
-<img alt="../../_images/86428909686cf0513886df93d7f63374c191954ad0ac1d894cb2cc4189db9d08.png" src="../../_images/86428909686cf0513886df93d7f63374c191954ad0ac1d894cb2cc4189db9d08.png" />
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Node 0 flagged at times: [(18, 7, 2.0, 0.8944271909999159, 5.5901699437494745)]
-Node 1 flagged at times: [(7, 5, 0.8, 0.4, 10.5), (14, 3, 1.0, 0.6324555320336759, 3.162277660168379), (18, 7, 1.6, 1.2, 4.500000000000001), (24, 3, 1.0, 0.6324555320336759, 3.162277660168379)]
-Node 2 flagged at times: [(18, 10, 1.0, 1.0954451150103321, 8.215838362577493)]
-Node 3 flagged at times: [(18, 8, 1.4, 1.4966629547095764, 4.409810491555002)]
-Node 4 flagged at times: [(17, 4, 0.8, 0.7483314773547883, 4.27617987059879), (18, 8, 1.6, 1.3564659966250536, 4.718142596956708)]
-Node 5 flagged at times: [(18, 8, 1.6, 1.2000000000000002, 5.333333333333333), (26, 4, 1.2, 0.7483314773547883, 3.741657386773941)]
-Node 6 flagged at times: [(11, 4, 1.8, 0.4, 5.5), (18, 6, 1.2, 0.7483314773547883, 6.414269805898185), (25, 3, 1.0, 0.6324555320336759, 3.162277660168379)]
-Node 7 flagged at times: [(5, 4, 0.6, 0.48989794855663565, 6.9402209378856705), (18, 9, 1.8, 0.7483314773547883, 9.621404708847278), (27, 6, 1.2, 1.1661903789690602, 4.115966043420212)]
-Node 8 flagged at times: [(18, 4, 1.4, 0.4898979485566356, 5.30722777603022)]
-Node 9 flagged at times: [(15, 3, 0.6, 0.48989794855663565, 4.898979485566356), (18, 6, 1.2, 1.1661903789690602, 4.115966043420212)]
+<img alt="../../_images/f36c6642fb8ab6cb2186cf9b729c8f4b1cab94cb27a780375fb127d4bc9b91d0.png" src="../../_images/f36c6642fb8ab6cb2186cf9b729c8f4b1cab94cb27a780375fb127d4bc9b91d0.png" />
+<img alt="../../_images/2b65697b3e8c07fec4ef37928a490e6b6e59971ad31c341158f30d76c8f321b4.png" src="../../_images/2b65697b3e8c07fec4ef37928a490e6b6e59971ad31c341158f30d76c8f321b4.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Node 0 flagged at times: [(18, 7, 1.4, 1.019803902718557, 5.491251783869152), (24, 3, 1.4, 0.4898979485566356, 3.2659863237109046)]
+Node 1 flagged at times: [(11, 4, 1.6, 0.4898979485566356, 4.898979485566357), (17, 2, 0.2, 0.4000000000000001, 4.499999999999999), (18, 10, 0.6, 0.7999999999999999, 11.750000000000002), (27, 3, 1.2, 0.4, 4.5)]
+Node 2 flagged at times: [(5, 2, 0.2, 0.4, 4.5)]
+Node 3 flagged at times: [(17, 2, 0.4, 0.48989794855663565, 3.265986323710904), (18, 5, 0.6, 0.8, 5.5)]
+Node 4 flagged at times: [(17, 3, 1.2, 0.4, 4.5), (18, 10, 1.6, 0.8, 10.5)]
+Node 5 flagged at times: [(18, 8, 1.0, 1.0, 7.0)]
+Node 6 flagged at times: [(13, 4, 2.0, 0.6324555320336759, 3.162277660168379), (18, 8, 1.2, 1.4696938456699067, 4.626813958590448)]
+Node 7 flagged at times: [(18, 7, 1.4, 0.8, 6.999999999999999)]
+Node 9 flagged at times: [(18, 7, 1.2, 0.9797958971132712, 5.919600211726014)]
+Node 10 flagged at times: [(28, 4, 1.2, 0.7483314773547883, 3.741657386773941)]
 </pre></div>
 </div>
 </div>

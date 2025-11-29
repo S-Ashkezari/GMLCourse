@@ -1,0 +1,92 @@
+Traceback (most recent call last):
+  File "C:\Users\sashk\AppData\Local\Programs\Python\Python313\Lib\site-packages\jupyter_cache\executors\utils.py", line 58, in single_nb_execution
+    executenb(
+    ~~~~~~~~~^
+        nb,
+        ^^^
+    ...<4 lines>...
+        **kwargs,
+        ^^^^^^^^^
+    )
+    ^
+  File "C:\Users\sashk\AppData\Local\Programs\Python\Python313\Lib\site-packages\nbclient\client.py", line 1319, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\sashk\AppData\Local\Programs\Python\Python313\Lib\site-packages\jupyter_core\utils\__init__.py", line 165, in wrapped
+    return loop.run_until_complete(inner)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\sashk\AppData\Local\Programs\Python\Python313\Lib\asyncio\base_events.py", line 725, in run_until_complete
+    return future.result()
+           ~~~~~~~~~~~~~^^
+  File "C:\Users\sashk\AppData\Local\Programs\Python\Python313\Lib\site-packages\nbclient\client.py", line 709, in async_execute
+    await self.async_execute_cell(
+        cell, index, execution_count=self.code_cells_executed + 1
+    )
+  File "C:\Users\sashk\AppData\Local\Programs\Python\Python313\Lib\site-packages\nbclient\client.py", line 1062, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "C:\Users\sashk\AppData\Local\Programs\Python\Python313\Lib\site-packages\nbclient\client.py", line 918, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+import numpy as np
+import matplotlib.pyplot as plt
+import networkx as nx
+from sklearn.semi_supervised import LabelPropagation, LabelSpreading
+from sklearn.metrics import accuracy_score
+from sklearn.metrics.pairwise import pairwise_kernels
+from torch_geometric.utils import from_networkx, to_scipy_sparse_matrix
+
+# Step 1: Create a synthetic graph with 3 communities
+G = nx.connected_caveman_graph(3, 20)  # 3 clusters, each with 20 nodes
+true_labels = []
+for i in range(3):
+    true_labels += [i] * 20
+true_labels = np.array(true_labels)
+
+# Visualize original graph with true labels
+pos = nx.spring_layout(G, seed=42)
+plt.figure(figsize=(6, 6))
+nx.draw(G, pos, node_color=true_labels, cmap=plt.cm.Set1, node_size=100, with_labels=False)
+plt.title("Original Graph with True Labels")
+plt.show()
+
+# Convert to PyG data format
+from torch_geometric.utils import from_networkx
+import torch
+data = from_networkx(G)
+data.num_nodes = G.number_of_nodes()
+
+# Simulate node features (for sklearn compatibility)
+X = np.random.randn(data.num_nodes, 10)
+
+# Step 2: Create semi-supervised labels
+y = true_labels
+y_semi = np.full_like(y, -1)
+train_idx = []
+
+# label 3 nodes per class
+for c in range(3):
+    idx = np.where(y == c)[0]
+    np.random.seed(0)
+    sel = np.random.choice(idx, 3, replace=False)
+    y_semi[sel] = y[sel]
+    train_idx.extend(sel)
+
+test_idx = [i for i in range(len(y)) if i not in train_idx]
+
+
+
+------------------
+
+
+[1;31m---------------------------------------------------------------------------[0m
+[1;31mModuleNotFoundError[0m                       Traceback (most recent call last)
+Cell [1;32mIn[1], line 7[0m
+[0;32m      5[0m [38;5;28;01mfrom[39;00m [38;5;21;01msklearn[39;00m[38;5;21;01m.[39;00m[38;5;21;01mmetrics[39;00m [38;5;28;01mimport[39;00m accuracy_score
+[0;32m      6[0m [38;5;28;01mfrom[39;00m [38;5;21;01msklearn[39;00m[38;5;21;01m.[39;00m[38;5;21;01mmetrics[39;00m[38;5;21;01m.[39;00m[38;5;21;01mpairwise[39;00m [38;5;28;01mimport[39;00m pairwise_kernels
+[1;32m----> 7[0m [38;5;28;01mfrom[39;00m [38;5;21;01mtorch_geometric[39;00m[38;5;21;01m.[39;00m[38;5;21;01mutils[39;00m [38;5;28;01mimport[39;00m from_networkx, to_scipy_sparse_matrix
+[0;32m      9[0m [38;5;66;03m# Step 1: Create a synthetic graph with 3 communities[39;00m
+[0;32m     10[0m G [38;5;241m=[39m nx[38;5;241m.[39mconnected_caveman_graph([38;5;241m3[39m, [38;5;241m20[39m)  [38;5;66;03m# 3 clusters, each with 20 nodes[39;00m
+
+[1;31mModuleNotFoundError[0m: No module named 'torch_geometric'
+
