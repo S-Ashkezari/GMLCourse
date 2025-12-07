@@ -60,7 +60,7 @@
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'content/Chapter03/01_Shallow_Embeddings';</script>
-    <link rel="canonical" href="/GMLCourse/content/Chapter03/01_Shallow_Embeddings.html" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="AutoEncoder" href="02_Autoencoders.html" />
@@ -103,8 +103,8 @@
          class="form-control"
          name="q"
          id="search-input"
-         placeholder="Search this book..."
-         aria-label="Search this book..."
+         placeholder="Search..."
+         aria-label="Search..."
          autocomplete="off"
          autocorrect="off"
          autocapitalize="off"
@@ -174,24 +174,20 @@
  </script></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
-        
-        <ul class="nav bd-sidenav bd-sidenav__home-link">
-            <li class="toctree-l1">
-                <a class="reference internal" href="../../intro.html">
-                    Welcome to Graph Machine Learning
-                </a>
-            </li>
-        </ul>
-        <ul class="current nav bd-sidenav">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Graph Machine Learning</span></p>
+<ul class="nav bd-sidenav">
 <li class="toctree-l1 has-children"><a class="reference internal" href="../Chapter01/01_Graph_metrics.html"><strong>First Part: Graph Mining - Concepts and properties</strong></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter01/02_community_detection.html">Community Detection in Graphs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter01/03_FrequentSubgraphMining.html">Frequent Subgraph Mining</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../Chapter01/04_Complex%20Networks%20and%20Generative%20Models.html">Complex Networks and Generative Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter01/04_ComplexNetworks_and_GenerativeModels.html">Complex Networks and Generative Models</a></li>
 
 
 <li class="toctree-l2"><a class="reference internal" href="../Chapter01/05_DynamicGraphsandNetworkEvolutionAnalysis.html">Dynamic Graphs and Network Evolution Analysis</a></li>
 </ul>
 </details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Unsupervised GML</span></p>
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1 has-children"><a class="reference internal" href="../Chapter02/01_intro_and_basics.html">Introduction to Graph Machine Learning</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter02/02_gnn_primer.html">Neural Network Essentials for Understanding GNNs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter02/03_embedding_examples.html">Graph Representation Learning</a></li>
@@ -203,14 +199,25 @@
 
 <li class="toctree-l2"><a class="reference internal" href="02_Autoencoders.html">AutoEncoder</a></li>
 <li class="toctree-l2"><a class="reference internal" href="03_ConstrativeLearning.html">Contrastive Learning</a></li>
-
-<li class="toctree-l2"><a class="reference internal" href="04_Graph%20Data%20Augmentation%20and%20Sampling%20Techniques.html">Graph Mining Presentation</a></li>
-
+<li class="toctree-l2"><a class="reference internal" href="04_Graph_DataAugmentation_and_SamplingTechniques.html">Graph Mining Presentation</a></li>
 
 
 </ul>
 </details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Supervised GML</span></p>
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../Chapter04/01_Feature_based_methods.html">Supervised Learning on Graphs</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../Chapter04/02_Shallow_embeddings.html">Shallow Embedding Methods</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Graph Neural Networks</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Chapter05/01_Graph_Neural_Networks.html">From Graph Structure to Graph Neural Networks</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../Chapter05/02_Spectral_Graph_Convolution_in_GNNs.html">Spectral Graph Convolution in GNNs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Chapter05/03_Spatial_Graph_Neural_Networks.html">Message Passing Neural Networks (MPNN)</a></li>
+
 
 </ul>
 
@@ -253,84 +260,6 @@
         <div class="header-article-item">
 
 <div class="article-header-buttons">
-
-
-
-
-
-<div class="dropdown dropdown-launch-buttons">
-  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
-    <i class="fas fa-rocket"></i>
-  </button>
-  <ul class="dropdown-menu">
-      
-      
-      
-      <li><a href="https://colab.research.google.com/github/executablebooks/jupyter-book/blob/master/docs/content/Chapter03/01_Shallow_Embeddings.ipynb" target="_blank"
-   class="btn btn-sm dropdown-item"
-   title="Launch on Colab"
-   data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  
-    <img alt="Colab logo" src="../../_static/images/logo_colab.png">
-  </span>
-<span class="btn__text-container">Colab</span>
-</a>
-</li>
-      
-  </ul>
-</div>
-
-
-
-
-
-
-<div class="dropdown dropdown-source-buttons">
-  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
-    <i class="fab fa-github"></i>
-  </button>
-  <ul class="dropdown-menu">
-      
-      
-      
-      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
-   class="btn btn-sm btn-source-repository-button dropdown-item"
-   title="Source repository"
-   data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  <i class="fab fa-github"></i>
-  </span>
-<span class="btn__text-container">Repository</span>
-</a>
-</li>
-      
-      
-      
-      
-      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fcontent/Chapter03/01_Shallow_Embeddings.html&body=Your%20issue%20content%20here." target="_blank"
-   class="btn btn-sm btn-source-issues-button dropdown-item"
-   title="Open an issue"
-   data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  <i class="fas fa-lightbulb"></i>
-  </span>
-<span class="btn__text-container">Open issue</span>
-</a>
-</li>
-      
-  </ul>
-</div>
-
 
 
 
@@ -440,8 +369,8 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Shallow Embedding Methods</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#matrix-factorization">Matrix Factorization</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#graph-factorization">Graph Factorization</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#solve-the-optimization-problem">Solve the optimization problem</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#graph-factorization">Graph Factorization</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#solve-the-optimization-problem">Solve the optimization problem</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-compute-the-gradient">Step 1 — Compute the Gradient</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-update-the-embedding-vectors">Step 2 — Update the Embedding Vectors</a></li>
 </ul>
@@ -453,8 +382,8 @@ document.write(`
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#graph-representation-with-global-structure-information-graphrep">Graph Representation with Global Structure Information (GraphRep)</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#motivation">Motivation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#notation-and-setup">Notation and Setup</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-the-k-th-order-proximity">What is the <span class="math notranslate nohighlight">\(k\)</span> th-Order Proximity?</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#small-graph-example-global-structure-with-graphrep">Small Graph Example: Global Structure with GraphRep</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-the-k-th-order-proximity">What is the <span class="math notranslate nohighlight">\(k\)</span> th-Order Proximity?</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#small-graph-example-global-structure-with-graphrep">Small Graph Example: Global Structure with GraphRep</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#graph-structure">🔹 Graph Structure</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-adjacency-matrix-a">🔹 Step 1: Adjacency Matrix <span class="math notranslate nohighlight">\( A \)</span></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-degree-matrix-d">🔹 Step 2: Degree Matrix <span class="math notranslate nohighlight">\( D \)</span></a></li>
@@ -466,24 +395,24 @@ document.write(`
 </li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objective-function">Objective Function</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objective-function">Objective Function</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#singular-value-decomposition-svd-for-embeddings">Singular Value Decomposition (SVD) for Embeddings</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-5-left-singular-vectors">🔹 Step 5: Left Singular Vectors</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#final-embedding-construction">Final Embedding Construction</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parameters">Parameters</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parameters">Parameters</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-6-final-embedding-y-s-y-s-1-y-s-2">🔹 step 6: Final Embedding <span class="math notranslate nohighlight">\( Y_s = [Y_s^{(1)} \ \| \ Y_s^{(2)}] \)</span></a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#higher-order-proximity-preserved-embedding-hope">Higher-Order Proximity Preserved Embedding ( HOPE)</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#higher-order-proximity-preserved-embedding-hope">Higher-Order Proximity Preserved Embedding ( HOPE)</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Final Embedding Construction</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#similarity-matrix-computation">Similarity Matrix Computation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#similarity-matrix-computation">Similarity Matrix Computation</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretation-of-adamic-adar-similarity">Interpretation of Adamic-Adar Similarity</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#katz-similarity-in-hope">Katz Similarity in HOPE</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#katz-similarity-in-hope">Katz Similarity in HOPE</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematical-definition">🔸 Mathematical Definition</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#intuition">🔸 Intuition</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#role-in-hope">🔸 Role in HOPE</a></li>
@@ -496,7 +425,7 @@ document.write(`
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#skip-gram-model">Skip-Gram Model</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-architecture">Model Architecture</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#detailed-input-output-description-of-skip-gram">Detailed input / output description of Skip-Gram</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#detailed-input-output-description-of-skip-gram">Detailed input / output description of Skip-Gram</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#notation-and-dimensions">Notation and dimensions</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#input-and-embedding-lookup">Input and embedding lookup</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#output-scores-probabilities">Output (scores, probabilities)</a></li>
@@ -507,7 +436,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Summary</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deepwalk-learning-node-embeddings-via-random-walks-and-skip-gram">DeepWalk: Learning Node Embeddings via Random Walks and Skip-Gram</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deepwalk-learning-node-embeddings-via-random-walks-and-skip-gram">DeepWalk: Learning Node Embeddings via Random Walks and Skip-Gram</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-understanding-random-walks">Step 1: Understanding Random Walks</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-applying-skip-gram-to-graph-walks">Step 2: Applying Skip-Gram to Graph Walks</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-extracting-node-embeddings">Step 3: Extracting Node Embeddings</a></li>
@@ -515,8 +444,8 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#applications">📌 Applications</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#node2vec">Node2Vec</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#skip-gram-with-negative-sampling-sgns">Skip-Gram with Negative Sampling (SGNS)</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#node2vec">Node2Vec</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#skip-gram-with-negative-sampling-sgns">Skip-Gram with Negative Sampling (SGNS)</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#training-strategy">Training Strategy</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#loss-function">Loss Function</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#advantages">Advantages</a></li>
@@ -534,14 +463,14 @@ document.write(`
 </li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#edge2vec-learning-edge-representations-from-node-embeddings">Edge2Vec: Learning Edge Representations from Node Embeddings</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#edge2vec-learning-edge-representations-from-node-embeddings">Edge2Vec: Learning Edge Representations from Node Embeddings</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#core-idea">Core Idea</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-edge-embedding-operators">Common Edge Embedding Operators</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Intuition</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Summary</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#graph2vec-learning-vector-representations-of-entire-graphs">Graph2Vec: Learning Vector Representations of Entire Graphs</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#graph2vec-learning-vector-representations-of-entire-graphs">Graph2Vec: Learning Vector Representations of Entire Graphs</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#objective">Objective</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#underlying-concept">Underlying Concept</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#algorithm-steps">Algorithm Steps</a></li>
@@ -576,9 +505,9 @@ document.write(`
 <p>Both approaches use matrix factorization to compute node embeddings that preserve different aspects of the graph’s topology.</p>
 <p>Let <span class="math notranslate nohighlight">\(W \in \mathbb{R}^{m \times n}\)</span> represent the input data matrix. Matrix factorization aims to approximate this matrix as the product of two lower-dimensional matrices:<br />
 <span class="math notranslate nohighlight">\(W \approx V \times H\)</span><br />
-where <span class="math notranslate nohighlight">\(V \in \mathbb{R}^{m \times d}\)</span> and <span class="math notranslate nohighlight">\(H \in \mathbb{R}^{d \times n}\)</span> are referred to as the <strong>source</strong> and <strong>abundance</strong> matrices, respectively. The parameter <span class="math notranslate nohighlight">\(d\)</span> indicates the dimensionality of the embedding space.<br />
-<img src="figures/mf.png" width="300px" style="display:block; margin:auto;">
-The matrix factorization process involves learning <span class="math notranslate nohighlight">\(V\)</span> and <span class="math notranslate nohighlight">\(H\)</span> by minimizing a loss function, typically defined as the reconstruction error. A commonly used form is the Frobenius norm:</p>
+where <span class="math notranslate nohighlight">\(V \in \mathbb{R}^{m \times d}\)</span> and <span class="math notranslate nohighlight">\(H \in \mathbb{R}^{d \times n}\)</span> are referred to as the <strong>source</strong> and <strong>abundance</strong> matrices, respectively. The parameter <span class="math notranslate nohighlight">\(d\)</span> indicates the dimensionality of the embedding space.</p>
+<p><img alt="" src="../../_images/mf.png" /></p>
+<p>The matrix factorization process involves learning <span class="math notranslate nohighlight">\(V\)</span> and <span class="math notranslate nohighlight">\(H\)</span> by minimizing a loss function, typically defined as the reconstruction error. A commonly used form is the Frobenius norm:</p>
 <div class="math notranslate nohighlight">
 \[
 \left\| W - V \times H \right\|_F^2
@@ -709,16 +638,34 @@ Y_i
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">line</span> <span class="mi">4</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1">#Instead of this old library, we use newer one</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">from</span><span class="w"> </span><span class="nn">gem.embedding.gf</span><span class="w"> </span><span class="kn">import</span> <span class="n">GraphFactorization</span>
-<span class="ne">----&gt; </span><span class="mi">4</span> <span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">barbell_graph</span><span class="p">(</span><span class="n">m1</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">m2</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">draw_graph</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="n">gf</span> <span class="o">=</span> <span class="n">GraphFactorization</span><span class="p">(</span><span class="n">d</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>  <span class="n">data_set</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">max_iter</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span> <span class="n">eta</span><span class="o">=</span><span class="mi">1</span><span class="o">*</span><span class="mi">10</span><span class="o">**-</span><span class="mi">4</span><span class="p">,</span> <span class="n">regu</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
-
-<span class="ne">NameError</span>: name &#39;nx&#39; is not defined
+<img alt="../../_images/c0a936abcddee2ae7b4938ce74e848eb9341b54801bf50f57640562e29ce1914.png" src="../../_images/c0a936abcddee2ae7b4938ce74e848eb9341b54801bf50f57640562e29ce1914.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>./gf not found. Reverting to Python implementation. Please compile gf, place node2vec in the path and grant executable permission
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[-0.00296322, -0.00289538],
+       [-0.00296152, -0.00289598],
+       [-0.00296458, -0.00289446],
+       [-0.00296274, -0.00289869],
+       [-0.00294662, -0.00289779],
+       [-0.00307019, -0.00283455],
+       [-0.00228408, -0.0028019 ],
+       [-0.00461994, -0.00395802],
+       [-0.00225683, -0.00198374],
+       [-0.00738909, -0.00340902],
+       [-0.01505051, -0.0060095 ],
+       [-0.00835906, -0.00617471],
+       [ 0.00022253, -0.00377277],
+       [ 0.00280522,  0.00319865],
+       [ 0.00862428, -0.00179457],
+       [ 0.00862761, -0.00179438],
+       [ 0.00862094, -0.00179564],
+       [ 0.00861799, -0.0017991 ],
+       [ 0.00864409, -0.00180069],
+       [ 0.00868223, -0.00168469],
+       [ 0.00881149, -0.00196443],
+       [ 0.008113  , -0.00299607],
+       [ 0.00644314, -0.00215713],
+       [ 0.01149144,  0.00318054]])
 </pre></div>
 </div>
 </div>
@@ -799,7 +746,7 @@ where <span class="math notranslate nohighlight">\( X^k_{ij} \)</span> is the pr
 <h4>🔹 Graph Structure<a class="headerlink" href="#graph-structure" title="Link to this heading">#</a></h4>
 <p>We define a simple undirected graph with 4 nodes:
 Graph:</p>
-<img src="figures/graph.png" width="300px" style="display:block; margin:auto;">
+<p><img alt="" src="../../_images/graph.png" /></p>
 <p>Edges: (1-2), (1-3), (2-4)</p>
 </section>
 <section id="step-1-adjacency-matrix-a">
@@ -983,15 +930,16 @@ Y_s = \left[ Y_s^1 \ \| \ Y_s^2 \ \| \ \cdots \ \| \ Y_s^K \right] \in \mathbb{R
 <section id="step-6-final-embedding-y-s-y-s-1-y-s-2">
 <h3>🔹 step 6: Final Embedding <span class="math notranslate nohighlight">\( Y_s = [Y_s^{(1)} \ \| \ Y_s^{(2)}] \)</span><a class="headerlink" href="#step-6-final-embedding-y-s-y-s-1-y-s-2" title="Link to this heading">#</a></h3>
 <p>In our example:
-$<span class="math notranslate nohighlight">\(
-Y_s =
-\begin{bmatrix}
+$$
+Y_s =</p>
+<div class="amsmath math notranslate nohighlight" id="equation-2914243a-8ef1-4fa5-ac5c-f9a388c27f1e">
+<span class="eqno">(1)<a class="headerlink" href="#equation-2914243a-8ef1-4fa5-ac5c-f9a388c27f1e" title="Permalink to this equation">#</a></span>\[\begin{bmatrix}
 \phantom{-}0.0000 &amp; \phantom{-}0.5623 &amp; -0.7618 &amp; \phantom{-}0.0000 \\
 -0.5623 &amp; \phantom{-}0.0000 &amp; \phantom{-}0.0000 &amp; -0.7618 \\
 -0.9099 &amp; \phantom{-}0.0000 &amp; \phantom{-}0.0000 &amp; -0.6725 \\
 \phantom{-}0.0000 &amp; \phantom{-}0.9099 &amp; -0.6725 &amp; \phantom{-}0.0000 \\
-\end{bmatrix}
-\)</span>$</p>
+\end{bmatrix}\]</div>
+<p>$$</p>
 <p>Each row corresponds to the low-dimensional representation of a node based on global structure information up to 2 hops.</p>
 </section>
 </section>
@@ -1341,12 +1289,10 @@ S = \sum_{k=1}^{\infty} \beta^k A^k = \beta A + \beta^2 A^2 + \beta^3 A^3 + \cdo
 and target nodes. Figure shows the first two dimensions of the embeddings matrix
 representing . It is possible to see how the embedding space generated by HOPE
 provides, in this case, a better separation of the different nodes.</p>
-<hr class="docutils" />
 </section>
 </section>
 </section>
 </section>
-<hr class="docutils" />
 <section class="tex2jax_ignore mathjax_ignore" id="skip-gram-model">
 <h1>Skip-Gram Model<a class="headerlink" href="#skip-gram-model" title="Link to this heading">#</a></h1>
 <p>The <strong>Skip-Gram</strong> model is a shallow neural network with a single hidden layer, designed to learn vector representations (embeddings) of words based on their context in a corpus. Its primary objective is to predict the surrounding words (context) of a given input word (target).</p>
@@ -1360,7 +1306,7 @@ provides, in this case, a better separation of the different nodes.</p>
 <p><span class="math notranslate nohighlight">\(
 P(w_{c} \mid w_{t})
 \)</span></p>
-<p><img alt="image.png" src="content/Chapter03/attachment:6a15b260-825d-4217-989c-e412c262d468.png" /></p>
+<p><img alt="" src="../../_images/words.png" /></p>
 <section id="model-architecture">
 <h2>Model Architecture<a class="headerlink" href="#model-architecture" title="Link to this heading">#</a></h2>
 <p>The Skip-Gram model uses a simple neural architecture to learn dense vector representations of words. Its main components are:</p>
@@ -1372,7 +1318,7 @@ P(w_{c} \mid w_{t})
 <p>During training, the model receives a pair <span class="math notranslate nohighlight">\((\text{target word}, \text{context word})\)</span>. The input one-hot vector contains zero in all positions except for the index corresponding to the target word, which is set to one. Multiplying this vector by the hidden-layer weight matrix retrieves the <span class="math notranslate nohighlight">\(d\)</span>-dimensional embedding of the target word.</p>
 <p>The structure of the neural network representing the skip-gram model is described in the
 following chart:</p>
-<p><img alt="{7BE2F5C6-4AED-40EC-A413-A4709712B7AB}.png" src="content/Chapter03/attachment:80ac2be5-aece-4257-a23b-6fb438433fb4.png" /></p>
+<p><img alt="" src="../../_images/skipGram2.png" /></p>
 <p>The output layer predicts the probability distribution over all words in the vocabulary, indicating how likely each word is to appear in the context of the input word.</p>
 <p>Because computing a full softmax over a large vocabulary is expensive, training typically uses <strong>Hierarchical Softmax</strong> or <strong>Negative Sampling</strong> to approximate it efficiently.</p>
 <p>The goal of the Skip-Gram model is not to predict context words perfectly, but to learn meaningful dense vector representations of words. After training, the embedding space is extracted from the hidden-layer weight matrix, where semantically similar words are located close to each other. Skip-Gram is one of the two architectures of Word2Vec, the other being Continuous Bag-of-Words (CBOW).</p>
@@ -1609,7 +1555,7 @@ Context word: on → [0. 0. 1. 0. 0.]
 <blockquote>
 <div><p>Note: There are no constraints on the structure or content of the walk. Therefore, the local neighborhood of a node might not be fully preserved.</p>
 </div></blockquote>
-<p><img alt="{C30A40F4-DCCE-408C-AD23-2C4C3BFF59DD}.png" src="content/Chapter03/attachment:a313ad89-33e3-45c6-878e-46a27af780df.png" /></p>
+<p><img alt="" src="../../_images/deepWalk.png" /></p>
 </section>
 <hr class="docutils" />
 <section id="step-2-applying-skip-gram-to-graph-walks">
@@ -1618,8 +1564,8 @@ Context word: on → [0. 0. 1. 0. 0.]
 <p>Just like skip-gram learns word embeddings by predicting nearby words, here we learn <strong>node embeddings</strong> by predicting neighboring nodes in the walk.</p>
 <p>Key parameters for training:</p>
 <ul class="simple">
-<li><p><strong>Window size ( w )</strong>: How many nodes around the target to consider as context</p></li>
-<li><p><strong>Embedding dimension ( d )</strong>: Size of the vector representation to be learned</p></li>
+<li><p><strong>Window size <span class="math notranslate nohighlight">\( w\)</span></strong>: How many nodes around the target to consider as context</p></li>
+<li><p><strong>Embedding dimension <span class="math notranslate nohighlight">\(d\)</span></strong>: Size of the vector representation to be learned</p></li>
 </ul>
 </section>
 <hr class="docutils" />
@@ -1687,7 +1633,6 @@ Use the learned weights of the skip-gram model to extract a low-dimensional vect
 </div>
 </section>
 </section>
-<hr class="docutils" />
 <section id="node2vec">
 <h2>Node2Vec<a class="headerlink" href="#node2vec" title="Link to this heading">#</a></h2>
 <p><strong>Node2Vec</strong> is an advanced graph embedding algorithm that builds upon the foundation laid by <strong>DeepWalk</strong>.<br />
@@ -1815,7 +1760,7 @@ After training, the weights of the hidden layer in the Skip-Gram model become th
 <p>Suppose we learn <strong>100-dimensional embeddings</strong> for each node in the graph.<br />
 If we reduce these embeddings to 2 dimensions (e.g., using PCA), the relative distances between nodes in this 2D space reflect their true relationships in the original graph.</p>
 <p>This way, Node2Vec <strong>preserves both structural proximity and functional similarity</strong> among nodes, even in a lower-dimensional space.</p>
-<p><img alt="image.png" src="content/Chapter03/attachment:ed88df22-91f8-4fba-bb31-71bfea80c054.png" /></p>
+<p><img alt="" src="../../_images/plot.png" /></p>
 </section>
 </section>
 <section id="id4">
@@ -2038,7 +1983,7 @@ Graph2Vec learns embeddings for entire graphs based on their substructures.</p><
 <li><p>It is based on the idea of using <strong>subgraph structures as building blocks</strong>, much like words in a document.</p></li>
 <li><p>Inspired by NLP techniques, it provides a flexible and unsupervised way to learn graph-level embeddings suitable for downstream tasks.</p></li>
 </ul>
-<img src="figures/graph2vec.png" width="500px" style="display:block; margin:auto;">
+<p><img alt="" src="../../_images/graph2vec.png" /></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
@@ -2142,8 +2087,8 @@ Graph2Vec learns embeddings for entire graphs based on their substructures.</p><
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Shallow Embedding Methods</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#matrix-factorization">Matrix Factorization</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#graph-factorization">Graph Factorization</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#solve-the-optimization-problem">Solve the optimization problem</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#graph-factorization">Graph Factorization</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#solve-the-optimization-problem">Solve the optimization problem</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-compute-the-gradient">Step 1 — Compute the Gradient</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-update-the-embedding-vectors">Step 2 — Update the Embedding Vectors</a></li>
 </ul>
@@ -2155,8 +2100,8 @@ Graph2Vec learns embeddings for entire graphs based on their substructures.</p><
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#graph-representation-with-global-structure-information-graphrep">Graph Representation with Global Structure Information (GraphRep)</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#motivation">Motivation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#notation-and-setup">Notation and Setup</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-the-k-th-order-proximity">What is the <span class="math notranslate nohighlight">\(k\)</span> th-Order Proximity?</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#small-graph-example-global-structure-with-graphrep">Small Graph Example: Global Structure with GraphRep</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-the-k-th-order-proximity">What is the <span class="math notranslate nohighlight">\(k\)</span> th-Order Proximity?</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#small-graph-example-global-structure-with-graphrep">Small Graph Example: Global Structure with GraphRep</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#graph-structure">🔹 Graph Structure</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-adjacency-matrix-a">🔹 Step 1: Adjacency Matrix <span class="math notranslate nohighlight">\( A \)</span></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-degree-matrix-d">🔹 Step 2: Degree Matrix <span class="math notranslate nohighlight">\( D \)</span></a></li>
@@ -2168,24 +2113,24 @@ Graph2Vec learns embeddings for entire graphs based on their substructures.</p><
 </li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objective-function">Objective Function</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objective-function">Objective Function</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#singular-value-decomposition-svd-for-embeddings">Singular Value Decomposition (SVD) for Embeddings</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-5-left-singular-vectors">🔹 Step 5: Left Singular Vectors</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#final-embedding-construction">Final Embedding Construction</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parameters">Parameters</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parameters">Parameters</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-6-final-embedding-y-s-y-s-1-y-s-2">🔹 step 6: Final Embedding <span class="math notranslate nohighlight">\( Y_s = [Y_s^{(1)} \ \| \ Y_s^{(2)}] \)</span></a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#higher-order-proximity-preserved-embedding-hope">Higher-Order Proximity Preserved Embedding ( HOPE)</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#higher-order-proximity-preserved-embedding-hope">Higher-Order Proximity Preserved Embedding ( HOPE)</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Final Embedding Construction</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#similarity-matrix-computation">Similarity Matrix Computation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#similarity-matrix-computation">Similarity Matrix Computation</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretation-of-adamic-adar-similarity">Interpretation of Adamic-Adar Similarity</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#katz-similarity-in-hope">Katz Similarity in HOPE</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#katz-similarity-in-hope">Katz Similarity in HOPE</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematical-definition">🔸 Mathematical Definition</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#intuition">🔸 Intuition</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#role-in-hope">🔸 Role in HOPE</a></li>
@@ -2198,7 +2143,7 @@ Graph2Vec learns embeddings for entire graphs based on their substructures.</p><
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#skip-gram-model">Skip-Gram Model</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-architecture">Model Architecture</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#detailed-input-output-description-of-skip-gram">Detailed input / output description of Skip-Gram</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#detailed-input-output-description-of-skip-gram">Detailed input / output description of Skip-Gram</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#notation-and-dimensions">Notation and dimensions</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#input-and-embedding-lookup">Input and embedding lookup</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#output-scores-probabilities">Output (scores, probabilities)</a></li>
@@ -2209,7 +2154,7 @@ Graph2Vec learns embeddings for entire graphs based on their substructures.</p><
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Summary</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deepwalk-learning-node-embeddings-via-random-walks-and-skip-gram">DeepWalk: Learning Node Embeddings via Random Walks and Skip-Gram</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deepwalk-learning-node-embeddings-via-random-walks-and-skip-gram">DeepWalk: Learning Node Embeddings via Random Walks and Skip-Gram</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-understanding-random-walks">Step 1: Understanding Random Walks</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-applying-skip-gram-to-graph-walks">Step 2: Applying Skip-Gram to Graph Walks</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-extracting-node-embeddings">Step 3: Extracting Node Embeddings</a></li>
@@ -2217,8 +2162,8 @@ Graph2Vec learns embeddings for entire graphs based on their substructures.</p><
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#applications">📌 Applications</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#node2vec">Node2Vec</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#skip-gram-with-negative-sampling-sgns">Skip-Gram with Negative Sampling (SGNS)</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#node2vec">Node2Vec</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#skip-gram-with-negative-sampling-sgns">Skip-Gram with Negative Sampling (SGNS)</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#training-strategy">Training Strategy</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#loss-function">Loss Function</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#advantages">Advantages</a></li>
@@ -2236,14 +2181,14 @@ Graph2Vec learns embeddings for entire graphs based on their substructures.</p><
 </li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#edge2vec-learning-edge-representations-from-node-embeddings">Edge2Vec: Learning Edge Representations from Node Embeddings</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#edge2vec-learning-edge-representations-from-node-embeddings">Edge2Vec: Learning Edge Representations from Node Embeddings</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#core-idea">Core Idea</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-edge-embedding-operators">Common Edge Embedding Operators</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Intuition</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Summary</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#graph2vec-learning-vector-representations-of-entire-graphs">Graph2Vec: Learning Vector Representations of Entire Graphs</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#graph2vec-learning-vector-representations-of-entire-graphs">Graph2Vec: Learning Vector Representations of Entire Graphs</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#objective">Objective</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#underlying-concept">Underlying Concept</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#algorithm-steps">Algorithm Steps</a></li>

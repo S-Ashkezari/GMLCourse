@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>First Part: Graph Mining - Concepts and properties &#8212; Graph Machine Learning</title>
+    <title>Graph Mining - Concepts and properties &#8212; Graph Machine Learning</title>
   
   
   
@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -60,7 +60,7 @@
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'content/Chapter01/01_Graph_metrics';</script>
-    <link rel="canonical" href="/GMLCourse/content/Chapter01/01_Graph_metrics.html" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Community Detection in Graphs" href="02_community_detection.html" />
@@ -103,8 +103,8 @@
          class="form-control"
          name="q"
          id="search-input"
-         placeholder="Search this book..."
-         aria-label="Search this book..."
+         placeholder="Search..."
+         aria-label="Search..."
          autocomplete="off"
          autocorrect="off"
          autocapitalize="off"
@@ -174,24 +174,20 @@
  </script></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
-        
-        <ul class="nav bd-sidenav bd-sidenav__home-link">
-            <li class="toctree-l1">
-                <a class="reference internal" href="../../intro.html">
-                    Welcome to Graph Machine Learning
-                </a>
-            </li>
-        </ul>
-        <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#"><strong>First Part: Graph Mining - Concepts and properties</strong></a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Graph Mining</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#"><strong>Graph Mining - Concepts and properties</strong></a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="02_community_detection.html">Community Detection in Graphs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="03_FrequentSubgraphMining.html">Frequent Subgraph Mining</a></li>
-<li class="toctree-l2"><a class="reference internal" href="04_Complex%20Networks%20and%20Generative%20Models.html">Complex Networks and Generative Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04_ComplexNetworks_and_GenerativeModels.html">Complex Networks and Generative Models</a></li>
 
 
 <li class="toctree-l2"><a class="reference internal" href="05_DynamicGraphsandNetworkEvolutionAnalysis.html">Dynamic Graphs and Network Evolution Analysis</a></li>
 </ul>
 </details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Unsupervised GML</span></p>
+<ul class="nav bd-sidenav">
 <li class="toctree-l1 has-children"><a class="reference internal" href="../Chapter02/01_intro_and_basics.html">Introduction to Graph Machine Learning</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter02/02_gnn_primer.html">Neural Network Essentials for Understanding GNNs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter02/03_embedding_examples.html">Graph Representation Learning</a></li>
@@ -203,14 +199,25 @@
 
 <li class="toctree-l2"><a class="reference internal" href="../Chapter03/02_Autoencoders.html">AutoEncoder</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter03/03_ConstrativeLearning.html">Contrastive Learning</a></li>
-
-<li class="toctree-l2"><a class="reference internal" href="../Chapter03/04_Graph%20Data%20Augmentation%20and%20Sampling%20Techniques.html">Graph Mining Presentation</a></li>
-
+<li class="toctree-l2"><a class="reference internal" href="../Chapter03/04_Graph_DataAugmentation_and_SamplingTechniques.html">Graph Mining Presentation</a></li>
 
 
 </ul>
 </details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Supervised GML</span></p>
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../Chapter04/01_Feature_based_methods.html">Supervised Learning on Graphs</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../Chapter04/02_Shallow_embeddings.html">Shallow Embedding Methods</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Graph Neural Networks</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Chapter05/01_Graph_Neural_Networks.html">From Graph Structure to Graph Neural Networks</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../Chapter05/02_Spectral_Graph_Convolution_in_GNNs.html">Spectral Graph Convolution in GNNs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Chapter05/03_Spatial_Graph_Neural_Networks.html">Message Passing Neural Networks (MPNN)</a></li>
+
 
 </ul>
 
@@ -253,84 +260,6 @@
         <div class="header-article-item">
 
 <div class="article-header-buttons">
-
-
-
-
-
-<div class="dropdown dropdown-launch-buttons">
-  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
-    <i class="fas fa-rocket"></i>
-  </button>
-  <ul class="dropdown-menu">
-      
-      
-      
-      <li><a href="https://colab.research.google.com/github/executablebooks/jupyter-book/blob/master/docs/content/Chapter01/01_Graph_metrics.ipynb" target="_blank"
-   class="btn btn-sm dropdown-item"
-   title="Launch on Colab"
-   data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  
-    <img alt="Colab logo" src="../../_static/images/logo_colab.png">
-  </span>
-<span class="btn__text-container">Colab</span>
-</a>
-</li>
-      
-  </ul>
-</div>
-
-
-
-
-
-
-<div class="dropdown dropdown-source-buttons">
-  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
-    <i class="fab fa-github"></i>
-  </button>
-  <ul class="dropdown-menu">
-      
-      
-      
-      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
-   class="btn btn-sm btn-source-repository-button dropdown-item"
-   title="Source repository"
-   data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  <i class="fab fa-github"></i>
-  </span>
-<span class="btn__text-container">Repository</span>
-</a>
-</li>
-      
-      
-      
-      
-      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fcontent/Chapter01/01_Graph_metrics.html&body=Your%20issue%20content%20here." target="_blank"
-   class="btn btn-sm btn-source-issues-button dropdown-item"
-   title="Open an issue"
-   data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  <i class="fas fa-lightbulb"></i>
-  </span>
-<span class="btn__text-container">Open issue</span>
-</a>
-</li>
-      
-  </ul>
-</div>
-
 
 
 
@@ -428,7 +357,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>First Part: Graph Mining - Concepts and properties</h1>
+    <h1>Graph Mining - Concepts and properties</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -438,20 +367,20 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#graph-properties">Graph properties</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#graph-properties">Graph properties</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-integration-metrics">a) Integration metrics (یکپارچگی)</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-segregation-metrics">b) Segregation metrics(تفکیک پذیری)</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#c-centrality-metrics">c) Centrality metrics (مرکزیت)</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#d-resilience-metrics">d) Resilience metrics (پایداری/تاب آوری)</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#investigating-some-of-these-properties">Investigating some of these properties</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#investigating-some-of-these-properties">Investigating some of these properties</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#shortest-path">Shortest path</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example:</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#characteristic-path-lenght">Characteristic path lenght</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#efficiency">Efficiency</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#another-example">Another example</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#clustering-coefficient">Clustering Coefficient</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#clustering-coefficient">Clustering Coefficient</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-count-triangles">Step 1: Count triangles</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-count-connected-triples">Step 2: Count connected triples</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-compute-transitivity">Step 3: Compute Transitivity</a></li>
@@ -475,8 +404,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="first-part-graph-mining-concepts-and-properties">
-<h1><strong>First Part: Graph Mining - Concepts and properties</strong><a class="headerlink" href="#first-part-graph-mining-concepts-and-properties" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="graph-mining-concepts-and-properties">
+<h1><strong>Graph Mining - Concepts and properties</strong><a class="headerlink" href="#graph-mining-concepts-and-properties" title="Link to this heading">#</a></h1>
 <p>!pip install networkx==2.5
 !pip install matplotlib==3.2.2
 !pip install pandas==1.1.3
@@ -620,7 +549,7 @@ highlighted):</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/1ce7771d5debc6036b8f7e6cfbf07d894a638b7df859b40fb0dd36b9092b5d85.png" src="../../_images/1ce7771d5debc6036b8f7e6cfbf07d894a638b7df859b40fb0dd36b9092b5d85.png" />
+<img alt="../../_images/bbe9a24190a1935d7a8f6646b2b50a01168a7e1288cad5b70f7ea32be3848c2a.png" src="../../_images/bbe9a24190a1935d7a8f6646b2b50a01168a7e1288cad5b70f7ea32be3848c2a.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -662,7 +591,7 @@ highlighted):</p>
 Total weight: 11725
 </pre></div>
 </div>
-<img alt="../../_images/a06604d4260c17b113e8d9bb8b71ad1e81b758238600cac06408ce1fbb153e1e.png" src="../../_images/a06604d4260c17b113e8d9bb8b71ad1e81b758238600cac06408ce1fbb153e1e.png" />
+<img alt="../../_images/6c3bfb28347caf74e3c4a604d4252cf92f2a882759db309d7a98e1986234ec9f.png" src="../../_images/6c3bfb28347caf74e3c4a604d4252cf92f2a882759db309d7a98e1986234ec9f.png" />
 </div>
 </div>
 </section>
@@ -753,7 +682,7 @@ making it less efficient:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/43306f5f478be553ef0c15db41007a8900e751f95fce1a71a735b4e143a83e6b.png" src="../../_images/43306f5f478be553ef0c15db41007a8900e751f95fce1a71a735b4e143a83e6b.png" />
+<img alt="../../_images/fbcf6e5f37517c923afa8d56b1fe9621685a30f55d1cda4436116b0d89872e15.png" src="../../_images/fbcf6e5f37517c923afa8d56b1fe9621685a30f55d1cda4436116b0d89872e15.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -773,7 +702,7 @@ making it less efficient:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/56a154077169f15cdcfb26bef2caf368c3f4566c35037ef808373b541120a9d9.png" src="../../_images/56a154077169f15cdcfb26bef2caf368c3f4566c35037ef808373b541120a9d9.png" />
+<img alt="../../_images/78ae911a7060203f474cf8a3c4ae9affda2c8b9cf70d059d8fe006010efcc547.png" src="../../_images/78ae911a7060203f474cf8a3c4ae9affda2c8b9cf70d059d8fe006010efcc547.png" />
 </div>
 </div>
 </section>
@@ -850,7 +779,7 @@ key), the corresponding value</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/be39720ef08af707cbdfab885b14a440f828d55dde91e40b74120d29cfa223de.png" src="../../_images/be39720ef08af707cbdfab885b14a440f828d55dde91e40b74120d29cfa223de.png" />
+<img alt="../../_images/1617684d4f63f67761e1e66be1afbaae264da41324005f8dc2f96d4824eb0935.png" src="../../_images/1617684d4f63f67761e1e66be1afbaae264da41324005f8dc2f96d4824eb0935.png" />
 </div>
 </div>
 <p><strong>Transitivity</strong><br />
@@ -1060,7 +989,7 @@ the following command:</p>
     </tr>
   </tbody>
 </table>
-</div></div><img alt="../../_images/6e8161cde0f8f1297a501bff7082843d9003f4796ebd7f0647f6627dd200d1fe.png" src="../../_images/6e8161cde0f8f1297a501bff7082843d9003f4796ebd7f0647f6627dd200d1fe.png" />
+</div></div><img alt="../../_images/73def6ed510a654e3ce0dd507705f23c3dd7ccd9e1378c7fe52fde6784595091.png" src="../../_images/73def6ed510a654e3ce0dd507705f23c3dd7ccd9e1378c7fe52fde6784595091.png" />
 </div>
 </div>
 </section>
@@ -1149,7 +1078,7 @@ C_i = \frac{1}{\sum_{j \in V, j \ne i} l_{ij}}
     </tr>
   </tbody>
 </table>
-</div></div><img alt="../../_images/c9f0706136061cfd96f9dd3d76fd90bf055cb659e66adaaa6be76fed9d135c93.png" src="../../_images/c9f0706136061cfd96f9dd3d76fd90bf055cb659e66adaaa6be76fed9d135c93.png" />
+</div></div><img alt="../../_images/b20b79419f6082f2502a9c60e79e8d18c8d0cd8265b7c4674e11ed3b41af487e.png" src="../../_images/b20b79419f6082f2502a9c60e79e8d18c8d0cd8265b7c4674e11ed3b41af487e.png" />
 </div>
 </div>
 </section>
@@ -1238,7 +1167,7 @@ C_B(i) = \sum_{\substack{w,j \in V \\ w \ne j \ne i}} \frac{L_{wj}(i)}{L_{wj}}
     </tr>
   </tbody>
 </table>
-</div></div><img alt="../../_images/e2068e2eadbf53cb216ca59cce6b740bdcdc8b8a7fbe40cd37d21743fe2581e3.png" src="../../_images/e2068e2eadbf53cb216ca59cce6b740bdcdc8b8a7fbe40cd37d21743fe2581e3.png" />
+</div></div><img alt="../../_images/ee57f373a39d7598929d59df791ec18ec353ff7d76c1b1c6d2a295420c4702aa.png" src="../../_images/ee57f373a39d7598929d59df791ec18ec353ff7d76c1b1c6d2a295420c4702aa.png" />
 </div>
 </div>
 <p>Milan and Naples have the highest degree centrality.</p>
@@ -1287,7 +1216,7 @@ command:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/3336b582cd4ff7080a6fc034162dcd124d91f149073c7f3e57fba2acc1a20b4f.png" src="../../_images/3336b582cd4ff7080a6fc034162dcd124d91f149073c7f3e57fba2acc1a20b4f.png" />
+<img alt="../../_images/42844f1b13ce3e330ffc102237458e30393614bf6821468b8e6322de7069a075.png" src="../../_images/42844f1b13ce3e330ffc102237458e30393614bf6821468b8e6322de7069a075.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1297,14 +1226,14 @@ command:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-0.7500000000000001
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-0.7499999999999998
 </pre></div>
 </div>
 </div>
 </div>
 <hr class="docutils" />
 <p>All implemented algorithms in networkx:</p>
-<p><a class="reference external" href="https://networkx.org/documentation/stable/reference/algorithms/">https://networkx.org/documentation/stable/reference/algorithms/</a></p>
+<p>https://networkx.org/documentation/stable/reference/algorithms/</p>
 </section>
 <div class="toctree-wrapper compound">
 </div>
@@ -1374,20 +1303,20 @@ command:</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#graph-properties">Graph properties</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#graph-properties">Graph properties</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-integration-metrics">a) Integration metrics (یکپارچگی)</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-segregation-metrics">b) Segregation metrics(تفکیک پذیری)</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#c-centrality-metrics">c) Centrality metrics (مرکزیت)</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#d-resilience-metrics">d) Resilience metrics (پایداری/تاب آوری)</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#investigating-some-of-these-properties">Investigating some of these properties</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#investigating-some-of-these-properties">Investigating some of these properties</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#shortest-path">Shortest path</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example:</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#characteristic-path-lenght">Characteristic path lenght</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#efficiency">Efficiency</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#another-example">Another example</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#clustering-coefficient">Clustering Coefficient</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#clustering-coefficient">Clustering Coefficient</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-count-triangles">Step 1: Count triangles</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-count-connected-triples">Step 2: Count connected triples</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-compute-transitivity">Step 3: Compute Transitivity</a></li>

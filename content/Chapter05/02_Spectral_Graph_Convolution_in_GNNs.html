@@ -1,0 +1,998 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Spectral Graph Convolution in GNNs &#8212; Graph Machine Learning</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/Chapter05/02_Spectral_Graph_Convolution_in_GNNs';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Message Passing Neural Networks (MPNN)" href="03_Spatial_Graph_Neural_Networks.html" />
+    <link rel="prev" title="From Graph Structure to Graph Neural Networks" href="01_Graph_Neural_Networks.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Graph Machine Learning - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Graph Machine Learning - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Graph Machine Learning</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Chapter01/01_Graph_metrics.html"><strong>First Part: Graph Mining - Concepts and properties</strong></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter01/02_community_detection.html">Community Detection in Graphs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter01/03_FrequentSubgraphMining.html">Frequent Subgraph Mining</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter01/04_ComplexNetworks_and_GenerativeModels.html">Complex Networks and Generative Models</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="../Chapter01/05_DynamicGraphsandNetworkEvolutionAnalysis.html">Dynamic Graphs and Network Evolution Analysis</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Unsupervised GML</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Chapter02/01_intro_and_basics.html">Introduction to Graph Machine Learning</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter02/02_gnn_primer.html">Neural Network Essentials for Understanding GNNs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter02/03_embedding_examples.html">Graph Representation Learning</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Chapter03/00_Unsupervised_Learning.html">Unsupervised Graph learning</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter03/01_Shallow_Embeddings.html">Shallow Embedding Methods</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="../Chapter03/02_Autoencoders.html">AutoEncoder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter03/03_ConstrativeLearning.html">Contrastive Learning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter03/04_Graph_DataAugmentation_and_SamplingTechniques.html">Graph Mining Presentation</a></li>
+
+
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Supervised GML</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Chapter04/01_Feature_based_methods.html">Supervised Learning on Graphs</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../Chapter04/02_Shallow_embeddings.html">Shallow Embedding Methods</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Graph Neural Networks</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_Graph_Neural_Networks.html">From Graph Structure to Graph Neural Networks</a></li>
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Spectral Graph Convolution in GNNs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_Spatial_Graph_Neural_Networks.html">Message Passing Neural Networks (MPNN)</a></li>
+
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/content/Chapter05/02_Spectral_Graph_Convolution_in_GNNs.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Spectral Graph Convolution in GNNs</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chebyshev-polynomial-filters">Chebyshev Polynomial Filters</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gcn-as-first-order-approximation">GCN as First-Order Approximation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#node-classification-with-graph-convolutional-networks-gcns">Node Classification with Graph Convolutional Networks (GCNs)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inputs-and-outputs">Inputs and Outputs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gcn-forward-pass">GCN Forward Pass</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#loss-function">Loss Function</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#oversmoothing-why-deep-gnns-fail">Oversmoothing: Why Deep GNNs Fail</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-oversmoothing">What Is Oversmoothing?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#oversmoothing-as-repeated-laplacian-smoothing">Oversmoothing as Repeated Laplacian Smoothing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#spectral-analysis-what-happens-to-frequencies">Spectral Analysis: What Happens to Frequencies?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#connection-to-heat-diffusion">Connection to Heat Diffusion</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-numerical-illustration">Simple Numerical Illustration</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-oversmoothing-harms-learning">Why Oversmoothing Harms Learning</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-advice">Practical Advice</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Summary</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="spectral-graph-convolution-in-gnns">
+<h1>Spectral Graph Convolution in GNNs<a class="headerlink" href="#spectral-graph-convolution-in-gnns" title="Link to this heading">#</a></h1>
+<p>Steps are:</p>
+<ol class="arabic simple">
+<li><p>Transform signal to Fourier domain: <span class="math notranslate nohighlight">\(U^\top x\)</span></p></li>
+<li><p>Apply spectral filter: <span class="math notranslate nohighlight">\(g_\theta(\Lambda)\)</span></p></li>
+<li><p>Transform back: <span class="math notranslate nohighlight">\(U g_\theta(\Lambda) U^\top x\)</span></p></li>
+</ol>
+<p><strong>Challenges:</strong></p>
+<ul class="simple">
+<li><p>Eigen-decomposition costs <span class="math notranslate nohighlight">\(O(n^3)\)</span></p></li>
+<li><p>Filters depend on graph → not transferable</p></li>
+<li><p>Not scalable for large graphs</p></li>
+</ul>
+<section id="chebyshev-polynomial-filters">
+<h2>Chebyshev Polynomial Filters<a class="headerlink" href="#chebyshev-polynomial-filters" title="Link to this heading">#</a></h2>
+<p>Avoid eigen-decomposition:</p>
+<div class="math notranslate nohighlight">
+\[
+g_\theta(\Lambda) \approx \sum_{k=0}^{K} \theta_k T_k(\tilde \Lambda), \quad
+g_\theta * x \approx \sum_{k=0}^{K} \theta_k T_k(\tilde L) x
+\]</div>
+<ul class="simple">
+<li><p>Efficient, scalable, no eigenvectors required</p></li>
+</ul>
+</section>
+<section id="gcn-as-first-order-approximation">
+<h2>GCN as First-Order Approximation<a class="headerlink" href="#gcn-as-first-order-approximation" title="Link to this heading">#</a></h2>
+<p>Kipf &amp; Welling simplify to first-order:</p>
+<div class="math notranslate nohighlight">
+\[
+g_\theta(L) \approx \theta_0 I + \theta_1 L
+\]</div>
+<p>Using the normalized Laplacian, we have:
+$<span class="math notranslate nohighlight">\(
+\theta_0 I + \theta_1 L 
+= \theta_0 I + \theta_1(I - D^{-1/2} A D^{-1/2})
+\)</span><span class="math notranslate nohighlight">\(
+Let the two parameters be tied into one: \)</span>\theta = \theta_0 = -\theta_1$</p>
+<p>This gives:
+$<span class="math notranslate nohighlight">\(
+g_\theta(L) \approx \theta (I + D^{-1/2} A D^{-1/2})
+\)</span>$</p>
+<p>Thus, the filtered signal becomes:</p>
+<div class="math notranslate nohighlight">
+\[
+g_\theta * x \approx \theta (I + D^{-1/2} A D^{-1/2}) x
+\]</div>
+<p>Define:</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{A} = A + I
+\]</div>
+<p>for adding self loop. Kipf &amp; Welling proposed to replace:</p>
+<div class="math notranslate nohighlight">
+\[
+I + D^{-1/2} A D^{-1/2}
+\quad\longrightarrow\quad
+\hat{D}^{-1/2} \hat{A} \hat{D}^{-1/2}
+\]</div>
+<p>where:<span class="math notranslate nohighlight">\(\hat{D}_{ii} = \sum_j \hat{A}_{ij}\)</span></p>
+<p>Replace the input signal <span class="math notranslate nohighlight">\(x\)</span> with feature matrix <span class="math notranslate nohighlight">\(H^{(l)}\)</span><br />
+and introduce a learnable weight matrix <span class="math notranslate nohighlight">\(W^{(l)}\)</span>, leads to the resulting GCN layer:</p>
+<div class="math notranslate nohighlight">
+\[
+H^{(l+1)} 
+= \sigma(\hat{D}^{-1/2} \hat{A} \hat{D}^{-1/2} H^{(l)} W^{(l)})
+\]</div>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(H^{(0)}=X\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\hat{A} = A + I\)</span>, add self-loops</p></li>
+<li><p><span class="math notranslate nohighlight">\(\hat{D}_{ii} = \sum_j \hat{A}_{ij}\)</span>, normalize</p></li>
+<li><p>Interpreted as a smooth low-pass spectral filter</p></li>
+</ul>
+<hr class="docutils" />
+<p><img alt="gcn" src="../../_images/gcn.png" /></p>
+</section>
+<section id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Graph Laplacian</strong> encodes neighborhood relations and enables diffusion</p></li>
+<li><p><strong>Heat diffusion / exponential</strong> gives intuition for smoothing signals</p></li>
+<li><p><strong>Eigen-decomposition</strong> defines graph frequency basis</p></li>
+<li><p><strong>Chebyshev / iterative approximations</strong> make diffusion scalable</p></li>
+<li><p><strong>GCNs</strong> implement low-order spectral filtering as message passing</p></li>
+<li><p><strong>Low-pass filtering</strong> promotes smooth feature propagation; high-frequency filtering can capture noise or sharp changes</p></li>
+</ul>
+<section id="node-classification-with-graph-convolutional-networks-gcns">
+<h3>Node Classification with Graph Convolutional Networks (GCNs)<a class="headerlink" href="#node-classification-with-graph-convolutional-networks-gcns" title="Link to this heading">#</a></h3>
+<p><strong>Objective</strong>: Predict a label for each node using its features and the graph structure.</p>
+</section>
+<hr class="docutils" />
+<section id="inputs-and-outputs">
+<h3>Inputs and Outputs<a class="headerlink" href="#inputs-and-outputs" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Input</strong>:</p>
+<ul>
+<li><p>Node feature matrix <span class="math notranslate nohighlight">\( \mathbf{X} \in \mathbb{R}^{N \times F} \)</span>, where:</p>
+<ul>
+<li><p><span class="math notranslate nohighlight">\(N\)</span> = number of nodes</p></li>
+<li><p><span class="math notranslate nohighlight">\(F\)</span> = number of features per node</p></li>
+</ul>
+</li>
+<li><p>Graph edge list <span class="math notranslate nohighlight">\( \mathcal{E} \)</span> (e.g., edge index in PyTorch Geometric)</p></li>
+</ul>
+</li>
+<li><p><strong>Output</strong>:</p>
+<ul>
+<li><p>Class probability matrix <span class="math notranslate nohighlight">\( \hat{\mathbf{Y}} \in \mathbb{R}^{N \times C} \)</span>, where:</p>
+<ul>
+<li><p><span class="math notranslate nohighlight">\(C\)</span> = number of classes</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="gcn-forward-pass">
+<h3>GCN Forward Pass<a class="headerlink" href="#gcn-forward-pass" title="Link to this heading">#</a></h3>
+<p>Let <span class="math notranslate nohighlight">\( f_\theta(\cdot) \)</span> be a GCN model parameterized by <span class="math notranslate nohighlight">\( \theta \)</span>. The forward pass computes:</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{\mathbf{Y}} = f_\theta(\mathbf{X}, \mathcal{E})
+\]</div>
+<p>A typical GCN with two layers:</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{\mathbf{Y}} = \text{softmax} \left( \mathbf{A}' \cdot \text{ReLU}(\mathbf{A}' \cdot \mathbf{X} \cdot \mathbf{W}^{(1)}) \cdot \mathbf{W}^{(2)} \right)
+\]</div>
+<p>Where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\( \mathbf{A}' = \tilde{\mathbf{D}}^{-1/2} \tilde{\mathbf{A}} \tilde{\mathbf{D}}^{-1/2} \)</span> is the <strong>normalized adjacency matrix with self-loops</strong></p></li>
+<li><p><span class="math notranslate nohighlight">\( \tilde{\mathbf{A}} = \mathbf{A} + \mathbf{I} \)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\( \tilde{\mathbf{D}} \)</span> is the degree matrix of <span class="math notranslate nohighlight">\( \tilde{\mathbf{A}} \)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\( \mathbf{W}^{(1)}, \mathbf{W}^{(2)} \)</span> are learnable weight matrices</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="loss-function">
+<h3>Loss Function<a class="headerlink" href="#loss-function" title="Link to this heading">#</a></h3>
+<p>The model is trained using <strong>cross-entropy loss</strong> on the labeled nodes:</p>
+<div class="math notranslate nohighlight">
+\[
+\mathcal{L} = - \frac{1}{|\mathcal{V}_L|} \sum_{i \in \mathcal{V}_L} \sum_{c=1}^C y_{ic} \log(\hat{y}_{ic})
+\]</div>
+<p>Where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\( \mathcal{V}_L \)</span> is the set of labeled nodes</p></li>
+<li><p><span class="math notranslate nohighlight">\( y_i \)</span> is the true label for node <span class="math notranslate nohighlight">\(i\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\( \hat{y}_{i, y_i} \)</span> is the predicted probability for the correct class</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">torch.nn.functional</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">F</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">torch_geometric.datasets</span><span class="w"> </span><span class="kn">import</span> <span class="n">Planetoid</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">torch_geometric.nn</span><span class="w"> </span><span class="kn">import</span> <span class="n">GCNConv</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="c1"># Load dataset</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">Planetoid</span><span class="p">(</span><span class="n">root</span><span class="o">=</span><span class="s1">&#39;data/Planetoid&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Cora&#39;</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="c1"># Define the GCN model</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">GCN</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">in_channels</span><span class="p">,</span> <span class="n">hidden_channels</span><span class="p">,</span> <span class="n">out_channels</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">conv1</span> <span class="o">=</span> <span class="n">GCNConv</span><span class="p">(</span><span class="n">in_channels</span><span class="p">,</span> <span class="n">hidden_channels</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">conv2</span> <span class="o">=</span> <span class="n">GCNConv</span><span class="p">(</span><span class="n">hidden_channels</span><span class="p">,</span> <span class="n">out_channels</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">edge_index</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">conv1</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">edge_index</span><span class="p">))</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">conv2</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">edge_index</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">x</span>
+
+<span class="c1"># Instantiate model, optimizer</span>
+<span class="n">device</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s1">&#39;cuda&#39;</span> <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span> <span class="k">else</span> <span class="s1">&#39;cpu&#39;</span><span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">GCN</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">num_node_features</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="n">dataset</span><span class="o">.</span><span class="n">num_classes</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+
+<span class="n">optimizer</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">weight_decay</span><span class="o">=</span><span class="mf">5e-4</span><span class="p">)</span>
+
+<span class="c1"># Training function</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">train</span><span class="p">():</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
+    <span class="n">optimizer</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">edge_index</span><span class="p">)</span>
+    <span class="n">loss</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">cross_entropy</span><span class="p">(</span><span class="n">out</span><span class="p">[</span><span class="n">data</span><span class="o">.</span><span class="n">train_mask</span><span class="p">],</span> <span class="n">data</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="n">data</span><span class="o">.</span><span class="n">train_mask</span><span class="p">])</span>
+    <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+    <span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+
+<span class="c1"># Evaluation function</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">test</span><span class="p">():</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">edge_index</span><span class="p">)</span>
+    <span class="n">pred</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="n">accs</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">mask</span> <span class="ow">in</span> <span class="p">[</span><span class="n">data</span><span class="o">.</span><span class="n">train_mask</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">val_mask</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">test_mask</span><span class="p">]:</span>
+        <span class="n">correct</span> <span class="o">=</span> <span class="n">pred</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="n">mask</span><span class="p">])</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+        <span class="n">acc</span> <span class="o">=</span> <span class="n">correct</span> <span class="o">/</span> <span class="n">mask</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+        <span class="n">accs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">acc</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">accs</span>  <span class="c1"># [train_acc, val_acc, test_acc]</span>
+
+<span class="c1"># === Training Loop ===</span>
+<span class="n">train_losses</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">val_accuracies</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">best_val_acc</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">best_test_acc</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">201</span><span class="p">):</span>
+    <span class="n">loss</span> <span class="o">=</span> <span class="n">train</span><span class="p">()</span>
+    <span class="n">train_acc</span><span class="p">,</span> <span class="n">val_acc</span><span class="p">,</span> <span class="n">test_acc</span> <span class="o">=</span> <span class="n">test</span><span class="p">()</span>
+    <span class="n">train_losses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">loss</span><span class="p">)</span>
+    <span class="n">val_accuracies</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">val_acc</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">val_acc</span> <span class="o">&gt;</span> <span class="n">best_val_acc</span><span class="p">:</span>
+        <span class="n">best_val_acc</span> <span class="o">=</span> <span class="n">val_acc</span>
+        <span class="n">best_test_acc</span> <span class="o">=</span> <span class="n">test_acc</span>  <span class="c1"># Save test acc at best val</span>
+
+    <span class="k">if</span> <span class="n">epoch</span> <span class="o">%</span> <span class="mi">20</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">epoch</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Epoch </span><span class="si">{</span><span class="n">epoch</span><span class="si">:</span><span class="s2">03d</span><span class="si">}</span><span class="s2">, Loss: </span><span class="si">{</span><span class="n">loss</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">, &quot;</span>
+              <span class="sa">f</span><span class="s2">&quot;Train Acc: </span><span class="si">{</span><span class="n">train_acc</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">, Val Acc: </span><span class="si">{</span><span class="n">val_acc</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">, Test Acc: </span><span class="si">{</span><span class="n">test_acc</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Final Results</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">✅ Best Validation Accuracy: </span><span class="si">{:.4f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">best_val_acc</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;🧪 Test Accuracy at Best Validation: </span><span class="si">{:.4f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">best_test_acc</span><span class="p">))</span>
+
+<span class="c1"># Plot training loss</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">train_losses</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Epoch&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Training Loss&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Training Loss over Epochs&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 001, Loss: 1.9330, Train Acc: 0.9286, Val Acc: 0.6380, Test Acc: 0.6650
+Epoch 020, Loss: 0.0060, Train Acc: 1.0000, Val Acc: 0.7680, Test Acc: 0.7870
+Epoch 040, Loss: 0.0051, Train Acc: 1.0000, Val Acc: 0.7820, Test Acc: 0.7940
+Epoch 060, Loss: 0.0122, Train Acc: 1.0000, Val Acc: 0.7840, Test Acc: 0.8110
+Epoch 080, Loss: 0.0106, Train Acc: 1.0000, Val Acc: 0.7800, Test Acc: 0.8080
+Epoch 100, Loss: 0.0098, Train Acc: 1.0000, Val Acc: 0.7820, Test Acc: 0.8150
+Epoch 120, Loss: 0.0090, Train Acc: 1.0000, Val Acc: 0.7780, Test Acc: 0.8130
+Epoch 140, Loss: 0.0084, Train Acc: 1.0000, Val Acc: 0.7780, Test Acc: 0.8130
+Epoch 160, Loss: 0.0080, Train Acc: 1.0000, Val Acc: 0.7780, Test Acc: 0.8110
+Epoch 180, Loss: 0.0077, Train Acc: 1.0000, Val Acc: 0.7780, Test Acc: 0.8040
+Epoch 200, Loss: 0.0074, Train Acc: 1.0000, Val Acc: 0.7760, Test Acc: 0.8040
+
+✅ Best Validation Accuracy: 0.7880
+🧪 Test Accuracy at Best Validation: 0.8080
+</pre></div>
+</div>
+<img alt="../../_images/9cf75418a491b2c21dc9f55f04fe57bbd220f69739d87ffeeb05e3ab9417c68e.png" src="../../_images/9cf75418a491b2c21dc9f55f04fe57bbd220f69739d87ffeeb05e3ab9417c68e.png" />
+</div>
+</div>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Task</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Output</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Link Prediction</strong></p></td>
+<td><p>Predict whether an edge exists between two nodes</p></td>
+<td><p>Binary classification</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Edge Classification</strong></p></td>
+<td><p>Predict a label for an edge</p></td>
+<td><p>Multi-class (or binary)</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Node Regression</strong></p></td>
+<td><p>Predict a continuous value per node</p></td>
+<td><p>Real-valued scalar</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Graph Regression</strong></p></td>
+<td><p>Predict a continuous value per graph</p></td>
+<td><p>Real-valued scalar</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<section id="oversmoothing-why-deep-gnns-fail">
+<h2>Oversmoothing: Why Deep GNNs Fail<a class="headerlink" href="#oversmoothing-why-deep-gnns-fail" title="Link to this heading">#</a></h2>
+<p>In GNNs, we often want to increase the number of layers to capture more complex patterns and improve learning capacity. However, <strong>adding too many layers is not always beneficial</strong>. Beyond a certain depth, node representations start to collapse, different nodes become nearly identical, and the model loses its ability to separate classes. This phenomenon is known as <strong>oversmoothing</strong>.</p>
+<section id="what-is-oversmoothing">
+<h3>What Is Oversmoothing?<a class="headerlink" href="#what-is-oversmoothing" title="Link to this heading">#</a></h3>
+<p>Oversmoothing refers to the situation where <strong>repeated message passing causes node embeddings to converge to the same vector</strong>, even for nodes that are far apart or belong to different classes.</p>
+<p>Formally, for a GNN layer:</p>
+<div class="math notranslate nohighlight">
+\[
+H^{(l+1)} = \hat{P} H^{(l)}, 
+\quad \text{with} \quad 
+\hat{P} = \hat{D}^{-1/2} \hat{A} \hat{D}^{-1/2},
+\]</div>
+<p>we have:</p>
+<div class="math notranslate nohighlight">
+\[
+\lim_{l \to \infty} H^{(l)} = c \mathbf{1},
+\]</div>
+<p>where all rows of <span class="math notranslate nohighlight">\(H^{(l)}\)</span> become equal.<br />
+The graph structure essentially vanishes; all nodes look the same.</p>
+<hr>
+</section>
+<section id="oversmoothing-as-repeated-laplacian-smoothing">
+<h3>Oversmoothing as Repeated Laplacian Smoothing<a class="headerlink" href="#oversmoothing-as-repeated-laplacian-smoothing" title="Link to this heading">#</a></h3>
+<p>We have:</p>
+<div class="math notranslate nohighlight">
+\[
+L_{\text{norm}} = I - \hat{D}^{-1/2} \hat{A} \hat{D}^{-1/2}.
+\]</div>
+<p>Therefore, a GCN layer is equivalent to <strong>Laplacian smoothing</strong>:</p>
+<div class="math notranslate nohighlight">
+\[
+H^{(l+1)} \approx (I - L_{\text{norm}}) H^{(l)}.
+\]</div>
+<p>Applying this multiple times:</p>
+<div class="math notranslate nohighlight">
+\[
+H^{(l)} \approx (I - L_{\text{norm}})^l H^{(0)}.
+\]</div>
+<p>As <span class="math notranslate nohighlight">\(l\)</span> increases:</p>
+<ul class="simple">
+<li><p>High-frequency components decay rapidly.</p></li>
+<li><p>Only the lowest eigenvector survives.</p></li>
+<li><p>Node features lose variation and converge.</p></li>
+</ul>
+<p>This is similar to <strong>low-pass filtering applied repeatedly</strong>: eventually, everything becomes flat.</p>
+<hr>
+</section>
+<section id="spectral-analysis-what-happens-to-frequencies">
+<h3>Spectral Analysis: What Happens to Frequencies?<a class="headerlink" href="#spectral-analysis-what-happens-to-frequencies" title="Link to this heading">#</a></h3>
+<p>Let the propagation matrix be:</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{P} = \hat{D}^{-1/2}\hat{A}\hat{D}^{-1/2}.
+\]</div>
+<p>Eigen-decomposition:</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{P} = U \Lambda U^\top,
+\]</div>
+<p>with eigenvalues:</p>
+<div class="math notranslate nohighlight">
+\[
+1 = \lambda_1 &gt; \lambda_2 \ge \cdots \ge \lambda_n \ge -1.
+\]</div>
+<p>After <span class="math notranslate nohighlight">\(l\)</span> layers:</p>
+<div class="math notranslate nohighlight">
+\[
+H^{(l)} = \hat{P}^l H^{(0)} = U \Lambda^l U^\top H^{(0)}.
+\]</div>
+<p>As <span class="math notranslate nohighlight">\(l\)</span> grows:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\lambda_1^l = 1\)</span> remains,</p></li>
+<li><p>all other <span class="math notranslate nohighlight">\(\lambda_i^l \to 0\)</span>.</p></li>
+</ul>
+<p>Thus:</p>
+<div class="math notranslate nohighlight">
+\[
+H^{(l)} \to u_1 u_1^\top H^{(0)},
+\]</div>
+<p>a <strong>rank-1</strong> representation.<br />
+All nodes collapse along the first eigenvector of <span class="math notranslate nohighlight">\(\hat{P}\)</span> — the smoothest signal.<br />
+This is the <strong>spectral signature of oversmoothing</strong>.</p>
+<hr>
+</section>
+<section id="connection-to-heat-diffusion">
+<h3>Connection to Heat Diffusion<a class="headerlink" href="#connection-to-heat-diffusion" title="Link to this heading">#</a></h3>
+<p>Recall heat diffusion:</p>
+<div class="math notranslate nohighlight">
+\[
+x(t) = e^{-tL} x(0).
+\]</div>
+<p>For large <span class="math notranslate nohighlight">\(t\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+e^{-tL} \to \mathbf{1} \pi^\top,
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\pi\)</span> is the stationary distribution.</p>
+<p>Interpretation:</p>
+<ul class="simple">
+<li><p>Small <span class="math notranslate nohighlight">\(t\)</span>: local smoothing.</p></li>
+<li><p>Large <span class="math notranslate nohighlight">\(t\)</span>: all nodes reach the same value.</p></li>
+</ul>
+<p>Deep GNNs behave like <strong>heat diffusion with large <span class="math notranslate nohighlight">\(t\)</span></strong>, erasing information.</p>
+<hr>
+</section>
+<section id="simple-numerical-illustration">
+<h3>Simple Numerical Illustration<a class="headerlink" href="#simple-numerical-illustration" title="Link to this heading">#</a></h3>
+<p>Consider a 3-node chain:</p>
+<div class="math notranslate nohighlight">
+\[
+1 - 2 - 3
+\]</div>
+<p>Initial signal:</p>
+<div class="math notranslate nohighlight">
+\[
+x^{(0)} = [1, 0, -1].
+\]</div>
+<p>After 1 smoothing step:</p>
+<div class="math notranslate nohighlight">
+\[
+x^{(1)} \approx [0.66, 0, -0.66]
+\]</div>
+<p>After 5 steps:</p>
+<div class="math notranslate nohighlight">
+\[
+x^{(5)} \approx [0.08, 0, -0.08]
+\]</div>
+<p>After 20 steps:</p>
+<div class="math notranslate nohighlight">
+\[
+x^{(20)} \approx [0, 0, 0]
+\]</div>
+<p>All variation disappears.</p>
+<hr>
+</section>
+<section id="why-oversmoothing-harms-learning">
+<h3>Why Oversmoothing Harms Learning<a class="headerlink" href="#why-oversmoothing-harms-learning" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Class boundaries vanish.</p></li>
+<li><p>Node clustering becomes impossible.</p></li>
+<li><p>Deeper layers do not add new information.</p></li>
+<li><p>Gradients may vanish.</p></li>
+</ul>
+<p>The model becomes almost constant and loses expressive power.</p>
+<hr>
+</section>
+<section id="practical-advice">
+<h3>Practical Advice<a class="headerlink" href="#practical-advice" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Few layers are usually sufficient</strong>: typically 2–4 layers in standard GCNs.</p></li>
+<li><p>To go deeper, consider methods like <strong>residual connections, DropEdge, GCNII, APPNP, or Graph Transformers</strong> to mitigate oversmoothing.</p></li>
+</ul>
+<hr>
+</section>
+<section id="id1">
+<h3>Summary<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Oversmoothing: collapse of node embeddings into nearly identical vectors.</p></li>
+<li><p>Arises from repeated application of normalized adjacency matrices.</p></li>
+<li><p>Spectral view: all but the smallest eigenvalue vanish.</p></li>
+<li><p>Analogy: heat diffusion with large time <span class="math notranslate nohighlight">\(t\)</span>.</p></li>
+<li><p>Sets a fundamental limit on how deep standard GCNs can be.</p></li>
+</ul>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "mlgbook"
+        },
+        kernelOptions: {
+            name: "mlgbook",
+            path: "./content\Chapter05"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'mlgbook'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="01_Graph_Neural_Networks.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">From Graph Structure to Graph Neural Networks</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="03_Spatial_Graph_Neural_Networks.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Message Passing Neural Networks (MPNN)</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chebyshev-polynomial-filters">Chebyshev Polynomial Filters</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gcn-as-first-order-approximation">GCN as First-Order Approximation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#node-classification-with-graph-convolutional-networks-gcns">Node Classification with Graph Convolutional Networks (GCNs)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inputs-and-outputs">Inputs and Outputs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gcn-forward-pass">GCN Forward Pass</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#loss-function">Loss Function</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#oversmoothing-why-deep-gnns-fail">Oversmoothing: Why Deep GNNs Fail</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-oversmoothing">What Is Oversmoothing?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#oversmoothing-as-repeated-laplacian-smoothing">Oversmoothing as Repeated Laplacian Smoothing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#spectral-analysis-what-happens-to-frequencies">Spectral Analysis: What Happens to Frequencies?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#connection-to-heat-diffusion">Connection to Heat Diffusion</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-numerical-illustration">Simple Numerical Illustration</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-oversmoothing-harms-learning">Why Oversmoothing Harms Learning</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-advice">Practical Advice</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Summary</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Soheila Ashkezari-T.
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

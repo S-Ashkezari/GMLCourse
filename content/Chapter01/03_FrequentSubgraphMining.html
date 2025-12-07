@@ -60,10 +60,10 @@
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'content/Chapter01/03_FrequentSubgraphMining';</script>
-    <link rel="canonical" href="/GMLCourse/content/Chapter01/03_FrequentSubgraphMining.html" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Complex Networks and Generative Models" href="04_Complex%20Networks%20and%20Generative%20Models.html" />
+    <link rel="next" title="Complex Networks and Generative Models" href="04_ComplexNetworks_and_GenerativeModels.html" />
     <link rel="prev" title="Community Detection in Graphs" href="02_community_detection.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -103,8 +103,8 @@
          class="form-control"
          name="q"
          id="search-input"
-         placeholder="Search this book..."
-         aria-label="Search this book..."
+         placeholder="Search..."
+         aria-label="Search..."
          autocomplete="off"
          autocorrect="off"
          autocapitalize="off"
@@ -174,24 +174,20 @@
  </script></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
-        
-        <ul class="nav bd-sidenav bd-sidenav__home-link">
-            <li class="toctree-l1">
-                <a class="reference internal" href="../../intro.html">
-                    Welcome to Graph Machine Learning
-                </a>
-            </li>
-        </ul>
-        <ul class="current nav bd-sidenav">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Graph Machine Learning</span></p>
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="01_Graph_metrics.html"><strong>First Part: Graph Mining - Concepts and properties</strong></a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="02_community_detection.html">Community Detection in Graphs</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Frequent Subgraph Mining</a></li>
-<li class="toctree-l2"><a class="reference internal" href="04_Complex%20Networks%20and%20Generative%20Models.html">Complex Networks and Generative Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04_ComplexNetworks_and_GenerativeModels.html">Complex Networks and Generative Models</a></li>
 
 
 <li class="toctree-l2"><a class="reference internal" href="05_DynamicGraphsandNetworkEvolutionAnalysis.html">Dynamic Graphs and Network Evolution Analysis</a></li>
 </ul>
 </details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Unsupervised GML</span></p>
+<ul class="nav bd-sidenav">
 <li class="toctree-l1 has-children"><a class="reference internal" href="../Chapter02/01_intro_and_basics.html">Introduction to Graph Machine Learning</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter02/02_gnn_primer.html">Neural Network Essentials for Understanding GNNs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter02/03_embedding_examples.html">Graph Representation Learning</a></li>
@@ -203,14 +199,25 @@
 
 <li class="toctree-l2"><a class="reference internal" href="../Chapter03/02_Autoencoders.html">AutoEncoder</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter03/03_ConstrativeLearning.html">Contrastive Learning</a></li>
-
-<li class="toctree-l2"><a class="reference internal" href="../Chapter03/04_Graph%20Data%20Augmentation%20and%20Sampling%20Techniques.html">Graph Mining Presentation</a></li>
-
+<li class="toctree-l2"><a class="reference internal" href="../Chapter03/04_Graph_DataAugmentation_and_SamplingTechniques.html">Graph Mining Presentation</a></li>
 
 
 </ul>
 </details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Supervised GML</span></p>
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../Chapter04/01_Feature_based_methods.html">Supervised Learning on Graphs</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../Chapter04/02_Shallow_embeddings.html">Shallow Embedding Methods</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Graph Neural Networks</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Chapter05/01_Graph_Neural_Networks.html">From Graph Structure to Graph Neural Networks</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../Chapter05/02_Spectral_Graph_Convolution_in_GNNs.html">Spectral Graph Convolution in GNNs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Chapter05/03_Spatial_Graph_Neural_Networks.html">Message Passing Neural Networks (MPNN)</a></li>
+
 
 </ul>
 
@@ -253,84 +260,6 @@
         <div class="header-article-item">
 
 <div class="article-header-buttons">
-
-
-
-
-
-<div class="dropdown dropdown-launch-buttons">
-  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
-    <i class="fas fa-rocket"></i>
-  </button>
-  <ul class="dropdown-menu">
-      
-      
-      
-      <li><a href="https://colab.research.google.com/github/executablebooks/jupyter-book/blob/master/docs/content/Chapter01/03_FrequentSubgraphMining.ipynb" target="_blank"
-   class="btn btn-sm dropdown-item"
-   title="Launch on Colab"
-   data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  
-    <img alt="Colab logo" src="../../_static/images/logo_colab.png">
-  </span>
-<span class="btn__text-container">Colab</span>
-</a>
-</li>
-      
-  </ul>
-</div>
-
-
-
-
-
-
-<div class="dropdown dropdown-source-buttons">
-  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
-    <i class="fab fa-github"></i>
-  </button>
-  <ul class="dropdown-menu">
-      
-      
-      
-      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
-   class="btn btn-sm btn-source-repository-button dropdown-item"
-   title="Source repository"
-   data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  <i class="fab fa-github"></i>
-  </span>
-<span class="btn__text-container">Repository</span>
-</a>
-</li>
-      
-      
-      
-      
-      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fcontent/Chapter01/03_FrequentSubgraphMining.html&body=Your%20issue%20content%20here." target="_blank"
-   class="btn btn-sm btn-source-issues-button dropdown-item"
-   title="Open an issue"
-   data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  <i class="fas fa-lightbulb"></i>
-  </span>
-<span class="btn__text-container">Open issue</span>
-</a>
-</li>
-      
-  </ul>
-</div>
-
 
 
 
@@ -438,7 +367,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1"></a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1"></a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-definition">1. Problem Definition</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#settings-for-mining">2. Settings for Mining</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-gspan-algorithm">3. The gSpan Algorithm</a></li>
@@ -446,47 +375,47 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#applications">5. Applications</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-definition-frequent-subgraph-mining">1. Problem Definition: Frequent Subgraph Mining</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-definition-frequent-subgraph-mining">1. Problem Definition: Frequent Subgraph Mining</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-a-subgraph">🔹 What is a Subgraph?</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#frequent-subgraph">🔹 Frequent Subgraph</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#support-measure">🔹 Support Measure</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transactional-setting-graph-database">🧩 Transactional Setting (Graph Database)</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#single-graph-setting">🌐 Single-Graph Setting</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#support-measure">🔹 Support Measure</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transactional-setting-graph-database">Transactional Setting (Graph Database)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#single-graph-setting">Single-Graph Setting</a></li>
 </ul>
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#comparison-between-settings">🔹 Comparison Between Settings</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example">🔹 Example</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#notes">🔹 Notes</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#application-areas">🔹 Application Areas</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#settings-for-frequent-subgraph-mining-fsm">✅ 2. Settings for Frequent Subgraph Mining (FSM)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-graph-data-settings">🔹 A. Graph Data Settings</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#settings-for-frequent-subgraph-mining-fsm">2. Settings for Frequent Subgraph Mining (FSM)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-graph-data-settings">🔹 A. Graph Data Settings</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#graph-database-setting-transactional-setting">1. <strong>Graph Database Setting (Transactional Setting)</strong></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#single-large-graph-setting">2. <strong>Single Large Graph Setting</strong></a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-label-information-settings">🔹 B. Label Information Settings</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-label-information-settings">🔹 B. Label Information Settings</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#labeled-graphs">1. <strong>Labeled Graphs</strong></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#unlabeled-graphs">2. <strong>Unlabeled Graphs</strong></a></li>
 </ul>
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-table">🔹 Summary Table</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-notes">🔹 Practical Notes</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">✅ 3. The gSpan Algorithm</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#dfs-code-tree">🔷 3.1 DFS Code Tree</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#lexicographical-order-canonical-form">🔷 3.2 Lexicographical Order &amp; Canonical Form</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pattern-growth-strategy">🔷 3.3 Pattern Growth Strategy</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#gspan-pseudocode">🔷 3.4 gSpan Pseudocode</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">🔷 3.5 Summary</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">3. The gSpan Algorithm</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#dfs-code-tree">3.1 DFS Code Tree</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#lexicographical-order-canonical-form">3.2 Lexicographical Order &amp; Canonical Form</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pattern-growth-strategy">3.3 Pattern Growth Strategy</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#gspan-pseudocode">3.4 gSpan Pseudocode</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">3.5 Summary</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#challenges-in-frequent-subgraph-mining">4. Challenges in Frequent Subgraph Mining</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#graph-isomorphism-np-complete">🧩 1. Graph Isomorphism (NP-Complete)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#search-space-explosion">🚀 2. Search Space Explosion</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#efficient-pruning-strategies">✂️ 3. Efficient Pruning Strategies</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scalability-on-large-real-world-data">🌐 4. Scalability on Large Real-World Data</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">✅ Summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#challenges-in-frequent-subgraph-mining">4. Challenges in Frequent Subgraph Mining</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#graph-isomorphism-np-complete">1. Graph Isomorphism (NP-Complete)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#search-space-explosion">2. Search Space Explosion</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#efficient-pruning-strategies">3. Efficient Pruning Strategies</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scalability-on-large-real-world-data">4. Scalability on Large Real-World Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Summary</a></li>
 </ul>
 </li>
 </ul>
@@ -585,7 +514,7 @@ A <strong>subgraph</strong> <span class="math notranslate nohighlight">\( G' = (
 <section id="support-measure">
 <h3>🔹 Support Measure<a class="headerlink" href="#support-measure" title="Link to this heading">#</a></h3>
 <section id="transactional-setting-graph-database">
-<h4>🧩 Transactional Setting (Graph Database)<a class="headerlink" href="#transactional-setting-graph-database" title="Link to this heading">#</a></h4>
+<h4>Transactional Setting (Graph Database)<a class="headerlink" href="#transactional-setting-graph-database" title="Link to this heading">#</a></h4>
 <p>In this setting, the dataset contains <strong>multiple independent graphs</strong>:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -600,7 +529,7 @@ The <strong>support</strong> of a subgraph <span class="math notranslate nohighl
 <p>That is, the <strong>number of graphs</strong> in which subgraph <span class="math notranslate nohighlight">\( S \)</span> appears (as an isomorphic subgraph).</p>
 </section>
 <section id="single-graph-setting">
-<h4>🌐 Single-Graph Setting<a class="headerlink" href="#single-graph-setting" title="Link to this heading">#</a></h4>
+<h4>Single-Graph Setting<a class="headerlink" href="#single-graph-setting" title="Link to this heading">#</a></h4>
 <p>In this setting, we have <strong>one large graph</strong> (such as a web graph, a social network, or a transportation network).<br />
 The <strong>support</strong> of a subgraph <span class="math notranslate nohighlight">\( S \)</span> is the <strong>number of distinct embeddings</strong> of <span class="math notranslate nohighlight">\( S \)</span> within the large graph <span class="math notranslate nohighlight">\( G \)</span>:</p>
 <div class="math notranslate nohighlight">
@@ -681,7 +610,7 @@ Then:</p>
 </section>
 <hr class="docutils" />
 <section id="settings-for-frequent-subgraph-mining-fsm">
-<h3>✅ 2. Settings for Frequent Subgraph Mining (FSM)<a class="headerlink" href="#settings-for-frequent-subgraph-mining-fsm" title="Link to this heading">#</a></h3>
+<h3>2. Settings for Frequent Subgraph Mining (FSM)<a class="headerlink" href="#settings-for-frequent-subgraph-mining-fsm" title="Link to this heading">#</a></h3>
 <p>Frequent Subgraph Mining (FSM) can be performed under different <strong>settings</strong>, determined by:</p>
 <ol class="arabic simple">
 <li><p>The <strong>structure</strong> of input data (single large graph vs. multiple graphs)</p></li>
@@ -741,9 +670,7 @@ $<span class="math notranslate nohighlight">\(
 $<span class="math notranslate nohighlight">\(
 l(u) = l(f(u)), \quad l(v) = l(f(v)), \quad l(u,v) = l(f(u),f(v))
 \)</span>$</p>
-<p align="center">
-  <img src="figures/isomorph.png" alt="isomorphicGraphs" width=40%>
-</p>
+<p><img alt="" src="../../_images/isomorph.png" /></p>
 </section>
 <section id="unlabeled-graphs">
 <h4>2. <strong>Unlabeled Graphs</strong><a class="headerlink" href="#unlabeled-graphs" title="Link to this heading">#</a></h4>
@@ -802,8 +729,8 @@ l(u) = l(f(u)), \quad l(v) = l(f(v)), \quad l(u,v) = l(f(u),f(v))
 </section>
 <hr class="docutils" />
 <section id="id2">
-<h3>✅ 3. The gSpan Algorithm<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
-<p>main paper: <a class="reference external" href="https://sites.cs.ucsb.edu/~xyan/papers/gSpan-short.pdf">https://sites.cs.ucsb.edu/~xyan/papers/gSpan-short.pdf</a></p>
+<h3>3. The gSpan Algorithm<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<p>main paper: https://sites.cs.ucsb.edu/~xyan/papers/gSpan-short.pdf</p>
 <p>Frequent Subgraph Mining is computationally intensive due to subgraph isomorphism checks. The <strong>gSpan</strong> algorithm (Graph-based Substructure Pattern Mining) addresses this by:</p>
 <ul class="simple">
 <li><p>Avoiding explicit isomorphism testing.</p></li>
@@ -813,7 +740,7 @@ l(u) = l(f(u)), \quad l(v) = l(f(v)), \quad l(u,v) = l(f(u),f(v))
 </ul>
 <hr class="docutils" />
 <section id="dfs-code-tree">
-<h4>🔷 3.1 DFS Code Tree<a class="headerlink" href="#dfs-code-tree" title="Link to this heading">#</a></h4>
+<h4>3.1 DFS Code Tree<a class="headerlink" href="#dfs-code-tree" title="Link to this heading">#</a></h4>
 <p>gSpan encodes each subgraph using a <strong>Depth-First Search (DFS) code</strong>, a tuple-based linear representation of the subgraph.</p>
 <p>Each edge in the DFS code is represented as a 5-tuple:
 $<span class="math notranslate nohighlight">\((i, j, l(i), l(i, j), l(j))\)</span>$</p>
@@ -833,7 +760,7 @@ $<span class="math notranslate nohighlight">\((i, j, l(i), l(i, j), l(j))\)</spa
 </div>
 </section>
 <section id="lexicographical-order-canonical-form">
-<h4>🔷 3.2 Lexicographical Order &amp; Canonical Form<a class="headerlink" href="#lexicographical-order-canonical-form" title="Link to this heading">#</a></h4>
+<h4>3.2 Lexicographical Order &amp; Canonical Form<a class="headerlink" href="#lexicographical-order-canonical-form" title="Link to this heading">#</a></h4>
 <p>For example, in our graph we have alternative DFS codes (depending on starting vertex):</p>
 <blockquote>
 <div><p>(0, 1, B, b, C), (0, 2, B, a, A)</p>
@@ -862,14 +789,14 @@ $<span class="math notranslate nohighlight">\((i, j, l(i), l(i, j), l(j))\)</spa
 </div></blockquote>
 </section>
 <section id="pattern-growth-strategy">
-<h4>🔷 3.3 Pattern Growth Strategy<a class="headerlink" href="#pattern-growth-strategy" title="Link to this heading">#</a></h4>
+<h4>3.3 Pattern Growth Strategy<a class="headerlink" href="#pattern-growth-strategy" title="Link to this heading">#</a></h4>
 <p>The gSpan algorithm grows patterns by appending edges to the current DFS code:</p>
 <p>Forward extension: Add a new vertex and edge.</p>
 <p>Backward extension: Close a cycle by connecting to a previously visited vertex.</p>
 <p>This is done recursively, pruning search paths when the support of the pattern drops below the threshold.</p>
 </section>
 <section id="gspan-pseudocode">
-<h4>🔷 3.4 gSpan Pseudocode<a class="headerlink" href="#gspan-pseudocode" title="Link to this heading">#</a></h4>
+<h4>3.4 gSpan Pseudocode<a class="headerlink" href="#gspan-pseudocode" title="Link to this heading">#</a></h4>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">gSpan</span><span class="p">(</span><span class="n">current_dfs_code</span><span class="p">,</span> <span class="n">database</span><span class="p">,</span> <span class="n">min_support</span><span class="p">):</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">is_canonical</span><span class="p">(</span><span class="n">current_dfs_code</span><span class="p">):</span>
         <span class="k">return</span>
@@ -892,7 +819,11 @@ $<span class="math notranslate nohighlight">\((i, j, l(i), l(i, j), l(j))\)</spa
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: gspan_mining in c:\users\sashk\anaconda3\envs\mlgbook\lib\site-packages (0.2.3)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting gspan_mining
+  Downloading gspan_mining-0.2.3-py3-none-any.whl.metadata (4.2 kB)
+Downloading gspan_mining-0.2.3-py3-none-any.whl (10 kB)
+Installing collected packages: gspan_mining
+Successfully installed gspan_mining-0.2.3
 Note: you may need to restart the kernel to use updated packages.
 </pre></div>
 </div>
@@ -953,6 +884,14 @@ Support: 1
 1        2                v 0 A v 1 B e 0 1 a          2
 2        1  v 0 A v 1 B v 2 C e 0 1 a e 1 2 b          3
 3        1                v 0 B v 1 C e 0 1 b          2
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c:\Users\sashk\anaconda3\envs\mlgBookPro\lib\site-packages\gspan_mining\gspan.py:336: FutureWarning: The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
+  self._report_df = self._report_df.append(
+c:\Users\sashk\anaconda3\envs\mlgBookPro\lib\site-packages\gspan_mining\gspan.py:336: FutureWarning: The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
+  self._report_df = self._report_df.append(
+c:\Users\sashk\anaconda3\envs\mlgBookPro\lib\site-packages\gspan_mining\gspan.py:336: FutureWarning: The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
+  self._report_df = self._report_df.append(
 </pre></div>
 </div>
 </div>
@@ -1044,11 +983,11 @@ Support: 1
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Pattern 1:
-    (0, 1, &#39;A&#39;, &#39;a&#39;, &#39;B&#39;)
     (1, 2, &#39;B&#39;, &#39;b&#39;, &#39;C&#39;)
 Pattern 2:
     (0, 1, &#39;A&#39;, &#39;a&#39;, &#39;B&#39;)
 Pattern 3:
+    (0, 1, &#39;A&#39;, &#39;a&#39;, &#39;B&#39;)
     (1, 2, &#39;B&#39;, &#39;b&#39;, &#39;C&#39;)
 </pre></div>
 </div>
@@ -1056,7 +995,7 @@ Pattern 3:
 </div>
 </section>
 <section id="summary">
-<h4>🔷 3.5 Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h4>
+<h4>3.5 Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h4>
 <p>gSpan avoids subgraph isomorphism by working in the DFS code space.</p>
 <p>Canonical DFS code ensures each pattern is processed only once.</p>
 <p>Pattern-growth strategy supports efficient traversal of the subgraph search space.</p>
@@ -1068,7 +1007,7 @@ Pattern 3:
 <p>Frequent subgraph mining (FSM) is a powerful yet computationally intensive task. Despite its wide applicability in areas like chemoinformatics, social network analysis, and bioinformatics, FSM faces several fundamental challenges:</p>
 <hr class="docutils" />
 <section id="graph-isomorphism-np-complete">
-<h3>🧩 1. Graph Isomorphism (NP-Complete)<a class="headerlink" href="#graph-isomorphism-np-complete" title="Link to this heading">#</a></h3>
+<h3>1. Graph Isomorphism (NP-Complete)<a class="headerlink" href="#graph-isomorphism-np-complete" title="Link to this heading">#</a></h3>
 <p>A key step in FSM is checking whether a candidate subgraph appears in a graph from the dataset — this is known as the <strong>subgraph isomorphism</strong> problem.</p>
 <p>Given two graphs <span class="math notranslate nohighlight">\( g \)</span> and <span class="math notranslate nohighlight">\( G_i \)</span>, we want to check:
 $<span class="math notranslate nohighlight">\(
@@ -1084,11 +1023,11 @@ such that:</p>
 <li><p><span class="math notranslate nohighlight">\(\forall (u,v) \in E_g\)</span>, <span class="math notranslate nohighlight">\( (f(u), f(v)) \in E \)</span></p></li>
 <li><p>node and edge labels are preserved (if labeled)</p></li>
 </ul>
-<p>🧠 The subgraph isomorphism problem is <strong>NP-complete</strong>, meaning it is computationally expensive and no known polynomial-time algorithm exists for all general cases.</p>
+<p>The subgraph isomorphism problem is <strong>NP-complete</strong>, meaning it is computationally expensive and no known polynomial-time algorithm exists for all general cases.</p>
 </section>
 <hr class="docutils" />
 <section id="search-space-explosion">
-<h3>🚀 2. Search Space Explosion<a class="headerlink" href="#search-space-explosion" title="Link to this heading">#</a></h3>
+<h3>2. Search Space Explosion<a class="headerlink" href="#search-space-explosion" title="Link to this heading">#</a></h3>
 <p>The number of possible subgraphs in a graph grows <strong>exponentially</strong> with the number of vertices and edges.</p>
 <p>Let:</p>
 <ul class="simple">
@@ -1103,7 +1042,7 @@ $<span class="math notranslate nohighlight">\(
 </section>
 <hr class="docutils" />
 <section id="efficient-pruning-strategies">
-<h3>✂️ 3. Efficient Pruning Strategies<a class="headerlink" href="#efficient-pruning-strategies" title="Link to this heading">#</a></h3>
+<h3>3. Efficient Pruning Strategies<a class="headerlink" href="#efficient-pruning-strategies" title="Link to this heading">#</a></h3>
 <p>To manage the large search space, <strong>pruning strategies</strong> are necessary. FSM algorithms (like gSpan) use constraints such as:</p>
 <ul class="simple">
 <li><p><strong>Minimum support threshold</strong>:
@@ -1118,7 +1057,7 @@ where \)</span> \sigma $ is the user-defined support threshold.</p></li>
 </section>
 <hr class="docutils" />
 <section id="scalability-on-large-real-world-data">
-<h3>🌐 4. Scalability on Large Real-World Data<a class="headerlink" href="#scalability-on-large-real-world-data" title="Link to this heading">#</a></h3>
+<h3>4. Scalability on Large Real-World Data<a class="headerlink" href="#scalability-on-large-real-world-data" title="Link to this heading">#</a></h3>
 <p>In real-world applications, graph datasets can be:</p>
 <ul class="simple">
 <li><p>Huge (e.g., molecular databases, social networks)</p></li>
@@ -1140,7 +1079,7 @@ where \)</span> \sigma $ is the user-defined support threshold.</p></li>
 </section>
 <hr class="docutils" />
 <section id="id3">
-<h3>✅ Summary<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<h3>Summary<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Challenge</p></th>
@@ -1168,7 +1107,6 @@ where \)</span> \sigma $ is the user-defined support threshold.</p></li>
 </tbody>
 </table>
 </div>
-<hr class="docutils" />
 </section>
 </section>
 </section>
@@ -1213,7 +1151,7 @@ where \)</span> \sigma $ is the user-defined support threshold.</p></li>
       </div>
     </a>
     <a class="right-next"
-       href="04_Complex%20Networks%20and%20Generative%20Models.html"
+       href="04_ComplexNetworks_and_GenerativeModels.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
@@ -1237,7 +1175,7 @@ where \)</span> \sigma $ is the user-defined support threshold.</p></li>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1"></a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1"></a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-definition">1. Problem Definition</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#settings-for-mining">2. Settings for Mining</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-gspan-algorithm">3. The gSpan Algorithm</a></li>
@@ -1245,47 +1183,47 @@ where \)</span> \sigma $ is the user-defined support threshold.</p></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#applications">5. Applications</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-definition-frequent-subgraph-mining">1. Problem Definition: Frequent Subgraph Mining</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-definition-frequent-subgraph-mining">1. Problem Definition: Frequent Subgraph Mining</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-a-subgraph">🔹 What is a Subgraph?</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#frequent-subgraph">🔹 Frequent Subgraph</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#support-measure">🔹 Support Measure</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transactional-setting-graph-database">🧩 Transactional Setting (Graph Database)</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#single-graph-setting">🌐 Single-Graph Setting</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#support-measure">🔹 Support Measure</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transactional-setting-graph-database">Transactional Setting (Graph Database)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#single-graph-setting">Single-Graph Setting</a></li>
 </ul>
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#comparison-between-settings">🔹 Comparison Between Settings</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example">🔹 Example</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#notes">🔹 Notes</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#application-areas">🔹 Application Areas</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#settings-for-frequent-subgraph-mining-fsm">✅ 2. Settings for Frequent Subgraph Mining (FSM)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-graph-data-settings">🔹 A. Graph Data Settings</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#settings-for-frequent-subgraph-mining-fsm">2. Settings for Frequent Subgraph Mining (FSM)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-graph-data-settings">🔹 A. Graph Data Settings</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#graph-database-setting-transactional-setting">1. <strong>Graph Database Setting (Transactional Setting)</strong></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#single-large-graph-setting">2. <strong>Single Large Graph Setting</strong></a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-label-information-settings">🔹 B. Label Information Settings</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-label-information-settings">🔹 B. Label Information Settings</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#labeled-graphs">1. <strong>Labeled Graphs</strong></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#unlabeled-graphs">2. <strong>Unlabeled Graphs</strong></a></li>
 </ul>
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-table">🔹 Summary Table</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-notes">🔹 Practical Notes</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">✅ 3. The gSpan Algorithm</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#dfs-code-tree">🔷 3.1 DFS Code Tree</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#lexicographical-order-canonical-form">🔷 3.2 Lexicographical Order &amp; Canonical Form</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pattern-growth-strategy">🔷 3.3 Pattern Growth Strategy</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#gspan-pseudocode">🔷 3.4 gSpan Pseudocode</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">🔷 3.5 Summary</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">3. The gSpan Algorithm</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#dfs-code-tree">3.1 DFS Code Tree</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#lexicographical-order-canonical-form">3.2 Lexicographical Order &amp; Canonical Form</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pattern-growth-strategy">3.3 Pattern Growth Strategy</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#gspan-pseudocode">3.4 gSpan Pseudocode</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">3.5 Summary</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#challenges-in-frequent-subgraph-mining">4. Challenges in Frequent Subgraph Mining</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#graph-isomorphism-np-complete">🧩 1. Graph Isomorphism (NP-Complete)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#search-space-explosion">🚀 2. Search Space Explosion</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#efficient-pruning-strategies">✂️ 3. Efficient Pruning Strategies</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scalability-on-large-real-world-data">🌐 4. Scalability on Large Real-World Data</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">✅ Summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#challenges-in-frequent-subgraph-mining">4. Challenges in Frequent Subgraph Mining</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#graph-isomorphism-np-complete">1. Graph Isomorphism (NP-Complete)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#search-space-explosion">2. Search Space Explosion</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#efficient-pruning-strategies">3. Efficient Pruning Strategies</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scalability-on-large-real-world-data">4. Scalability on Large Real-World Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Summary</a></li>
 </ul>
 </li>
 </ul>

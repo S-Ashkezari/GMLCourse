@@ -60,10 +60,10 @@
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'content/Chapter03/03_ConstrativeLearning';</script>
-    <link rel="canonical" href="/GMLCourse/content/Chapter03/03_ConstrativeLearning.html" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Graph Mining Presentation" href="04_Graph%20Data%20Augmentation%20and%20Sampling%20Techniques.html" />
+    <link rel="next" title="Graph Mining Presentation" href="04_Graph_DataAugmentation_and_SamplingTechniques.html" />
     <link rel="prev" title="AutoEncoder" href="02_Autoencoders.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -103,8 +103,8 @@
          class="form-control"
          name="q"
          id="search-input"
-         placeholder="Search this book..."
-         aria-label="Search this book..."
+         placeholder="Search..."
+         aria-label="Search..."
          autocomplete="off"
          autocorrect="off"
          autocapitalize="off"
@@ -174,24 +174,20 @@
  </script></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
-        
-        <ul class="nav bd-sidenav bd-sidenav__home-link">
-            <li class="toctree-l1">
-                <a class="reference internal" href="../../intro.html">
-                    Welcome to Graph Machine Learning
-                </a>
-            </li>
-        </ul>
-        <ul class="current nav bd-sidenav">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Graph Machine Learning</span></p>
+<ul class="nav bd-sidenav">
 <li class="toctree-l1 has-children"><a class="reference internal" href="../Chapter01/01_Graph_metrics.html"><strong>First Part: Graph Mining - Concepts and properties</strong></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter01/02_community_detection.html">Community Detection in Graphs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter01/03_FrequentSubgraphMining.html">Frequent Subgraph Mining</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../Chapter01/04_Complex%20Networks%20and%20Generative%20Models.html">Complex Networks and Generative Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter01/04_ComplexNetworks_and_GenerativeModels.html">Complex Networks and Generative Models</a></li>
 
 
 <li class="toctree-l2"><a class="reference internal" href="../Chapter01/05_DynamicGraphsandNetworkEvolutionAnalysis.html">Dynamic Graphs and Network Evolution Analysis</a></li>
 </ul>
 </details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Unsupervised GML</span></p>
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1 has-children"><a class="reference internal" href="../Chapter02/01_intro_and_basics.html">Introduction to Graph Machine Learning</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter02/02_gnn_primer.html">Neural Network Essentials for Understanding GNNs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter02/03_embedding_examples.html">Graph Representation Learning</a></li>
@@ -203,14 +199,25 @@
 
 <li class="toctree-l2"><a class="reference internal" href="02_Autoencoders.html">AutoEncoder</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Contrastive Learning</a></li>
-
-<li class="toctree-l2"><a class="reference internal" href="04_Graph%20Data%20Augmentation%20and%20Sampling%20Techniques.html">Graph Mining Presentation</a></li>
-
+<li class="toctree-l2"><a class="reference internal" href="04_Graph_DataAugmentation_and_SamplingTechniques.html">Graph Mining Presentation</a></li>
 
 
 </ul>
 </details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Supervised GML</span></p>
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../Chapter04/01_Feature_based_methods.html">Supervised Learning on Graphs</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../Chapter04/02_Shallow_embeddings.html">Shallow Embedding Methods</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Graph Neural Networks</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Chapter05/01_Graph_Neural_Networks.html">From Graph Structure to Graph Neural Networks</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../Chapter05/02_Spectral_Graph_Convolution_in_GNNs.html">Spectral Graph Convolution in GNNs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Chapter05/03_Spatial_Graph_Neural_Networks.html">Message Passing Neural Networks (MPNN)</a></li>
+
 
 </ul>
 
@@ -253,84 +260,6 @@
         <div class="header-article-item">
 
 <div class="article-header-buttons">
-
-
-
-
-
-<div class="dropdown dropdown-launch-buttons">
-  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
-    <i class="fas fa-rocket"></i>
-  </button>
-  <ul class="dropdown-menu">
-      
-      
-      
-      <li><a href="https://colab.research.google.com/github/executablebooks/jupyter-book/blob/master/docs/content/Chapter03/03_ConstrativeLearning.ipynb" target="_blank"
-   class="btn btn-sm dropdown-item"
-   title="Launch on Colab"
-   data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  
-    <img alt="Colab logo" src="../../_static/images/logo_colab.png">
-  </span>
-<span class="btn__text-container">Colab</span>
-</a>
-</li>
-      
-  </ul>
-</div>
-
-
-
-
-
-
-<div class="dropdown dropdown-source-buttons">
-  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
-    <i class="fab fa-github"></i>
-  </button>
-  <ul class="dropdown-menu">
-      
-      
-      
-      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
-   class="btn btn-sm btn-source-repository-button dropdown-item"
-   title="Source repository"
-   data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  <i class="fab fa-github"></i>
-  </span>
-<span class="btn__text-container">Repository</span>
-</a>
-</li>
-      
-      
-      
-      
-      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fcontent/Chapter03/03_ConstrativeLearning.html&body=Your%20issue%20content%20here." target="_blank"
-   class="btn btn-sm btn-source-issues-button dropdown-item"
-   title="Open an issue"
-   data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  <i class="fas fa-lightbulb"></i>
-  </span>
-<span class="btn__text-container">Open issue</span>
-</a>
-</li>
-      
-  </ul>
-</div>
-
 
 
 
@@ -438,19 +367,17 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Contrastive Learning</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Contrastive Learning</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#core-idea">Core Idea</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematical-formulation">Mathematical Formulation</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematical-formulation">Mathematical Formulation</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#similarity-function">Similarity Function</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#infonce-loss">InfoNCE Loss</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#infonce-loss">InfoNCE Loss</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#gradient-with-respect-to-anchor-embedding">Gradient with Respect to Anchor Embedding</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#intuition">Intuition:</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contrastive-learning-for-graphs">Contrastive Learning for Graphs</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contrastive-learning-for-graphs">Contrastive Learning for Graphs</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#node-level-contrast-locallocal">1. Node-Level Contrast (Local–Local)</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#subgraph-level-contrast-localglobal">2. Subgraph-Level Contrast (Local–Global)</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#graph-level-contrast-globalglobal">3. Graph-Level Contrast (Global–Global)</a></li>
@@ -461,9 +388,6 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparison-with-autoencoders">Comparison With Autoencoders</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#advantages-in-graph-representation-learning">Advantages in Graph Representation Learning</a></li>
 </ul>
-</li>
-</ul>
-
             </nav>
         </div>
     </div>
@@ -477,9 +401,6 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="contrastive-learning">
 <h1>Contrastive Learning<a class="headerlink" href="#contrastive-learning" title="Link to this heading">#</a></h1>
 <p>While autoencoders are effective for learning embeddings in an unsupervised manner, newer <strong>self-supervised techniques such as contrastive learning</strong> have shown superior performance in preserving fine-grained similarities between nodes or graphs.</p>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="id1">
-<h1>Contrastive Learning<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
 <p>Contrastive learning is a self-supervised framework designed to learn representations by <strong>pulling semantically similar samples closer</strong> and <strong>pushing dissimilar samples apart</strong> in the embedding space.<br />
 Instead of reconstructing the input (as autoencoders do), contrastive learning shapes the geometry of the latent space directly, ensuring that similarity becomes an organizing principle for representation.</p>
 <p>In graph representation learning, this approach has become central because graphs naturally contain positive and negative relational structure (e.g., connected vs. unconnected nodes, augmented views of the same graph, or subgraphs drawn from related regions).</p>
@@ -658,7 +579,7 @@ p_{ij} = \frac{\exp(z_i^\top z_j' / \tau)}{\sum_{k=1}^{N} \exp(z_i^\top z_k' / \
 <li><p>scalability</p></li>
 <li><p>suitability for node/graph classification, clustering, and link prediction</p></li>
 </ul>
-<hr class="docutils" />
+<p>End of this section</p>
 </section>
 </section>
 
@@ -702,7 +623,7 @@ p_{ij} = \frac{\exp(z_i^\top z_j' / \tau)}{\sum_{k=1}^{N} \exp(z_i^\top z_k' / \
       </div>
     </a>
     <a class="right-next"
-       href="04_Graph%20Data%20Augmentation%20and%20Sampling%20Techniques.html"
+       href="04_Graph_DataAugmentation_and_SamplingTechniques.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
@@ -726,19 +647,17 @@ p_{ij} = \frac{\exp(z_i^\top z_j' / \tau)}{\sum_{k=1}^{N} \exp(z_i^\top z_k' / \
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Contrastive Learning</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Contrastive Learning</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#core-idea">Core Idea</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematical-formulation">Mathematical Formulation</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematical-formulation">Mathematical Formulation</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#similarity-function">Similarity Function</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#infonce-loss">InfoNCE Loss</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#infonce-loss">InfoNCE Loss</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#gradient-with-respect-to-anchor-embedding">Gradient with Respect to Anchor Embedding</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#intuition">Intuition:</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contrastive-learning-for-graphs">Contrastive Learning for Graphs</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contrastive-learning-for-graphs">Contrastive Learning for Graphs</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#node-level-contrast-locallocal">1. Node-Level Contrast (Local–Local)</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#subgraph-level-contrast-localglobal">2. Subgraph-Level Contrast (Local–Global)</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#graph-level-contrast-globalglobal">3. Graph-Level Contrast (Global–Global)</a></li>
@@ -749,9 +668,6 @@ p_{ij} = \frac{\exp(z_i^\top z_j' / \tau)}{\sum_{k=1}^{N} \exp(z_i^\top z_k' / \
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparison-with-autoencoders">Comparison With Autoencoders</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#advantages-in-graph-representation-learning">Advantages in Graph Representation Learning</a></li>
 </ul>
-</li>
-</ul>
-
   </nav></div>
 
 </div></div>

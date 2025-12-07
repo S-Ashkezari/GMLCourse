@@ -60,7 +60,7 @@
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'content/Chapter03/00_Unsupervised_Learning';</script>
-    <link rel="canonical" href="/GMLCourse/content/Chapter03/00_Unsupervised_Learning.html" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Shallow Embedding Methods" href="01_Shallow_Embeddings.html" />
@@ -103,8 +103,8 @@
          class="form-control"
          name="q"
          id="search-input"
-         placeholder="Search this book..."
-         aria-label="Search this book..."
+         placeholder="Search..."
+         aria-label="Search..."
          autocomplete="off"
          autocorrect="off"
          autocapitalize="off"
@@ -174,24 +174,20 @@
  </script></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
-        
-        <ul class="nav bd-sidenav bd-sidenav__home-link">
-            <li class="toctree-l1">
-                <a class="reference internal" href="../../intro.html">
-                    Welcome to Graph Machine Learning
-                </a>
-            </li>
-        </ul>
-        <ul class="current nav bd-sidenav">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Graph Machine Learning</span></p>
+<ul class="nav bd-sidenav">
 <li class="toctree-l1 has-children"><a class="reference internal" href="../Chapter01/01_Graph_metrics.html"><strong>First Part: Graph Mining - Concepts and properties</strong></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter01/02_community_detection.html">Community Detection in Graphs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter01/03_FrequentSubgraphMining.html">Frequent Subgraph Mining</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../Chapter01/04_Complex%20Networks%20and%20Generative%20Models.html">Complex Networks and Generative Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter01/04_ComplexNetworks_and_GenerativeModels.html">Complex Networks and Generative Models</a></li>
 
 
 <li class="toctree-l2"><a class="reference internal" href="../Chapter01/05_DynamicGraphsandNetworkEvolutionAnalysis.html">Dynamic Graphs and Network Evolution Analysis</a></li>
 </ul>
 </details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Unsupervised GML</span></p>
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1 has-children"><a class="reference internal" href="../Chapter02/01_intro_and_basics.html">Introduction to Graph Machine Learning</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter02/02_gnn_primer.html">Neural Network Essentials for Understanding GNNs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter02/03_embedding_examples.html">Graph Representation Learning</a></li>
@@ -203,14 +199,25 @@
 
 <li class="toctree-l2"><a class="reference internal" href="02_Autoencoders.html">AutoEncoder</a></li>
 <li class="toctree-l2"><a class="reference internal" href="03_ConstrativeLearning.html">Contrastive Learning</a></li>
-
-<li class="toctree-l2"><a class="reference internal" href="04_Graph%20Data%20Augmentation%20and%20Sampling%20Techniques.html">Graph Mining Presentation</a></li>
-
+<li class="toctree-l2"><a class="reference internal" href="04_Graph_DataAugmentation_and_SamplingTechniques.html">Graph Mining Presentation</a></li>
 
 
 </ul>
 </details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Supervised GML</span></p>
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../Chapter04/01_Feature_based_methods.html">Supervised Learning on Graphs</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../Chapter04/02_Shallow_embeddings.html">Shallow Embedding Methods</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Graph Neural Networks</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Chapter05/01_Graph_Neural_Networks.html">From Graph Structure to Graph Neural Networks</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../Chapter05/02_Spectral_Graph_Convolution_in_GNNs.html">Spectral Graph Convolution in GNNs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Chapter05/03_Spatial_Graph_Neural_Networks.html">Message Passing Neural Networks (MPNN)</a></li>
+
 
 </ul>
 
@@ -253,84 +260,6 @@
         <div class="header-article-item">
 
 <div class="article-header-buttons">
-
-
-
-
-
-<div class="dropdown dropdown-launch-buttons">
-  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
-    <i class="fas fa-rocket"></i>
-  </button>
-  <ul class="dropdown-menu">
-      
-      
-      
-      <li><a href="https://colab.research.google.com/github/executablebooks/jupyter-book/blob/master/docs/content/Chapter03/00_Unsupervised_Learning.ipynb" target="_blank"
-   class="btn btn-sm dropdown-item"
-   title="Launch on Colab"
-   data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  
-    <img alt="Colab logo" src="../../_static/images/logo_colab.png">
-  </span>
-<span class="btn__text-container">Colab</span>
-</a>
-</li>
-      
-  </ul>
-</div>
-
-
-
-
-
-
-<div class="dropdown dropdown-source-buttons">
-  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
-    <i class="fab fa-github"></i>
-  </button>
-  <ul class="dropdown-menu">
-      
-      
-      
-      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
-   class="btn btn-sm btn-source-repository-button dropdown-item"
-   title="Source repository"
-   data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  <i class="fab fa-github"></i>
-  </span>
-<span class="btn__text-container">Repository</span>
-</a>
-</li>
-      
-      
-      
-      
-      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fcontent/Chapter03/00_Unsupervised_Learning.html&body=Your%20issue%20content%20here." target="_blank"
-   class="btn btn-sm btn-source-issues-button dropdown-item"
-   title="Open an issue"
-   data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  <i class="fas fa-lightbulb"></i>
-  </span>
-<span class="btn__text-container">Open issue</span>
-</a>
-</li>
-      
-  </ul>
-</div>
-
 
 
 
@@ -438,8 +367,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#unsupervised-machine-learning">Unsupervised machine learning</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#unsupervised-learning-for-graph-data">Unsupervised Learning for Graph Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#unsupervised-learning-for-graph-data">Unsupervised Learning for Graph Data</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#shallow-embedding">🔹 1. Shallow Embedding</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#autoencoders">🔸 2. Autoencoders</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#graph-neural-networks-gnns">🔹 3. Graph Neural Networks (GNNs)</a></li>
@@ -460,13 +388,11 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="unsupervised-graph-learning">
 <h1>Unsupervised Graph learning<a class="headerlink" href="#unsupervised-graph-learning" title="Link to this heading">#</a></h1>
-<section id="unsupervised-machine-learning">
-<h2>Unsupervised machine learning<a class="headerlink" href="#unsupervised-machine-learning" title="Link to this heading">#</a></h2>
 <p>Unsupervised machine learning refers to a category of algorithms that can learn patterns from data without relying on labeled examples. In the context of graph data, these algorithms are particularly valuable because they <strong>operate using only the graph structure (e.g., adjacency matrix) and optionally node features</strong>, without requiring any prior knowledge of specific tasks such as classification or regression.</p>
 <p>A widely adopted strategy in unsupervised graph learning is to <strong>learn node or graph embeddings</strong>—that is, low-dimensional vector representations that capture the structure and relationships within the graph. These embeddings are typically optimized to preserve similarity between nodes or substructures, enabling the reconstruction of relationships like those expressed in the adjacency matrix.</p>
 <p>What makes this approach powerful is that the <strong>learned representations can encode latent and abstract patterns, revealing complex dependencies or communities that are not explicitly observable in the original data</strong>.</p>
 <p>As a result, <strong>these embeddings serve as rich feature sets</strong> for various downstream tasks such as node clustering, link prediction, and anomaly detection—even though no supervision was provided during training.</p>
-<img src="figures/chap1_5.png" width="700px" style="display:block; margin:auto;"></section>
+<p><a class="reference internal" href="../../_images/chap1_5.png"><img alt="" src="../../_images/chap1_5.png" style="width: 500px;" /></a></p>
 <section id="unsupervised-learning-for-graph-data">
 <h2>Unsupervised Learning for Graph Data<a class="headerlink" href="#unsupervised-learning-for-graph-data" title="Link to this heading">#</a></h2>
 <p>This diagram categorizes the main approaches for unsupervised machine learning on graph-structured data, specifically focusing on representation learning:</p>
@@ -527,8 +453,8 @@ document.write(`
 </li>
 <li><p><strong>Example:</strong> <code class="docutils literal notranslate"><span class="pre">SDNE</span></code> (Structural Deep Network Embedding)</p></li>
 </ul>
-<img src="figures/chap3_0_AE.png" width="500px" style="display:block; margin:auto;">
-<p>ref:<a class="reference external" href="https://www.mdpi.com/2624-831X/4/3/16">https://www.mdpi.com/2624-831X/4/3/16</a></p>
+<p><a class="reference internal" href="../../_images/chap3_0_AE.png"><img alt="" src="../../_images/chap3_0_AE.png" style="width: 500px;" /></a></p>
+<p>ref:https://www.mdpi.com/2624-831X/4/3/16</p>
 </section>
 <hr class="docutils" />
 <section id="graph-neural-networks-gnns">
@@ -560,7 +486,7 @@ document.write(`
 </ul>
 </li>
 </ul>
-<img src="figures/chap3_1_2.png" width="500px" style="display:block; margin:auto;">
+<p><img alt="" src="../../_images/chap3_1_2.png" /></p>
 </section>
 <hr class="docutils" />
 <section id="key-insight">
@@ -666,8 +592,7 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#unsupervised-machine-learning">Unsupervised machine learning</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#unsupervised-learning-for-graph-data">Unsupervised Learning for Graph Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#unsupervised-learning-for-graph-data">Unsupervised Learning for Graph Data</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#shallow-embedding">🔹 1. Shallow Embedding</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#autoencoders">🔸 2. Autoencoders</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#graph-neural-networks-gnns">🔹 3. Graph Neural Networks (GNNs)</a></li>

@@ -60,7 +60,7 @@
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'content/Chapter02/02_gnn_primer';</script>
-    <link rel="canonical" href="/GMLCourse/content/Chapter02/02_gnn_primer.html" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Graph Representation Learning" href="03_embedding_examples.html" />
@@ -103,8 +103,8 @@
          class="form-control"
          name="q"
          id="search-input"
-         placeholder="Search this book..."
-         aria-label="Search this book..."
+         placeholder="Search..."
+         aria-label="Search..."
          autocomplete="off"
          autocorrect="off"
          autocapitalize="off"
@@ -174,24 +174,20 @@
  </script></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
-        
-        <ul class="nav bd-sidenav bd-sidenav__home-link">
-            <li class="toctree-l1">
-                <a class="reference internal" href="../../intro.html">
-                    Welcome to Graph Machine Learning
-                </a>
-            </li>
-        </ul>
-        <ul class="current nav bd-sidenav">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Graph Machine Learning</span></p>
+<ul class="nav bd-sidenav">
 <li class="toctree-l1 has-children"><a class="reference internal" href="../Chapter01/01_Graph_metrics.html"><strong>First Part: Graph Mining - Concepts and properties</strong></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter01/02_community_detection.html">Community Detection in Graphs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter01/03_FrequentSubgraphMining.html">Frequent Subgraph Mining</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../Chapter01/04_Complex%20Networks%20and%20Generative%20Models.html">Complex Networks and Generative Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter01/04_ComplexNetworks_and_GenerativeModels.html">Complex Networks and Generative Models</a></li>
 
 
 <li class="toctree-l2"><a class="reference internal" href="../Chapter01/05_DynamicGraphsandNetworkEvolutionAnalysis.html">Dynamic Graphs and Network Evolution Analysis</a></li>
 </ul>
 </details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Unsupervised GML</span></p>
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="01_intro_and_basics.html">Introduction to Graph Machine Learning</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Neural Network Essentials for Understanding GNNs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="03_embedding_examples.html">Graph Representation Learning</a></li>
@@ -203,14 +199,25 @@
 
 <li class="toctree-l2"><a class="reference internal" href="../Chapter03/02_Autoencoders.html">AutoEncoder</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter03/03_ConstrativeLearning.html">Contrastive Learning</a></li>
-
-<li class="toctree-l2"><a class="reference internal" href="../Chapter03/04_Graph%20Data%20Augmentation%20and%20Sampling%20Techniques.html">Graph Mining Presentation</a></li>
-
+<li class="toctree-l2"><a class="reference internal" href="../Chapter03/04_Graph_DataAugmentation_and_SamplingTechniques.html">Graph Mining Presentation</a></li>
 
 
 </ul>
 </details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Supervised GML</span></p>
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../Chapter04/01_Feature_based_methods.html">Supervised Learning on Graphs</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../Chapter04/02_Shallow_embeddings.html">Shallow Embedding Methods</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Graph Neural Networks</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Chapter05/01_Graph_Neural_Networks.html">From Graph Structure to Graph Neural Networks</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../Chapter05/02_Spectral_Graph_Convolution_in_GNNs.html">Spectral Graph Convolution in GNNs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Chapter05/03_Spatial_Graph_Neural_Networks.html">Message Passing Neural Networks (MPNN)</a></li>
+
 
 </ul>
 
@@ -253,84 +260,6 @@
         <div class="header-article-item">
 
 <div class="article-header-buttons">
-
-
-
-
-
-<div class="dropdown dropdown-launch-buttons">
-  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
-    <i class="fas fa-rocket"></i>
-  </button>
-  <ul class="dropdown-menu">
-      
-      
-      
-      <li><a href="https://colab.research.google.com/github/executablebooks/jupyter-book/blob/master/docs/content/Chapter02/02_gnn_primer.ipynb" target="_blank"
-   class="btn btn-sm dropdown-item"
-   title="Launch on Colab"
-   data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  
-    <img alt="Colab logo" src="../../_static/images/logo_colab.png">
-  </span>
-<span class="btn__text-container">Colab</span>
-</a>
-</li>
-      
-  </ul>
-</div>
-
-
-
-
-
-
-<div class="dropdown dropdown-source-buttons">
-  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
-    <i class="fab fa-github"></i>
-  </button>
-  <ul class="dropdown-menu">
-      
-      
-      
-      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
-   class="btn btn-sm btn-source-repository-button dropdown-item"
-   title="Source repository"
-   data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  <i class="fab fa-github"></i>
-  </span>
-<span class="btn__text-container">Repository</span>
-</a>
-</li>
-      
-      
-      
-      
-      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fcontent/Chapter02/02_gnn_primer.html&body=Your%20issue%20content%20here." target="_blank"
-   class="btn btn-sm btn-source-issues-button dropdown-item"
-   title="Open an issue"
-   data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  <i class="fas fa-lightbulb"></i>
-  </span>
-<span class="btn__text-container">Open issue</span>
-</a>
-</li>
-      
-  </ul>
-</div>
-
 
 
 
@@ -441,7 +370,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-a-neural-network">1. What Is a Neural Network?</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#forward-and-backward-propagation">2. Forward and Backward Propagation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loss-functions">3. Loss Functions</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-are-embeddings">4. What Are Embeddings?</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-are-embeddings">4. What Are Embeddings?</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#definition">Definition</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#types-of-embeddings">Types of Embeddings</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-information-embeddings-capture">What information embeddings capture</a></li>
@@ -451,7 +380,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#similarity-downstream-use">Similarity &amp; downstream use</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-standard-neural-networks-fail-on-graph-data">5. Why Standard Neural Networks Fail on Graph Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-standard-neural-networks-fail-on-graph-data">5. Why Standard Neural Networks Fail on Graph Data</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#assumption-1-fixed-size-inputs"><strong>Assumption 1 — Fixed-size Inputs</strong></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#assumption-2-regular-euclidean-structure"><strong>Assumption 2 — Regular Euclidean Structure</strong></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#assumption-3-positional-ordering-permutation-sensitivity"><strong>Assumption 3 — Positional Ordering (Permutation Sensitivity)</strong></a></li>
@@ -481,7 +410,7 @@ followed by a nonlinear activation:</p>
 \[
 h^{(l+1)} = \sigma(W^{(l)} h^{(l)} + b^{(l)})
 \]</div>
-<img src="figures/nn2.jpg" width="600px" style="display:block; margin:auto;">
+<p><img alt="" src="../../_images/nn2.jpg" /></p>
 <p>Key concepts:</p>
 <ul class="simple">
 <li><p><strong>Neuron</strong>: linear combination + activation</p></li>
@@ -590,14 +519,14 @@ h_v^{(l+1)} = \psi(h_v^{(l)}, m_v^{(l)})
 A simple linearized GCN layer:
 \)</span><span class="math notranslate nohighlight">\(
 H^{(l+1)} = \sigma(\widehat{A} H^{(l)} W^{(l)})
-\)</span>$
-where (\widehat{A}) is a (normalized) adjacency matrix with self-loops.</p>
+\)</span><span class="math notranslate nohighlight">\(
+where \)</span>\widehat{A}$ is a (normalized) adjacency matrix with self-loops.</p>
 </section>
 <hr class="docutils" />
 <section id="practical-considerations">
 <h3>Practical considerations<a class="headerlink" href="#practical-considerations" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p><strong>Dimension (d):</strong> common choices 32–512. Larger (d) → more capacity but more computation and overfitting risk.</p></li>
+<li><p><strong>Dimension <span class="math notranslate nohighlight">\(d\)</span>:</strong> common choices 32–512. Larger <span class="math notranslate nohighlight">\(d\)</span> → more capacity but more computation and overfitting risk.</p></li>
 <li><p><strong>Normalization:</strong> unit-normalize embeddings when using cosine similarity.</p></li>
 <li><p><strong>Aggregation choice:</strong> sum/mean/max — affects expressiveness and scale.</p></li>
 <li><p><strong>Initial features:</strong> if no features, use one-hot or learnable embeddings.</p></li>
@@ -660,10 +589,10 @@ Graphs are <strong>non-Euclidean</strong>:</p>
 </ul>
 <p>Thus:<br />
 <strong>Convolutions cannot be applied directly to graphs</strong> because there is no regular local geometry.</p>
-<img src="figures/cnn_gnn.png" width="400px" style="display:block; margin:auto;">
-<img src="figures/conv1.png" width="600px" style="display:block; margin:auto;">
-<img src="figures/conv2.png" width="600px" style="display:block; margin:auto;">
-<p>ref:<a class="reference external" href="https://distill.pub/2021/understanding-gnns/">https://distill.pub/2021/understanding-gnns/</a></p>
+<p><img alt="" src="../../_images/cnn_gnn.png" />
+<img alt="" src="../../_images/conv1.png" />
+<img alt="" src="../../_images/conv2.png" /></p>
+<p>ref:https://distill.pub/2021/understanding-gnns/</p>
 </section>
 <hr class="docutils" />
 <section id="assumption-3-positional-ordering-permutation-sensitivity">
@@ -674,8 +603,8 @@ Graphs are <strong>non-Euclidean</strong>:</p>
 <li><p>index = position (e.g., pixel (i, j))</p></li>
 </ul>
 <p>If you permute input dimensions in a CNN, everything breaks.</p>
-<img src="figures/permutationInvariant.webp" width="400px" style="display:block; margin:auto;">
-<p>ref:<a class="reference external" href="https://medium.com/&#64;bscarleth.gtz/introduction-to-graph-neural-networks-an-illustrated-guide-c3f19da2ba39">https://medium.com/&#64;bscarleth.gtz/introduction-to-graph-neural-networks-an-illustrated-guide-c3f19da2ba39</a></p>
+<p><img alt="" src="../../_images/permutationInvariant.webp" /></p>
+<p>ref:https://medium.com/&#64;bscarleth.gtz/introduction-to-graph-neural-networks-an-illustrated-guide-c3f19da2ba39</p>
 <p><strong>Graph reality:</strong><br />
 Graphs must be <strong>permutation invariant</strong>:<br />
 Renaming nodes should not change the output.<br />
@@ -683,7 +612,7 @@ But MLPs/CNNs/RNNs are <em>not</em> permutation invariant.</p>
 <p>Example: nodes {1, 2, 3} → reorder to {3, 1, 2}<br />
 The graph is identical, but an MLP sees a totally different input vector.</p>
 <p><img alt="permutation" src="../../_images/permute.png" /></p>
-<p>ref:<a class="reference external" href="https://distill.pub/2021/gnn-intro/">https://distill.pub/2021/gnn-intro/</a></p>
+<p>ref:https://distill.pub/2021/gnn-intro/</p>
 </section>
 <hr class="docutils" />
 <section id="assumption-4-locality-is-predefined">
@@ -712,7 +641,7 @@ Nodes do not have identical local shapes.<br />
 Neighborhood sizes differ.<br />
 Graph positions are not directly comparable.</p>
 <p>Thus weight sharing is non-trivial.</p>
-<img src="figures/gnn_cnn.png" width="400px" style="display:block; margin:auto;">
+<p><img alt="gnnCNN" src="../../_images/gnn_cnn.png" /></p>
 </section>
 </section>
 <hr class="docutils" />
@@ -755,7 +684,6 @@ Graph positions are not directly comparable.</p>
 </div>
 <p>Hence, MLPs/CNNs/RNNs fail on graph-structured data.</p>
 <p>This is the motivation for <strong>Graph Neural Networks (GNNs)</strong>.</p>
-<hr class="docutils" />
 </section>
 </section>
 
@@ -826,7 +754,7 @@ Graph positions are not directly comparable.</p>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-a-neural-network">1. What Is a Neural Network?</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#forward-and-backward-propagation">2. Forward and Backward Propagation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loss-functions">3. Loss Functions</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-are-embeddings">4. What Are Embeddings?</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-are-embeddings">4. What Are Embeddings?</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#definition">Definition</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#types-of-embeddings">Types of Embeddings</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-information-embeddings-capture">What information embeddings capture</a></li>
@@ -836,7 +764,7 @@ Graph positions are not directly comparable.</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#similarity-downstream-use">Similarity &amp; downstream use</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-standard-neural-networks-fail-on-graph-data">5. Why Standard Neural Networks Fail on Graph Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-standard-neural-networks-fail-on-graph-data">5. Why Standard Neural Networks Fail on Graph Data</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#assumption-1-fixed-size-inputs"><strong>Assumption 1 — Fixed-size Inputs</strong></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#assumption-2-regular-euclidean-structure"><strong>Assumption 2 — Regular Euclidean Structure</strong></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#assumption-3-positional-ordering-permutation-sensitivity"><strong>Assumption 3 — Positional Ordering (Permutation Sensitivity)</strong></a></li>

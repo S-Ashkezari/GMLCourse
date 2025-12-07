@@ -60,11 +60,11 @@
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'content/Chapter01/05_DynamicGraphsandNetworkEvolutionAnalysis';</script>
-    <link rel="canonical" href="/GMLCourse/content/Chapter01/05_DynamicGraphsandNetworkEvolutionAnalysis.html" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Introduction to Graph Machine Learning" href="../Chapter02/01_intro_and_basics.html" />
-    <link rel="prev" title="Complex Networks and Generative Models" href="04_Complex%20Networks%20and%20Generative%20Models.html" />
+    <link rel="prev" title="Complex Networks and Generative Models" href="04_ComplexNetworks_and_GenerativeModels.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -103,8 +103,8 @@
          class="form-control"
          name="q"
          id="search-input"
-         placeholder="Search this book..."
-         aria-label="Search this book..."
+         placeholder="Search..."
+         aria-label="Search..."
          autocomplete="off"
          autocorrect="off"
          autocapitalize="off"
@@ -174,24 +174,20 @@
  </script></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
-        
-        <ul class="nav bd-sidenav bd-sidenav__home-link">
-            <li class="toctree-l1">
-                <a class="reference internal" href="../../intro.html">
-                    Welcome to Graph Machine Learning
-                </a>
-            </li>
-        </ul>
-        <ul class="current nav bd-sidenav">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Graph Machine Learning</span></p>
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="01_Graph_metrics.html"><strong>First Part: Graph Mining - Concepts and properties</strong></a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="02_community_detection.html">Community Detection in Graphs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="03_FrequentSubgraphMining.html">Frequent Subgraph Mining</a></li>
-<li class="toctree-l2"><a class="reference internal" href="04_Complex%20Networks%20and%20Generative%20Models.html">Complex Networks and Generative Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04_ComplexNetworks_and_GenerativeModels.html">Complex Networks and Generative Models</a></li>
 
 
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Dynamic Graphs and Network Evolution Analysis</a></li>
 </ul>
 </details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Unsupervised GML</span></p>
+<ul class="nav bd-sidenav">
 <li class="toctree-l1 has-children"><a class="reference internal" href="../Chapter02/01_intro_and_basics.html">Introduction to Graph Machine Learning</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter02/02_gnn_primer.html">Neural Network Essentials for Understanding GNNs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter02/03_embedding_examples.html">Graph Representation Learning</a></li>
@@ -203,14 +199,25 @@
 
 <li class="toctree-l2"><a class="reference internal" href="../Chapter03/02_Autoencoders.html">AutoEncoder</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter03/03_ConstrativeLearning.html">Contrastive Learning</a></li>
-
-<li class="toctree-l2"><a class="reference internal" href="../Chapter03/04_Graph%20Data%20Augmentation%20and%20Sampling%20Techniques.html">Graph Mining Presentation</a></li>
-
+<li class="toctree-l2"><a class="reference internal" href="../Chapter03/04_Graph_DataAugmentation_and_SamplingTechniques.html">Graph Mining Presentation</a></li>
 
 
 </ul>
 </details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Supervised GML</span></p>
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../Chapter04/01_Feature_based_methods.html">Supervised Learning on Graphs</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../Chapter04/02_Shallow_embeddings.html">Shallow Embedding Methods</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Graph Neural Networks</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Chapter05/01_Graph_Neural_Networks.html">From Graph Structure to Graph Neural Networks</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../Chapter05/02_Spectral_Graph_Convolution_in_GNNs.html">Spectral Graph Convolution in GNNs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Chapter05/03_Spatial_Graph_Neural_Networks.html">Message Passing Neural Networks (MPNN)</a></li>
+
 
 </ul>
 
@@ -253,84 +260,6 @@
         <div class="header-article-item">
 
 <div class="article-header-buttons">
-
-
-
-
-
-<div class="dropdown dropdown-launch-buttons">
-  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
-    <i class="fas fa-rocket"></i>
-  </button>
-  <ul class="dropdown-menu">
-      
-      
-      
-      <li><a href="https://colab.research.google.com/github/executablebooks/jupyter-book/blob/master/docs/content/Chapter01/05_DynamicGraphsandNetworkEvolutionAnalysis.ipynb" target="_blank"
-   class="btn btn-sm dropdown-item"
-   title="Launch on Colab"
-   data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  
-    <img alt="Colab logo" src="../../_static/images/logo_colab.png">
-  </span>
-<span class="btn__text-container">Colab</span>
-</a>
-</li>
-      
-  </ul>
-</div>
-
-
-
-
-
-
-<div class="dropdown dropdown-source-buttons">
-  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
-    <i class="fab fa-github"></i>
-  </button>
-  <ul class="dropdown-menu">
-      
-      
-      
-      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
-   class="btn btn-sm btn-source-repository-button dropdown-item"
-   title="Source repository"
-   data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  <i class="fab fa-github"></i>
-  </span>
-<span class="btn__text-container">Repository</span>
-</a>
-</li>
-      
-      
-      
-      
-      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fcontent/Chapter01/05_DynamicGraphsandNetworkEvolutionAnalysis.html&body=Your%20issue%20content%20here." target="_blank"
-   class="btn btn-sm btn-source-issues-button dropdown-item"
-   title="Open an issue"
-   data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  <i class="fas fa-lightbulb"></i>
-  </span>
-<span class="btn__text-container">Open issue</span>
-</a>
-</li>
-      
-  </ul>
-</div>
-
 
 
 
@@ -438,7 +367,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#definitions-and-representations">1 Definitions and Representations</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#definitions-and-representations">1 Definitions and Representations</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#temporal-dynamic-graph-formal-definition">1.1 Temporal / Dynamic Graph — formal definition</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#snapshot-vs-streaming-vs-interval-representations">1.2 Snapshot vs. Streaming vs. Interval representations</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#node-dynamics-birth-death-and-activity-of-nodes">1.3 Node Dynamics: Birth, Death, and Activity of Nodes</a></li>
@@ -449,7 +378,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#temporal-analogues-of-static-measures">2 Temporal analogues of static measures</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#temporal-analogues-of-static-measures">2 Temporal analogues of static measures</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#temporal-degree-per-node">2.1 Temporal degree (per node)</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#temporal-closeness-reachability-and-temporal-paths">2.2 Temporal closeness / reachability and temporal paths</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#temporal-motifs">2.3 Temporal motifs</a></li>
@@ -457,7 +386,7 @@ document.write(`
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dynamic-network-models-brief">3 Dynamic network models (brief)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tasks-in-dynamic-graph-analysis">4 Tasks in dynamic graph analysis</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#methods-for-anomaly-change-detection-core-ideas">5 Methods for anomaly &amp; change detection (core ideas)</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#methods-for-anomaly-change-detection-core-ideas">5 Methods for anomaly &amp; change detection (core ideas)</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#global-change-detection-snapshot-level">5.1 Global change detection (snapshot-level)</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#local-node-level-anomaly">5.2 Local / node-level anomaly</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#subgraph-structural-anomaly">5.3 Subgraph / structural anomaly</a></li>
@@ -827,18 +756,18 @@ where \)</span>\mu_v,\sigma_v<span class="math notranslate nohighlight">\( are m
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/f36c6642fb8ab6cb2186cf9b729c8f4b1cab94cb27a780375fb127d4bc9b91d0.png" src="../../_images/f36c6642fb8ab6cb2186cf9b729c8f4b1cab94cb27a780375fb127d4bc9b91d0.png" />
-<img alt="../../_images/2b65697b3e8c07fec4ef37928a490e6b6e59971ad31c341158f30d76c8f321b4.png" src="../../_images/2b65697b3e8c07fec4ef37928a490e6b6e59971ad31c341158f30d76c8f321b4.png" />
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Node 0 flagged at times: [(18, 7, 1.4, 1.019803902718557, 5.491251783869152), (24, 3, 1.4, 0.4898979485566356, 3.2659863237109046)]
-Node 1 flagged at times: [(11, 4, 1.6, 0.4898979485566356, 4.898979485566357), (17, 2, 0.2, 0.4000000000000001, 4.499999999999999), (18, 10, 0.6, 0.7999999999999999, 11.750000000000002), (27, 3, 1.2, 0.4, 4.5)]
-Node 2 flagged at times: [(5, 2, 0.2, 0.4, 4.5)]
-Node 3 flagged at times: [(17, 2, 0.4, 0.48989794855663565, 3.265986323710904), (18, 5, 0.6, 0.8, 5.5)]
-Node 4 flagged at times: [(17, 3, 1.2, 0.4, 4.5), (18, 10, 1.6, 0.8, 10.5)]
-Node 5 flagged at times: [(18, 8, 1.0, 1.0, 7.0)]
-Node 6 flagged at times: [(13, 4, 2.0, 0.6324555320336759, 3.162277660168379), (18, 8, 1.2, 1.4696938456699067, 4.626813958590448)]
-Node 7 flagged at times: [(18, 7, 1.4, 0.8, 6.999999999999999)]
-Node 9 flagged at times: [(18, 7, 1.2, 0.9797958971132712, 5.919600211726014)]
-Node 10 flagged at times: [(28, 4, 1.2, 0.7483314773547883, 3.741657386773941)]
+<img alt="../../_images/1826c4e1bf2cf9eb2941a211ebea6b81b11bdbbc90a00ae35378548f55391b01.png" src="../../_images/1826c4e1bf2cf9eb2941a211ebea6b81b11bdbbc90a00ae35378548f55391b01.png" />
+<img alt="../../_images/1c0bfe02f6bea2dc80ee4c15e6977376d2f9eab8ad5883193ae932f78d80712b.png" src="../../_images/1c0bfe02f6bea2dc80ee4c15e6977376d2f9eab8ad5883193ae932f78d80712b.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Node 0 flagged at times: [(18, np.int64(5), np.float64(1.2), np.float64(0.7483314773547883), np.float64(5.077963596336063)), (24, np.int64(3), np.float64(1.4), np.float64(0.4898979485566356), np.float64(3.2659863237109046))]
+Node 1 flagged at times: [(13, np.int64(3), np.float64(1.0), np.float64(0.6324555320336759), np.float64(3.162277660168379)), (18, np.int64(9), np.float64(2.2), np.float64(0.7483314773547882), np.float64(9.08688222502243))]
+Node 2 flagged at times: [(7, np.int64(3), np.float64(0.8), np.float64(0.4), np.float64(5.5)), (14, np.int64(3), np.float64(1.0), np.float64(0.6324555320336759), np.float64(3.162277660168379)), (18, np.int64(5), np.float64(1.2), np.float64(1.1661903789690602), np.float64(3.2584731177076676))]
+Node 3 flagged at times: [(18, np.int64(8), np.float64(1.0), np.float64(0.6324555320336759), np.float64(11.067971810589327))]
+Node 4 flagged at times: [(18, np.int64(4), np.float64(1.2), np.float64(0.7483314773547883), np.float64(3.741657386773941))]
+Node 5 flagged at times: [(18, np.int64(7), np.float64(1.2), np.float64(1.16619037896906), np.float64(4.973458969132757))]
+Node 6 flagged at times: [(18, np.int64(9), np.float64(1.6), np.float64(0.8), np.float64(9.25))]
+Node 7 flagged at times: [(18, np.int64(7), np.float64(1.4), np.float64(1.019803902718557), np.float64(5.491251783869152))]
+Node 8 flagged at times: [(18, np.int64(6), np.float64(1.2), np.float64(0.9797958971132713), np.float64(4.898979485566356))]
+Node 9 flagged at times: [(18, np.int64(6), np.float64(1.0), np.float64(0.6324555320336759), np.float64(7.905694150420948))]
 </pre></div>
 </div>
 </div>
@@ -877,7 +806,7 @@ Node 10 flagged at times: [(28, 4, 1.2, 0.7483314773547883, 3.741657386773941)]
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="04_Complex%20Networks%20and%20Generative%20Models.html"
+       href="04_ComplexNetworks_and_GenerativeModels.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
@@ -910,7 +839,7 @@ Node 10 flagged at times: [(28, 4, 1.2, 0.7483314773547883, 3.741657386773941)]
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#definitions-and-representations">1 Definitions and Representations</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#definitions-and-representations">1 Definitions and Representations</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#temporal-dynamic-graph-formal-definition">1.1 Temporal / Dynamic Graph — formal definition</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#snapshot-vs-streaming-vs-interval-representations">1.2 Snapshot vs. Streaming vs. Interval representations</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#node-dynamics-birth-death-and-activity-of-nodes">1.3 Node Dynamics: Birth, Death, and Activity of Nodes</a></li>
@@ -921,7 +850,7 @@ Node 10 flagged at times: [(28, 4, 1.2, 0.7483314773547883, 3.741657386773941)]
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#temporal-analogues-of-static-measures">2 Temporal analogues of static measures</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#temporal-analogues-of-static-measures">2 Temporal analogues of static measures</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#temporal-degree-per-node">2.1 Temporal degree (per node)</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#temporal-closeness-reachability-and-temporal-paths">2.2 Temporal closeness / reachability and temporal paths</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#temporal-motifs">2.3 Temporal motifs</a></li>
@@ -929,7 +858,7 @@ Node 10 flagged at times: [(28, 4, 1.2, 0.7483314773547883, 3.741657386773941)]
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dynamic-network-models-brief">3 Dynamic network models (brief)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tasks-in-dynamic-graph-analysis">4 Tasks in dynamic graph analysis</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#methods-for-anomaly-change-detection-core-ideas">5 Methods for anomaly &amp; change detection (core ideas)</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#methods-for-anomaly-change-detection-core-ideas">5 Methods for anomaly &amp; change detection (core ideas)</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#global-change-detection-snapshot-level">5.1 Global change detection (snapshot-level)</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#local-node-level-anomaly">5.2 Local / node-level anomaly</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#subgraph-structural-anomaly">5.3 Subgraph / structural anomaly</a></li>

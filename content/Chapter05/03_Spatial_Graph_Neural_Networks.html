@@ -1,0 +1,1201 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Message Passing Neural Networks (MPNN) &#8212; Graph Machine Learning</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/Chapter05/03_Spatial_Graph_Neural_Networks';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="prev" title="Spectral Graph Convolution in GNNs" href="02_Spectral_Graph_Convolution_in_GNNs.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Graph Machine Learning - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Graph Machine Learning - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Graph Machine Learning</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Chapter01/01_Graph_metrics.html"><strong>First Part: Graph Mining - Concepts and properties</strong></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter01/02_community_detection.html">Community Detection in Graphs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter01/03_FrequentSubgraphMining.html">Frequent Subgraph Mining</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter01/04_ComplexNetworks_and_GenerativeModels.html">Complex Networks and Generative Models</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="../Chapter01/05_DynamicGraphsandNetworkEvolutionAnalysis.html">Dynamic Graphs and Network Evolution Analysis</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Unsupervised GML</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Chapter02/01_intro_and_basics.html">Introduction to Graph Machine Learning</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter02/02_gnn_primer.html">Neural Network Essentials for Understanding GNNs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter02/03_embedding_examples.html">Graph Representation Learning</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Chapter03/00_Unsupervised_Learning.html">Unsupervised Graph learning</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter03/01_Shallow_Embeddings.html">Shallow Embedding Methods</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="../Chapter03/02_Autoencoders.html">AutoEncoder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter03/03_ConstrativeLearning.html">Contrastive Learning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter03/04_Graph_DataAugmentation_and_SamplingTechniques.html">Graph Mining Presentation</a></li>
+
+
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Supervised GML</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Chapter04/01_Feature_based_methods.html">Supervised Learning on Graphs</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../Chapter04/02_Shallow_embeddings.html">Shallow Embedding Methods</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Graph Neural Networks</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_Graph_Neural_Networks.html">From Graph Structure to Graph Neural Networks</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="02_Spectral_Graph_Convolution_in_GNNs.html">Spectral Graph Convolution in GNNs</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Message Passing Neural Networks (MPNN)</a></li>
+
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/content/Chapter05/03_Spatial_Graph_Neural_Networks.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Message Passing Neural Networks (MPNN)</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Message Passing Neural Networks (MPNN)</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spectral-vs-spatial-gnns">Spectral vs. Spatial GNNs</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#spectral-gnns">Spectral GNNs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#spatial-gnns">Spatial GNNs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-insights">Key Insights</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Message Passing Neural Networks (MPNN):</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-unifying-framework-for-spatial-gnns">The Unifying Framework for Spatial GNNs</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-general-mpnn-layer">The General MPNN Layer</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-message-function">Step 1 — Message Function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-aggregation-function">Step 2 — Aggregation Function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-update-function">Step 3 — Update Function</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-popular-gnn-models-fit-into-the-mpnn-framework">How Popular GNN Models Fit Into the MPNN Framework</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gcn-kipf-welling-2017"><strong>GCN (Kipf &amp; Welling, 2017)</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#graphsage-hamilton-et-al-2017"><strong>GraphSAGE (Hamilton et al., 2017)</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gat-graph-attention-networks"><strong>GAT (Graph Attention Networks)</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gin-graph-isomorphism-network"><strong>GIN (Graph Isomorphism Network)</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spectral-vs-message-passing-two-views-of-the-same-idea">Spectral vs. Message Passing: Two Views of the Same Idea</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-the-mpnn-framework-matters">Why the MPNN Framework Matters</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#expressiveness-of-gnns-and-the-weisfeilerleman-test">Expressiveness of GNNs and the Weisfeiler–Leman Test</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-1-wl-color-refinement-algorithm-intuition-and-steps">1. The 1-WL (Color Refinement) Algorithm — Intuition and Steps</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-properties">Key properties</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#relation-between-1-wl-and-message-passing-gnns">2. Relation between 1-WL and Message-Passing GNNs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#consequences-for-gnn-design">3. Consequences for GNN Design</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-python-demonstration-1-wl-color-refinement">Simple Python demonstration: 1-WL color refinement</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analysis-of-examples">Analysis of examples</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Summary</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#oversquashing">Oversquashing</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-oversquashing">1. What is Oversquashing?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#intuition-via-message-passing">2. Intuition via Message Passing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-simple-illustrative-example">3. A Simple Illustrative Example</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#small-numerical-demonstration-conceptual">Small Numerical Demonstration (Conceptual)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#relation-to-graph-curvature-and-bottlenecks">4. Relation to Graph Curvature and Bottlenecks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#connection-to-diffusion-and-heat-interpretation">5. Connection to Diffusion and Heat Interpretation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#remedies-and-design-patterns-to-mitigate-oversquashing">6. Remedies and Design Patterns to Mitigate Oversquashing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-advice">7. Practical Advice</a></li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="message-passing-neural-networks-mpnn">
+<h1>Message Passing Neural Networks (MPNN)<a class="headerlink" href="#message-passing-neural-networks-mpnn" title="Link to this heading">#</a></h1>
+<section id="spectral-vs-spatial-gnns">
+<h2>Spectral vs. Spatial GNNs<a class="headerlink" href="#spectral-vs-spatial-gnns" title="Link to this heading">#</a></h2>
+<p>Graph Neural Networks can be approached from two complementary perspectives:</p>
+<ol class="arabic simple">
+<li><p><strong>Spectral perspective</strong> – defines convolution via the graph Fourier transform and Laplacian eigen-decomposition.</p></li>
+<li><p><strong>Spatial perspective</strong> – defines convolution via message passing and local neighborhood aggregation.</p></li>
+</ol>
+<p>Modern GNNs are mostly spatial, but spectral theory provides the underlying rationale.</p>
+<section id="spectral-gnns">
+<h3>Spectral GNNs<a class="headerlink" href="#spectral-gnns" title="Link to this heading">#</a></h3>
+<p>We got familiar with spectral GNN.</p>
+<p><strong>Properties:</strong></p>
+<ul class="simple">
+<li><p>Requires eigen-decomposition → costly <span class="math notranslate nohighlight">\(O(n^3)\)</span></p></li>
+<li><p>Filters depend on the graph → limited transferability</p></li>
+<li><p>Provides a theoretical foundation for low-pass filtering and smoothing</p></li>
+</ul>
+<p><strong>Examples:</strong> ChebNet, Spectral CNN, GCN (first-order approximation)</p>
+</section>
+<section id="spatial-gnns">
+<h3>Spatial GNNs<a class="headerlink" href="#spatial-gnns" title="Link to this heading">#</a></h3>
+<p>Convolution directly on nodes via <strong>message passing</strong>:</p>
+<p><span class="math notranslate nohighlight">\(h_i^{(k+1)} = \phi^{(k)}\Big(h_i^{(k)}, Agg_{j \in \mathcal{N}(i)} Ψ ^{(k)}(h_i^{(k)}, h_j^{(k)}, e_{ij})\Big)\)</span></p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(h_i^{(k)}\)</span>: node feature at layer <span class="math notranslate nohighlight">\(k\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(Ψ\)</span>: message function</p></li>
+<li><p><span class="math notranslate nohighlight">\(Agg\)</span>: aggregation (sum, mean, max)</p></li>
+<li><p><span class="math notranslate nohighlight">\(\phi\)</span>: update function</p></li>
+<li><p><span class="math notranslate nohighlight">\(e_{ij}\)</span>: optional edge features</p></li>
+</ul>
+<p><strong>Advantages:</strong></p>
+<ul class="simple">
+<li><p>No eigenvectors, scales to large graphs</p></li>
+<li><p>Transferable to unseen graphs</p></li>
+<li><p>Intuitive: each node updates by looking at neighbors</p></li>
+</ul>
+<p><strong>Examples:</strong> GraphSAGE, GAT, GIN, MPNNs, Graph Transformers</p>
+</section>
+<section id="key-insights">
+<h3>Key Insights<a class="headerlink" href="#key-insights" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Aspect</p></th>
+<th class="head"><p>Spectral</p></th>
+<th class="head"><p>Spatial</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Foundation</p></td>
+<td><p>Fourier &amp; Laplacian</p></td>
+<td><p>Message passing</p></td>
+</tr>
+<tr class="row-odd"><td><p>Filter</p></td>
+<td><p>Frequency domain</p></td>
+<td><p>Node domain</p></td>
+</tr>
+<tr class="row-even"><td><p>Transferability</p></td>
+<td><p>Limited</p></td>
+<td><p>High</p></td>
+</tr>
+<tr class="row-odd"><td><p>Scalability</p></td>
+<td><p>Hard for large graphs</p></td>
+<td><p>Easy</p></td>
+</tr>
+<tr class="row-even"><td><p>Examples</p></td>
+<td><p>ChebNet, GCN</p></td>
+<td><p>GAT, GraphSAGE</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Unification:</strong></p>
+<ul class="simple">
+<li><p>Spatial aggregation = low-pass filtering</p></li>
+<li><p>Attention = adaptive spectral filter</p></li>
+<li><p>Diffusion-based methods = heat-kernel spectral filtering</p></li>
+<li><p>Polynomial filters = localized spectral operators</p></li>
+</ul>
+<p>Spectral theory gives the <strong>language</strong>, spatial models provide the <strong>practical implementation</strong>.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="id1">
+<h2>Message Passing Neural Networks (MPNN):<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<section id="the-unifying-framework-for-spatial-gnns">
+<h3>The Unifying Framework for Spatial GNNs<a class="headerlink" href="#the-unifying-framework-for-spatial-gnns" title="Link to this heading">#</a></h3>
+<p>After understanding spectral graph convolution and Laplacian-based filtering, we now move to the <strong>spatial</strong> viewpoint of GNNs, where information flows locally along edges.<br />
+Most modern GNNs — including GCN, GraphSAGE, GAT, and GIN — can be described under a single general model called the <strong>Message Passing Neural Network (MPNN) framework</strong>.</p>
+<p>This formulation captures the essence of how nodes exchange information in a graph.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="the-general-mpnn-layer">
+<h2>The General MPNN Layer<a class="headerlink" href="#the-general-mpnn-layer" title="Link to this heading">#</a></h2>
+<p>An MPNN layer updates node representations by exchanging <em>messages</em> between neighbors.</p>
+<p>For each node <span class="math notranslate nohighlight">\( i \)</span>, the update rule is:</p>
+<div class="math notranslate nohighlight">
+\[
+h_i^{(l+1)} 
+= 
+\phi\!\left(
+h_i^{(l)},\;
+\text{AGG}\_{\;j \in N(i)}
+\; \psi\!\left(h_i^{(l)},\, h_j^{(l)},\, e_{ij}\right)
+\right).
+\]</div>
+<p>Here:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\( h_i^{(l)} \)</span>: embedding of node <span class="math notranslate nohighlight">\(i\)</span> at layer <span class="math notranslate nohighlight">\(l\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\( e_{ij} \)</span>: optional edge features</p></li>
+<li><p><span class="math notranslate nohighlight">\( \psi \)</span>: <strong>message function</strong></p></li>
+<li><p><span class="math notranslate nohighlight">\( \text{AGG} \)</span>: a permutation-invariant <strong>aggregation</strong></p></li>
+<li><p><span class="math notranslate nohighlight">\( \phi \)</span>: <strong>update function</strong></p></li>
+</ul>
+<p>The layer consists of three conceptual steps:</p>
+<hr class="docutils" />
+<section id="step-1-message-function">
+<h3>Step 1 — Message Function<a class="headerlink" href="#step-1-message-function" title="Link to this heading">#</a></h3>
+<p>Each neighbor <span class="math notranslate nohighlight">\(j\)</span> sends a message to <span class="math notranslate nohighlight">\(i\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+m_{ij}^{(l)} = \psi(h_i^{(l)},\, h_j^{(l)},\, e_{ij}).
+\]</div>
+<p>This function can be:</p>
+<ul class="simple">
+<li><p>a linear transformation,</p></li>
+<li><p>an MLP,</p></li>
+<li><p>attention-based weights (as in GAT),</p></li>
+<li><p>or any learnable function.</p></li>
+</ul>
+<p>The message may depend on:</p>
+<ul class="simple">
+<li><p>sender node <span class="math notranslate nohighlight">\(j\)</span>,</p></li>
+<li><p>receiver node <span class="math notranslate nohighlight">\(i\)</span>,</p></li>
+<li><p>and edge features <span class="math notranslate nohighlight">\(e_{ij}\)</span>.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="step-2-aggregation-function">
+<h3>Step 2 — Aggregation Function<a class="headerlink" href="#step-2-aggregation-function" title="Link to this heading">#</a></h3>
+<p>Node <span class="math notranslate nohighlight">\(i\)</span> collects messages from all neighbors:</p>
+<div class="math notranslate nohighlight">
+\[
+m_i^{(l)} = \text{AGG}_{j \in N(i)} \; m_{ij}^{(l)}.
+\]</div>
+<p>Aggregation must be <strong>permutation invariant</strong>, since graph neighborhoods have no order.</p>
+<p>Common choices:</p>
+<ul class="simple">
+<li><p><strong>Sum</strong> → used in GIN (most expressive)</p></li>
+<li><p><strong>Mean</strong> → used in GraphSAGE</p></li>
+<li><p><strong>Max</strong> → captures strongest signal</p></li>
+<li><p><strong>Attention-weighted sum</strong> → used in GAT</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="step-3-update-function">
+<h3>Step 3 — Update Function<a class="headerlink" href="#step-3-update-function" title="Link to this heading">#</a></h3>
+<p>The node updates its embedding:</p>
+<div class="math notranslate nohighlight">
+\[
+h_i^{(l+1)} = \phi\!\left(h_i^{(l)},\; m_i^{(l)}\right).
+\]</div>
+<p>Typical update functions:</p>
+<ul class="simple">
+<li><p>concatenation + MLP (GraphSAGE)</p></li>
+<li><p>GRU/LSTM-style gating (Gated GNNs)</p></li>
+<li><p>simple linear transform (GCN style)</p></li>
+<li><p>residual connections</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="how-popular-gnn-models-fit-into-the-mpnn-framework">
+<h2>How Popular GNN Models Fit Into the MPNN Framework<a class="headerlink" href="#how-popular-gnn-models-fit-into-the-mpnn-framework" title="Link to this heading">#</a></h2>
+<section id="gcn-kipf-welling-2017">
+<h3><strong>GCN (Kipf &amp; Welling, 2017)</strong><a class="headerlink" href="#gcn-kipf-welling-2017" title="Link to this heading">#</a></h3>
+<p>A <em>linearized</em> MPNN with:</p>
+<ul class="simple">
+<li><p>message: <span class="math notranslate nohighlight">\( \psi(h_j) = W h_j \)</span></p></li>
+<li><p>aggregation: <strong>normalized sum</strong> using <span class="math notranslate nohighlight">\(D^{-1/2} A D^{-1/2}\)</span></p></li>
+<li><p>update: no dependence on <span class="math notranslate nohighlight">\(h_i\)</span></p></li>
+</ul>
+<p>GCN message passing:</p>
+<div class="math notranslate nohighlight">
+\[
+h_i^{(l+1)} = \sigma \!\left( \sum_{j \in N(i) \cup \{i\}} \frac{1}{\sqrt{d_i d_j}} \, W h_j^{(l)} \right).
+\]</div>
+</section>
+<hr class="docutils" />
+<section id="graphsage-hamilton-et-al-2017">
+<h3><strong>GraphSAGE (Hamilton et al., 2017)</strong><a class="headerlink" href="#graphsage-hamilton-et-al-2017" title="Link to this heading">#</a></h3>
+<p>An inductive MPNN with flexible aggregators:</p>
+<ul class="simple">
+<li><p>sum/mean/max aggregators</p></li>
+<li><p>update: concatenation with self-embedding</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+h_i^{(l+1)} = \sigma\!\left( W \cdot \left[ h_i^{(l)} \;\Vert\; \text{AGG}_{j \in N(i)} h_j^{(l)} \right] \right).
+\]</div>
+</section>
+<hr class="docutils" />
+<section id="gat-graph-attention-networks">
+<h3><strong>GAT (Graph Attention Networks)</strong><a class="headerlink" href="#gat-graph-attention-networks" title="Link to this heading">#</a></h3>
+<p>A message function computed through <strong>attention scores</strong>:</p>
+<div class="math notranslate nohighlight">
+\[
+\alpha_{ij}
+=
+\text{softmax}_j 
+\big(
+a^\top [W h_i \;\Vert\; W h_j]
+\big).
+\]</div>
+<p>Message passing becomes:</p>
+<div class="math notranslate nohighlight">
+\[
+h_i^{(l+1)} = \sigma\!\left( \sum_{j \in N(i)} \alpha_{ij} W h_j \right).
+\]</div>
+</section>
+<hr class="docutils" />
+<section id="gin-graph-isomorphism-network">
+<h3><strong>GIN (Graph Isomorphism Network)</strong><a class="headerlink" href="#gin-graph-isomorphism-network" title="Link to this heading">#</a></h3>
+<p>Uses <strong>sum</strong> aggregation for maximal expressive power:</p>
+<div class="math notranslate nohighlight">
+\[
+h_i^{(l+1)} = \text{MLP} \left( (1 + \epsilon) h_i^{(l)} + \sum_{j \in N(i)} h_j^{(l)} \right).
+\]</div>
+<p>It matches the power of the Weisfeiler–Leman test.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="spectral-vs-message-passing-two-views-of-the-same-idea">
+<h2>Spectral vs. Message Passing: Two Views of the Same Idea<a class="headerlink" href="#spectral-vs-message-passing-two-views-of-the-same-idea" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Aspect</p></th>
+<th class="head"><p>Spectral View</p></th>
+<th class="head"><p>Spatial / MPNN View</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Based on</p></td>
+<td><p>Graph Laplacian, eigenvectors</p></td>
+<td><p>Local neighborhoods, message passing</p></td>
+</tr>
+<tr class="row-odd"><td><p>Convolution</p></td>
+<td><p>Defined via filtering in frequency domain</p></td>
+<td><p>Defined via aggregating neighbor features</p></td>
+</tr>
+<tr class="row-even"><td><p>Computation</p></td>
+<td><p>Global (needs whole graph)</p></td>
+<td><p>Local (scalable)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Examples</p></td>
+<td><p>ChebNet, GCN</p></td>
+<td><p>GraphSAGE, GAT, GIN</p></td>
+</tr>
+<tr class="row-even"><td><p>Intuition</p></td>
+<td><p>Heat diffusion, smoothing</p></td>
+<td><p>Information exchange along edges</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Both views describe the same underlying phenomenon:</strong><br />
+<strong>information mixing across connected nodes.</strong></p>
+<p>Spectral = mathematical foundation<br />
+MPNN = general practical framework</p>
+</section>
+<hr class="docutils" />
+<section id="why-the-mpnn-framework-matters">
+<h2>Why the MPNN Framework Matters<a class="headerlink" href="#why-the-mpnn-framework-matters" title="Link to this heading">#</a></h2>
+<p>This unified view helps us understand:</p>
+<ul class="simple">
+<li><p>how seemingly different GNNs are related,</p></li>
+<li><p>how to design new architectures,</p></li>
+<li><p>how message functions and aggregators determine expressiveness,</p></li>
+<li><p>how edge features and directionality can be incorporated,</p></li>
+<li><p>how GNNs can scale to large graphs.</p></li>
+</ul>
+<p>It is the conceptual bridge between classical spectral theory and modern deep GNN design.</p>
+</section>
+<hr class="docutils" />
+<section id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>MPNN is a general framework that unifies most spatial GNN architectures.</p></li>
+<li><p>Each layer consists of message computation, aggregation, and update.</p></li>
+<li><p>GCN, GraphSAGE, GAT, and GIN are all special cases of MPNN.</p></li>
+<li><p>Spectral and spatial perspectives are different interpretations of the same process.</p></li>
+</ul>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="expressiveness-of-gnns-and-the-weisfeilerleman-test">
+<h1>Expressiveness of GNNs and the Weisfeiler–Leman Test<a class="headerlink" href="#expressiveness-of-gnns-and-the-weisfeilerleman-test" title="Link to this heading">#</a></h1>
+<p>Graph Neural Networks (GNNs) are powerful, but not all GNN architectures can distinguish every pair of non-isomorphic graphs. The most common theoretical tool for reasoning about the distinguishing power of (message-passing) GNNs is the <strong>Weisfeiler–Leman (WL) color refinement test</strong> — usually the 1-dimensional version, called <strong>1-WL</strong> or <strong>color refinement</strong>.</p>
+<section id="the-1-wl-color-refinement-algorithm-intuition-and-steps">
+<h2>1. The 1-WL (Color Refinement) Algorithm — Intuition and Steps<a class="headerlink" href="#the-1-wl-color-refinement-algorithm-intuition-and-steps" title="Link to this heading">#</a></h2>
+<p>1-WL is an iterative vertex-coloring procedure. Initially, every node is assigned a color that encodes its input label (or a single uniform color if there are no input labels). At each round, every node updates its color by hashing (or otherwise compressing) the multiset formed by its current color together with the multiset of neighbor colors.</p>
+<p>Formally, if <span class="math notranslate nohighlight">\(c^{(t)}(v)\)</span> is the color of node <span class="math notranslate nohighlight">\(v\)</span> at iteration <span class="math notranslate nohighlight">\(t\)</span>, then</p>
+<div class="math notranslate nohighlight">
+\[
+c^{(t+1)}(v) \leftarrow \text{hash}\Big( c^{(t)}(v),\ \{ c^{(t)}(u) : u \in \mathcal{N}(v) \} \Big).
+\]</div>
+<ul class="simple">
+<li><p>The algorithm stops when the coloring stabilizes (no new colors appear).</p></li>
+<li><p>If the final color histograms (counts of each color) differ between two graphs, 1-WL certifies they are non-isomorphic.</p></li>
+<li><p>If 1-WL produces the same color histogram on two graphs, the test is <strong>inconclusive</strong> — the graphs may still be non-isomorphic.</p></li>
+</ul>
+<section id="key-properties">
+<h3>Key properties<a class="headerlink" href="#key-properties" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Fast</strong>: each iteration is local and typically linear in edges.</p></li>
+<li><p><strong>Incomplete</strong>: there exist non-isomorphic graphs that 1-WL cannot distinguish.</p></li>
+<li><p><strong>Hierarchy</strong>: higher-dimensional WL tests (k-WL for <span class="math notranslate nohighlight">\(k&gt;1\)</span>) are strictly more powerful.</p></li>
+</ul>
+</section>
+</section>
+<section id="relation-between-1-wl-and-message-passing-gnns">
+<h2>2. Relation between 1-WL and Message-Passing GNNs<a class="headerlink" href="#relation-between-1-wl-and-message-passing-gnns" title="Link to this heading">#</a></h2>
+<p>A standard result in theory of GNNs:</p>
+<ul>
+<li><p><strong>Any standard Message-Passing Neural Network (MPNN)</strong> — where node features are iteratively updated using an aggregation of neighbor features followed by an update function — <strong>cannot be more powerful than 1-WL</strong> in distinguishing non-isomorphic graphs (provided the aggregation and update are permutation invariant and the network uses fixed-width continuous features). Intuition: each GNN layer performs a continuous analogue of the WL color refinement step (aggregate neighbor information → combine with node’s own feature).</p></li>
+<li><p><strong>Graph Isomorphism Network (GIN)</strong> (Xu et al., 2019) provably matches the discriminative power of 1-WL under suitable choices of aggregation and injective combine functions. GIN uses sum aggregation and multi-layer perceptrons (MLPs) to make the update approximately injective:</p>
+<div class="math notranslate nohighlight">
+\[
+  h_v^{(k+1)} = \text{MLP}^{(k)}\Big( (1+\epsilon^{(k)})\cdot h_v^{(k)} + \sum_{u \in \mathcal{N}(v)} h_u^{(k)} \Big).
+  \]</div>
+<p>With injective MLPs and appropriate parameters, GIN is as powerful as 1-WL.</p>
+</li>
+</ul>
+</section>
+<section id="consequences-for-gnn-design">
+<h2>3. Consequences for GNN Design<a class="headerlink" href="#consequences-for-gnn-design" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>If your task requires distinguishing graph structures that 1-WL cannot separate, standard MPNNs will also fail. To gain more expressiveness you can:</p>
+<ul>
+<li><p>Use higher-order GNNs (related to k-WL) that operate on tuples of nodes.</p></li>
+<li><p>Augment node features with additional structural information (positional encodings, random features, subgraph IDs).</p></li>
+<li><p>Use architectures that incorporate subgraph or path information (subgraph GNNs, higher-order message passing).</p></li>
+</ul>
+</li>
+<li><p>However, more expressive models often cost more computation and memory, so there is a trade-off.</p></li>
+</ul>
+<section id="simple-python-demonstration-1-wl-color-refinement">
+<h3>Simple Python demonstration: 1-WL color refinement<a class="headerlink" href="#simple-python-demonstration-1-wl-color-refinement" title="Link to this heading">#</a></h3>
+<p>The snippet below demonstrates one round of 1-WL color refinement on a small graph.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">networkx</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nx</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">defaultdict</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">torch_geometric.data</span><span class="w"> </span><span class="kn">import</span> <span class="n">Data</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">torch_geometric.nn</span><span class="w"> </span><span class="kn">import</span> <span class="n">GCNConv</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">weisfeiler_lehman_step</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">labels</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Perform one WL refinement step.&quot;&quot;&quot;</span>
+    <span class="n">new_labels</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">():</span>
+        <span class="c1"># Multiset of neighbors&#39; labels</span>
+        <span class="n">neighbor_labels</span> <span class="o">=</span> <span class="p">[</span><span class="n">labels</span><span class="p">[</span><span class="n">neigh</span><span class="p">]</span> <span class="k">for</span> <span class="n">neigh</span> <span class="ow">in</span> <span class="n">G</span><span class="o">.</span><span class="n">neighbors</span><span class="p">(</span><span class="n">node</span><span class="p">)]</span>
+        <span class="c1"># Sort and convert to tuple for hashable key</span>
+        <span class="n">neighbor_labels_sorted</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">neighbor_labels</span><span class="p">))</span>
+        <span class="c1"># New label is combination of current label and neighbors</span>
+        <span class="n">new_labels</span><span class="p">[</span><span class="n">node</span><span class="p">]</span> <span class="o">=</span> <span class="nb">hash</span><span class="p">((</span><span class="n">labels</span><span class="p">[</span><span class="n">node</span><span class="p">],</span> <span class="n">neighbor_labels_sorted</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">new_labels</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">wl_test</span><span class="p">(</span><span class="n">G1</span><span class="p">,</span> <span class="n">G2</span><span class="p">,</span> <span class="n">num_iter</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Perform WL test to check if two graphs are distinguishable.&quot;&quot;&quot;</span>
+    <span class="c1"># Initial labels: all 0</span>
+    <span class="n">labels1</span> <span class="o">=</span> <span class="p">{</span><span class="n">n</span><span class="p">:</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">G1</span><span class="o">.</span><span class="n">nodes</span><span class="p">()}</span>
+    <span class="n">labels2</span> <span class="o">=</span> <span class="p">{</span><span class="n">n</span><span class="p">:</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">G2</span><span class="o">.</span><span class="n">nodes</span><span class="p">()}</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_iter</span><span class="p">):</span>
+        <span class="n">labels1</span> <span class="o">=</span> <span class="n">weisfeiler_lehman_step</span><span class="p">(</span><span class="n">G1</span><span class="p">,</span> <span class="n">labels1</span><span class="p">)</span>
+        <span class="n">labels2</span> <span class="o">=</span> <span class="n">weisfeiler_lehman_step</span><span class="p">(</span><span class="n">G2</span><span class="p">,</span> <span class="n">labels2</span><span class="p">)</span>
+        
+        <span class="c1"># Compare multisets of labels</span>
+        <span class="n">multiset1</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">labels1</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+        <span class="n">multiset2</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">labels2</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Step </span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2"> - Graph A labels: </span><span class="si">{</span><span class="n">multiset1</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Step </span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2"> - Graph B labels: </span><span class="si">{</span><span class="n">multiset2</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        
+        <span class="k">if</span> <span class="n">multiset1</span> <span class="o">!=</span> <span class="n">multiset2</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">True</span>  <span class="c1"># Graphs are distinguishable</span>
+    <span class="k">return</span> <span class="kc">False</span>  <span class="c1"># Graphs are indistinguishable</span>
+
+<span class="c1"># --- Example graphs ---</span>
+<span class="c1"># Graph A: 4-node cycle</span>
+<span class="n">G_A</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">cycle_graph</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="c1"># Graph B: 4-node cycle + diagonal</span>
+<span class="n">G_B</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">cycle_graph</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">G_B</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="c1"># --- Run WL test ---</span>
+<span class="n">distinguishable</span> <span class="o">=</span> <span class="n">wl_test</span><span class="p">(</span><span class="n">G_A</span><span class="p">,</span> <span class="n">G_B</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Graphs are distinguishable by 1-WL:&quot;</span> <span class="p">,</span> <span class="n">distinguishable</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step 1 - Graph A labels: [7676811509268022211, 7676811509268022211, 7676811509268022211, 7676811509268022211]
+Step 1 - Graph B labels: [3222727695683937112, 3222727695683937112, 7676811509268022211, 7676811509268022211]
+
+Graphs are distinguishable by 1-WL: True
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># --- Simple 2-layer GCN ---</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">SimpleGCN</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="c1"># First GCN layer: input_dim=1, hidden_dim=2</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">conv1</span> <span class="o">=</span> <span class="n">GCNConv</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="c1"># Second GCN layer: hidden_dim=2, output_dim=2</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">conv2</span> <span class="o">=</span> <span class="n">GCNConv</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">edge_index</span><span class="p">):</span>
+        <span class="c1"># First layer + ReLU activation</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">conv1</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">edge_index</span><span class="p">)</span><span class="o">.</span><span class="n">relu</span><span class="p">()</span>
+        <span class="c1"># Second layer (no activation)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">conv2</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">edge_index</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">x</span>
+
+<span class="c1"># Instantiate the model</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">SimpleGCN</span><span class="p">()</span>
+
+<span class="c1"># --- Compute embeddings for both graphs ---</span>
+<span class="n">out_A</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">graph_A</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">graph_A</span><span class="o">.</span><span class="n">edge_index</span><span class="p">)</span>
+<span class="n">out_B</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">graph_B</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">graph_B</span><span class="o">.</span><span class="n">edge_index</span><span class="p">)</span>
+
+<span class="c1"># Print the embeddings</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Graph A embeddings:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">out_A</span><span class="o">.</span><span class="n">detach</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Graph B embeddings:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">out_B</span><span class="o">.</span><span class="n">detach</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Graph A embeddings:
+ tensor([[ 1.2406, -0.9831],
+        [ 1.2406, -0.9831],
+        [ 1.2406, -0.9831],
+        [ 1.2406, -0.9831]])
+Graph B embeddings:
+ tensor([[ 1.3205, -1.0464],
+        [ 1.1482, -0.9099],
+        [ 1.3205, -1.0464],
+        [ 1.1482, -0.9099]])
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="analysis-of-examples">
+<h3>Analysis of examples<a class="headerlink" href="#analysis-of-examples" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Small differences ≠ identical embeddings</strong><br />
+Although the 1-WL test can perfectly distinguish Graph A and B, the GCN embeddings are still close. In downstream tasks like classification, such small differences might lead to errors.</p></li>
+<li><p><strong>Reasons for closeness:</strong></p>
+<ol class="arabic simple">
+<li><p>All nodes have identical initial features → GCN only aggregates neighbor information.</p></li>
+<li><p>Few layers (2-layer GCN) → global structural differences are not fully captured.</p></li>
+<li><p>Aggregation via mean/sum → a single extra edge has limited impact on embeddings.</p></li>
+</ol>
+</li>
+</ul>
+</section>
+<section id="id2">
+<h3>Summary<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>The embeddings are not identical, but a simple GCN has <strong>limited discriminative power</strong>.</p></li>
+<li><p>To increase separation and obtain clearer embeddings:</p>
+<ul>
+<li><p>Use GIN or a more expressive GNN.</p></li>
+<li><p>Add node features (e.g., degree or random features).</p></li>
+<li><p>Increase the number of layers.</p></li>
+</ul>
+</li>
+</ul>
+<p>This simple routine shows how node colors are refined. Repeating wl_one_round until convergence implements the full 1-WL procedure.</p>
+<p>Takeaway: 1-WL is the canonical baseline for theoretical expressiveness of GNNs. Standard MPNNs are bounded by 1-WL; GIN reaches that bound. If you need strictly greater discriminative power, consider higher-order or augmented architectures.</p>
+</section>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="oversquashing">
+<h1>Oversquashing<a class="headerlink" href="#oversquashing" title="Link to this heading">#</a></h1>
+<p><strong>Bottlenecks and Graph Curvature</strong></p>
+<p>In graph learning, a key limitation is <strong>oversquashing</strong>: the phenomenon that prevents distant information from being transmitted reliably through a GNN.<br />
+Oversquashing is <strong>different from oversmoothing</strong>; both are important but distinct failure modes.</p>
+<hr class="docutils" />
+<section id="what-is-oversquashing">
+<h2>1. What is Oversquashing?<a class="headerlink" href="#what-is-oversquashing" title="Link to this heading">#</a></h2>
+<p><strong>Oversquashing</strong> occurs when a large amount of information (many messages) must pass through a <strong>small number of edges or nodes</strong> — a bottleneck. Because typical message-passing layers compress neighbor information into a fixed-size vector, the node(s) at the bottleneck cannot faithfully encode all upstream information.</p>
+<p>Consequences:</p>
+<ul class="simple">
+<li><p>Long-range dependencies are “squashed” into low-dimensional representations.</p></li>
+<li><p>Performance degrades for tasks that require combining information from distant parts of the graph (e.g., parity-like tasks, long-range relational reasoning).</p></li>
+</ul>
+<p><strong>Formal scenario:</strong><br />
+Consider regions (A) and (B) in a graph. If all paths from (A) to (B) go through a small cut (C) (few edges/nodes), the total information from (A) must be compressed through (C), causing loss.</p>
+</section>
+<hr class="docutils" />
+<section id="intuition-via-message-passing">
+<h2>2. Intuition via Message Passing<a class="headerlink" href="#intuition-via-message-passing" title="Link to this heading">#</a></h2>
+<p>A typical MPNN layer aggregates neighbor messages:</p>
+<p>[
+m_v^{(k)} = \text{AGG}\big( { h_u^{(k)} : u \in \mathcal{N}(v) }\big), \qquad
+h_v^{(k+1)} = \phi( h_v^{(k)}, m_v^{(k)} ).
+]</p>
+<p>If many messages are aggregated at a bottleneck node (b), the resulting fixed-length vector <strong>cannot uniquely encode all combinations of upstream messages</strong>.</p>
+</section>
+<hr class="docutils" />
+<section id="a-simple-illustrative-example">
+<h2>3. A Simple Illustrative Example<a class="headerlink" href="#a-simple-illustrative-example" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Construct two clusters (A) and (B), each with many nodes, connected through a <strong>single bridge node</strong> (b).</p></li>
+<li><p>Nodes in (A) have signals that must influence a node in (B).</p></li>
+<li><p>All information must pass through (b), which aggregates multiple inputs into one vector.</p></li>
+</ul>
+<p><strong>Consequence:</strong> Different configurations of (A) collapse to the same representation at (b). The network cannot distinguish them.</p>
+<section id="small-numerical-demonstration-conceptual">
+<h3>Small Numerical Demonstration (Conceptual)<a class="headerlink" href="#small-numerical-demonstration-conceptual" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Let cluster (A) have 100 nodes, each carrying one bit.</p></li>
+<li><p>The bridge node can only pass a 32-dimensional float vector.</p></li>
+<li><p>The number of distinct messages is limited ((2^{32})) compared to (2^{100}) possible input configurations.</p></li>
+</ul>
+<blockquote>
+<div><p>This illustrates the information bottleneck: many-to-one mapping through narrow channels.</p>
+</div></blockquote>
+</section>
+</section>
+<hr class="docutils" />
+<section id="relation-to-graph-curvature-and-bottlenecks">
+<h2>4. Relation to Graph Curvature and Bottlenecks<a class="headerlink" href="#relation-to-graph-curvature-and-bottlenecks" title="Link to this heading">#</a></h2>
+<p>Research links oversquashing to geometric/topological properties:</p>
+<ul class="simple">
+<li><p><strong>Negative curvature</strong> and <strong>low-conductance cuts</strong> → strong bottlenecks → increased oversquashing.</p></li>
+<li><p>Tree-like branches and narrow bridges compress information more than well-connected meshes.</p></li>
+</ul>
+<p><strong>Graph curvature intuition:</strong> Measures neighborhood expansion; narrow cuts or low expansion indicate potential oversquashing.</p>
+</section>
+<hr class="docutils" />
+<section id="connection-to-diffusion-and-heat-interpretation">
+<h2>5. Connection to Diffusion and Heat Interpretation<a class="headerlink" href="#connection-to-diffusion-and-heat-interpretation" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Message passing is analogous to <strong>local diffusion / smoothing</strong>.</p></li>
+<li><p>Propagating detailed information over long geodesic distances attenuates and mixes signals.</p></li>
+<li><p>Bottlenecks accelerate this loss: important high-frequency or combinatorial information may vanish before reaching the target.</p></li>
+</ul>
+<p><strong>Comparison with oversmoothing:</strong></p>
+<ul class="simple">
+<li><p><strong>Oversmoothing:</strong> Node representations converge to similar vectors due to repeated smoothing (large effective (t) in diffusion).</p></li>
+<li><p><strong>Oversquashing:</strong> Node representations do not converge, but bottlenecks limit the <strong>capacity</strong> to transmit diverse information.</p></li>
+</ul>
+</section>
+<section id="remedies-and-design-patterns-to-mitigate-oversquashing">
+<h2>6. Remedies and Design Patterns to Mitigate Oversquashing<a class="headerlink" href="#remedies-and-design-patterns-to-mitigate-oversquashing" title="Link to this heading">#</a></h2>
+<p>Several strategies can help reduce oversquashing:</p>
+<ul class="simple">
+<li><p><strong>Increase channel width</strong><br />
+Larger hidden dimensions can carry more information. This is helpful but not a complete solution and increases the number of parameters.</p></li>
+<li><p><strong>Add skip/residual connections or residual gating</strong><br />
+Allow earlier (less-compressed) signals to bypass bottlenecks, preserving more information.</p></li>
+<li><p><strong>Use virtual nodes</strong><br />
+Add fully-connected virtual nodes that gather global information and broadcast it back to the graph.</p></li>
+<li><p><strong>Graph rewiring / edge augmentation</strong><br />
+Add edges to increase connectivity across bottlenecks. Techniques include stochastic edges, Personalized PageRank (PPR) edges, or curvature-based rewiring.</p></li>
+<li><p><strong>Use positional encodings or structural features</strong><br />
+Provide nodes with extra features that help distinguish them without sending all raw information through bottlenecks.</p></li>
+<li><p><strong>Higher-order or subgraph GNNs</strong><br />
+Capture more local structure, reducing the need for long-range message passing.</p></li>
+<li><p><strong>Residual mixing schemes (e.g., GCNII)</strong><br />
+Combine initial features with deep-layer outputs to preserve the original signal.</p></li>
+</ul>
+<hr>
+</section>
+<section id="practical-advice">
+<h2>7. Practical Advice<a class="headerlink" href="#practical-advice" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Assess task requirements</strong><br />
+Determine whether the task needs long-range or combinatorial information. For many standard semi-supervised node classification tasks on homophilous graphs, simple GNNs suffice.</p></li>
+<li><p><strong>Detect oversquashing</strong><br />
+For tasks connecting distant nodes across narrow cuts (e.g., molecular graphs or reasoning tasks), test by building synthetic bottleneck graphs or measuring sensitivity to added edges/virtual nodes.</p></li>
+<li><p><strong>Mitigate early</strong><br />
+Apply rewiring or virtual nodes as effective mitigation techniques before moving to heavier higher-order models.</p></li>
+</ul>
+<p><strong>Summary:</strong><br />
+Oversquashing is an information-theoretic bottleneck in message passing: when many messages are squeezed through a few edges or nodes, information is lost. Detecting it, analyzing it theoretically (via curvature or conductance), and mitigating it (via rewiring, residual connections, virtual nodes, or positional encodings) are active and practically important areas in modern GNN research.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "mlgbook"
+        },
+        kernelOptions: {
+            name: "mlgbook",
+            path: "./content\Chapter05"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'mlgbook'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="02_Spectral_Graph_Convolution_in_GNNs.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Spectral Graph Convolution in GNNs</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Message Passing Neural Networks (MPNN)</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spectral-vs-spatial-gnns">Spectral vs. Spatial GNNs</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#spectral-gnns">Spectral GNNs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#spatial-gnns">Spatial GNNs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-insights">Key Insights</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Message Passing Neural Networks (MPNN):</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-unifying-framework-for-spatial-gnns">The Unifying Framework for Spatial GNNs</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-general-mpnn-layer">The General MPNN Layer</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-message-function">Step 1 — Message Function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-aggregation-function">Step 2 — Aggregation Function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-update-function">Step 3 — Update Function</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-popular-gnn-models-fit-into-the-mpnn-framework">How Popular GNN Models Fit Into the MPNN Framework</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gcn-kipf-welling-2017"><strong>GCN (Kipf &amp; Welling, 2017)</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#graphsage-hamilton-et-al-2017"><strong>GraphSAGE (Hamilton et al., 2017)</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gat-graph-attention-networks"><strong>GAT (Graph Attention Networks)</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gin-graph-isomorphism-network"><strong>GIN (Graph Isomorphism Network)</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spectral-vs-message-passing-two-views-of-the-same-idea">Spectral vs. Message Passing: Two Views of the Same Idea</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-the-mpnn-framework-matters">Why the MPNN Framework Matters</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#expressiveness-of-gnns-and-the-weisfeilerleman-test">Expressiveness of GNNs and the Weisfeiler–Leman Test</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-1-wl-color-refinement-algorithm-intuition-and-steps">1. The 1-WL (Color Refinement) Algorithm — Intuition and Steps</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-properties">Key properties</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#relation-between-1-wl-and-message-passing-gnns">2. Relation between 1-WL and Message-Passing GNNs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#consequences-for-gnn-design">3. Consequences for GNN Design</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-python-demonstration-1-wl-color-refinement">Simple Python demonstration: 1-WL color refinement</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analysis-of-examples">Analysis of examples</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Summary</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#oversquashing">Oversquashing</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-oversquashing">1. What is Oversquashing?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#intuition-via-message-passing">2. Intuition via Message Passing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-simple-illustrative-example">3. A Simple Illustrative Example</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#small-numerical-demonstration-conceptual">Small Numerical Demonstration (Conceptual)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#relation-to-graph-curvature-and-bottlenecks">4. Relation to Graph Curvature and Bottlenecks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#connection-to-diffusion-and-heat-interpretation">5. Connection to Diffusion and Heat Interpretation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#remedies-and-design-patterns-to-mitigate-oversquashing">6. Remedies and Design Patterns to Mitigate Oversquashing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-advice">7. Practical Advice</a></li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Soheila Ashkezari-T.
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

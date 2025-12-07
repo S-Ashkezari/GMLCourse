@@ -60,7 +60,7 @@
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'content/Chapter01/02_community_detection';</script>
-    <link rel="canonical" href="/GMLCourse/content/Chapter01/02_community_detection.html" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Frequent Subgraph Mining" href="03_FrequentSubgraphMining.html" />
@@ -103,8 +103,8 @@
          class="form-control"
          name="q"
          id="search-input"
-         placeholder="Search this book..."
-         aria-label="Search this book..."
+         placeholder="Search..."
+         aria-label="Search..."
          autocomplete="off"
          autocorrect="off"
          autocapitalize="off"
@@ -174,24 +174,20 @@
  </script></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
-        
-        <ul class="nav bd-sidenav bd-sidenav__home-link">
-            <li class="toctree-l1">
-                <a class="reference internal" href="../../intro.html">
-                    Welcome to Graph Machine Learning
-                </a>
-            </li>
-        </ul>
-        <ul class="current nav bd-sidenav">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Graph Machine Learning</span></p>
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="01_Graph_metrics.html"><strong>First Part: Graph Mining - Concepts and properties</strong></a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Community Detection in Graphs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="03_FrequentSubgraphMining.html">Frequent Subgraph Mining</a></li>
-<li class="toctree-l2"><a class="reference internal" href="04_Complex%20Networks%20and%20Generative%20Models.html">Complex Networks and Generative Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04_ComplexNetworks_and_GenerativeModels.html">Complex Networks and Generative Models</a></li>
 
 
 <li class="toctree-l2"><a class="reference internal" href="05_DynamicGraphsandNetworkEvolutionAnalysis.html">Dynamic Graphs and Network Evolution Analysis</a></li>
 </ul>
 </details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Unsupervised GML</span></p>
+<ul class="nav bd-sidenav">
 <li class="toctree-l1 has-children"><a class="reference internal" href="../Chapter02/01_intro_and_basics.html">Introduction to Graph Machine Learning</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter02/02_gnn_primer.html">Neural Network Essentials for Understanding GNNs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter02/03_embedding_examples.html">Graph Representation Learning</a></li>
@@ -203,14 +199,25 @@
 
 <li class="toctree-l2"><a class="reference internal" href="../Chapter03/02_Autoencoders.html">AutoEncoder</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter03/03_ConstrativeLearning.html">Contrastive Learning</a></li>
-
-<li class="toctree-l2"><a class="reference internal" href="../Chapter03/04_Graph%20Data%20Augmentation%20and%20Sampling%20Techniques.html">Graph Mining Presentation</a></li>
-
+<li class="toctree-l2"><a class="reference internal" href="../Chapter03/04_Graph_DataAugmentation_and_SamplingTechniques.html">Graph Mining Presentation</a></li>
 
 
 </ul>
 </details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Supervised GML</span></p>
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../Chapter04/01_Feature_based_methods.html">Supervised Learning on Graphs</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../Chapter04/02_Shallow_embeddings.html">Shallow Embedding Methods</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Graph Neural Networks</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Chapter05/01_Graph_Neural_Networks.html">From Graph Structure to Graph Neural Networks</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../Chapter05/02_Spectral_Graph_Convolution_in_GNNs.html">Spectral Graph Convolution in GNNs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Chapter05/03_Spatial_Graph_Neural_Networks.html">Message Passing Neural Networks (MPNN)</a></li>
+
 
 </ul>
 
@@ -253,84 +260,6 @@
         <div class="header-article-item">
 
 <div class="article-header-buttons">
-
-
-
-
-
-<div class="dropdown dropdown-launch-buttons">
-  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
-    <i class="fas fa-rocket"></i>
-  </button>
-  <ul class="dropdown-menu">
-      
-      
-      
-      <li><a href="https://colab.research.google.com/github/executablebooks/jupyter-book/blob/master/docs/content/Chapter01/02_community_detection.ipynb" target="_blank"
-   class="btn btn-sm dropdown-item"
-   title="Launch on Colab"
-   data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  
-    <img alt="Colab logo" src="../../_static/images/logo_colab.png">
-  </span>
-<span class="btn__text-container">Colab</span>
-</a>
-</li>
-      
-  </ul>
-</div>
-
-
-
-
-
-
-<div class="dropdown dropdown-source-buttons">
-  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
-    <i class="fab fa-github"></i>
-  </button>
-  <ul class="dropdown-menu">
-      
-      
-      
-      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
-   class="btn btn-sm btn-source-repository-button dropdown-item"
-   title="Source repository"
-   data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  <i class="fab fa-github"></i>
-  </span>
-<span class="btn__text-container">Repository</span>
-</a>
-</li>
-      
-      
-      
-      
-      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fcontent/Chapter01/02_community_detection.html&body=Your%20issue%20content%20here." target="_blank"
-   class="btn btn-sm btn-source-issues-button dropdown-item"
-   title="Open an issue"
-   data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  <i class="fas fa-lightbulb"></i>
-  </span>
-<span class="btn__text-container">Open issue</span>
-</a>
-</li>
-      
-  </ul>
-</div>
-
 
 
 
@@ -439,20 +368,20 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-a-community">What is a Community?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modularity-a-measure-of-community-quality">Modularity: A Measure of Community Quality</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modularity-a-measure-of-community-quality">Modularity: A Measure of Community Quality</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#formula">Formula:</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#louvain-method-for-community-detection">Louvain Method for Community Detection</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#louvain-method-for-community-detection">Louvain Method for Community Detection</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#algorithm-steps">Algorithm Steps</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#intuition">Intuition</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#advantages-and-disadvantages-of-the-louvain-algorithm">Advantages and Disadvantages of the Louvain Algorithm</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#advantages-and-disadvantages-of-the-louvain-algorithm">Advantages and Disadvantages of the Louvain Algorithm</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#label-propagation-algorithm-lpa">Label Propagation Algorithm (LPA)</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#label-propagation-algorithm-lpa">Label Propagation Algorithm (LPA)</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1"><strong>Algorithm Steps</strong></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#characteristics"><strong>Characteristics</strong></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#advantages"><strong>Advantages</strong></a></li>
@@ -460,14 +389,14 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">**Example</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#label-propagation-algorithm-lpa-step-by-step-example">Label Propagation Algorithm (LPA) – Step by Step Example</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#label-propagation-algorithm-lpa-step-by-step-example">Label Propagation Algorithm (LPA) – Step by Step Example</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-0-initialization">Step 0: Initialization</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-first-iteration">Step 1: First Iteration</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-second-iteration">Step 2: Second Iteration</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-convergence">Step 3: Convergence</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#girvannewman-algorithm">Girvan–Newman Algorithm</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#girvannewman-algorithm">Girvan–Newman Algorithm</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3"><strong>Algorithm Steps</strong></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4"><strong>Characteristics</strong></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5"><strong>Advantages</strong></a></li>
@@ -475,7 +404,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#python">**Python **</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practice">📝 Practice</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practice">Practice</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#starter-code">Starter Code:</a></li>
 </ul>
 </li>
@@ -660,7 +589,7 @@ Node 6: Moscow -&gt; Community 1
 Node 7: Tokyo -&gt; Community 1
 </pre></div>
 </div>
-<img alt="../../_images/b2edcd187a248db6c30986a3b065a9345cac3445ce36cd09c4f9c9af2f94147a.png" src="../../_images/b2edcd187a248db6c30986a3b065a9345cac3445ce36cd09c4f9c9af2f94147a.png" />
+<img alt="../../_images/8ed08f0e0399fc1a061bf2ad43467997b575ea95d5de65ad77a63ced3ca43676.png" src="../../_images/8ed08f0e0399fc1a061bf2ad43467997b575ea95d5de65ad77a63ced3ca43676.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -686,7 +615,7 @@ Node 7: Tokyo -&gt; Community 1
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/d5eb3efa0fd94f4459a7e172fc65c72b6fde15fb4de30a0c02daa5508c555cef.png" src="../../_images/d5eb3efa0fd94f4459a7e172fc65c72b6fde15fb4de30a0c02daa5508c555cef.png" />
+<img alt="../../_images/666433f77f89b8ae5f8b2652c57e8efc2b01801657cb5eff77b010c9891bfa3d.png" src="../../_images/666433f77f89b8ae5f8b2652c57e8efc2b01801657cb5eff77b010c9891bfa3d.png" />
 </div>
 </div>
 </section>
@@ -921,12 +850,12 @@ Nodes sharing the same label are grouped together as one community.</p></li>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Community 1: [2, 8, 9, 14, 15, 18, 20, 22, 23, 26, 27, 28, 29, 30, 32, 33]
-Community 2: [5, 6, 16]
-Community 3: [0, 1, 3, 4, 7, 10, 11, 12, 13, 17, 19, 21, 24, 25, 31]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Community 1: [0, 1, 3, 4, 7, 10, 11, 12, 13, 17, 19, 21, 24, 25, 31]
+Community 2: [2, 8, 9, 14, 15, 18, 20, 22, 23, 26, 27, 28, 29, 30, 32, 33]
+Community 3: [5, 6, 16]
 </pre></div>
 </div>
-<img alt="../../_images/231b48a1094d006238d1bc9811206b5609c3d9e734ae8a9fd16e2710b75ef4bb.png" src="../../_images/231b48a1094d006238d1bc9811206b5609c3d9e734ae8a9fd16e2710b75ef4bb.png" />
+<img alt="../../_images/0d7e2300dc4b35f37ec70ddd4500562a7a41ad5f8d1c7bea7532a86957ff40d4.png" src="../../_images/0d7e2300dc4b35f37ec70ddd4500562a7a41ad5f8d1c7bea7532a86957ff40d4.png" />
 </div>
 </div>
 </section>
@@ -1039,13 +968,22 @@ It identifies edges that are most “between” communities (edges with high <st
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Communities: ([0, 1, 3, 4, 5, 6, 7, 10, 11, 12, 13, 16, 17, 19, 21], [2, 8, 9, 14, 15, 18, 20, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33])
 </pre></div>
 </div>
-<img alt="../../_images/73f340225fd6852ab42fbecc20dd1879ec437ccd6d431456d8f182735ceaa3f1.png" src="../../_images/73f340225fd6852ab42fbecc20dd1879ec437ccd6d431456d8f182735ceaa3f1.png" />
+<img alt="../../_images/dd7e9630681b52fb584fe9d0d9fb5070086582a29f559e6325b635501d46a21a.png" src="../../_images/dd7e9630681b52fb584fe9d0d9fb5070086582a29f559e6325b635501d46a21a.png" />
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="n">The</span> <span class="n">Kernel</span> <span class="n">crashed</span> <span class="k">while</span> <span class="n">executing</span> <span class="n">code</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">current</span> <span class="n">cell</span> <span class="ow">or</span> <span class="n">a</span> <span class="n">previous</span> <span class="n">cell</span><span class="o">.</span> 
+
+<span class="n">Please</span> <span class="n">review</span> <span class="n">the</span> <span class="n">code</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">cell</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="n">to</span> <span class="n">identify</span> <span class="n">a</span> <span class="n">possible</span> <span class="n">cause</span> <span class="n">of</span> <span class="n">the</span> <span class="n">failure</span><span class="o">.</span> 
+
+<span class="n">Click</span> <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s1">&#39;https://aka.ms/vscodeJupyterKernelCrash&#39;</span><span class="o">&gt;</span><span class="n">here</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span> <span class="k">for</span> <span class="n">more</span> <span class="n">info</span><span class="o">.</span> 
+
+<span class="n">View</span> <span class="n">Jupyter</span> <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s1">&#39;command:jupyter.viewOutput&#39;</span><span class="o">&gt;</span><span class="n">log</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span> <span class="k">for</span> <span class="n">further</span> <span class="n">details</span><span class="o">.</span>
+</pre></div>
+</div>
 </div>
 </div>
 </section>
 </section>
 <section id="practice">
-<h2>📝 Practice<a class="headerlink" href="#practice" title="Link to this heading">#</a></h2>
+<h2>Practice<a class="headerlink" href="#practice" title="Link to this heading">#</a></h2>
 <p>Generate a synthetic graph using the <strong>Barabási–Albert</strong> model and apply all three community detection methods. Compare the number of detected communities and visualize them.</p>
 <section id="starter-code">
 <h3>Starter Code:<a class="headerlink" href="#starter-code" title="Link to this heading">#</a></h3>
@@ -1053,6 +991,7 @@ It identifies edges that are most “between” communities (edges with high <st
 <span class="c1"># Try Louvain, LPA, and Girvan–Newman on this graph</span>
 </pre></div>
 </div>
+<p>End of section</p>
 </section>
 </section>
 </section>
@@ -1122,20 +1061,20 @@ It identifies edges that are most “between” communities (edges with high <st
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-a-community">What is a Community?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modularity-a-measure-of-community-quality">Modularity: A Measure of Community Quality</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modularity-a-measure-of-community-quality">Modularity: A Measure of Community Quality</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#formula">Formula:</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#louvain-method-for-community-detection">Louvain Method for Community Detection</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#louvain-method-for-community-detection">Louvain Method for Community Detection</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#algorithm-steps">Algorithm Steps</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#intuition">Intuition</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#advantages-and-disadvantages-of-the-louvain-algorithm">Advantages and Disadvantages of the Louvain Algorithm</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#advantages-and-disadvantages-of-the-louvain-algorithm">Advantages and Disadvantages of the Louvain Algorithm</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#label-propagation-algorithm-lpa">Label Propagation Algorithm (LPA)</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#label-propagation-algorithm-lpa">Label Propagation Algorithm (LPA)</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1"><strong>Algorithm Steps</strong></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#characteristics"><strong>Characteristics</strong></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#advantages"><strong>Advantages</strong></a></li>
@@ -1143,14 +1082,14 @@ It identifies edges that are most “between” communities (edges with high <st
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">**Example</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#label-propagation-algorithm-lpa-step-by-step-example">Label Propagation Algorithm (LPA) – Step by Step Example</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#label-propagation-algorithm-lpa-step-by-step-example">Label Propagation Algorithm (LPA) – Step by Step Example</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-0-initialization">Step 0: Initialization</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-first-iteration">Step 1: First Iteration</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-second-iteration">Step 2: Second Iteration</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-convergence">Step 3: Convergence</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#girvannewman-algorithm">Girvan–Newman Algorithm</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#girvannewman-algorithm">Girvan–Newman Algorithm</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3"><strong>Algorithm Steps</strong></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4"><strong>Characteristics</strong></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5"><strong>Advantages</strong></a></li>
@@ -1158,7 +1097,7 @@ It identifies edges that are most “between” communities (edges with high <st
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#python">**Python **</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practice">📝 Practice</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practice">Practice</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#starter-code">Starter Code:</a></li>
 </ul>
 </li>

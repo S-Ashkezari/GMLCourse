@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Introduction: From Graph Structure to Graph Neural Networks &#8212; Graph Machine Learning</title>
+    <title>From Graph Structure to Graph Neural Networks &#8212; Graph Machine Learning</title>
   
   
   
@@ -60,9 +60,11 @@
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'content/Chapter05/01_Graph_Neural_Networks';</script>
-    <link rel="canonical" href="/GMLCourse/content/Chapter05/01_Graph_Neural_Networks.html" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Spectral Graph Convolution in GNNs" href="02_Spectral_Graph_Convolution_in_GNNs.html" />
+    <link rel="prev" title="Shallow Embedding Methods" href="../Chapter04/02_Shallow_embeddings.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -101,8 +103,8 @@
          class="form-control"
          name="q"
          id="search-input"
-         placeholder="Search this book..."
-         aria-label="Search this book..."
+         placeholder="Search..."
+         aria-label="Search..."
          autocomplete="off"
          autocorrect="off"
          autocapitalize="off"
@@ -124,8 +126,6 @@
     <div class="bd-container__inner bd-page-width">
       
       
-      
-        
       
       <div class="bd-sidebar-primary bd-sidebar">
         
@@ -174,24 +174,20 @@
  </script></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
-        
-        <ul class="nav bd-sidenav bd-sidenav__home-link">
-            <li class="toctree-l1">
-                <a class="reference internal" href="../../intro.html">
-                    Welcome to Graph Machine Learning
-                </a>
-            </li>
-        </ul>
-        <ul class="nav bd-sidenav">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Graph Machine Learning</span></p>
+<ul class="nav bd-sidenav">
 <li class="toctree-l1 has-children"><a class="reference internal" href="../Chapter01/01_Graph_metrics.html"><strong>First Part: Graph Mining - Concepts and properties</strong></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter01/02_community_detection.html">Community Detection in Graphs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter01/03_FrequentSubgraphMining.html">Frequent Subgraph Mining</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../Chapter01/04_Complex%20Networks%20and%20Generative%20Models.html">Complex Networks and Generative Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter01/04_ComplexNetworks_and_GenerativeModels.html">Complex Networks and Generative Models</a></li>
 
 
 <li class="toctree-l2"><a class="reference internal" href="../Chapter01/05_DynamicGraphsandNetworkEvolutionAnalysis.html">Dynamic Graphs and Network Evolution Analysis</a></li>
 </ul>
 </details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Unsupervised GML</span></p>
+<ul class="nav bd-sidenav">
 <li class="toctree-l1 has-children"><a class="reference internal" href="../Chapter02/01_intro_and_basics.html">Introduction to Graph Machine Learning</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter02/02_gnn_primer.html">Neural Network Essentials for Understanding GNNs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter02/03_embedding_examples.html">Graph Representation Learning</a></li>
@@ -203,14 +199,25 @@
 
 <li class="toctree-l2"><a class="reference internal" href="../Chapter03/02_Autoencoders.html">AutoEncoder</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter03/03_ConstrativeLearning.html">Contrastive Learning</a></li>
-
-<li class="toctree-l2"><a class="reference internal" href="../Chapter03/04_Graph%20Data%20Augmentation%20and%20Sampling%20Techniques.html">Graph Mining Presentation</a></li>
-
+<li class="toctree-l2"><a class="reference internal" href="../Chapter03/04_Graph_DataAugmentation_and_SamplingTechniques.html">Graph Mining Presentation</a></li>
 
 
 </ul>
 </details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Supervised GML</span></p>
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../Chapter04/01_Feature_based_methods.html">Supervised Learning on Graphs</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../Chapter04/02_Shallow_embeddings.html">Shallow Embedding Methods</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Graph Neural Networks</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">From Graph Structure to Graph Neural Networks</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="02_Spectral_Graph_Convolution_in_GNNs.html">Spectral Graph Convolution in GNNs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_Spatial_Graph_Neural_Networks.html">Message Passing Neural Networks (MPNN)</a></li>
+
 
 </ul>
 
@@ -253,84 +260,6 @@
         <div class="header-article-item">
 
 <div class="article-header-buttons">
-
-
-
-
-
-<div class="dropdown dropdown-launch-buttons">
-  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
-    <i class="fas fa-rocket"></i>
-  </button>
-  <ul class="dropdown-menu">
-      
-      
-      
-      <li><a href="https://colab.research.google.com/github/executablebooks/jupyter-book/blob/master/docs/content/Chapter05/01_Graph_Neural_Networks.ipynb" target="_blank"
-   class="btn btn-sm dropdown-item"
-   title="Launch on Colab"
-   data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  
-    <img alt="Colab logo" src="../../_static/images/logo_colab.png">
-  </span>
-<span class="btn__text-container">Colab</span>
-</a>
-</li>
-      
-  </ul>
-</div>
-
-
-
-
-
-
-<div class="dropdown dropdown-source-buttons">
-  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
-    <i class="fab fa-github"></i>
-  </button>
-  <ul class="dropdown-menu">
-      
-      
-      
-      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
-   class="btn btn-sm btn-source-repository-button dropdown-item"
-   title="Source repository"
-   data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  <i class="fab fa-github"></i>
-  </span>
-<span class="btn__text-container">Repository</span>
-</a>
-</li>
-      
-      
-      
-      
-      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fcontent/Chapter05/01_Graph_Neural_Networks.html&body=Your%20issue%20content%20here." target="_blank"
-   class="btn btn-sm btn-source-issues-button dropdown-item"
-   title="Open an issue"
-   data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  <i class="fas fa-lightbulb"></i>
-  </span>
-<span class="btn__text-container">Open issue</span>
-</a>
-</li>
-      
-  </ul>
-</div>
-
 
 
 
@@ -428,7 +357,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Introduction: From Graph Structure to Graph Neural Networks</h1>
+    <h1>From Graph Structure to Graph Neural Networks</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -438,53 +367,59 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Introduction: From Graph Structure to Graph Neural Networks</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">From Graph Structure to Graph Neural Networks</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spectral-vs-spatial-formulations">• Spectral vs. Spatial formulations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#graph-types"><strong>• Graph types:</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#propagation-rules"><strong>• Propagation rules:</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#training-settings"><strong>• Training settings:</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scalability-strategies"><strong>• Scalability strategies:</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#expressiveness"><strong>• Expressiveness:</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#domain-adaptations"><strong>• Domain adaptations:</strong></a></li>
+</ul>
+</li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#foundations-of-graph-linear-algebra-and-spectral-methods">Foundations of Graph Linear Algebra and Spectral Methods</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-algebraic-representation-of-graphs">1. Linear Algebraic Representation of Graphs</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-algebraic-representation-of-graphs">1. Linear Algebraic Representation of Graphs</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#adjacency-matrix-a">1.1 Adjacency Matrix <span class="math notranslate nohighlight">\(A\)</span></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#degree-matrix-d">1.2 Degree Matrix <span class="math notranslate nohighlight">\(D\)</span></a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#graph-laplacian">2. Graph Laplacian</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#normalized-laplacians">2.1 Normalized Laplacians</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#graph-laplacian">2. Graph Laplacian</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#normalized-laplacians">2.1 Normalized Laplacians</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#symmetric-normalized-laplacian">Symmetric normalized Laplacian</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#random-walk-laplacian">Random-walk Laplacian</a></li>
 </ul>
 </li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#why-this-stabilizes-learning">Why This Stabilizes Learning</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#normalized-laplacians-reduce-degree-influence-and-stabilize-learning">Normalized Laplacians reduce degree influence and stabilize learning.</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-normalized-laplacians-reduce-degree-influence-and-stabilize-learning">Why Normalized Laplacians Reduce Degree Influence and Stabilize Learning</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-this-stabilizes-learning">Why This Stabilizes Learning</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#diffusion-interpretation">3. Diffusion Interpretation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#graph-spectrum-and-frequency">4. Graph Spectrum and Frequency</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#graph-fourier-transform">4.1 Graph Fourier Transform</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#diffusion-on-graphs">3. Diffusion on Graphs</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#heat-diffusion-on-graphs">Heat Diffusion on Graphs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-a-graph-signal">What Is a Graph Signal?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-role-of-the-graph-laplacian">The Role of the Graph Laplacian</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#heat-equation-on-a-graph">Heat Equation on a Graph</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#heat-equation-in-physics">Heat Equation in Physics</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#solution-of-the-heat-equation">Solution of the Heat Equation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-compute-the-heat-kernel">How to Compute the Heat Kernel</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-using-eigen-decomposition-exact-but-expensive"><strong>a) Using Eigen-Decomposition (Exact but Expensive)</strong></a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spectral-graph-convolution">5. Spectral Graph Convolution</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chebyshev-polynomial-filters">6. Chebyshev Polynomial Filters</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gcn-as-first-order-spectral-approximation">7. GCN as First-Order Spectral Approximation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-code-laplacian-and-spectral-filtering-pytorch">8. Example Code: Laplacian and Spectral Filtering (PyTorch)</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#node-classification-with-graph-convolutional-networks-gcns">1.  Node Classification with Graph Convolutional Networks (GCNs)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inputs-and-outputs">🧩 Inputs and Outputs</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gcn-forward-pass">⚙️ GCN Forward Pass</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#loss-function">🧮 Loss Function</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">✅ Summary</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#further-reading">📚 Further Reading</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#graph-classification">2.  Graph Classification</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#input-and-output">Input and Output</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#b-using-polynomial-approximations-fast-and-scalable">b) Using Polynomial Approximations (Fast and Scalable)</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematical-formulation">Mathematical Formulation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-1-truncated-taylor-power-series-approximation"><strong>b-1) Truncated Taylor (Power-Series) Approximation</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-2-chebyshev-polynomial-approximation"><strong>b-2). Chebyshev Polynomial Approximation</strong></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#c-using-iterative-diffusion-power-series-form"><strong>c) Using Iterative Diffusion (Power-Series Form)</strong></a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1"></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Loss Function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretation">Interpretation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-this-matters-in-gnns">Why This Matters in GNNs</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#graph-spectrum-and-fourier-transform">4. Graph Spectrum and Fourier Transform</a></li>
 </ul>
 </li>
 </ul>
@@ -499,19 +434,92 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="introduction-from-graph-structure-to-graph-neural-networks">
-<h1>Introduction: From Graph Structure to Graph Neural Networks<a class="headerlink" href="#introduction-from-graph-structure-to-graph-neural-networks" title="Link to this heading">#</a></h1>
-<p>Graph Neural Networks (GNNs) are deep learning models designed to operate on graph-structured data. They are part of the broader field of geometric deep learning, which studies learning architectures that generalize beyond Euclidean domains.</p>
-<p>Many systems—such as social networks, molecules, knowledge graphs, and transportation networks—are naturally represented as graphs. This has made GNNs a powerful framework for representation learning.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="from-graph-structure-to-graph-neural-networks">
+<h1>From Graph Structure to Graph Neural Networks<a class="headerlink" href="#from-graph-structure-to-graph-neural-networks" title="Link to this heading">#</a></h1>
+<p>Graph Neural Networks (GNNs) are deep learning models designed to operate on graph-structured data. They belong to the broader world of geometric deep learning, which studies learning architectures that generalize beyond Euclidean grids.</p>
+<p>Many systems—such as social networks, molecules, knowledge graphs, and transportation networks—are naturally represented as graphs. This makes GNNs a powerful framework for representation learning.</p>
 <p>Modern GNN variants differ in their:</p>
+<hr class="docutils" />
+<section id="spectral-vs-spatial-formulations">
+<h2>• Spectral vs. Spatial formulations<a class="headerlink" href="#spectral-vs-spatial-formulations" title="Link to this heading">#</a></h2>
+<p>Two foundational viewpoints for defining convolution on graphs:</p>
 <ul class="simple">
-<li><p><strong>Graph types:</strong> directed, undirected, weighted, heterogeneous, dynamic, and temporal.</p></li>
-<li><p><strong>Propagation rules:</strong> spectral convolution, message passing, attention, gating, and skip connections.</p></li>
-<li><p><strong>Training settings:</strong> supervised, semi-supervised, and self-supervised approaches.</p></li>
-<li><p><strong>Scalability strategies:</strong> sampling, subgraph extraction, layer-wise aggregation, and distributed training.</p></li>
-<li><p><strong>Expressiveness:</strong> deeper architectures capable of capturing higher-order dependencies.</p></li>
-<li><p><strong>Domain adaptations:</strong> molecular biology, recommender systems, knowledge graphs, and spatiotemporal forecasting.</p></li>
+<li><p><strong>Spectral GNNs:</strong> based on graph Laplacian eigenvalues/eigenvectors and spectral filters.<br />
+<strong>Examples:</strong> GCN, ChebNet, CayleyNet, SGC</p></li>
+<li><p><strong>Spatial GNNs:</strong> based on direct message passing or neighborhood aggregation.<br />
+<strong>Examples:</strong> GraphSAGE, GAT, GIN, MPNN</p></li>
 </ul>
+</section>
+<hr class="docutils" />
+<section id="graph-types">
+<h2><strong>• Graph types:</strong><a class="headerlink" href="#graph-types" title="Link to this heading">#</a></h2>
+<p>directed, undirected, weighted, heterogeneous, dynamic, and temporal.<br />
+<strong>Examples:</strong></p>
+<ul class="simple">
+<li><p>Directed: <strong>DGCN</strong>, <strong>DCRNN</strong> (traffic forecasting)</p></li>
+<li><p>Weighted: <strong>GCN</strong>, <strong>ChebNet</strong></p></li>
+<li><p>Heterogeneous: <strong>HAN</strong>, <strong>R-GCN</strong></p></li>
+<li><p>Temporal/Dynamic: <strong>TGAT</strong>, <strong>DyRep</strong>, <strong>TGN</strong></p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="propagation-rules">
+<h2><strong>• Propagation rules:</strong><a class="headerlink" href="#propagation-rules" title="Link to this heading">#</a></h2>
+<p>spectral convolution, message passing, attention, gating, skip connections.<br />
+<strong>Examples:</strong></p>
+<ul class="simple">
+<li><p>Spectral: <strong>GCN</strong>, <strong>ChebNet</strong>, <strong>SGC</strong></p></li>
+<li><p>Message passing: <strong>GIN</strong>, <strong>MPNN</strong>, <strong>GraphSAGE</strong></p></li>
+<li><p>Attention: <strong>GAT</strong>, <strong>HGT</strong>, <strong>GATv2</strong></p></li>
+<li><p>Gating: <strong>GGNN</strong>, <strong>GatedGCN</strong></p></li>
+<li><p>Skip/Residual: <strong>ResGCN</strong>, <strong>JK-Net</strong></p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="training-settings">
+<h2><strong>• Training settings:</strong><a class="headerlink" href="#training-settings" title="Link to this heading">#</a></h2>
+<p>supervised, semi-supervised, self-supervised.<br />
+<strong>Examples:</strong></p>
+<ul class="simple">
+<li><p>Supervised: <strong>GIN</strong>, <strong>Graph Transformer</strong></p></li>
+<li><p>Semi-supervised: <strong>GCN</strong>, <strong>APPNP</strong></p></li>
+<li><p>Self-supervised: <strong>DGI</strong>, <strong>GraphCL</strong>, <strong>GRACE</strong>, <strong>MVGRL</strong></p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="scalability-strategies">
+<h2><strong>• Scalability strategies:</strong><a class="headerlink" href="#scalability-strategies" title="Link to this heading">#</a></h2>
+<p>sampling, subgraph extraction, layer-wise aggregation, distributed training.<br />
+<strong>Examples:</strong></p>
+<ul class="simple">
+<li><p>Sampling: <strong>GraphSAGE</strong>, <strong>FastGCN</strong>, <strong>LADIES</strong></p></li>
+<li><p>Subgraphs: <strong>Cluster-GCN</strong>, <strong>GraphSAINT</strong></p></li>
+<li><p>Layer-wise: <strong>PinSAGE</strong></p></li>
+<li><p>Distributed: <strong>DistDGL</strong>, <strong>PaGraph</strong></p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="expressiveness">
+<h2><strong>• Expressiveness:</strong><a class="headerlink" href="#expressiveness" title="Link to this heading">#</a></h2>
+<p>deeper architectures capable of capturing higher-order dependencies.<br />
+<strong>Examples:</strong></p>
+<ul class="simple">
+<li><p>Higher-order: <strong>MixHop</strong>, <strong>PPNP/APPNP</strong>, <strong>Geom-GCN</strong></p></li>
+<li><p>Deep GNNs: <strong>ResGCN</strong>, <strong>DeepGCN</strong>, <strong>GCNII</strong></p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="domain-adaptations">
+<h2><strong>• Domain adaptations:</strong><a class="headerlink" href="#domain-adaptations" title="Link to this heading">#</a></h2>
+<p>molecular biology, recommender systems, knowledge graphs, spatiotemporal forecasting.<br />
+<strong>Examples:</strong></p>
+<ul class="simple">
+<li><p>Molecules: <strong>MPNN</strong>, <strong>SchNet</strong>, <strong>DimeNet</strong>, <strong>Graphormer</strong></p></li>
+<li><p>Recommender systems: <strong>NGCF</strong>, <strong>LightGCN</strong>, <strong>PinSAGE</strong></p></li>
+<li><p>Knowledge graphs: <strong>R-GCN</strong>, <strong>CompGCN</strong>, <strong>KGAT</strong></p></li>
+<li><p>Spatiotemporal: <strong>ST-GCN</strong>, <strong>DCRNN</strong>, <strong>Graph WaveNet</strong></p></li>
+</ul>
+<hr class="docutils" />
 <p>Despite architectural diversity, all GNNs rely on common mathematical foundations. Concepts such as adjacency matrices, degree matrices, Laplacians, diffusion processes, and eigenstructure form the basis for information propagation on graphs.</p>
 <p>These foundations explain:</p>
 <ul class="simple">
@@ -521,6 +529,7 @@ document.write(`
 <li><p>and how efficient models such as GCN arise from spectral filtering principles.</p></li>
 </ul>
 <p>The next section introduces these ideas in detail, beginning with basic graph matrices and building toward spectral convolution, Chebyshev filters, and their connection to modern GNN layers.</p>
+</section>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="foundations-of-graph-linear-algebra-and-spectral-methods">
 <h1>Foundations of Graph Linear Algebra and Spectral Methods<a class="headerlink" href="#foundations-of-graph-linear-algebra-and-spectral-methods" title="Link to this heading">#</a></h1>
@@ -583,23 +592,16 @@ L_{\text{sym}} = D^{-1/2} L D^{-1/2} = I - D^{-1/2} A D^{-1/2}.
 \[
 L_{\text{rw}} = I - D^{-1}A.
 \]</div>
-</section>
-</section>
-</section>
-<section id="normalized-laplacians-reduce-degree-influence-and-stabilize-learning">
-<h2>Normalized Laplacians reduce degree influence and stabilize learning.<a class="headerlink" href="#normalized-laplacians-reduce-degree-influence-and-stabilize-learning" title="Link to this heading">#</a></h2>
-<section id="why-normalized-laplacians-reduce-degree-influence-and-stabilize-learning">
-<h3>Why Normalized Laplacians Reduce Degree Influence and Stabilize Learning<a class="headerlink" href="#why-normalized-laplacians-reduce-degree-influence-and-stabilize-learning" title="Link to this heading">#</a></h3>
+<p><strong>Normalized Laplacians reduce degree influence and stabilize learning</strong>. Why?</p>
 <p>The unnormalized Laplacian, directly depends on node degrees. High-degree nodes produce large diagonal values in <span class="math notranslate nohighlight">\(L\)</span>, causing their influence to dominate smoothing, diffusion, and gradient flow. This often leads to unstable learning, exploding variations, and biased representations.</p>
 <p>Normalized Laplacians address this by scaling node contributions.
 Both operators <span class="math notranslate nohighlight">\(L_{\text{sym}}\)</span> and <span class="math notranslate nohighlight">\(L_{\text{rw}}\)</span> ensure that messages between nodes are weighted by their degrees, reducing the effect of hubs and making propagation more balanced.</p>
 </section>
+</section>
 <section id="example">
 <h3>Example<a class="headerlink" href="#example" title="Link to this heading">#</a></h3>
-<p>Consider the graph:
-1 — 2 — 3
-|
-4</p>
+<p>Consider the graph:</p>
+<p><img alt="" src="../../_images/simpleGraph.png" /></p>
 <p>Node 2 has degree 3; the others have degree 1.<br />
 Using the unnormalized Laplacian on a signal such as</p>
 <div class="math notranslate nohighlight">
@@ -608,9 +610,10 @@ x = [1,\ 10,\ 1,\ 1]^T,
 \]</div>
 <p>produces large outputs dominated by node 2.</p>
 <p>In contrast, the symmetric normalized Laplacian scales each interaction by <span class="math notranslate nohighlight">\(1/\sqrt{d_i d_j}\)</span>, resulting in significantly smaller and more balanced outputs. No node disproportionately drives the result.</p>
-</section>
+<p>In our example:</p>
+<p><img alt="" src="../../_images/matrix.png" /></p>
 <section id="why-this-stabilizes-learning">
-<h3>Why This Stabilizes Learning<a class="headerlink" href="#why-this-stabilizes-learning" title="Link to this heading">#</a></h3>
+<h4>Why This Stabilizes Learning<a class="headerlink" href="#why-this-stabilizes-learning" title="Link to this heading">#</a></h4>
 <ul class="simple">
 <li><p>Degree-normalized operators prevent hubs from dominating gradients.</p></li>
 <li><p>Convolution behaves consistently across nodes with different degrees.</p></li>
@@ -620,726 +623,351 @@ x = [1,\ 10,\ 1,\ 1]^T,
 <p>Overall, normalized Laplacians make graph convolution, message passing, and optimization more stable by controlling degree-induced variance.</p>
 </section>
 </section>
-<hr class="docutils" />
-<section id="diffusion-interpretation">
-<h2>3. Diffusion Interpretation<a class="headerlink" href="#diffusion-interpretation" title="Link to this heading">#</a></h2>
-<p>Consider heat distribution <span class="math notranslate nohighlight">\(x(t)\)</span> on the graph. The heat equation is:</p>
-<div class="math notranslate nohighlight">
-\[
-\frac{dx(t)}{dt} = -Lx(t),
-\]</div>
-<p>with solution:</p>
-<div class="math notranslate nohighlight">
-\[
-x(t) = e^{-tL} x(0).
-\]</div>
-<p>Interpretation:</p>
-<ul class="simple">
-<li><p>Information flows from nodes to neighbors.</p></li>
-<li><p>Larger eigenvalues correspond to rapid variation.</p></li>
-<li><p>Smaller eigenvalues correspond to smooth signals.</p></li>
-</ul>
 </section>
 <hr class="docutils" />
-<section id="graph-spectrum-and-frequency">
-<h2>4. Graph Spectrum and Frequency<a class="headerlink" href="#graph-spectrum-and-frequency" title="Link to this heading">#</a></h2>
+<section id="diffusion-on-graphs">
+<h2>3. Diffusion on Graphs<a class="headerlink" href="#diffusion-on-graphs" title="Link to this heading">#</a></h2>
+<section id="heat-diffusion-on-graphs">
+<h3>Heat Diffusion on Graphs<a class="headerlink" href="#heat-diffusion-on-graphs" title="Link to this heading">#</a></h3>
+<p>Heat diffusion on graphs is a mathematical tool used to understand how a signal<br />
+(or information) spreads through the nodes of a graph.<br />
+Although the idea comes from physics, its graph version is simple, intuitive,<br />
+and very useful in spectral graph learning.</p>
+</section>
+<section id="what-is-a-graph-signal">
+<h3>What Is a Graph Signal?<a class="headerlink" href="#what-is-a-graph-signal" title="Link to this heading">#</a></h3>
+<p>A <strong>graph signal</strong> is simply a vector:</p>
+<div class="math notranslate nohighlight">
+\[
+x \in \mathbb{R}^n,
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(x_i\)</span> is the value at node <span class="math notranslate nohighlight">\(i\)</span>.<br />
+It may represent temperature, feature magnitude, label probability, or any<br />
+quantity assigned to nodes.</p>
+</section>
+<section id="the-role-of-the-graph-laplacian">
+<h3>The Role of the Graph Laplacian<a class="headerlink" href="#the-role-of-the-graph-laplacian" title="Link to this heading">#</a></h3>
+<p>As it has been said, the <strong>graph Laplacian</strong> is defined as:</p>
+<div class="math notranslate nohighlight">
+\[
+L = D - A,
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(A\)</span> is the adjacency matrix and <span class="math notranslate nohighlight">\(D\)</span> is the degree matrix.</p>
+<p>The Laplacian measures <strong>how different a node is from its neighbors</strong>,<br />
+so it is the natural operator for modeling <em>diffusion</em>.</p>
+</section>
+<section id="heat-equation-on-a-graph">
+<h3>Heat Equation on a Graph<a class="headerlink" href="#heat-equation-on-a-graph" title="Link to this heading">#</a></h3>
+<p>The graph heat equation is:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{dx(t)}{dt} = -L\,x(t).
+\]</div>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(x(t)\)</span>: the signal at time <span class="math notranslate nohighlight">\(t\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(L\)</span>: pushes each node toward the average of its neighbors.</p></li>
+<li><p>The equation expresses that heat flows from high to low values.</p></li>
+</ul>
+</section>
+<section id="heat-equation-in-physics">
+<h3>Heat Equation in Physics<a class="headerlink" href="#heat-equation-in-physics" title="Link to this heading">#</a></h3>
+<p>To better understand the graph heat equation, it helps to look at the original
+heat equation from physics.<br />
+In a continuous space, heat spreads according to:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\partial u(x,t)}{\partial t}
+= \alpha\,\frac{\partial^2 u(x,t)}{\partial x^2},
+\]</div>
+<p>where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(u(x,t)\)</span> is the temperature at position <span class="math notranslate nohighlight">\(x\)</span> and time <span class="math notranslate nohighlight">\(t\)</span>,</p></li>
+<li><p><span class="math notranslate nohighlight">\(\alpha\)</span> is the heat diffusion constant,</p></li>
+<li><p>the second derivative <span class="math notranslate nohighlight">\(\frac{\partial^2 u}{\partial x^2}\)</span> is the continuous Laplacian.</p></li>
+</ul>
+<p>In higher dimensions, the equation becomes:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\partial u(\mathbf{x},t)}{\partial t}
+= \alpha\, \Delta u(\mathbf{x},t),
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\Delta\)</span> is the Laplacian operator.</p>
+<p>This equation says that heat flows from hotter regions to colder ones, and the
+Laplacian measures how different a point is from its surroundings.</p>
+<ul class="simple">
+<li><p>Intuition: the <strong>rate of change of temperature</strong> at a point is proportional to the <strong>difference between that point and its surroundings</strong>.</p></li>
+<li><p>The first derivative <span class="math notranslate nohighlight">\(\partial u / \partial x\)</span> measures the slope (how temperature changes along space).</p></li>
+<li><p>The second derivative <span class="math notranslate nohighlight">\(\partial^2 u / \partial x^2\)</span> measures the <strong>curvature of the temperature profile</strong>, i.e., whether the point is hotter or colder than its neighbors.</p></li>
+</ul>
+<p>In other words:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\partial^2 u}{\partial x^2} \approx \text{(average temperature of neighbors) - (temperature at the point)}.
+\]</div>
+<ul class="simple">
+<li><p>If the point is hotter than neighbors → second derivative &gt; 0 → temperature decreases.</p></li>
+<li><p>If the point is colder than neighbors → second derivative &lt; 0 → temperature increases.</p></li>
+</ul>
+<p>This is exactly the principle behind the <strong>graph Laplacian</strong>: each node moves toward the average of its neighbors, simulating heat diffusion on a discrete graph.</p>
+<p>Therefore, when we move from continuous space to a graph, the <strong>continuous Laplacian</strong>
+<span class="math notranslate nohighlight">\(\Delta\)</span> is replaced by the <strong>graph Laplacian</strong> <span class="math notranslate nohighlight">\(L = D - A\)</span>.<br />
+This gives the graph version of the heat equation:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{dx(t)}{dt} = -L\,x(t),
+\]</div>
+<p>which describes how a signal diffuses across the nodes of a graph.</p>
+</section>
+<section id="solution-of-the-heat-equation">
+<h3>Solution of the Heat Equation<a class="headerlink" href="#solution-of-the-heat-equation" title="Link to this heading">#</a></h3>
+<p>This is a <strong>linear differential equation with constant coefficients</strong>, so its solution can be written using the <strong>matrix exponential</strong>:</p>
+<div class="math notranslate nohighlight">
+\[
+x(t) = e^{-t L} \, x(0)
+\]</div>
+<ul class="simple">
+<li><p>Verification:
+$<span class="math notranslate nohighlight">\(
+\frac{d}{dt} (e^{-t L} x(0)) = -L \, e^{-t L} x(0) = -L x(t)
+\)</span>$</p></li>
+<li><p><span class="math notranslate nohighlight">\(e^{-t L}\)</span> is called the <strong>heat kernel</strong>, representing how the signal diffuses over the graph.</p></li>
+</ul>
+<p>Here:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(x(0)\)</span> is the initial signal,</p></li>
+<li><p><span class="math notranslate nohighlight">\(e^{-tL}\)</span> is the <strong>heat kernel</strong>,</p></li>
+<li><p>parameter <span class="math notranslate nohighlight">\(t &gt; 0\)</span> controls the amount of smoothing:<br />
+small <span class="math notranslate nohighlight">\(t\)</span> = little diffusion,<br />
+large <span class="math notranslate nohighlight">\(t\)</span> = strong smoothing.</p></li>
+</ul>
+<p>The matrix exponential plays a key role in spectral graph filtering.</p>
+</section>
+<section id="how-to-compute-the-heat-kernel">
+<h3>How to Compute the Heat Kernel<a class="headerlink" href="#how-to-compute-the-heat-kernel" title="Link to this heading">#</a></h3>
+<p>The heat kernel is defined as:</p>
+<div class="math notranslate nohighlight">
+\[
+H(t) = e^{-tL}.
+\]</div>
+<p>There are three common ways to compute or approximate it:</p>
+<section id="a-using-eigen-decomposition-exact-but-expensive">
+<h4><strong>a) Using Eigen-Decomposition (Exact but Expensive)</strong><a class="headerlink" href="#a-using-eigen-decomposition-exact-but-expensive" title="Link to this heading">#</a></h4>
+<p>For a symmetric Laplacian matrix <span class="math notranslate nohighlight">\(L\)</span>, we can write:</p>
+<div class="math notranslate nohighlight">
+\[
+L = U \Lambda U^\top,
+\]</div>
+<p>where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(U\)</span> is an orthogonal matrix of eigenvectors <span class="math notranslate nohighlight">\((U^\top U = I)\)</span>,</p></li>
+<li><p><span class="math notranslate nohighlight">\(\Lambda = \mathrm{diag}(\lambda_1,\ldots,\lambda_n)\)</span> is the diagonal matrix of eigenvalues.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+e^{-tL} = U e^{-t\Lambda} U^\top.
+\]</div>
+<p>Why?</p>
+<p>The matrix exponential is defined by the power series:</p>
+<div class="math notranslate nohighlight">
+\[
+e^{-tL} = \sum_{k=0}^{\infty} \frac{(-tL)^k}{k!}.
+\]</div>
+<p>Substitute <span class="math notranslate nohighlight">\(L = U\Lambda U^\top\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+(-tL)^k = (-t)^k (U \Lambda U^\top)^k.
+\]</div>
+<p>Because <span class="math notranslate nohighlight">\(U^\top U = I\)</span>, the product collapses:</p>
+<div class="math notranslate nohighlight">
+\[
+(U \Lambda U^\top)^k
+= U \Lambda (U^\top U)\Lambda (U^\top U)\cdots \Lambda U^\top
+= U \Lambda^k U^\top.
+\]</div>
+<p>Thus each term in the series becomes:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{(-tL)^k}{k!}
+= U \frac{(-t\Lambda)^k}{k!} U^\top.
+\]</div>
+<p>Factor out the constant <span class="math notranslate nohighlight">\(U\)</span> and <span class="math notranslate nohighlight">\(U^\top\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+e^{-tL}
+= U\left( \sum_{k=0}^{\infty} \frac{(-t\Lambda)^k}{k!} \right) U^\top
+= U\, e^{-t\Lambda}\, U^\top.
+\]</div>
+</section>
+</section>
+<section id="summary">
+<h3>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Eigenvectors define the “directions” of diffusion.</p></li>
+<li><p>Eigenvalues determine how fast each component decays.</p></li>
+<li><p>The heat kernel is:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+e^{-tL} = U \, \mathrm{diag}(e^{-t\lambda_1},\ldots,e^{-t\lambda_n}) \, U^\top.
+\]</div>
+<p>This method is exact but requires full eigen-decomposition:<br />
+cost <span class="math notranslate nohighlight">\(O(n^3)\)</span>. Feasible only for small graphs.</p>
+<hr class="docutils" />
+<section id="b-using-polynomial-approximations-fast-and-scalable">
+<h4>b) Using Polynomial Approximations (Fast and Scalable)<a class="headerlink" href="#b-using-polynomial-approximations-fast-and-scalable" title="Link to this heading">#</a></h4>
+<p>To avoid eigen-decomposition, we approximate the heat kernel operator<br />
+$<span class="math notranslate nohighlight">\(
+e^{-tL}
+\)</span>$
+using low-degree polynomials. Two widely used approaches:</p>
+</section>
+</section>
+<section id="b-1-truncated-taylor-power-series-approximation">
+<h3><strong>b-1) Truncated Taylor (Power-Series) Approximation</strong><a class="headerlink" href="#b-1-truncated-taylor-power-series-approximation" title="Link to this heading">#</a></h3>
+<p>We truncate the Taylor expansion of the exponential and keep only the first <span class="math notranslate nohighlight">\(K+1\)</span> terms:</p>
+<div class="math notranslate nohighlight">
+\[
+e^{-tL} \approx \sum_{k=0}^{K} \frac{(-tL)^k}{k!}.
+\]</div>
+<p>This is the standard <strong>Maclaurin power-series truncation</strong>, meaning that we use only terms <span class="math notranslate nohighlight">\(k = 0, 1, \dots, K\)</span>.</p>
+<p>Efficient application to a vector <span class="math notranslate nohighlight">\(x\)</span>:</p>
+<ul class="simple">
+<li><p>Let <span class="math notranslate nohighlight">\(v_0 = x\)</span></p></li>
+<li><p>Recursively compute <span class="math notranslate nohighlight">\(v_{k} = L v_{k-1}\)</span></p></li>
+<li><p>Accumulate <span class="math notranslate nohighlight">\(\frac{(-t)^k}{k!} v_k\)</span></p></li>
+</ul>
+<p>Cost: <span class="math notranslate nohighlight">\(O(K |E|)\)</span> for sparse graphs.</p>
+</section>
+<section id="b-2-chebyshev-polynomial-approximation">
+<h3><strong>b-2). Chebyshev Polynomial Approximation</strong><a class="headerlink" href="#b-2-chebyshev-polynomial-approximation" title="Link to this heading">#</a></h3>
+<p>In Chebyshev Polynomial Approximation, normalized Laplacian has been used and we rescale it so its eigenvalues lie inside <span class="math notranslate nohighlight">\([-1,1]\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\tilde L = \frac{2}{\lambda_{\max}} L - I.
+\]</div>
+<p>Then approximate:</p>
+<div class="math notranslate nohighlight">
+\[
+e^{-tL} \approx \sum_{k=0}^{K} \theta_k\, T_k(\tilde L),
+\]</div>
+<p>where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(T_k\)</span> are Chebyshev polynomials,</p></li>
+<li><p><span class="math notranslate nohighlight">\(\theta_k\)</span> approximate the scalar function <span class="math notranslate nohighlight">\(e^{-t\lambda}\)</span>.</p></li>
+</ul>
+<p>Chebyshev recurrence:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(T_0 x = x\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(T_1 x = \tilde L x\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(T_{k} x = 2 \tilde L T_{k-1} x - T_{k-2} x\)</span></p></li>
+</ul>
+<p>Advantages:</p>
+<ul class="simple">
+<li><p>near-minimax approximation error</p></li>
+<li><p>numerically stable</p></li>
+<li><p>used in <strong>ChebNet</strong></p></li>
+</ul>
+<p>Cost: <span class="math notranslate nohighlight">\(O(K |E|)\)</span>.</p>
+<section id="c-using-iterative-diffusion-power-series-form">
+<h4><strong>c) Using Iterative Diffusion (Power-Series Form)</strong><a class="headerlink" href="#c-using-iterative-diffusion-power-series-form" title="Link to this heading">#</a></h4>
+<p>We can rewrite the heat solution as repeated small diffusion steps using Euler forward with small iterative steps instead of Chebyshev polynomials:</p>
+<div class="math notranslate nohighlight">
+\[
+x(t+\Delta t) \approx (I - \Delta t \, L)\,x(t).
+\]</div>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(I\)</span> keeps each node’s current value.</p></li>
+<li><p><span class="math notranslate nohighlight">\(-\Delta t\, L x(t)\)</span> moves each node toward the average of its neighbors.</p></li>
+<li><p>Smaller <span class="math notranslate nohighlight">\(\Delta t\)</span> → more stable but requires more steps.</p></li>
+<li><p>After repeating the process many times, the result approximates <span class="math notranslate nohighlight">\(e^{-tL} x(0)\)</span>.</p></li>
+</ul>
+<p>Repeat this for <span class="math notranslate nohighlight">\(T = t / \Delta t\)</span> steps.</p>
+<p>This is intuitive and easy to implement,<br />
+similar to repeatedly applying a smoothing operator.
+This recursive update is essentially <strong>repeated Laplacian smoothing</strong>.
+To ensure the iterative diffusion update remains stable and does not diverge,<br />
+the step size <span class="math notranslate nohighlight">\(\Delta t\)</span> must satisfy:</p>
+<div class="math notranslate nohighlight">
+\[
+\Delta t &lt; \frac{1}{\lambda_{\max}},
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\lambda_{\max}\)</span> is the largest eigenvalue of the Laplacian <span class="math notranslate nohighlight">\(L\)</span>.</p>
+<p>In practice, for most graphs, using a conservative value such as:</p>
+<div class="math notranslate nohighlight">
+\[
+\Delta t \le 0.1
+\]</div>
+<p>keeps the diffusion process stable.</p>
+<p>Why This Method Is Useful:</p>
+<ul class="simple">
+<li><p>No eigen-decomposition needed.</p></li>
+<li><p>No Chebyshev basis required.</p></li>
+<li><p>Each iteration costs only <span class="math notranslate nohighlight">\(O(|E|)\)</span> for sparse graphs.</p></li>
+<li><p>Works even on large graphs.</p></li>
+</ul>
+</section>
+</section>
+<section id="interpretation">
+<h3>Interpretation<a class="headerlink" href="#interpretation" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Information flows from each node to its neighbors.</p></li>
+<li><p>Large eigenvalues correspond to fast-varying components, suppressed by <span class="math notranslate nohighlight">\(e^{-t\lambda}\)</span>.</p></li>
+<li><p>Small eigenvalues correspond to smooth components, preserved even for large <span class="math notranslate nohighlight">\(t\)</span>.</p></li>
+</ul>
+</section>
+<section id="why-this-matters-in-gnns">
+<h3>Why This Matters in GNNs<a class="headerlink" href="#why-this-matters-in-gnns" title="Link to this heading">#</a></h3>
+<p>Even though GNNs do not explicitly solve the heat equation, many fundamental<br />
+behaviors come from the same diffusion idea:</p>
+<ul class="simple">
+<li><p><strong>GCN</strong> performs a discrete Laplacian smoothing step.</p></li>
+<li><p><strong>Chebyshev spectral filters</strong> approximate the heat kernel.</p></li>
+<li><p><strong>Oversmoothing</strong> in deep GNNs is analogous to using very large <span class="math notranslate nohighlight">\(t\)</span>.</p></li>
+<li><p><strong>Diffusion-based GNNs</strong> (PPR-GNN, GDC, APPNP) explicitly compute diffusion kernels<br />
+similar to <span class="math notranslate nohighlight">\(e^{-tL}\)</span>.</p></li>
+</ul>
+<p>Thus, heat diffusion gives a clear conceptual lens for understanding<br />
+information propagation in graph neural networks.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="graph-spectrum-and-fourier-transform">
+<h2>4. Graph Spectrum and Fourier Transform<a class="headerlink" href="#graph-spectrum-and-fourier-transform" title="Link to this heading">#</a></h2>
 <p>Since <span class="math notranslate nohighlight">\(L\)</span> is symmetric:</p>
 <div class="math notranslate nohighlight">
 \[
-L = U\Lambda U^\top,
+L = U \Lambda U^\top
 \]</div>
-<p>where:</p>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(U\)</span> contains orthonormal eigenvectors (graph Fourier basis),</p></li>
-<li><p><span class="math notranslate nohighlight">\(\Lambda\)</span> contains eigenvalues (graph frequencies).</p></li>
+<li><p><span class="math notranslate nohighlight">\(U\)</span>: orthonormal eigenvectors → <strong>graph Fourier basis</strong></p></li>
+<li><p><span class="math notranslate nohighlight">\(\Lambda = \text{diag}(\lambda_1, \dots, \lambda_n)\)</span> → <strong>graph frequencies</strong></p></li>
 </ul>
-<section id="graph-fourier-transform">
-<h3>4.1 Graph Fourier Transform<a class="headerlink" href="#graph-fourier-transform" title="Link to this heading">#</a></h3>
-<p>For a graph signal <span class="math notranslate nohighlight">\(x \in \mathbb{R}^n\)</span>:</p>
+<p><strong>Graph Fourier transform:</strong></p>
 <div class="math notranslate nohighlight">
 \[
-\hat{x} = U^\top x
+\hat{x} = U^\top x, \quad x = U \hat{x}
 \]</div>
-<div class="math notranslate nohighlight">
-\[
-x = U\hat{x}.
-\]</div>
-<p>Smooth signals → aligned with small eigenvalues.<br />
-Oscillatory signals → aligned with large eigenvalues.</p>
-</section>
-</section>
-<hr class="docutils" />
-<section id="spectral-graph-convolution">
-<h2>5. Spectral Graph Convolution<a class="headerlink" href="#spectral-graph-convolution" title="Link to this heading">#</a></h2>
-<p>A spectral filter modifies Fourier coefficients:</p>
-<div class="math notranslate nohighlight">
-\[
-x \mapsto U g(\Lambda) U^\top x.
-\]</div>
-<p>Steps:</p>
-<ol class="arabic simple">
-<li><p>Transform to Fourier domain: <span class="math notranslate nohighlight">\(U^\top x\)</span></p></li>
-<li><p>Apply filter <span class="math notranslate nohighlight">\(g(\Lambda)\)</span></p></li>
-<li><p>Return to the node domain: <span class="math notranslate nohighlight">\(U g(\Lambda) U^\top x\)</span></p></li>
-</ol>
-<p>Challenges:</p>
 <ul class="simple">
-<li><p>Eigen-decomposition costs <span class="math notranslate nohighlight">\(O(n^3)\)</span>.</p></li>
-<li><p>Filters depend on graph structure (not transferable).</p></li>
-<li><p>Not scalable for large graphs.</p></li>
+<li><p>Small eigenvalues (low graph frequencies) correspond to <strong>smooth signals</strong>, where neighboring nodes have similar values.</p></li>
+<li><p>Large eigenvalues (high graph frequencies) correspond to <strong>oscillatory signals</strong>, where neighboring nodes vary strongly.</p></li>
 </ul>
-</section>
-<hr class="docutils" />
-<section id="chebyshev-polynomial-filters">
-<h2>6. Chebyshev Polynomial Filters<a class="headerlink" href="#chebyshev-polynomial-filters" title="Link to this heading">#</a></h2>
-<p>Chebyshev approximation avoids eigen-decomposition.</p>
-<p>Scale Laplacian:</p>
+<p><strong>Filtering in spectral domain:</strong></p>
 <div class="math notranslate nohighlight">
 \[
-\tilde{L} = \frac{2}{\lambda_{\max}} L - I.
+g_\theta * x = U g_\theta(\Lambda) U^\top x
 \]</div>
-<p>Approximate filter:</p>
 <div class="math notranslate nohighlight">
-\[
-g_\theta(\Lambda) \approx \sum_{k=0}^{K} \theta_k T_k(\tilde{\Lambda}),
+\[g_\theta * x 
+= 
+\underbrace{U^\top x}_{\text{Graph\ Fourier\ Transform\ (node\ →\ frequency)}}\;
+\underbrace{g_\theta(\Lambda)}_{\text{Filtering\ in\ the\ spectral\ domain}}\;
+\underbrace{U}_{\text{Inverse\ Transform\ (frequency\ →\ node)}}
 \]</div>
-<p>where <span class="math notranslate nohighlight">\(T_k\)</span> are Chebyshev polynomials.</p>
-<p>Convolution:</p>
-<div class="math notranslate nohighlight">
-\[
-g_\theta * x \approx \sum_{k=0}^{K} \theta_k T_k(\tilde{L}) x.
-\]</div>
-<p>Advantages:</p>
 <ul class="simple">
-<li><p>No eigenvectors required.</p></li>
-<li><p>Efficient and scalable.</p></li>
+<li><p><span class="math notranslate nohighlight">\(g_\theta(\Lambda)\)</span> applies a filter on graph frequencies</p></li>
+<li><p>Generalizes classical convolution to irregular graphs</p></li>
 </ul>
-</section>
-<hr class="docutils" />
-<section id="gcn-as-first-order-spectral-approximation">
-<h2>7. GCN as First-Order Spectral Approximation<a class="headerlink" href="#gcn-as-first-order-spectral-approximation" title="Link to this heading">#</a></h2>
-<p>Kipf &amp; Welling simplify Chebyshev filtering to first order:</p>
-<div class="math notranslate nohighlight">
-\[
-g_\theta(L) \approx \theta_0 I + \theta_1 L.
-\]</div>
-<p>Resulting GCN layer:</p>
-<div class="math notranslate nohighlight">
-\[
-H^{(l+1)} = \sigma\Big( \hat{D}^{-1/2} \hat{A} \hat{D}^{-1/2} H^{(l)} W^{(l)} \Big),
-\]</div>
-<p>where:</p>
-<div class="math notranslate nohighlight">
-\[
-\hat{A} = A + I, \qquad
-\hat{D}_{ii} = \sum_j \hat{A}_{ij}.
-\]</div>
-<p>Interpretation:</p>
-<ul class="simple">
-<li><p>Add self-loops.</p></li>
-<li><p>Normalize to prevent exploding/vanishing signals.</p></li>
-<li><p>Equivalent to a smooth low-pass spectral filter.</p></li>
-</ul>
-<p>GCN links spectral convolution with practical message passing.</p>
-</section>
-<hr class="docutils" />
-<section id="example-code-laplacian-and-spectral-filtering-pytorch">
-<h2>8. Example Code: Laplacian and Spectral Filtering (PyTorch)<a class="headerlink" href="#example-code-laplacian-and-spectral-filtering-pytorch" title="Link to this heading">#</a></h2>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
-
-<span class="c1"># Adjacency matrix</span>
-<span class="n">A</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span>
-    <span class="p">[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],</span>
-    <span class="p">[</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">],</span>
-    <span class="p">[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">]</span>
-<span class="p">])</span>
-
-<span class="c1"># Degree matrix</span>
-<span class="n">D</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
-
-<span class="c1"># Laplacian</span>
-<span class="n">L</span> <span class="o">=</span> <span class="n">D</span> <span class="o">-</span> <span class="n">A</span>
-
-<span class="c1"># Eigen-decomposition</span>
-<span class="n">eigvals</span><span class="p">,</span> <span class="n">eigvecs</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eigh</span><span class="p">(</span><span class="n">L</span><span class="p">)</span>
-
-<span class="c1"># Simple spectral filter g(λ) = 1 / (1 + λ)</span>
-<span class="n">g</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">eigvals</span><span class="p">)</span>
-
-<span class="c1"># Graph signal</span>
-<span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.</span><span class="p">])</span>
-
-<span class="c1"># Fourier transform</span>
-<span class="n">x_hat</span> <span class="o">=</span> <span class="n">eigvecs</span><span class="o">.</span><span class="n">t</span><span class="p">()</span> <span class="o">@</span> <span class="n">x</span>
-
-<span class="c1"># Filtering</span>
-<span class="n">x_hat_filtered</span> <span class="o">=</span> <span class="n">g</span> <span class="o">*</span> <span class="n">x_hat</span>
-
-<span class="c1"># Inverse transform</span>
-<span class="n">x_filtered</span> <span class="o">=</span> <span class="n">eigvecs</span> <span class="o">@</span> <span class="n">x_hat_filtered</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Original:&quot;</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Filtered:&quot;</span><span class="p">,</span> <span class="n">x_filtered</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Original: tensor([ 1.,  0., -1.])
-Filtered: tensor([ 5.0000e-01, -4.7526e-08, -5.0000e-01])
-</pre></div>
-</div>
-</div>
-</div>
-<section id="node-classification-with-graph-convolutional-networks-gcns">
-<h3>1.  Node Classification with Graph Convolutional Networks (GCNs)<a class="headerlink" href="#node-classification-with-graph-convolutional-networks-gcns" title="Link to this heading">#</a></h3>
-<p><strong>Objective</strong>: Predict a label for each node using its features and the graph structure.</p>
-</section>
-<hr class="docutils" />
-<section id="inputs-and-outputs">
-<h3>🧩 Inputs and Outputs<a class="headerlink" href="#inputs-and-outputs" title="Link to this heading">#</a></h3>
-<ul class="simple">
-<li><p><strong>Input</strong>:</p>
-<ul>
-<li><p>Node feature matrix <span class="math notranslate nohighlight">\( \mathbf{X} \in \mathbb{R}^{N \times F} \)</span>, where:</p>
-<ul>
-<li><p><span class="math notranslate nohighlight">\(N\)</span> = number of nodes</p></li>
-<li><p><span class="math notranslate nohighlight">\(F\)</span> = number of features per node</p></li>
-</ul>
-</li>
-<li><p>Graph edge list <span class="math notranslate nohighlight">\( \mathcal{E} \)</span> (e.g., edge index in PyTorch Geometric)</p></li>
-</ul>
-</li>
-<li><p><strong>Output</strong>:</p>
-<ul>
-<li><p>Class probability matrix <span class="math notranslate nohighlight">\( \hat{\mathbf{Y}} \in \mathbb{R}^{N \times C} \)</span>, where:</p>
-<ul>
-<li><p><span class="math notranslate nohighlight">\(C\)</span> = number of classes</p></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</section>
-<hr class="docutils" />
-<section id="gcn-forward-pass">
-<h3>⚙️ GCN Forward Pass<a class="headerlink" href="#gcn-forward-pass" title="Link to this heading">#</a></h3>
-<p>Let <span class="math notranslate nohighlight">\( f_\theta(\cdot) \)</span> be a GCN model parameterized by <span class="math notranslate nohighlight">\( \theta \)</span>. The forward pass computes:</p>
-<div class="math notranslate nohighlight">
-\[
-\hat{\mathbf{Y}} = f_\theta(\mathbf{X}, \mathcal{E})
-\]</div>
-<p>A typical GCN with two layers:</p>
-<div class="math notranslate nohighlight">
-\[
-\hat{\mathbf{Y}} = \text{softmax} \left( \mathbf{A}' \cdot \text{ReLU}(\mathbf{A}' \cdot \mathbf{X} \cdot \mathbf{W}^{(1)}) \cdot \mathbf{W}^{(2)} \right)
-\]</div>
-<p>Where:</p>
-<ul class="simple">
-<li><p><span class="math notranslate nohighlight">\( \mathbf{A}' = \tilde{\mathbf{D}}^{-1/2} \tilde{\mathbf{A}} \tilde{\mathbf{D}}^{-1/2} \)</span> is the <strong>normalized adjacency matrix with self-loops</strong></p></li>
-<li><p><span class="math notranslate nohighlight">\( \tilde{\mathbf{A}} = \mathbf{A} + \mathbf{I} \)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\( \tilde{\mathbf{D}} \)</span> is the degree matrix of <span class="math notranslate nohighlight">\( \tilde{\mathbf{A}} \)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\( \mathbf{W}^{(1)}, \mathbf{W}^{(2)} \)</span> are learnable weight matrices</p></li>
-</ul>
-</section>
-<hr class="docutils" />
-<section id="loss-function">
-<h3>🧮 Loss Function<a class="headerlink" href="#loss-function" title="Link to this heading">#</a></h3>
-<p>The model is trained using <strong>cross-entropy loss</strong> on the labeled nodes:</p>
-<div class="math notranslate nohighlight">
-\[
-\mathcal{L} = - \frac{1}{|\mathcal{V}_L|} \sum_{i \in \mathcal{V}_L} \sum_{c=1}^C y_{ic} \log(\hat{y}_{ic})
-\]</div>
-<p>Where:</p>
-<ul class="simple">
-<li><p><span class="math notranslate nohighlight">\( \mathcal{V}_L \)</span> is the set of labeled nodes</p></li>
-<li><p><span class="math notranslate nohighlight">\( y_i \)</span> is the true label for node <span class="math notranslate nohighlight">\(i\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\( \hat{y}_{i, y_i} \)</span> is the predicted probability for the correct class</p></li>
-</ul>
-<p>In PyTorch:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">torch.nn.functional</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">F</span>
-
-<span class="n">loss</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">cross_entropy</span><span class="p">(</span><span class="n">pred</span><span class="p">[</span><span class="n">train_mask</span><span class="p">],</span> <span class="n">labels</span><span class="p">[</span><span class="n">train_mask</span><span class="p">])</span>
-</pre></div>
-</div>
-<p><img alt="GCN" src="../../_images/chap4_GCN.png" /></p>
-<hr class="docutils" />
-<p>🛠️ PyTorch Geometric (PyG)</p>
-<p>✅ <strong>Step 1: Define the GCN Model</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">torch.nn.functional</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">F</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">torch_geometric.nn</span><span class="w"> </span><span class="kn">import</span> <span class="n">GCNConv</span>  <span class="c1"># GCN layer from PyG</span>
-
-<span class="c1"># Define a 2-layer Graph Convolutional Network (GCN)</span>
-<span class="k">class</span><span class="w"> </span><span class="nc">GCN</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">in_channels</span><span class="p">,</span> <span class="n">hidden_channels</span><span class="p">,</span> <span class="n">out_channels</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
-        <span class="c1"># First GCN layer: transforms input features to hidden space</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">conv1</span> <span class="o">=</span> <span class="n">GCNConv</span><span class="p">(</span><span class="n">in_channels</span><span class="p">,</span> <span class="n">hidden_channels</span><span class="p">)</span>
-        <span class="c1"># Second GCN layer: transforms hidden features to output space (number of classes)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">conv2</span> <span class="o">=</span> <span class="n">GCNConv</span><span class="p">(</span><span class="n">hidden_channels</span><span class="p">,</span> <span class="n">out_channels</span><span class="p">)</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">edge_index</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        x: Node feature matrix (N x F)</span>
-<span class="sd">        edge_index: Edge list (2 x E) in COO format</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">conv1</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">edge_index</span><span class="p">)</span>  <span class="c1"># First graph convolution</span>
-        <span class="n">x</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>                  <span class="c1"># Non-linearity</span>
-        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">conv2</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">edge_index</span><span class="p">)</span>  <span class="c1"># Second graph convolution</span>
-        <span class="k">return</span> <span class="n">F</span><span class="o">.</span><span class="n">log_softmax</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># Output log-probabilities for each class</span>
-</pre></div>
-</div>
-<p>✅ <strong>Step 2: Training Loop</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Instantiate the GCN model</span>
-<span class="n">model</span> <span class="o">=</span> <span class="n">GCN</span><span class="p">(</span>
-    <span class="n">in_channels</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">num_node_features</span><span class="p">,</span>  <span class="c1"># Number of features per node</span>
-    <span class="n">hidden_channels</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span>                     <span class="c1"># Size of hidden layer</span>
-    <span class="n">out_channels</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">num_classes</span>        <span class="c1"># Number of output classes</span>
-<span class="p">)</span>
-
-<span class="c1"># Define the optimizer (Adam) with learning rate and L2 regularization (weight decay)</span>
-<span class="n">optimizer</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">weight_decay</span><span class="o">=</span><span class="mf">5e-4</span><span class="p">)</span>
-
-<span class="c1"># Set model to training mode (activates dropout, etc.)</span>
-<span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
-
-<span class="c1"># Train for 200 epochs</span>
-<span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">200</span><span class="p">):</span>
-    <span class="n">optimizer</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>                            <span class="c1"># Reset gradients</span>
-    <span class="n">out</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">edge_index</span><span class="p">)</span>             <span class="c1"># Forward pass</span>
-    <span class="c1"># Compute loss only on labeled training nodes</span>
-    <span class="n">loss</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">nll_loss</span><span class="p">(</span><span class="n">out</span><span class="p">[</span><span class="n">data</span><span class="o">.</span><span class="n">train_mask</span><span class="p">],</span> <span class="n">data</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="n">data</span><span class="o">.</span><span class="n">train_mask</span><span class="p">])</span>
-    <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>                                  <span class="c1"># Backpropagation</span>
-    <span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>                                 <span class="c1"># Update weights</span>
-
-</pre></div>
-</div>
-<p>✅ <strong>Step 3: Evaluation</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set model to evaluation mode (disables dropout, etc.)</span>
-<span class="n">model</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
-
-<span class="c1"># Forward pass to get predictions</span>
-<span class="n">pred</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">edge_index</span><span class="p">)</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># Take class with highest probability</span>
-
-<span class="c1"># Compare predictions with true labels on the test set</span>
-<span class="n">correct</span> <span class="o">=</span> <span class="n">pred</span><span class="p">[</span><span class="n">data</span><span class="o">.</span><span class="n">test_mask</span><span class="p">]</span> <span class="o">==</span> <span class="n">data</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="n">data</span><span class="o">.</span><span class="n">test_mask</span><span class="p">]</span>
-
-<span class="c1"># Compute accuracy</span>
-<span class="n">acc</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">correct</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span> <span class="o">/</span> <span class="nb">int</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">test_mask</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Test Accuracy: </span><span class="si">{</span><span class="n">acc</span><span class="si">:</span><span class="s1">.4f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</section>
-<hr class="docutils" />
-<section id="summary">
-<h3>✅ Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h3>
-<div class="pst-scrollable-table-container"><table class="table">
-<thead>
-<tr class="row-odd"><th class="head"><p>Concept</p></th>
-<th class="head"><p>Explanation</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">GCNConv</span></code></p></td>
-<td><p>Graph convolution layer from PyTorch Geometric</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">edge_index</span></code></p></td>
-<td><p>Sparse edge list in COO format (2 × num_edges)</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">data.x</span></code></p></td>
-<td><p>Node feature matrix</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">data.y</span></code></p></td>
-<td><p>Ground-truth labels (integers)</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">data.train_mask</span></code></p></td>
-<td><p>Boolean mask to specify training nodes</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">F.nll_loss</span></code></p></td>
-<td><p>Negative log likelihood loss (used with <code class="docutils literal notranslate"><span class="pre">log_softmax</span></code> output)</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">argmax(dim=1)</span></code></p></td>
-<td><p>Picks the class with highest predicted log-probability</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">optimizer.step()</span></code></p></td>
-<td><p>Performs one optimization (gradient descent) step</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-</section>
-<hr class="docutils" />
-<section id="further-reading">
-<h3>📚 Further Reading<a class="headerlink" href="#further-reading" title="Link to this heading">#</a></h3>
-<ul class="simple">
-<li><p>Kipf &amp; Welling (2017): <a class="reference external" href="https://arxiv.org/abs/1609.02907">“Semi-Supervised Classification with Graph Convolutional Networks”</a></p></li>
-<li><p><a class="reference external" href="https://pytorch-geometric.readthedocs.io">PyTorch Geometric Docs</a></p></li>
-</ul>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">torch.nn.functional</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">F</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">torch_geometric.datasets</span><span class="w"> </span><span class="kn">import</span> <span class="n">Planetoid</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">torch_geometric.nn</span><span class="w"> </span><span class="kn">import</span> <span class="n">GCNConv</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
-
-<span class="c1"># Load dataset</span>
-<span class="n">dataset</span> <span class="o">=</span> <span class="n">Planetoid</span><span class="p">(</span><span class="n">root</span><span class="o">=</span><span class="s1">&#39;data/Planetoid&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Cora&#39;</span><span class="p">)</span>
-<span class="n">data</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-
-<span class="c1"># Define the GCN model</span>
-<span class="k">class</span><span class="w"> </span><span class="nc">GCN</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">in_channels</span><span class="p">,</span> <span class="n">hidden_channels</span><span class="p">,</span> <span class="n">out_channels</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">conv1</span> <span class="o">=</span> <span class="n">GCNConv</span><span class="p">(</span><span class="n">in_channels</span><span class="p">,</span> <span class="n">hidden_channels</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">conv2</span> <span class="o">=</span> <span class="n">GCNConv</span><span class="p">(</span><span class="n">hidden_channels</span><span class="p">,</span> <span class="n">out_channels</span><span class="p">)</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">edge_index</span><span class="p">):</span>
-        <span class="n">x</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">conv1</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">edge_index</span><span class="p">))</span>
-        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">conv2</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">edge_index</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">x</span>
-
-<span class="c1"># Instantiate model, optimizer</span>
-<span class="n">device</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s1">&#39;cuda&#39;</span> <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span> <span class="k">else</span> <span class="s1">&#39;cpu&#39;</span><span class="p">)</span>
-<span class="n">model</span> <span class="o">=</span> <span class="n">GCN</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">num_node_features</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="n">dataset</span><span class="o">.</span><span class="n">num_classes</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
-<span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
-
-<span class="n">optimizer</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">weight_decay</span><span class="o">=</span><span class="mf">5e-4</span><span class="p">)</span>
-
-<span class="c1"># Training function</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">train</span><span class="p">():</span>
-    <span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
-    <span class="n">optimizer</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
-    <span class="n">out</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">edge_index</span><span class="p">)</span>
-    <span class="n">loss</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">cross_entropy</span><span class="p">(</span><span class="n">out</span><span class="p">[</span><span class="n">data</span><span class="o">.</span><span class="n">train_mask</span><span class="p">],</span> <span class="n">data</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="n">data</span><span class="o">.</span><span class="n">train_mask</span><span class="p">])</span>
-    <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
-    <span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
-    <span class="k">return</span> <span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
-
-<span class="c1"># Evaluation function</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">test</span><span class="p">():</span>
-    <span class="n">model</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
-    <span class="n">out</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">edge_index</span><span class="p">)</span>
-    <span class="n">pred</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-
-    <span class="n">accs</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="n">mask</span> <span class="ow">in</span> <span class="p">[</span><span class="n">data</span><span class="o">.</span><span class="n">train_mask</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">val_mask</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">test_mask</span><span class="p">]:</span>
-        <span class="n">correct</span> <span class="o">=</span> <span class="n">pred</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="n">mask</span><span class="p">])</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
-        <span class="n">acc</span> <span class="o">=</span> <span class="n">correct</span> <span class="o">/</span> <span class="n">mask</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
-        <span class="n">accs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">acc</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">accs</span>  <span class="c1"># [train_acc, val_acc, test_acc]</span>
-
-<span class="c1"># === Training Loop ===</span>
-<span class="n">train_losses</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="n">val_accuracies</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="n">best_val_acc</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="n">best_test_acc</span> <span class="o">=</span> <span class="mi">0</span>
-
-<span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">201</span><span class="p">):</span>
-    <span class="n">loss</span> <span class="o">=</span> <span class="n">train</span><span class="p">()</span>
-    <span class="n">train_acc</span><span class="p">,</span> <span class="n">val_acc</span><span class="p">,</span> <span class="n">test_acc</span> <span class="o">=</span> <span class="n">test</span><span class="p">()</span>
-    <span class="n">train_losses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">loss</span><span class="p">)</span>
-    <span class="n">val_accuracies</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">val_acc</span><span class="p">)</span>
-
-    <span class="k">if</span> <span class="n">val_acc</span> <span class="o">&gt;</span> <span class="n">best_val_acc</span><span class="p">:</span>
-        <span class="n">best_val_acc</span> <span class="o">=</span> <span class="n">val_acc</span>
-        <span class="n">best_test_acc</span> <span class="o">=</span> <span class="n">test_acc</span>  <span class="c1"># Save test acc at best val</span>
-
-    <span class="k">if</span> <span class="n">epoch</span> <span class="o">%</span> <span class="mi">20</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">epoch</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Epoch </span><span class="si">{</span><span class="n">epoch</span><span class="si">:</span><span class="s2">03d</span><span class="si">}</span><span class="s2">, Loss: </span><span class="si">{</span><span class="n">loss</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">, &quot;</span>
-              <span class="sa">f</span><span class="s2">&quot;Train Acc: </span><span class="si">{</span><span class="n">train_acc</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">, Val Acc: </span><span class="si">{</span><span class="n">val_acc</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">, Test Acc: </span><span class="si">{</span><span class="n">test_acc</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-
-<span class="c1"># Final Results</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">✅ Best Validation Accuracy: </span><span class="si">{:.4f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">best_val_acc</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;🧪 Test Accuracy at Best Validation: </span><span class="si">{:.4f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">best_test_acc</span><span class="p">))</span>
-
-<span class="c1"># Plot training loss</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">train_losses</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Epoch&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Training Loss&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Training Loss over Epochs&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">3</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">import</span><span class="w"> </span><span class="nn">torch.nn.functional</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">F</span>
-<span class="ne">----&gt; </span><span class="mi">3</span> <span class="kn">from</span><span class="w"> </span><span class="nn">torch_geometric.datasets</span><span class="w"> </span><span class="kn">import</span> <span class="n">Planetoid</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="kn">from</span><span class="w"> </span><span class="nn">torch_geometric.nn</span><span class="w"> </span><span class="kn">import</span> <span class="n">GCNConv</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
-
-<span class="ne">ModuleNotFoundError</span>: No module named &#39;torch_geometric&#39;
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="graph-classification">
-<h3>2.  Graph Classification<a class="headerlink" href="#graph-classification" title="Link to this heading">#</a></h3>
-<p><strong>Objective</strong>: Predict a single label for an entire graph.</p>
-<p>This task arises in many real-world domains:</p>
-<ul class="simple">
-<li><p>Chemistry: Predict molecule toxicity or solubility</p></li>
-<li><p>Bioinformatics: Predict protein functions</p></li>
-<li><p>NLP: Document-level classification where each document is modeled as a graph</p></li>
-<li><p>Social networks: Predict community type based on graph connectivity</p></li>
-</ul>
-<hr class="docutils" />
-<section id="input-and-output">
-<h4>Input and Output<a class="headerlink" href="#input-and-output" title="Link to this heading">#</a></h4>
-<ul>
-<li><p><strong>Input</strong>:</p>
-<ul class="simple">
-<li><p>A batch of graphs <span class="math notranslate nohighlight">\( \{G_1, G_2, \dots, G_B\} \)</span>,<br />
-where each graph <span class="math notranslate nohighlight">\( G_i\)</span> has its own node features <span class="math notranslate nohighlight">\( \mathbf{X}^{(i)} \in \mathbb{R}^{N_i \times F} \)</span> and edge list <span class="math notranslate nohighlight">\( \mathcal{E}^{(i)} \)</span>.</p></li>
-<li><p>A batch vector <span class="math notranslate nohighlight">\( \mathbf{b} \in \mathbb{R}^{\sum_i N_i}\)</span> assigning each node to its graph ID.
-i.e. The batch vector is a 1D tensor that assigns each node in the concatenated batch to the graph it belongs to.</p></li>
-</ul>
-<p>Let’s assume we are working with a batch of <span class="math notranslate nohighlight">\(B\)</span> graphs:</p>
-<ul class="simple">
-<li><p>Graph <span class="math notranslate nohighlight">\(G_1\)</span> has <span class="math notranslate nohighlight">\(N_1\)</span> nodes</p></li>
-<li><p>Graph <span class="math notranslate nohighlight">\(G_2\)</span> has <span class="math notranslate nohighlight">\(N_2\)</span> nodes</p></li>
-<li><p>…</p></li>
-<li><p>Graph <span class="math notranslate nohighlight">\(G_B\)</span> has <span class="math notranslate nohighlight">\(N_B\)</span> nodes</p></li>
-</ul>
-</li>
-</ul>
-<p>All node features are concatenated into a single matrix:</p>
-<div class="math notranslate nohighlight">
-\[
-\mathbf{X}_{\text{batch}} \in \mathbb{R}^{(N_1 + N_2 + \cdots + N_B) \times F}
-\]</div>
-<p>To tell PyTorch Geometric (PyG) which node belongs to which graph, a <strong>batch vector</strong> is used:</p>
-<div class="math notranslate nohighlight">
-\[
-\mathbf{b} = [0, 0, \ldots, 0,\, 1, 1, \ldots, 1,\, 2, \ldots, B-1]
-\]</div>
-<p>Each entry <span class="math notranslate nohighlight">\(b_j\)</span> in the vector <span class="math notranslate nohighlight">\(\mathbf{b}\)</span> indicates:</p>
-<blockquote>
-<div><p>Node <span class="math notranslate nohighlight">\(j\)</span> belongs to graph <span class="math notranslate nohighlight">\(G_{b_j}\)</span>.</p>
-</div></blockquote>
-<ul class="simple">
-<li><p><strong>Output</strong>:</p>
-<ul>
-<li><p>A predicted class label <span class="math notranslate nohighlight">\( \hat{y}_i \)</span> for each graph <span class="math notranslate nohighlight">\( G_i \)</span></p></li>
-</ul>
-</li>
-</ul>
-</section>
-</section>
-<hr class="docutils" />
-<section id="mathematical-formulation">
-<h3>Mathematical Formulation<a class="headerlink" href="#mathematical-formulation" title="Link to this heading">#</a></h3>
-<ol class="arabic simple">
-<li><p>Apply GNN layers to compute node embeddings:
-$<span class="math notranslate nohighlight">\(
-\mathbf{H}^{(l)} = \text{GNN}_l(\mathbf{H}^{(l-1)}, \mathcal{E})
-\quad \text{with } \mathbf{H}^{(0)} = \mathbf{X}
-\)</span>$</p></li>
-<li><p>Aggregate (or pool) node features to a graph-level embedding:
-$<span class="math notranslate nohighlight">\(
-\mathbf{h}_G = \text{READOUT}(\{\mathbf{h}_v \mid v \in G\})
-\)</span>$</p></li>
-</ol>
-<p>Typical readout functions:</p>
-<ul class="simple">
-<li><p>Mean pooling:
-$<span class="math notranslate nohighlight">\(
-\mathbf{h}_G = \frac{1}{|G|} \sum_{v \in G} \mathbf{h}_v
-\)</span>$</p></li>
-<li><p>Sum pooling</p></li>
-<li><p>Max pooling</p></li>
-</ul>
-<ol class="arabic simple" start="3">
-<li><p>Feed the graph embedding into a classifier:
-$<span class="math notranslate nohighlight">\(
-\hat{y}_G = \text{softmax}(\mathbf{W} \cdot \mathbf{h}_G + \mathbf{b})
-\)</span>$</p></li>
-</ol>
-</section>
-</section>
-<section id="id1">
-<h2><img alt="GCN_graph" src="../../_images/chap4_graphGCN.png" /><a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
-<section id="id2">
-<h3>Loss Function<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
-<p>As in node classification, we use <strong>cross-entropy loss</strong> over labeled graphs:</p>
-<div class="math notranslate nohighlight">
-\[
-\mathcal{L}_{\text{graph}} = - \frac{1}{B} \sum_{i=1}^{B} \log \hat{y}_{i, y_i}
-\]</div>
-<p>where:</p>
-<ul class="simple">
-<li><p><span class="math notranslate nohighlight">\( B \)</span> is the number of graphs in the batch,</p></li>
-<li><p><span class="math notranslate nohighlight">\( y_i \)</span> is the true class index of graph <span class="math notranslate nohighlight">\( i \)</span>,</p></li>
-<li><p><span class="math notranslate nohighlight">\( \hat{y}_{i, y_i} \)</span> is the predicted probability of the correct class.</p></li>
-</ul>
-<hr class="docutils" />
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">torch.nn.functional</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">F</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">torch_geometric.nn</span><span class="w"> </span><span class="kn">import</span> <span class="n">GCNConv</span><span class="p">,</span> <span class="n">global_mean_pool</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">torch_geometric.datasets</span><span class="w"> </span><span class="kn">import</span> <span class="n">TUDataset</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">torch_geometric.loader</span><span class="w"> </span><span class="kn">import</span> <span class="n">DataLoader</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
-
-<span class="c1"># === 1. Load Graph Classification Dataset (e.g., MUTAG or PROTEINS) ===</span>
-<span class="n">dataset</span> <span class="o">=</span> <span class="n">TUDataset</span><span class="p">(</span><span class="n">root</span><span class="o">=</span><span class="s1">&#39;data/TUDataset&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;MUTAG&#39;</span><span class="p">)</span>  <span class="c1"># You can change to &#39;PROTEINS&#39;, etc.</span>
-<span class="n">dataset</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">shuffle</span><span class="p">()</span>
-
-<span class="c1"># Train/test split</span>
-<span class="n">train_dataset</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">[:</span><span class="mi">150</span><span class="p">]</span>
-<span class="n">test_dataset</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">[</span><span class="mi">150</span><span class="p">:]</span>
-<span class="n">train_loader</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">train_dataset</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">32</span><span class="p">)</span>
-<span class="n">test_loader</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">test_dataset</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">32</span><span class="p">)</span>
-
-<span class="c1"># === 2. Define GCN for Graph Classification ===</span>
-<span class="k">class</span><span class="w"> </span><span class="nc">GCNGraphClassifier</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">in_channels</span><span class="p">,</span> <span class="n">hidden_channels</span><span class="p">,</span> <span class="n">out_channels</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">conv1</span> <span class="o">=</span> <span class="n">GCNConv</span><span class="p">(</span><span class="n">in_channels</span><span class="p">,</span> <span class="n">hidden_channels</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">conv2</span> <span class="o">=</span> <span class="n">GCNConv</span><span class="p">(</span><span class="n">hidden_channels</span><span class="p">,</span> <span class="n">hidden_channels</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">classifier</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">hidden_channels</span><span class="p">,</span> <span class="n">out_channels</span><span class="p">)</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">edge_index</span><span class="p">,</span> <span class="n">batch</span><span class="p">):</span>
-        <span class="n">x</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">conv1</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">edge_index</span><span class="p">))</span>
-        <span class="n">x</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">conv2</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">edge_index</span><span class="p">))</span>
-        <span class="n">x</span> <span class="o">=</span> <span class="n">global_mean_pool</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">batch</span><span class="p">)</span>  <span class="c1"># Aggregate node features</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">classifier</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-
-<span class="c1"># === 3. Setup Model, Optimizer, Loss ===</span>
-<span class="n">device</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s1">&#39;cuda&#39;</span> <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span> <span class="k">else</span> <span class="s1">&#39;cpu&#39;</span><span class="p">)</span>
-<span class="n">model</span> <span class="o">=</span> <span class="n">GCNGraphClassifier</span><span class="p">(</span>
-    <span class="n">in_channels</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">num_node_features</span><span class="p">,</span>
-    <span class="n">hidden_channels</span><span class="o">=</span><span class="mi">64</span><span class="p">,</span>
-    <span class="n">out_channels</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">num_classes</span>
-<span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
-
-<span class="n">optimizer</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">weight_decay</span><span class="o">=</span><span class="mf">5e-4</span><span class="p">)</span>
-<span class="n">criterion</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">CrossEntropyLoss</span><span class="p">()</span>
-
-<span class="c1"># === 4. Training Function ===</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">train</span><span class="p">():</span>
-    <span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
-    <span class="n">total_loss</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="k">for</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">train_loader</span><span class="p">:</span>
-        <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
-        <span class="n">optimizer</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
-        <span class="n">out</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">edge_index</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">batch</span><span class="p">)</span>
-        <span class="n">loss</span> <span class="o">=</span> <span class="n">criterion</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">y</span><span class="p">)</span>
-        <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
-        <span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
-        <span class="n">total_loss</span> <span class="o">+=</span> <span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">()</span> <span class="o">*</span> <span class="n">data</span><span class="o">.</span><span class="n">num_graphs</span>
-    <span class="k">return</span> <span class="n">total_loss</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">train_dataset</span><span class="p">)</span>
-
-<span class="c1"># === 5. Evaluation Function ===</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">test</span><span class="p">(</span><span class="n">loader</span><span class="p">):</span>
-    <span class="n">model</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
-    <span class="n">correct</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="k">for</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">loader</span><span class="p">:</span>
-        <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
-        <span class="n">out</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">edge_index</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">batch</span><span class="p">)</span>
-        <span class="n">pred</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-        <span class="n">correct</span> <span class="o">+=</span> <span class="n">pred</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">y</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
-    <span class="k">return</span> <span class="n">correct</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">loader</span><span class="o">.</span><span class="n">dataset</span><span class="p">)</span>
-
-<span class="c1"># === 6. Run Training ===</span>
-<span class="n">train_losses</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="n">best_test_acc</span> <span class="o">=</span> <span class="mi">0</span>
-
-<span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">101</span><span class="p">):</span>
-    <span class="n">loss</span> <span class="o">=</span> <span class="n">train</span><span class="p">()</span>
-    <span class="n">train_acc</span> <span class="o">=</span> <span class="n">test</span><span class="p">(</span><span class="n">train_loader</span><span class="p">)</span>
-    <span class="n">test_acc</span> <span class="o">=</span> <span class="n">test</span><span class="p">(</span><span class="n">test_loader</span><span class="p">)</span>
-    <span class="n">train_losses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">loss</span><span class="p">)</span>
-
-    <span class="k">if</span> <span class="n">test_acc</span> <span class="o">&gt;</span> <span class="n">best_test_acc</span><span class="p">:</span>
-        <span class="n">best_test_acc</span> <span class="o">=</span> <span class="n">test_acc</span>
-
-    <span class="k">if</span> <span class="n">epoch</span> <span class="o">%</span> <span class="mi">10</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">epoch</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Epoch </span><span class="si">{</span><span class="n">epoch</span><span class="si">:</span><span class="s2">03d</span><span class="si">}</span><span class="s2">, Loss: </span><span class="si">{</span><span class="n">loss</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">, &quot;</span>
-              <span class="sa">f</span><span class="s2">&quot;Train Acc: </span><span class="si">{</span><span class="n">train_acc</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">, Test Acc: </span><span class="si">{</span><span class="n">test_acc</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-
-<span class="c1"># Final Results</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">✅ Best Test Accuracy: </span><span class="si">{</span><span class="n">best_test_acc</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-
-<span class="c1"># === 7. Plot Loss Curve ===</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">train_losses</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Training Loss Over Epochs&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Epoch&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Loss&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading https://www.chrsmrrs.com/graphkerneldatasets/MUTAG.zip
-Processing...
-Done!
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 001, Loss: 0.6730, Train Acc: 0.6533, Test Acc: 0.7105
-Epoch 010, Loss: 0.5345, Train Acc: 0.7400, Test Acc: 0.6842
-Epoch 020, Loss: 0.5164, Train Acc: 0.7400, Test Acc: 0.6842
-Epoch 030, Loss: 0.5100, Train Acc: 0.7200, Test Acc: 0.7368
-Epoch 040, Loss: 0.5065, Train Acc: 0.7533, Test Acc: 0.7632
-Epoch 050, Loss: 0.5030, Train Acc: 0.7533, Test Acc: 0.7632
-Epoch 060, Loss: 0.5003, Train Acc: 0.7467, Test Acc: 0.7368
-Epoch 070, Loss: 0.4988, Train Acc: 0.7467, Test Acc: 0.7368
-Epoch 080, Loss: 0.4975, Train Acc: 0.7467, Test Acc: 0.7368
-Epoch 090, Loss: 0.4963, Train Acc: 0.7467, Test Acc: 0.7368
-Epoch 100, Loss: 0.4961, Train Acc: 0.7467, Test Acc: 0.7368
-
-✅ Best Test Accuracy: 0.7632
-</pre></div>
-</div>
-<img alt="../../_images/87d7a05e8b2d00cb560487c725020d0a14c6f755a82a0486cb5faa983b0afb52.png" src="../../_images/87d7a05e8b2d00cb560487c725020d0a14c6f755a82a0486cb5faa983b0afb52.png" />
-</div>
-</div>
-<p>Graph classification learns to predict labels at the graph level.</p>
-<p>It requires aggregating (pooling) node embeddings into a single vector.</p>
-<p>The typical pipeline includes GNN → Pooling → MLP → Softmax.</p>
-<p>Cross-entropy loss is computed using predicted and true graph labels.</p>
-<div class="pst-scrollable-table-container"><table class="table">
-<thead>
-<tr class="row-odd"><th class="head"><p>Task</p></th>
-<th class="head"><p>Description</p></th>
-<th class="head"><p>Output</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p><strong>Link Prediction</strong></p></td>
-<td><p>Predict whether an edge exists between two nodes</p></td>
-<td><p>Binary classification</p></td>
-</tr>
-<tr class="row-odd"><td><p><strong>Edge Classification</strong></p></td>
-<td><p>Predict a label for an edge</p></td>
-<td><p>Multi-class (or binary)</p></td>
-</tr>
-<tr class="row-even"><td><p><strong>Node Regression</strong></p></td>
-<td><p>Predict a continuous value per node</p></td>
-<td><p>Real-valued scalar</p></td>
-</tr>
-<tr class="row-odd"><td><p><strong>Graph Regression</strong></p></td>
-<td><p>Predict a continuous value per graph</p></td>
-<td><p>Real-valued scalar</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-</section>
+<p><strong>Interpretation:</strong> smooth propagation corresponds to low-pass filtering; high-frequency components capture sharp changes or noise.</p>
 </section>
 </section>
 
@@ -1352,16 +980,16 @@ Epoch 100, Loss: 0.4961, Train Acc: 0.7467, Test Acc: 0.7368
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "python"
+            mode: "mlgbook"
         },
         kernelOptions: {
-            name: "python3",
+            name: "mlgbook",
             path: "./content\Chapter05"
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'python3'</script>
+    <script>kernelName = 'mlgbook'</script>
 
                 </article>
               
@@ -1373,6 +1001,24 @@ Epoch 100, Loss: 0.4961, Train Acc: 0.7467, Test Acc: 0.7368
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="../Chapter04/02_Shallow_embeddings.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Shallow Embedding Methods</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="02_Spectral_Graph_Convolution_in_GNNs.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Spectral Graph Convolution in GNNs</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               
@@ -1389,53 +1035,59 @@ Epoch 100, Loss: 0.4961, Train Acc: 0.7467, Test Acc: 0.7368
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Introduction: From Graph Structure to Graph Neural Networks</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">From Graph Structure to Graph Neural Networks</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spectral-vs-spatial-formulations">• Spectral vs. Spatial formulations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#graph-types"><strong>• Graph types:</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#propagation-rules"><strong>• Propagation rules:</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#training-settings"><strong>• Training settings:</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scalability-strategies"><strong>• Scalability strategies:</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#expressiveness"><strong>• Expressiveness:</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#domain-adaptations"><strong>• Domain adaptations:</strong></a></li>
+</ul>
+</li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#foundations-of-graph-linear-algebra-and-spectral-methods">Foundations of Graph Linear Algebra and Spectral Methods</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-algebraic-representation-of-graphs">1. Linear Algebraic Representation of Graphs</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-algebraic-representation-of-graphs">1. Linear Algebraic Representation of Graphs</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#adjacency-matrix-a">1.1 Adjacency Matrix <span class="math notranslate nohighlight">\(A\)</span></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#degree-matrix-d">1.2 Degree Matrix <span class="math notranslate nohighlight">\(D\)</span></a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#graph-laplacian">2. Graph Laplacian</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#normalized-laplacians">2.1 Normalized Laplacians</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#graph-laplacian">2. Graph Laplacian</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#normalized-laplacians">2.1 Normalized Laplacians</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#symmetric-normalized-laplacian">Symmetric normalized Laplacian</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#random-walk-laplacian">Random-walk Laplacian</a></li>
 </ul>
 </li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#why-this-stabilizes-learning">Why This Stabilizes Learning</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#normalized-laplacians-reduce-degree-influence-and-stabilize-learning">Normalized Laplacians reduce degree influence and stabilize learning.</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-normalized-laplacians-reduce-degree-influence-and-stabilize-learning">Why Normalized Laplacians Reduce Degree Influence and Stabilize Learning</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-this-stabilizes-learning">Why This Stabilizes Learning</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#diffusion-interpretation">3. Diffusion Interpretation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#graph-spectrum-and-frequency">4. Graph Spectrum and Frequency</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#graph-fourier-transform">4.1 Graph Fourier Transform</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#diffusion-on-graphs">3. Diffusion on Graphs</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#heat-diffusion-on-graphs">Heat Diffusion on Graphs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-a-graph-signal">What Is a Graph Signal?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-role-of-the-graph-laplacian">The Role of the Graph Laplacian</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#heat-equation-on-a-graph">Heat Equation on a Graph</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#heat-equation-in-physics">Heat Equation in Physics</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#solution-of-the-heat-equation">Solution of the Heat Equation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-compute-the-heat-kernel">How to Compute the Heat Kernel</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-using-eigen-decomposition-exact-but-expensive"><strong>a) Using Eigen-Decomposition (Exact but Expensive)</strong></a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spectral-graph-convolution">5. Spectral Graph Convolution</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chebyshev-polynomial-filters">6. Chebyshev Polynomial Filters</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gcn-as-first-order-spectral-approximation">7. GCN as First-Order Spectral Approximation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-code-laplacian-and-spectral-filtering-pytorch">8. Example Code: Laplacian and Spectral Filtering (PyTorch)</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#node-classification-with-graph-convolutional-networks-gcns">1.  Node Classification with Graph Convolutional Networks (GCNs)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inputs-and-outputs">🧩 Inputs and Outputs</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gcn-forward-pass">⚙️ GCN Forward Pass</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#loss-function">🧮 Loss Function</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">✅ Summary</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#further-reading">📚 Further Reading</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#graph-classification">2.  Graph Classification</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#input-and-output">Input and Output</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#b-using-polynomial-approximations-fast-and-scalable">b) Using Polynomial Approximations (Fast and Scalable)</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematical-formulation">Mathematical Formulation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-1-truncated-taylor-power-series-approximation"><strong>b-1) Truncated Taylor (Power-Series) Approximation</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-2-chebyshev-polynomial-approximation"><strong>b-2). Chebyshev Polynomial Approximation</strong></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#c-using-iterative-diffusion-power-series-form"><strong>c) Using Iterative Diffusion (Power-Series Form)</strong></a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1"></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Loss Function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretation">Interpretation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-this-matters-in-gnns">Why This Matters in GNNs</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#graph-spectrum-and-fourier-transform">4. Graph Spectrum and Fourier Transform</a></li>
 </ul>
 </li>
 </ul>
