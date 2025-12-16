@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -368,10 +368,10 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#graph-properties">Graph properties</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-integration-metrics">a) Integration metrics (یکپارچگی)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-segregation-metrics">b) Segregation metrics(تفکیک پذیری)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#c-centrality-metrics">c) Centrality metrics (مرکزیت)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#d-resilience-metrics">d) Resilience metrics (پایداری/تاب آوری)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-integration-metrics">a) Integration metrics</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-segregation-metrics">b) Segregation metrics</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#c-centrality-metrics">c) Centrality metrics</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#d-resilience-metrics">d) Resilience metrics</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#investigating-some-of-these-properties">Investigating some of these properties</a><ul class="visible nav section-nav flex-column">
@@ -410,48 +410,32 @@ document.write(`
 !pip install matplotlib==3.2.2
 !pip install pandas==1.1.3
 !pip install scipy==1.6.2</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">networkx</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nx</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
-
-<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
-<span class="o">%</span><span class="k">matplotlib</span> inline
-
-<span class="n">default_edge_color</span> <span class="o">=</span> <span class="s1">&#39;gray&#39;</span>
-<span class="n">default_node_color</span> <span class="o">=</span> <span class="s1">&#39;#407cc9&#39;</span>
-<span class="n">enhanced_node_color</span> <span class="o">=</span> <span class="s1">&#39;#f5b042&#39;</span>
-<span class="n">enhanced_edge_color</span> <span class="o">=</span> <span class="s1">&#39;#cc2f04&#39;</span>
-</pre></div>
-</div>
-</div>
-</div>
 <section id="graph-properties">
 <h2>Graph properties<a class="headerlink" href="#graph-properties" title="Link to this heading">#</a></h2>
 <p>Graph properties provide quantitative measures that characterize the structure and functionality of a network. They describe how nodes and edges are arranged and how information, influence, or resources can propagate through the system. These properties are typically grouped into four major categories—integration, segregation, centrality, and resilience metrics—each offering a distinct perspective on the network’s organization and behavior.</p>
 <section id="a-integration-metrics">
-<h3>a) Integration metrics (یکپارچگی)<a class="headerlink" href="#a-integration-metrics" title="Link to this heading">#</a></h3>
+<h3>a) Integration metrics<a class="headerlink" href="#a-integration-metrics" title="Link to this heading">#</a></h3>
 <p>Integration metrics capture the overall connectedness of a network and evaluate how efficiently nodes can reach one another. They are primarily concerned with the ease of communication or flow across the entire system and reflect the network’s capacity to integrate information globally.</p>
 <p>Distance, path, and shortest path</p>
 <p>Characteristic path length</p>
 <p>Global and local efficiency</p>
 </section>
 <section id="b-segregation-metrics">
-<h3>b) Segregation metrics(تفکیک پذیری)<a class="headerlink" href="#b-segregation-metrics" title="Link to this heading">#</a></h3>
+<h3>b) Segregation metrics<a class="headerlink" href="#b-segregation-metrics" title="Link to this heading">#</a></h3>
 <p>Segregation metrics describe the extent to which nodes form cohesive subgroups or modules within the network. They assess the degree of local clustering and reveal the presence of community structures that may correspond to specialized functions or localized interactions.</p>
 <p>Clustering coefficient</p>
 <p>Transitivity</p>
 <p>Modularity</p>
 </section>
 <section id="c-centrality-metrics">
-<h3>c) Centrality metrics (مرکزیت)<a class="headerlink" href="#c-centrality-metrics" title="Link to this heading">#</a></h3>
+<h3>c) Centrality metrics<a class="headerlink" href="#c-centrality-metrics" title="Link to this heading">#</a></h3>
 <p>Centrality metrics identify the most influential or structurally significant nodes in a network. They provide insight into which nodes play key roles in maintaining connectivity, facilitating information transfer, or controlling the flow of interactions across the system.</p>
 <p>Degree centrality</p>
 <p>Closeness centrality</p>
 <p>Betweenness centrality</p>
 </section>
 <section id="d-resilience-metrics">
-<h3>d) Resilience metrics (پایداری/تاب آوری)<a class="headerlink" href="#d-resilience-metrics" title="Link to this heading">#</a></h3>
+<h3>d) Resilience metrics<a class="headerlink" href="#d-resilience-metrics" title="Link to this heading">#</a></h3>
 <p>Resilience metrics assess the robustness of a network—its ability to maintain performance and structural integrity when subjected to failures, perturbations, or targeted attacks. These measures capture how networks adapt or degrade under adverse conditions, providing a quantitative understanding of stability and fault tolerance. Adverse conditions refer to situations such as node or edge failures, random noise, targeted attacks, or excessive load that can weaken the network’s connectivity and efficiency.</p>
 <p>Assortativity coefficient</p>
 <p>Network robustness indicators (e.g., size of the largest connected component, post-failure efficiency)</p>
@@ -1304,10 +1288,10 @@ command:</p>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#graph-properties">Graph properties</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-integration-metrics">a) Integration metrics (یکپارچگی)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-segregation-metrics">b) Segregation metrics(تفکیک پذیری)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#c-centrality-metrics">c) Centrality metrics (مرکزیت)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#d-resilience-metrics">d) Resilience metrics (پایداری/تاب آوری)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-integration-metrics">a) Integration metrics</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-segregation-metrics">b) Segregation metrics</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#c-centrality-metrics">c) Centrality metrics</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#d-resilience-metrics">d) Resilience metrics</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#investigating-some-of-these-properties">Investigating some of these properties</a><ul class="visible nav section-nav flex-column">
